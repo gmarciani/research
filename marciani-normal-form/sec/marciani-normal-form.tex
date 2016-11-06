@@ -1,0 +1,24 @@
+\section{Marciani Normal Form}
+\label{sec:marciani-normal-form}
+
+We introduce the notion of context-free grammars in Marciani Normal Form (MNF). 
+We prove that every MNF grammar generates a regular language.
+
+\begin{definition}
+	\label{dfn:mnf}
+	A context-free grammar $G=(V,V_{N},S,P)$ is said to be in Marciani Normal Form (MNF) iff $G$ enjoys the looking forward property and there exists a pseudo-regular partition $\Upsilon_{A}$ for all symbol $A\in V_{T}$.
+\end{definition}
+
+\begin{theorem}
+	\label{thm:mnf}	
+	A context-free grammar $G=(V_{T},V_{N},S,P)$ in Marciani Normal Form always generates a regular language.
+	
+	\begin{proof}
+		If $G$ is in Marciani Normal Form, then for each non-terminal $A$ there exists a pseudo-regular partition $\Upsilon_{A}$. 
+		Notice that to every pseudo-regular partition $\Upsilon_{A}=\{\{p|p\in P_{A},A\rightarrow\alpha A\},\{p|p\in P_{A},A\rightarrow A\beta\},\{p|p\in P_{A},A\rightarrow\gamma\}\}$ can be associated a both-linear language equation $A=\alpha A+A\beta+\gamma$.
+		By the application of the Marciani's Rule, we know that the least solution of the previous equation is $\alpha^{*}\gamma\beta^{*}$,
+		so $L(A)=L(\alpha^{*}\gamma\beta^{*})$.
+		
+		As a consequence of the previous results and the looking forward property, there exists a regular expression $e$ such that $L(S)=L(e)$, then $L(S)$ is a regular language, that is $G$ is regular.
+	\end{proof}
+\end{theorem}
