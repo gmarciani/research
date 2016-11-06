@@ -3,13 +3,15 @@
 
 We recall definitions known in the literature, for convenience of the reader.
 
-It is well known that a language equation can be classified, at first instance, according to the position of its unknown. 
+It is well known that a language equation can be classified, at first instance,
+according to the position of its unknown.
 In  particular, we tipically have the following definitions.
 
 \begin{definition}
 	\label{dfn:ll-language-equation}
-	A left-linear (ll) language equation in the unknown $r$ is a language equation of the form
-	
+	A left-linear (ll) language equation in the unknown $r$ is a language
+	equation of the form
+
 	\begin{equation}
 	\label{eqn:ll-language}
 	r=ar+s
@@ -18,39 +20,48 @@ In  particular, we tipically have the following definitions.
 
 \begin{definition}
 	\label{dfn:rl-language-equation}
-	A right-linear (rl) language equation in the unknown $r$ is a language equation of the form
-	
+	A right-linear (rl) language equation in the unknown $r$ is a language
+	equation of the form
+
 	\begin{equation}
 	\label{eqn:rl-language}
 	r=ra+s
 	\end{equation}
 \end{definition}
 
-A grammar in wich all productions for a given non-terminal identifiy ll or rl language equations, always generates a regular language.
+A grammar in wich all productions for a given non-terminal identifiy ll or rl
+language equations, always generates a regular language.
 
-The problem of saying whether or not a context-free grammar $G$ generates a regular language is very important. 
-In fact, a context-free grammar has a greater expressiveness than a regular one. 
-On the other hand, a regular grammar is much lighter in terms of computational complexity. 
+The problem of saying whether or not a context-free grammar $G$ generates a
+regular language is very important.
+In fact, a context-free grammar has greater expressiveness than a regular one.
+On the other hand, a regular grammar is much lighter in terms of computational
+complexity.
 We call this problem \textit{Context-Free (CF) Regularity Problem}.
 
 \begin{definition}
 	\label{dfn:cf-regularity-problem}
-	The \textit{Context-Free (CF) Regularity Problem} is the subset $\Re$ of $\{0,1\}^{*}$ defined as follows:
-	
+	The \textit{Context-Free (CF) Regularity Problem} is the subset
+	$\Re$ of $\{0,1\}^{*}$ defined as follows:
+
 	\begin{equation}
 	\label{eqn:cf-regularity-problem}
 	\Re=\{\underline{G}|G\in[G_{CS}]\wedge L(G)\in[L_{REG}]\}
 	\end{equation}
-	
-	where $\underline{G}$ is the encoding of a context-free grammar $G$ as a string in $\{0,1\}^{*}$, $[G_{CS}]$ is the class of context-free grammars, and $[L_{REG}]$ is the class of regular languages.
+
+	where $\underline{G}$ is the encoding of a context-free grammar $G$ as a
+	string in $\{0,1\}^{*}$, $[G_{CS}]$ is the class of context-free grammars,
+	and $[L_{REG}]$ is the class of regular languages.
 \end{definition}
 
-We now introduce the new definitions, that will be essential in subsequent sections.
+We now introduce the new definitions, which will be essential in subsequent
+sections.
 
 \begin{definition}
 	\label{dfn:bl-language-equation}
-	A bilateral-linear language equation in the unknown $r$ is a language equation of the form
-	
+	A bilateral-linear language equation in the unknown $r$ is a language
+	equation of the form
+
 	\begin{equation}
 	\label{eqn:ll-rl-language}
 	r=ar+rb+s
@@ -59,24 +70,31 @@ We now introduce the new definitions, that will be essential in subsequent secti
 
 \begin{definition}
 	\label{dfn:looking-forward-property}
-	A grammar $G=(V_{T},V_{N},S,P)$ enjoys the looking forward property if and only if the digraph $D_{G}$ constructed as follows does not have any cycle.
-	
-	Let $D_{G}$ be a digraph such that for all non-terminal symbol in $V_{T}$ there exists a node in $D_{G}$, and for all production $A\rightarrow\alpha$ in $P$ there exists an arc from $A$ to every non-terminal symbol in $\alpha$, with the exception of $A$ itself.
+	A grammar $G=(V_{T},V_{N},S,P)$ enjoys the looking forward property if and
+	only if the digraph $D_{G}$, constructed as follows, does not have any cycle.
+
+	Let $D_{G}$ be a digraph such that for all non-terminal symbol in $V_{T}$
+	there exists a node in $D_{G}$, and for all production $A\rightarrow\alpha$
+	in $P$ there exists an arc from $A$ to every non-terminal symbol in $\alpha$,
+	with the exception of $A$ itself.
 \end{definition}
 
 \begin{definition}
 	\label{dfn:pseudo-regular-partition}
-	Given a grammar $G=(V_{T},V_{N},S,P)$, a symbol $A\in V_{N}$ and the subset $P_{A}\subseteq P$ of productions for the non-terminal $A$, the \textit{pseudo-regular partition} induced by $A$ is the partition $\Upsilon_{A}$ of $P_{A}$ defined as follows:
-	
+	Given a grammar $G=(V_{T},V_{N},S,P)$, a symbol $A\in V_{N}$ and the subset
+	$P_{A}\subseteq P$ of productions for the non-terminal $A$, the
+	\textit{pseudo-regular partition} induced by $A$ is the partition
+	$\Upsilon_{A}$ of $P_{A}$, defined as follows:
+
 	\begin{equation}
 	\label{eqn:pseudo-regular-partition}
-	\Upsilon_{A}:= 
+	\Upsilon_{A}:=
 	\biggl\{p\in P_{A} \;\bigg|\;
-	\{A\rightarrow\alpha A\}, 
-	\{A\rightarrow A\beta\}, 
+	\{A\rightarrow\alpha A\},
+	\{A\rightarrow A\beta\},
 	\{A\rightarrow\gamma\}
 	\biggl\}
 	\end{equation}
-	
+
 	where $\alpha,\beta,\gamma\in\left(V_{T}\cup V_{N}\setminus\{A\}\right)^{*}$.
 \end{definition}

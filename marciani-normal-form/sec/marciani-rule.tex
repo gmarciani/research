@@ -1,48 +1,77 @@
 \section{Marciani's Rule}
 \label{sec:marciani-rule}
 
-It is well known that the Arden's Rule permits the resolution of left-linear and right-linear language equations \cite{Pettorossi13}.
-In particular, by the Arden's Rule, given the language equation $r=ar+s$ in the unknown $r$, its least solution is $a^{*}s$. Likewise, given the language equation $r=ra+s$ in the unknown $r$, its least solution is $sa^{*}$. 
+It is well known that Arden's Rule permits the resolution of left-linear and
+right-linear language equations \cite{Pettorossi13}.
+In particular, by Arden's Rule, given the language equation $r=ar+s$ in the
+unknown $r$, its least solution is $a^{*}s$. Likewise, given the language
+equation $r=ra+s$ in the unknown $r$, its least solution is $sa^{*}$.
 
-Now, we state and prove a theorem that permits the resolution of both-linear language equations.
+Now, we state and prove a theorem that permits the resolution of both-linear
+language equations.
 
 \begin{theorem}
 	\label{thm:marciani-rule}
-	
-	Given the language equation $r=ar+rb+s$ in the unknown $r$, its least solution is $a^{*}sb^{*}$.
-	
+
+	Given the language equation $r=ar+rb+s$ in the unknown $r$, its least
+	solution is $a^{*}sb^{*}$.
+
 	\begin{proof}
-		Let us divide the proof in the following three point (a), (b), (c).
-		\\
-		(a) We will first show that the language equation $r=ar+rb+s$ is equivalent to the language equation $r=a^{*}(rb+s)$. \\
-		(b) Then, we will show that $a^{*}sb^{*}$ is a solution for $r$ of the language equation $r=a^{*}(rb+s)$. \\
-		(c) Finally, we will show that $a^{*}sb^{*}$ is the minimal solution for $r$ of the language equation $r=a^{*}(rb+s)$, that is, for
-		any other solution $z$ we have that $L(a^{*}sb^{*})\subseteq L(z)$.\\
-		
-		Proof (a): By the application of the Arden Rule on $r=ar+rb+s$, we obtain $r=a^{*}(rb+s)$. 
-		So $ar+rb+s=a^{*}(rb+s)$\cite{Pettorossi13}.\\
-		
-		Proof (b): Notice that $a^{*}((a^{*}sb^{*})b+s)=a^{*}a^{*}sb^{*}b+a^{*}s=a^{*}sb^{*}b+a^{*}s$,
-		so we have to show that 
-		(b.1) $a^{*}sb^{*}\subseteq a^{*}sb^{*}b+a^{*}s$ and 
-		(b.2) $\beta.2$ $a^{*}sb^{*}b+a^{*}s\subseteq a^{*}sb^{*}$.\\
-		
-		Proof (b.1): The following inclusion holds 
-		$a^{*}sb^{*}=a^{*}s(b^{+}+\varepsilon)\subseteq  a^{*}s(b^{*}b+\varepsilon)=a^{*}sb^{*}b+a^{*}s$.\\
-		
-		Proof (b.2): The following inclusions holds 
-		$a^{*}sb^{*}b\subseteq a^{*}sb^{*}$ and $a^{*}s\subseteq a^{*}sb^{*}$.\\
-		
-		Proof (c): We assume that $z$ is a solution of $r=a^{*}(rb+s)$, that is $z=a^{*}(zb+s)$, and we show that $a^{*}sb^{*}\subseteq z$,
-		that is $\bigcup_{i,j\geq0}a^{i}sb^{j}\subseteq z$. The proof can be done by induction on $i,j\geq0$.\\
-		\textsl{(Basis $i,j=0$):} $s\subseteq z$ holds because
-		$z=a^{*}(zb+s)$.\\
-		\textsl{(Step: $i\geq0,j=0$):} We have to show the following implication
-		$\bigcup_{i\geq0}a^{i}s\subseteq z\rightarrow\bigcup_{i\geq0}a^{i+1}s\subseteq z$.
-		This holds because $\bigcup_{i\geq0}a^{i+1}s\subseteq a\bigcup_{i\geq0}a^{i}s\subseteq az\subseteq z$.
-		\\
-		\textsl{(Step: $i,j\geq0$):} We have to show the following implication
-		$\bigcup_{i,j\geq0}a^{i}sb^{j}\subseteq z\rightarrow\bigcup_{i,j\geq0}a^{i}sb^{j+1}\subseteq z$.
-		This holds because $\bigcup_{i,j\geq0}a^{i}sb^{j+1}\subseteq\bigcup_{i,j\geq0}a^{i}sb^{j}b\subseteq zb\subseteq z$.
+		Let us divide the proof in the following three points.
+
+		\begin{enumerate}[label=\alph*]
+
+			\item We will first show that the language equation $r=ar+rb+s$ is
+			equivalent to the language equation $r=a^{*}(rb+s)$.
+
+			\item Then, we will show that $a^{*}sb^{*}$ is a solution for $r$ of
+			the language equation $r=a^{*}(rb+s)$.
+
+			\item Finally, we will show that $a^{*}sb^{*}$ is the minimal
+			solution for $r$ of the language equation $r=a^{*}(rb+s)$; that is,
+			for	any other solution $z$ we have that
+			$L(a^{*}sb^{*})\subseteq L(z)$.
+
+		\end{enumerate}
+
+		\begin{description}
+
+			\item [Proof (a)] By the application of Arden's Rule on $r=ar+rb+s$, we obtain $r=a^{*}(rb+s)$.
+			So $ar+rb+s=a^{*}(rb+s)$\cite{Pettorossi13}.
+
+			\item [Proof (b)] Notice that $a^{*}((a^{*}sb^{*})b+s)=a^{*}a^{*}sb^{*}b+a^{*}s=a^{*}sb^{*}b+a^{*}s$,
+			so we have to show that
+			(b.1) $a^{*}sb^{*}\subseteq a^{*}sb^{*}b+a^{*}s$ and
+			(b.2) $\beta.2$ $a^{*}sb^{*}b+a^{*}s\subseteq a^{*}sb^{*}$.
+
+			\begin{description}
+
+				\item [Proof (b.1)] The following inclusion holds
+				$a^{*}sb^{*}=a^{*}s(b^{+}+\varepsilon)\subseteq  a^{*}s(b^{*}b+\varepsilon)=a^{*}sb^{*}b+a^{*}s$.
+
+				\item [Proof (b.2)] The following inclusions hold
+				$a^{*}sb^{*}b\subseteq a^{*}sb^{*}$ and $a^{*}s\subseteq a^{*}sb^{*}$.
+
+			\end{description}
+
+			\item [Proof (c)] We assume that $z$ is a solution of $r=a^{*}(rb+s)$, that is $z=a^{*}(zb+s)$, and we show that $a^{*}sb^{*}\subseteq z$,
+			that is $\bigcup_{i,j\geq0}a^{i}sb^{j}\subseteq z$. The proof can be done by induction on $i,j\geq0$.
+			
+			\begin{description}
+				
+				\item [(Basis:$i,j=0$)] $s\subseteq z$ holds because
+				$z=a^{*}(zb+s)$.
+				
+				\item [(Step:$i\geq0,j=0$)] We have to show the following implication
+				$\bigcup_{i\geq0}a^{i}s\subseteq z\rightarrow\bigcup_{i\geq0}a^{i+1}s\subseteq z$.
+				This holds because $\bigcup_{i\geq0}a^{i+1}s\subseteq a\bigcup_{i\geq0}a^{i}s\subseteq az\subseteq z$.
+				
+				\item [(Step:$i,j\geq0$)] We have to show the following implication
+				$\bigcup_{i,j\geq0}a^{i}sb^{j}\subseteq z\rightarrow\bigcup_{i,j\geq0}a^{i}sb^{j+1}\subseteq z$.
+				This holds because $\bigcup_{i,j\geq0}a^{i}sb^{j+1}\subseteq\bigcup_{i,j\geq0}a^{i}sb^{j}b\subseteq zb\subseteq z$.
+				
+			\end{description}
+
+		\end{description}		
 	\end{proof}
 \end{theorem}

@@ -16,6 +16,7 @@
 \usepackage{epstopdf}
 \usepackage{subfig}
 \usepackage{bm}
+\usepackage{enumitem}
 \usepackage{url}
 \usepackage[hidelinks=true]{hyperref}
 \usepackage{cleveref}
@@ -52,7 +53,7 @@
 %*******************************************************************************
 % hyphenation
 %*******************************************************************************
-\hyphenation{sched-uler par-a-digm adopt-ed evolv-ing th}
+\hyphenation{}
 
 \begin{document}
 
@@ -64,12 +65,13 @@
 %\conferenceinfo{DEBS '16}{June 20-24, 2016, Irvine, CA, USA}
 %\isbn{978-1-4503-4021-2/16/06}
 %\doi{http://dx.doi.org/10.1145/2933267.2933517}
+\setlist[description]{font=\normalfont\itshape\space}
 
 %*******************************************************************************
 % Title and Authors
 %*******************************************************************************
 \title{Marciani Normal Form,\\
-	On semi-decidability of context-free language regularity}
+	On semidecidability of context-free language regularity}
 
 \numberofauthors{1}
 \author{
@@ -91,7 +93,7 @@
 \input{sec/definitions}
 \input{sec/marciani-rule}
 \input{sec/marciani-normal-form}
-\input{sec/semi-decidability}
+\input{sec/semidecidability}
 \input{sec/examples}
 \input{sec/conclusions}
 
