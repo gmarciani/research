@@ -1,0 +1,602 @@
+#LyX 2.1 created this file. For more info see http://www.lyx.org/
+\lyxformat 474
+\begin_document
+\begin_header
+\textclass report
+\begin_preamble
+\numberwithin{equation}{chapter}
+\end_preamble
+\use_default_options true
+\master ../thesis.lyx
+\begin_modules
+customHeadersFooters
+theorems-bytype
+theorems-chap-bytype
+\end_modules
+\maintain_unincluded_children false
+\language italian
+\language_package default
+\inputencoding auto
+\fontencoding global
+\font_roman lmodern
+\font_sans lmss
+\font_typewriter lmtt
+\font_math auto
+\font_default_family rmdefault
+\use_non_tex_fonts false
+\font_sc false
+\font_osf false
+\font_sf_scale 100
+\font_tt_scale 100
+\graphics default
+\default_output_format default
+\output_sync 0
+\bibtex_command default
+\index_command default
+\paperfontsize 12
+\spacing onehalf
+\use_hyperref true
+\pdf_bookmarks true
+\pdf_bookmarksnumbered false
+\pdf_bookmarksopen false
+\pdf_bookmarksopenlevel 1
+\pdf_breaklinks false
+\pdf_pdfborder true
+\pdf_colorlinks false
+\pdf_backref false
+\pdf_pdfusetitle true
+\papersize a4paper
+\use_geometry true
+\use_package amsmath 1
+\use_package amssymb 1
+\use_package cancel 1
+\use_package esint 1
+\use_package mathdots 1
+\use_package mathtools 1
+\use_package mhchem 1
+\use_package stackrel 1
+\use_package stmaryrd 1
+\use_package undertilde 1
+\cite_engine basic
+\cite_engine_type default
+\biblio_style plain
+\use_bibtopic false
+\use_indices false
+\paperorientation portrait
+\suppress_date false
+\justification true
+\use_refstyle 1
+\index Index
+\shortcut idx
+\color #008000
+\end_index
+\leftmargin 3cm
+\topmargin 2.5cm
+\rightmargin 3cm
+\bottommargin 4cm
+\headsep 1cm
+\footskip 1.5cm
+\secnumdepth 3
+\tocdepth 3
+\paragraph_separation skip
+\defskip medskip
+\quotes_language french
+\papercolumns 1
+\papersides 2
+\paperpagestyle default
+\tracking_changes false
+\output_changes false
+\html_math_output 0
+\html_css_as_file 0
+\html_be_strict false
+\end_header
+
+\begin_body
+
+\begin_layout Chapter
+\begin_inset CommandInset label
+LatexCommand label
+name "chap:implementazione"
+
+\end_inset
+
+Implementazione
+\end_layout
+
+\begin_layout Standard
+In questo capitolo descriviamo brevemente l’implementazione software dei
+ modelli proposti per il problema di posizionamento.
+ Nel seguito, parleremo dunque di “modello” in riferimento all'implementazione
+ software della corrispondente formulazione matematica.
+\end_layout
+
+\begin_layout Standard
+I modelli sono stati realizzati dapprima in Optimization Programming Language
+ (OPL) all’interno dell’ambiente di sviluppo integrato IBM ILOG CPLEX Optimizati
+on Studio.
+ Abbiamo adottato questa soluzione preliminare in quanto era necessaria
+ una rapida prototipazione dei modelli, volta a valutarne le prestazioni
+ su piccole istanze ad hoc.
+ 
+\end_layout
+
+\begin_layout Standard
+Successivamente, questi sono stati implementati in Java, dando vita al progetto
+ OPMap.
+ Questa soluzione ci ha permesso di condurre un’analisi sperimentale quanto
+ più possibile estensiva sui modelli in esame.
+ La metodologia e i risultati di questa analisi sono oggetto del prossimo
+ capitolo.
+\end_layout
+
+\begin_layout Section
+IBM ILOG CPLEX Optimization Studio
+\end_layout
+
+\begin_layout Standard
+IBM ILOG
+\begin_inset Foot
+status collapsed
+
+\begin_layout Plain Layout
+ILOG è una multinazionale fracese leader nel settore dei Business Rule Managemen
+t Systems (BRMS) 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "IBMILOGOverview"
+
+\end_inset
+
+, acquisita da IBM nel Gennaio 2009 per 340M$ 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "IBMILOGAcquisition"
+
+\end_inset
+
+.
+ Uno dei prodotti che motivarono l'acquisizione fu proprio ILOG CPLEX.
+\end_layout
+
+\end_inset
+
+ CPLEX
+\begin_inset Foot
+status collapsed
+
+\begin_layout Plain Layout
+CPLEX prende il nome dal linguaggio di programmazione in cui è stato sviluppato
+ (C), e dal noto algoritmo del Simplesso (Simplex) 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "Dantzig1955"
+
+\end_inset
+
+, primo algoritmo implementato nella libreria e pietra miliare dei metodi
+ risolutivi per problemi di programmazione lineare.
+ Sebbene oggi la libreria implementi anche altri algoritmi risolutivi, si
+ è deciso di mantenere il nome originario.
+ Lo sviluppo della prima versione si deve a Robert E.
+ Bixby, e la sua prima commercializzazione alla CPLEX Optimization Inc.
+ nel 1988, la quale fu poi acquisita dalla ILOG nel 1997.
+\end_layout
+
+\end_inset
+
+ Optimization Studio è un ambiente di sviluppo integrato (IDE) per la creazione,
+ risoluzione ed analisi di modelli di ottimizzazione 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "IBMCPLEXOptStudioOverview"
+
+\end_inset
+
+.
+ Commercializzato, nella sua attuale struttura, a partire dal 2010, è divenuto
+ presto un prodotto di punta nel settore dei Business Process Management
+ Systems (BPMSs).
+ Attualmente è impiegato sia in ambito accademico che in quello industriale,
+ vantando una diffusa adozione tra le compagnie Fortune 500
+\begin_inset Foot
+status collapsed
+
+\begin_layout Plain Layout
+la 
+\begin_inset Quotes fld
+\end_inset
+
+Fortune 500
+\begin_inset Quotes frd
+\end_inset
+
+ è una classifica annuale, pubblicata dalla rivista Fortune, che riporta
+ le 500 compagnie statunitensi misurate in base al loro fatturato.
+\end_layout
+
+\end_inset
+
+ 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "Zhao2015"
+
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+Questo IDE unisce lo stile modulare dell’ambiente di sviluppo open source
+ Eclipse, la forte espressività del linguaggio OPL e la comprovata efficienza
+ degli algoritmi di risoluzione ILOG CPLEX Optimizer e IBM CP Optimizer
+\begin_inset CommandInset citation
+LatexCommand cite
+key "IBMCPLEXOpt,IBMCPLEXCPOpt,IBMMPvsCP"
+
+\end_inset
+
+.
+ Di anno in anno questo prodotto migliora le proprie performance nella risoluzio
+ne di modelli Mixed Integer Problems (MIPs) 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "IBMCPLEXOptPerformance"
+
+\end_inset
+
+.
+ In generale, questi problemi sono computazionalmente più complessi rispetto
+ alle controparti continue 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "Serafini2009"
+
+\end_inset
+
+, ma sono anche quelli che più diffusamente trovano applicazione nei processi
+ di business intelligence e di controllo industriale 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "IBMCPLEXUserManual"
+
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Paragraph
+OPL
+\end_layout
+
+\begin_layout Standard
+L’Optimization Programming Language (OPL) è un linguaggio di programmazione
+ dichiarativo sviluppato da IBM appositamente per essere utilizzato all'interno
+ dei prodotti della famiglia CPLEX 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "IBMOPLUserManual,IBMOPLReferenceManual,Zhao2015"
+
+\end_inset
+
+.
+ Questo linguaggio è caratterizzato da una sintassi totalmente orientata
+ alla descrizione matematica di modelli di ottimizzazione, pertanto affine
+ ai principi della Mathematical Programming (MP) e della Constraint Programming
+ (CP) 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "IBMMPvsCP"
+
+\end_inset
+
+.
+ Oltre alla definizione dei modelli, il linguaggio permette di definire
+ il dataset e stabilire semplici procedure di pre/post-processamento
+\begin_inset Foot
+status collapsed
+
+\begin_layout Plain Layout
+per il pre/post-processamento OPL fornisce un liguaggio simile al Javascript,
+ che per questo è stato chiamato OPL Script.
+\end_layout
+
+\end_inset
+
+.
+ 
+\end_layout
+
+\begin_layout Standard
+OPL garantisce la minimizzazione del codice necessario, massimizzandone
+ l'espressività e rendendo l’applicazione facilmente manutenibile.
+ Di contro, questo risulta poco flessibile in termini di strutture dati,
+ rendendo inagevole il controllo dinamico delle istanze.
+\end_layout
+
+\begin_layout Paragraph
+Struttura di un progetto CPLEX
+\end_layout
+
+\begin_layout Standard
+Un progetto CPLEX prevede almeno (i) un file (.mod) in OPL per la descrizione
+ del modello, (ii) un file (.dat) in OPL per la definizione del dataset e
+ (iii) un file (.ops) in XML per l'impostazione dei parametri di risoluzione.
+ L'associazione di un file .mod, un file .dat ed un file .ops costituisce una
+ configurazione di esecuzione.
+ Un progetto presenta, tipicamente, più configurazioni di esecuzione alternative
+, al fine di confrontarne i risultati, sia in termini di obiettivo raggiunto
+ che di prestazioni del modello.
+ Per dettagli operativi sulla realizzazione, esecuzione ed analisi di un
+ progetto OPL all’interno dell’IDE, rimandiamo il lettore alle guide fornite
+ dal produttore 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "IBMCPLEXManualIDE,IBMCPLEXUserManual,IBMOPLUserManual,IBMOPLReferenceManual"
+
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+L'implementazione dei modelli all'interno di IBM ILOG CPLEX Optimization
+ Studio ci ha garantito un rapido processo di prototipazione, consentendoci
+ così di avere subito una prima valutazione delle performance.
+ Nondimeno ci ha permesso di acquisire familiarità con le potenzialità di
+ CPLEX.
+ 
+\end_layout
+
+\begin_layout Standard
+Il codice sorgente dell'implementazione dei modelli è disponibile in 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "OPMapOPLGit"
+
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Section
+OPMap
+\end_layout
+
+\begin_layout Standard
+OPMap (OPerator Mapping) è l'applicazione sviluppata appositamente per condurre
+ l'analisi sperimentale sui modelli proposti per il problema di posizionamento.
+ L'applicazione è scritta in Java 8 ed utilizza le APIs esposte da IBM Java
+ Concert Technology per interfacciarsi con il core del motore CPLEX.
+ In Figura 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:architettura-opmap"
+
+\end_inset
+
+ mostriamo una semplice rappresentazione dell'architettura OPMap, che descrivere
+mo nel seguito adottando un approccio bottom-up.
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\noindent
+\align center
+\begin_inset Graphics
+	filename /home/giacomo/Documents/projects/bsc-thesis/figures/implementation/opmap-architecture.svg
+	lyxscale 60
+	width 12cm
+	groupId implementation
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:architettura-opmap"
+
+\end_inset
+
+Architettura OPMap.
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+
+\shape slanted
+CPLEX Core
+\shape default
+, o 
+\shape slanted
+CPLEX Callable Library
+\shape default
+, è la libreria C che realizza tutte le funzionalità del motore CPLEX.
+ 
+\end_layout
+
+\begin_layout Standard
+
+\shape slanted
+Java Native Interface (JNI)
+\shape default
+ è il framework, sviluppato da Oracle, che realizza l'interfaccia bidirezionale
+ tra porzioni di codice Java e porzioni di codice nativo
+\begin_inset Foot
+status collapsed
+
+\begin_layout Plain Layout
+per codice 
+\begin_inset Quotes fld
+\end_inset
+
+nativo
+\begin_inset Quotes frd
+\end_inset
+
+ si intende un codice scritto in un linguaggio di programmazione specifico
+ di un determinato sistema operativo, pertanto intrinsecamente non portabile.
+\end_layout
+
+\end_inset
+
+ .
+ La JNI viene dunque tipicamente utilizzata per invocare porzioni di codice
+ C/C++ o Assembly all'interno di programmi Java 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "OracleJNI"
+
+\end_inset
+
+.
+ Nella nostra architettura, la JNI viene utilizzata internamente da Java
+ Concert Technology per invocare i metodi della libreria CPLEX.
+\end_layout
+
+\begin_layout Standard
+
+\shape slanted
+Java Concert Technology
+\shape default
+ è il framework Java, sviluppato da IBM, che espone le APIs necessarie alla
+ creazione, risoluzione ed analisi dei modelli di ottimizzazione.
+ Queste APIs forniscono un totale accesso alle funzionalità del motore CPLEX,
+ attraverso (i) 
+\shape slanted
+IloModeler
+\shape default
+, ovvero la factory che permette di creare le componenti del modello nella
+ forma di oggetti Java, e (ii) 
+\shape slanted
+IloCplex
+\shape default
+, ovvero la classe tramite la quale è possibile risolvere ed analizzare
+ un modello compilato.
+ Nella nostra architettura, 
+\shape slanted
+IloModeler
+\shape default
+ è usato dal costruttore di ogni modello OPP per istanziarsi come modello
+ CPLEX, mentre 
+\shape slanted
+IloCplex
+\shape default
+ è usato dal risolutore OPP per invocare l'algoritmo di risoluzione ed accedere
+ al valore delle soluzioni.
+\end_layout
+
+\begin_layout Standard
+
+\shape slanted
+JUnit
+\shape default
+ 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "JUnitHome"
+
+\end_inset
+
+ è un framework Java open source per la creazione di test.
+ Nella nostra architettura, lo abbiamo utilizzato per testare la compilazione
+ e la risoluzione dei modelli.
+ Ogni esperimento previsto dall'analisi sperimentale è stato implementato
+ nella forma di un 
+\shape slanted
+JUnit TestCase
+\shape default
+.
+\end_layout
+
+\begin_layout Standard
+
+\shape slanted
+OPPModel
+\shape default
+ è l'interfaccia implementata da un qualsivoglia modello OPP.
+ Il costruttore del modello riceve in input (i) una 
+\shape slanted
+Architecture
+\shape default
+ , ovvero l'oggetto che incapsula i dettagli dell'architettura distribuita,
+ e (ii) una 
+\shape slanted
+Application
+\shape default
+, ovvero l'oggetto che incapsula i dettagli dell'applicazione DSP.
+ Il costruttore del modello invoca i metodi di 
+\shape slanted
+IloModeler
+\shape default
+ per istanziarsi come modello CPLEX.
+\end_layout
+
+\begin_layout Standard
+
+\shape slanted
+Random Generator
+\shape default
+ è una factory adibita alla generazione casuale di architetture distribuite
+ ed applicazioni DSP.
+ Questo generatore garantisce il pieno controllo statistico e deterministico
+ delle istanze del problema, ed è pertanto impiegato in ogni esperimento
+ per generare le istanze secondo i parametri statistici e deterministici
+ previsti dall'esperimento.
+\end_layout
+
+\begin_layout Standard
+Il codice sorgente del progetto OPMap è disponibile in 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "OPMapGit"
+
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Paragraph
+Sviluppi futuri
+\end_layout
+
+\begin_layout Standard
+In futuro, speriamo che il progetto OPMap possa diventare un utile strumento
+ per la prototipazione rapida in Java di modelli OPP, e che possa fornire
+ strumenti di benchmark a supporto dello sviluppo di soluzioni euristiche
+ al problema.
+ Nell'ottica di questo obiettivo, la prossima release di OPMap fornirà (i)
+ una CLI per la definizione dello scopo e dei parametri degli esperimenti,
+ (ii) la possibilità di inserire a run-time una propria implementazione
+ di modello OPP, (iii) una suite di esperimenti volti a valutare il consumo
+ di memoria in fase di compilazione e risoluzione, (iv) risoluzione mediante
+ IBM Network Optimizer, e (v) risultati degli esperimenti nella forma prevista
+ dall'analisi boxplot.
+\end_layout
+
+\end_body
+\end_document

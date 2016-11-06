@@ -1,0 +1,356 @@
+#LyX 2.1 created this file. For more info see http://www.lyx.org/
+\lyxformat 474
+\begin_document
+\begin_header
+\textclass report
+\begin_preamble
+\numberwithin{equation}{chapter}
+\end_preamble
+\use_default_options true
+\master ../thesis.lyx
+\begin_modules
+customHeadersFooters
+theorems-bytype
+theorems-chap-bytype
+\end_modules
+\maintain_unincluded_children false
+\language italian
+\language_package default
+\inputencoding auto
+\fontencoding global
+\font_roman lmodern
+\font_sans lmss
+\font_typewriter lmtt
+\font_math auto
+\font_default_family rmdefault
+\use_non_tex_fonts false
+\font_sc false
+\font_osf false
+\font_sf_scale 100
+\font_tt_scale 100
+\graphics default
+\default_output_format default
+\output_sync 0
+\bibtex_command default
+\index_command default
+\paperfontsize 12
+\spacing onehalf
+\use_hyperref true
+\pdf_bookmarks true
+\pdf_bookmarksnumbered false
+\pdf_bookmarksopen false
+\pdf_bookmarksopenlevel 1
+\pdf_breaklinks false
+\pdf_pdfborder true
+\pdf_colorlinks false
+\pdf_backref false
+\pdf_pdfusetitle true
+\papersize a4paper
+\use_geometry true
+\use_package amsmath 1
+\use_package amssymb 1
+\use_package cancel 1
+\use_package esint 1
+\use_package mathdots 1
+\use_package mathtools 1
+\use_package mhchem 1
+\use_package stackrel 1
+\use_package stmaryrd 1
+\use_package undertilde 1
+\cite_engine basic
+\cite_engine_type default
+\biblio_style plain
+\use_bibtopic false
+\use_indices false
+\paperorientation portrait
+\suppress_date false
+\justification true
+\use_refstyle 1
+\index Index
+\shortcut idx
+\color #008000
+\end_index
+\leftmargin 3cm
+\topmargin 2.5cm
+\rightmargin 3cm
+\bottommargin 4cm
+\headsep 1cm
+\footskip 1.5cm
+\secnumdepth 3
+\tocdepth 3
+\paragraph_separation skip
+\defskip medskip
+\quotes_language french
+\papercolumns 1
+\papersides 2
+\paperpagestyle default
+\tracking_changes false
+\output_changes false
+\html_math_output 0
+\html_css_as_file 0
+\html_be_strict false
+\end_header
+
+\begin_body
+
+\begin_layout Chapter
+\begin_inset CommandInset label
+LatexCommand label
+name "chap:problemi-di-ottimizzazione"
+
+\end_inset
+
+DEBS Grand Challange
+\end_layout
+
+\begin_layout Section
+DEBS 2012
+\end_layout
+
+\begin_layout Standard
+Nella edizione 2012 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "Jerzak2012"
+
+\end_inset
+
+ problem requires a continuous monitoring of the high-tech manufacturing
+ equipment, based on the data gathered by sensors embedded within the equip-ment.
+ The goal of the monitoring is to detect and record deviations from the
+ predefined (good) system behavior.
+ In a typical, existing setup data is first collected from sen-sors within
+ the equipment using an embedded PC.
+ Subse-quently, it is stored by the PC 1 as raw data in a flat file.
+ This file is periodically integrated into a database by the PC 2.
+ The analysis of data is performed using the PC 3 connected to the database.
+ Only in this last step a possi-ble violation can be detected.
+ It can be observed that such setup results in a delayed response to potential
+ violations of Key Performance Indicators (KPI).
+ The high latency of the response (which currently reaches 30 minutes) is
+ the major factor increasing the severity of the KPI violations and their
+ direct monetary costs.
+ Therefore, the major goal of the DEBS 2012 Grand Chal-lenge was to investigate
+ the applicability of the event processing systems to bridge the gap between
+ the actual occurrence of the event causing a violation of a predefined
+ KPI and the detection of such a violation.
+\end_layout
+
+\begin_layout Standard
+The DEBS 2012 Grand Challenge monitoring data orig-inates from the high-tech
+ manufacturing equipment.In a typical high-tech manufacturing scenario (a
+ single fabrication plant) an aver-age of 1,000 pieces of geographically
+ distributed manufactur-ing equipment are operated.
+ This results in a 50 Terabytes of data being collected every day.
+ This, in turn, requires an event processing system which can sustain a
+ continuous workload of 5 Million events per second.
+ Neither classical database systems, nor existing, batch oriented systems,
+ such as [4, 1], were designed to cope with such scenarios.
+ 1.
+ The analogue sensors produce data in the range 0 − 215.
+ Each sensor produces data with a frequency of either 100Hz or 1000Hz.
+ Data originating from each sensor is collected by a PC embedded withing
+ the manufacturing equipment and aggregated into a single event.
+ The embedded PC outputs events with the rate of 100Hz.
+\end_layout
+
+\begin_layout Standard
+The goal of the first query (see Figure 5) is to monitor the energy consumption
+ of the manufacturing equipment.
+\end_layout
+
+\begin_layout Standard
+The specific goal of the second query is to monitor the dependencies and
+ relations between sensors and their switching times.
+\end_layout
+
+\begin_layout Section
+DEBS 2013 
+\end_layout
+
+\begin_layout Standard
+Nella edizione 2013 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "Mutschler2013"
+
+\end_inset
+
+ is to demonstrate the applicability of event based systems for providing
+ real- time, continuous analytics for both managers of sport teams as well
+ as spectators of sports events.
+ On one hand side they provide the competitive edge to team managers allow-
+ ing themto take bettermore insightful decisions in real time.
+ On the other hand side the ability to operate on real time data allows
+ for new and enriched expe- rience for spectators both in stadiums as well
+ as in front of TV screens.
+\end_layout
+
+\begin_layout Standard
+The RedFIR tracking system is a Real-Time Locating Sys-tem (RTLS) based
+ on time-of-flight measurements, where small transmitter Integrated Circuits
+ emit burst signals.
+ The locating system is able to receive an overall of 50, 000 of those signal
+ bursts per second.
+ The 2013 Grand Challenge data set was collected during a football match
+ car- ried out at a Nuremberg Stadium in Germany and is com- plemented with
+ a set of continuous analytical queries which provide detailed insight into
+ the match statistics for both team managers and spectators.
+\end_layout
+
+\begin_layout Standard
+The goal of the running analysis query is to quantify and track how well
+ each of the players moves on the playing field.
+ The major indicators are the speed and distance covered by each player
+ as a function of time.
+ To that end the running analysis query should return two classes of results:
+ (1) current running statistics and (2) ag- gregate running statistics.
+ Aggregate running statistics provides a cumulative view on the running
+ performance of a given player.
+\end_layout
+
+\begin_layout Standard
+The goal of the ball possession query is to calculate the ball possession
+ for each of the players as well as for each team.
+ The ball position query should return two classes of results: (1) per player
+ ball possession stream and (2) per team ball possession.
+ The per team ball possession should be calculated using five different
+ time windows: 1 minute, 5 minutes, 10 minutes, 20 minutes and the whole
+ game duration.
+\end_layout
+
+\begin_layout Standard
+The goal of the heat map query is to calculate statistics about the presence
+ of each player in a given region of the playing field.
+ The system must calculate for each cell and each player the percentage
+ of time that the given player spent in the respective cell.
+ The statistics should be calculated using five different time windows:
+ 1 minute, 5 minutes, 10 minutes, 20 minutes and the whole game duration.
+\end_layout
+
+\begin_layout Standard
+The aim of the shoat on goal query is to detect when a player hits the ball
+ in an attempt to score a goal.
+ The result stream should be updated with the frequency of the sensor data
+ until an exit condition occurs.
+ Exit con-ditions are: (1) the ball leaves the field, or (2) the direction
+ of the ball movement changes so that (the proximity of) the goal area would
+ no longer be hit.
+\end_layout
+
+\begin_layout Section
+DEBS 2014 
+\end_layout
+
+\begin_layout Standard
+Nella edizione 2014 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "JerzakZiekow2014"
+
+\end_inset
+
+ is to demonstrate the applicability of event-based systems to provision
+ of scalable, real-time analytics over high volume sensor data.
+ The un- derlying scenario stems from the smart grid domain and targets
+ the analysis of energy consumption measurements.
+ Specifically, the DEBS 2014 Grand Challenge focuses on the two following
+ problems: (1) short-term load forecasting and (2) outliers detection for
+ real-time demand management.
+ The data for the challenge is synthesized based on real-world profiles
+ collected from a number of smart-home installations.
+\end_layout
+
+\begin_layout Standard
+The Grand Challenge 2014 data set is based on simulations driven by real-world
+ energy consumption profiles originating from smart plugs deployed in households.
+ Smart plugs used in the DEBS 2014 Grand Challenge are equipped with a range
+ of sensors that measure different, values related to power consumption.
+ For the purpose of the DEBS 2014 Grand Challenge a number of smart plugs
+ has been deployed in households with data being collected roughly every
+ second for each sensor in each smart plug.
+ It has to be noted that the data set is collected in an uncontrolled, real-
+ world environment, which implies the possibility of malformed data as well
+ as missing measurements.
+ no pre-computation based on the whole data set must be made.
+\end_layout
+
+\begin_layout Standard
+The goal of the load prediction query is to make load forecasts based on
+ the current load measurements and a model that was learned over historical
+ data.
+ Such forecasts are used in demand side management to proactively influence
+ load and adapt it to the supply situation, e.g., current production of renewable
+ energy sources.
+ The output streams should be updated every 30 seconds.
+\end_layout
+
+\begin_layout Standard
+The goal of the outliers query is to find the outliers as far as the energy
+ consumption levels are concerned.
+ The main motivation of this query is to highlight the capability of data
+ stream processing systems to cope with correlated aggregate class of problems.
+ The query should answer the following question: for each house calculate
+ the percentage of plugs which have a median load during the last hour greater
+ than the median load of all plugs (in all households of all houses) during
+ the last hour.
+ The
+\end_layout
+
+\begin_layout Section
+DEBS 2015 
+\end_layout
+
+\begin_layout Standard
+Nella edizione 2015 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "JerzakZiekow2015"
+
+\end_inset
+
+ is to demonstrate the applicability of event-based systems to processing
+ of geo-spatial data contained within taxi trip reports from the New York
+ City.
+ Two specific problems targeted: (1) identification of recent frequent routes
+ and (2) identification of regions with the highest profit.
+ Participants of the challenge are asked to submit innovative and high performin
+g solutions to the defined problem.
+\end_layout
+
+\begin_layout Standard
+The data for the 2015 Grand Challenge is based on a data set released under
+ the Freedom of Information Law and has been made publicly available by
+ Chris Whong1 in March 2014.
+ Provided data consists of reports of taxi trips including starting point,
+ drop-off point, corresponding timestamps, and information related to the
+ payment.
+ Data are reported at the end of the trip, i.e., upon arrive in the order
+ of the drop-off timestamps.
+\end_layout
+
+\begin_layout Standard
+The goal of the frequent routes query is to find the top ten most frequent
+ routes during the last 30 minutes.
+ A route is represented by a starting grid cell and an ending grid cell.
+ All routes completed within the last 30 minutes are considered for the
+ query.
+ The output query results must be updated whenever any of the 10 most frequent
+ routes changes.
+\end_layout
+
+\begin_layout Standard
+The goal of profitable areas query is to identify areas that are currently
+ most profitable for taxi drivers.
+ The profitability of an area is determined by dividing the area profit
+ by the number of empty taxis in that area within the last 15 minutes.
+ The profit that originates from an area is computed by calculating the
+ median fare including tip for trips that started in the area and ended
+ within the last 15 minutes.
+ The number of empty taxis in an area is the sum of taxis that had a drop-off
+ location in that area less than 30 minutes ago and had no following pickup
+ yet.
+\end_layout
+
+\end_body
+\end_document

@@ -1,0 +1,141 @@
+#LyX 2.1 created this file. For more info see http://www.lyx.org/
+\lyxformat 474
+\begin_document
+\begin_header
+\textclass report
+\use_default_options true
+\master ../thesis.lyx
+\begin_modules
+customHeadersFooters
+\end_modules
+\maintain_unincluded_children false
+\language italian
+\language_package default
+\inputencoding auto
+\fontencoding global
+\font_roman lmodern
+\font_sans lmss
+\font_typewriter lmtt
+\font_math auto
+\font_default_family rmdefault
+\use_non_tex_fonts false
+\font_sc false
+\font_osf false
+\font_sf_scale 100
+\font_tt_scale 100
+\graphics default
+\default_output_format default
+\output_sync 0
+\bibtex_command default
+\index_command default
+\paperfontsize 11
+\spacing onehalf
+\use_hyperref false
+\papersize a4paper
+\use_geometry true
+\use_package amsmath 1
+\use_package amssymb 1
+\use_package cancel 1
+\use_package esint 1
+\use_package mathdots 1
+\use_package mathtools 1
+\use_package mhchem 1
+\use_package stackrel 1
+\use_package stmaryrd 1
+\use_package undertilde 1
+\cite_engine basic
+\cite_engine_type default
+\biblio_style plain
+\use_bibtopic false
+\use_indices false
+\paperorientation portrait
+\suppress_date false
+\justification true
+\use_refstyle 1
+\index Index
+\shortcut idx
+\color #008000
+\end_index
+\leftmargin 3cm
+\topmargin 2.5cm
+\rightmargin 3cm
+\bottommargin 4cm
+\headsep 1cm
+\footskip 1.5cm
+\secnumdepth 3
+\tocdepth 3
+\paragraph_separation skip
+\defskip medskip
+\quotes_language french
+\papercolumns 1
+\papersides 2
+\paperpagestyle empty
+\tracking_changes false
+\output_changes false
+\html_math_output 0
+\html_css_as_file 0
+\html_be_strict false
+\end_header
+
+\begin_body
+
+\begin_layout Chapter*
+\begin_inset CommandInset label
+LatexCommand label
+name "chap:ringraziamenti"
+
+\end_inset
+
+Ringraziamenti
+\end_layout
+
+\begin_layout Standard
+Questa tesi porta con sè anni di emozioni.
+ Desidero ringraziare tutte quelle persone che queste emozioni le hanno
+ suscitate o vi hanno preso parte.
+\end_layout
+
+\begin_layout Standard
+Ringrazio il professor Lo Presti per avermi posto, più volte, dinnanzi a
+ sfide entusiasmanti.
+ Ringrazio Matteo Nardelli per avermi accompagnato in questo lavoro di tesi:
+ non avrei potuto desiderare correlatore migliore.
+ Ringrazio il professor Tucci per avermi sempre dato il consiglio giusto,
+ al momento perfetto.
+ Ringrazio il professor Pettorossi per avermi trasmesso passione per lo
+ studio, e per essermi stato accanto nei momenti difficili.
+\end_layout
+
+\begin_layout Standard
+Ringrazio la mia famiglia per aver sostenuto emotivamente ed economicamente
+ il mio percorso in questi anni.
+ In modo particolare ringrazio mio padre per avermi sempre fatto sentire
+ importante, per aver valorizzato i miei interessi e stimolato la mia curiosità.
+ Ringrazio mio nonno per aver gettato il seme della mia passione per l'informati
+ca: vorrei che oggi fosse qui a vederne un primo risultato.
+\end_layout
+
+\begin_layout Standard
+Ringrazio i miei amici di sempre, Michele Finocchi, Francesco Sposato, Giuliano
+ Bartoloni ed Edoardo Croce per avermi regalato la spensieratezza anche
+ quando non ero capace di concedermela.
+ In particolar modo ringrazio Michele e tutta la sua famiglia, per avermi
+ sempre fatto sentire a casa.
+ Ringrazio Daniele Oteri perchè ogni volta che ci rivediamo mi si spalanca
+ il cuore.
+ Ringrazio Gabriele Santi perchè anche nelle giornate più intense riusciamo
+ a darci la carica.
+ Ringrazio Edoardo Felici perchè ogni estate mi convince a vedere al di
+ là del mio computer.
+\end_layout
+
+\begin_layout Standard
+Ringrazio Laura perchè senza di lei oggi non sorriderei.
+ La ringrazio per non aver mai dubitato di me in questi anni, anche quando
+ ero io il primo a farlo.
+ La ringrazio per avermi sempre dato il coraggio di superare i miei limiti.
+ La ringrazio perchè con lei tutto sembra realizzabile.
+\end_layout
+
+\end_body
+\end_document

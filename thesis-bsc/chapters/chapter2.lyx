@@ -1,0 +1,3943 @@
+#LyX 2.1 created this file. For more info see http://www.lyx.org/
+\lyxformat 474
+\begin_document
+\begin_header
+\textclass report
+\begin_preamble
+\numberwithin{equation}{chapter}
+\end_preamble
+\use_default_options true
+\master ../thesis.lyx
+\begin_modules
+customHeadersFooters
+theorems-bytype
+theorems-chap-bytype
+\end_modules
+\maintain_unincluded_children false
+\language italian
+\language_package default
+\inputencoding auto
+\fontencoding global
+\font_roman lmodern
+\font_sans lmss
+\font_typewriter lmtt
+\font_math auto
+\font_default_family rmdefault
+\use_non_tex_fonts false
+\font_sc false
+\font_osf false
+\font_sf_scale 100
+\font_tt_scale 100
+\graphics default
+\default_output_format default
+\output_sync 0
+\bibtex_command default
+\index_command default
+\paperfontsize 11
+\spacing onehalf
+\use_hyperref true
+\pdf_bookmarks true
+\pdf_bookmarksnumbered false
+\pdf_bookmarksopen false
+\pdf_bookmarksopenlevel 1
+\pdf_breaklinks false
+\pdf_pdfborder true
+\pdf_colorlinks false
+\pdf_backref false
+\pdf_pdfusetitle true
+\papersize a4paper
+\use_geometry true
+\use_package amsmath 1
+\use_package amssymb 1
+\use_package cancel 1
+\use_package esint 1
+\use_package mathdots 1
+\use_package mathtools 1
+\use_package mhchem 1
+\use_package stackrel 1
+\use_package stmaryrd 1
+\use_package undertilde 1
+\cite_engine basic
+\cite_engine_type default
+\biblio_style plain
+\use_bibtopic false
+\use_indices false
+\paperorientation portrait
+\suppress_date false
+\justification true
+\use_refstyle 1
+\index Index
+\shortcut idx
+\color #008000
+\end_index
+\leftmargin 3cm
+\topmargin 2.5cm
+\rightmargin 3cm
+\bottommargin 4cm
+\headsep 1cm
+\footskip 1.5cm
+\secnumdepth 3
+\tocdepth 3
+\paragraph_separation skip
+\defskip medskip
+\quotes_language french
+\papercolumns 1
+\papersides 2
+\paperpagestyle default
+\tracking_changes false
+\output_changes false
+\html_math_output 0
+\html_css_as_file 0
+\html_be_strict false
+\end_header
+
+\begin_body
+
+\begin_layout Chapter
+\begin_inset CommandInset label
+LatexCommand label
+name "chap:Posizionamento-Ottimo"
+
+\end_inset
+
+Posizionamento degli operatori
+\end_layout
+
+\begin_layout Standard
+Il problema del posizionamento degli operatori consiste nell'assegnare l'esecuzi
+one degli operatori di un'applicazione DSP ai nodi computazionali di un'architet
+tura distribuita.
+ Quando il processamento di una standing query è distribuito su risorse
+ computazionali e trasmissive distinte, determinare una soluzione di posizioname
+nto quanto più possibile prossima all'ottimalità è di fondamentale importanza
+ per garantire l'efficienza dell'applicazione.
+ Il posizionamento degli operatori può dunque considerarsi una tecnica di
+ ottimizzazione per un'applicazione di data stream processing 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "Schneider2013,Aniello2013,Pietzuch2006"
+
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+Un'applicazione DSP è rappresentata da una topologia che incapsula le relazioni
+ fra gli operatori e i dettagli relativi alla loro domanda computazionale.
+ Un'architettura distribuita, sia essa una Cloud o una Grid, è rappresentata
+ da una topologia che incapsula le potenzialità operative e la connettività
+ delle risorse computazionali.
+ Il problema del posizionamento degli operatori consiste dunque nel mappare
+ la topologia operazionale dell'applicazione sulla topologia logica e fisica
+ delle risorse computazionali offerte dall'architettura distribuita.
+ Il posizionamento degli operatori è un problema di ottimizzazione combinatoria
+ riducibile al Binary Knapsack Problem ed al Bin Packing Problem: pertanto
+ esso appartiene alla classe di complessità computazionale NP-hard 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "Pettorossi2014,Trevisan2002,Krentel1988"
+
+\end_inset
+
+.
+ Risulta dunque corretto, oltre che intuitivo, esprimerlo mediante un modello
+ di programmazione lineare binaria.
+\end_layout
+
+\begin_layout Standard
+In questo capitolo descriviamo nel dettaglio il modello adottato per risolvere
+ il problema di posizionamento degli operatori.
+ Talvolta faremo riferimento a problemi di ottimizzazione combinatoria,
+ noti in letteratura: come il Knapsack Problem 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "Kellerer2004,Martello1990,Martello1987a"
+
+\end_inset
+
+ ed il Bin Packing Problem 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "Serafini2009,Martello1987"
+
+\end_inset
+
+.
+ Nella Sezione 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "sec:Grafo-DSP"
+
+\end_inset
+
+ descriviamo il grafo che permette di rappresentare un'applicazione DSP.
+ Nella Sezione 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "sec:Grafo-RES"
+
+\end_inset
+
+ descriviamo il grafo che permette di rappresentare un'architettura distribuita.
+ Nella Sezione 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "sec:Posizionamento"
+
+\end_inset
+
+ definiamo la soluzione del problema del posizionamento degli operatori,
+ il vettore di posizionamento dei data stream e le condizioni necessarie
+ e sufficienti alla ammissibilità.
+ Nella Sezione 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "sec:Metriche"
+
+\end_inset
+
+ descriviamo lo spazio metrico adottato nel nostro modello, formulando il
+ tempo di risposta dell'applicazione e la disponibilità dell'architettura.
+ Introduciamo inoltre le utili definizioni di metrica antitetica e metrica
+ disomogenea.
+ Nella Sezione 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "sec:Ottimizzazione"
+
+\end_inset
+
+ descriviamo il criterio di ottimizzazione adottato nel nostro modello,
+ mostrando come questo derivi dall'approccio di Čebyšëv ai problemi di ottimizza
+zione multi-obiettivo.
+ Nella Sezione 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "sec:Formulazione"
+
+\end_inset
+
+ diamo infine tre formulazioni del problema di posizionamento in programmazione
+ lineare binaria.
+ Partendo da una prima formulazione basica, ricaviamo le seguenti modificando
+ il dominio delle variabili decisionali ed esprimendo uno specifico vincolo
+ come conservazione di flusso.
+\end_layout
+
+\begin_layout Section
+\begin_inset CommandInset label
+LatexCommand label
+name "sec:Grafo-DSP"
+
+\end_inset
+
+Grafo DSP
+\end_layout
+
+\begin_layout Standard
+Un'applicazione DSP è rappresentata da un grafo diretto aciclico 
+\begin_inset Formula $G_{dsp}=(V_{dsp},E_{dsp})$
+\end_inset
+
+, dove 
+\begin_inset Formula $V_{dsp}$
+\end_inset
+
+ è l'insieme dei nodi operazionali e 
+\begin_inset Formula $E_{dsp}$
+\end_inset
+
+ è l'insieme dei data stream (Figura 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:grafo-dsp"
+
+\end_inset
+
+).
+ Ogni nodo 
+\begin_inset Formula $i\in V_{dsp}$
+\end_inset
+
+ incapsula la domanda computazionale dell'istanza dell'operatore 
+\begin_inset Formula $op_{i}$
+\end_inset
+
+.
+ Ogni arco 
+\begin_inset Formula $(i,j)\in E_{dsp}$
+\end_inset
+
+ incapsula le caratteristiche del data stream che connette la istanza dell'opera
+tore 
+\begin_inset Formula $op_{i}$
+\end_inset
+
+ alla istanza dell'operatore 
+\begin_inset Formula $op_{j}$
+\end_inset
+
+.
+ Qualora 
+\begin_inset Formula $(i,j)\in E_{dsp}$
+\end_inset
+
+, diciamo che il nodo operazionale 
+\begin_inset Formula $i$
+\end_inset
+
+ 
+\begin_inset Quotes fld
+\end_inset
+
+produce
+\begin_inset Quotes frd
+\end_inset
+
+ il data stream 
+\begin_inset Formula $(i,j)$
+\end_inset
+
+, mentre il nodo 
+\begin_inset Formula $j$
+\end_inset
+
+ 
+\begin_inset Quotes fld
+\end_inset
+
+consuma
+\begin_inset Quotes frd
+\end_inset
+
+ il data stream 
+\begin_inset Formula $(i,j)$
+\end_inset
+
+, e ancora che un flusso di tuple è 
+\begin_inset Quotes fld
+\end_inset
+
+associato
+\begin_inset Quotes frd
+\end_inset
+
+ al data stream 
+\begin_inset Formula $(i,j)$
+\end_inset
+
+, ovvero che delle tuple 
+\begin_inset Quotes fld
+\end_inset
+
+costituiscono
+\begin_inset Quotes frd
+\end_inset
+
+ il data stream 
+\begin_inset Formula $(i,j)$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+placement h
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\noindent
+\align center
+\begin_inset Graphics
+	filename /home/giacomo/Documents/projects/bsc-thesis/figures/optimal-placement/grafo-dsp.svg
+	width 12cm
+	groupId optimal-placement
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:grafo-dsp"
+
+\end_inset
+
+Esempio di Grafo DSP.
+ Ogni nodo è etichettato con il proprio identificativo.
+ La dimensione di un nodo 
+\begin_inset Formula $i$
+\end_inset
+
+ sta ad indicare la relativa domanda computazionale, in termini di risorse
+ richieste 
+\begin_inset Formula $\mathbf{C}_{i}$
+\end_inset
+
+ e velocità di processamento 
+\begin_inset Formula $S_{i}$
+\end_inset
+
+ .
+ La dimensione degli archi 
+\begin_inset Formula $(i,j)$
+\end_inset
+
+ sta ad indicare la entità del data stream, in termini di flusso 
+\begin_inset Formula $\varphi_{(i,j)}$
+\end_inset
+
+ e dimensione delle tuple 
+\begin_inset Formula $\lambda_{(i,j)}$
+\end_inset
+
+.
+ Per una maggiore chiarezza grafica, abbiamo assunto data stream omogenei.
+ I nodi 
+\begin_inset Quotes fld
+\end_inset
+
+Source
+\begin_inset Quotes frd
+\end_inset
+
+ sono i nodi 
+\begin_inset Formula $i\in So$
+\end_inset
+
+.
+ I nodi 
+\begin_inset Quotes fld
+\end_inset
+
+Sink
+\begin_inset Quotes frd
+\end_inset
+
+ sono i nodi 
+\begin_inset Formula $i\in Si$
+\end_inset
+
+.
+ I nodi 
+\begin_inset Quotes fld
+\end_inset
+
+Processing
+\begin_inset Quotes frd
+\end_inset
+
+ sono i nodi 
+\begin_inset Formula $i\in V_{dsp}\setminus(So\cap Si)$
+\end_inset
+
+.
+ Se non diversamente specificato, assumiamo che 
+\begin_inset Formula $\forall i\in V_{dsp}:V_{res}^{i}=V_{res}$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsection
+Nodi operazionali
+\end_layout
+
+\begin_layout Standard
+Un generico nodo 
+\begin_inset Formula $i\in V_{dsp}$
+\end_inset
+
+ è detto 
+\begin_inset Quotes fld
+\end_inset
+
+nodo operazionale
+\begin_inset Quotes frd
+\end_inset
+
+, in quanto ad esso è associata l'istanza di un operatore.
+ Esso è caratterizzato da:
+\end_layout
+
+\begin_layout Labeling
+\labelwidthstring 00.00.0000
+\begin_inset Formula $op_{i}$
+\end_inset
+
+ Istanza dell'operatore assegnato al nodo.
+\end_layout
+
+\begin_layout Labeling
+\labelwidthstring 00.00.0000
+\begin_inset Formula $\mathbf{C}_{i}$
+\end_inset
+
+ Vettore delle risorse necessarie all'esecuzione dell'operatore.
+ Una componente 
+\begin_inset Formula $c_{i,\varrho}\in\boldsymbol{\mathbf{C}}_{i}$
+\end_inset
+
+ indica la domanda di risorsa 
+\begin_inset Formula $\varrho$
+\end_inset
+
+ per l'istanza dell'operatore.
+\end_layout
+
+\begin_layout Labeling
+\labelwidthstring 00.00.0000
+\begin_inset Formula $S_{i}$
+\end_inset
+
+ Velocità di processamento delle tuple 
+\shape slanted
+da parte di un processore di riferimento
+\shape default
+.
+ Misurata in tuple al secondo (
+\begin_inset Formula $[\tau/s]$
+\end_inset
+
+).
+\end_layout
+
+\begin_layout Labeling
+\labelwidthstring 00.00.0000
+\begin_inset Formula $\varphi_{i}^{in}$
+\end_inset
+
+ Flusso delle tuple in ingresso all'operatore.
+ Misurato in tuple (
+\begin_inset Formula $[\tau]$
+\end_inset
+
+).
+\end_layout
+
+\begin_layout Labeling
+\labelwidthstring 00.00.0000
+\begin_inset Formula $\varphi_{i}^{out}$
+\end_inset
+
+ Flusso delle tuple in uscita dall'operatore.
+ Misurato in tuple (
+\begin_inset Formula $[\tau]$
+\end_inset
+
+).
+\end_layout
+
+\begin_layout Labeling
+\labelwidthstring 00.00.0000
+\begin_inset Formula $\lambda_{i}^{in}$
+\end_inset
+
+ Dimensione delle tuple in ingresso all'operatore.
+ Misurata in bit per tupla tupla (
+\begin_inset Formula $[b/\tau]$
+\end_inset
+
+).
+\end_layout
+
+\begin_layout Labeling
+\labelwidthstring 00.00.0000
+\begin_inset Formula $\lambda_{i}^{out}$
+\end_inset
+
+ Dimensione delle tuple in uscita dall'operatore.
+ Misurata in bit per tupla tupla (
+\begin_inset Formula $[b/\tau]$
+\end_inset
+
+).
+\end_layout
+
+\begin_layout Labeling
+\labelwidthstring 00.00.0000
+\begin_inset Formula $V_{res}^{i}\subseteq V_{res}$
+\end_inset
+
+ Nodi computazionali 
+\begin_inset Formula $u\in V_{res}$
+\end_inset
+
+ sui quali il nodo 
+\begin_inset Formula $i$
+\end_inset
+
+ può essere posizionato.
+\end_layout
+
+\begin_layout Paragraph
+Nodi source e nodi sink
+\end_layout
+
+\begin_layout Standard
+Il grafo 
+\begin_inset Formula $G_{dsp}$
+\end_inset
+
+ presenta almeno un nodo source e almeno un nodo sink, per i quali alcuni
+ specifici parametri topologici ed operativi sono vincolati ad opportuni
+ valori.
+ Denotiamo con 
+\begin_inset Formula $So$
+\end_inset
+
+ l'insieme dei nodi source, e con 
+\begin_inset Formula $Si$
+\end_inset
+
+ l'insieme dei nodi sink, dove 
+\begin_inset Formula $So,Si\subset V_{dsp}$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Definition
+\begin_inset CommandInset label
+LatexCommand label
+name "def:nodo-source"
+
+\end_inset
+
+Un 
+\shape slanted
+nodo source
+\shape default
+ è un nodo operazionale che produce e non consuma un data stream.
+ Esso è dunque un nodo 
+\begin_inset Formula $i\in V_{dsp}.op_{i}=src$
+\end_inset
+
+ che ha almeno un arco uscente (
+\begin_inset Formula $deg_{out}(i)\geq1$
+\end_inset
+
+), non ha alcun arco entrante (
+\begin_inset Formula $deg_{in}(i)=0$
+\end_inset
+
+, 
+\begin_inset Formula $\varphi_{i}^{in}=0$
+\end_inset
+
+, 
+\begin_inset Formula $\lambda_{i}^{in}=0$
+\end_inset
+
+), e può essere posizionato esclusivamente su uno specifico nodo 
+\begin_inset Formula $u\in V_{res}$
+\end_inset
+
+ (
+\begin_inset Formula $|V_{res}^{i}|=1$
+\end_inset
+
+).
+ 
+\end_layout
+
+\begin_layout Standard
+Tale definizione può essere rilassata considerando nodi source 
+\begin_inset Formula $i$
+\end_inset
+
+ per i quali 
+\begin_inset Formula $|V_{res}^{i}|\geq1$
+\end_inset
+
+.
+ 
+\end_layout
+
+\begin_layout Definition
+\begin_inset CommandInset label
+LatexCommand label
+name "def:nodo-sink"
+
+\end_inset
+
+Un 
+\shape slanted
+nodo sink
+\shape default
+ è un nodo operazionale che consuma e non produce un data stream.
+ Esso è dunque un nodo 
+\begin_inset Formula $i\in V_{dsp}.op_{i}=snk$
+\end_inset
+
+ che ha almeno un arco entrante (
+\begin_inset Formula $deg_{in}(i)\geq1$
+\end_inset
+
+), non ha alcun arco uscente (
+\begin_inset Formula $deg_{out}(i)=0$
+\end_inset
+
+, 
+\begin_inset Formula $\varphi_{i}^{out}=0$
+\end_inset
+
+, 
+\begin_inset Formula $\lambda_{i}^{out}=0$
+\end_inset
+
+), e può essere posizionato esclusivamente su uno specifico nodo 
+\begin_inset Formula $u\in V_{res}$
+\end_inset
+
+ (
+\begin_inset Formula $|V_{res}^{i}|=1$
+\end_inset
+
+).
+\end_layout
+
+\begin_layout Standard
+Tale definizione può essere rilassata considerando nodi sink 
+\begin_inset Formula $i$
+\end_inset
+
+ per i quali 
+\begin_inset Formula $|V_{res}^{i}|\geq1$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Subsection
+Data stream
+\end_layout
+
+\begin_layout Standard
+Un generico arco 
+\begin_inset Formula $(i,j)\in E_{dsp}$
+\end_inset
+
+ è detto 
+\begin_inset Quotes fld
+\end_inset
+
+data stream
+\begin_inset Quotes frd
+\end_inset
+
+, in quanto ad esso è associato un flusso di tuple.
+ Esso è caratterizzato da:
+\end_layout
+
+\begin_layout Labeling
+\labelwidthstring 00.00.0000
+\begin_inset Formula $\varphi_{(i,j)}$
+\end_inset
+
+ Flusso delle tuple in transito nel data stream dal nodo 
+\begin_inset Formula $i\in V_{dsp}$
+\end_inset
+
+ al nodo 
+\begin_inset Formula $j\in V_{dsp}$
+\end_inset
+
+ .
+ Misurato in tuple (
+\begin_inset Formula $[\tau]$
+\end_inset
+
+).
+\end_layout
+
+\begin_layout Labeling
+\labelwidthstring 00.00.0000
+\begin_inset Formula $\lambda_{(i,j)}$
+\end_inset
+
+ Dimensione delle tuple in transito nel data stream dal nodo 
+\begin_inset Formula $i\in V_{dsp}$
+\end_inset
+
+ al nodo 
+\begin_inset Formula $j\in V_{dsp}$
+\end_inset
+
+ .
+ Misurato in bit per tupla (
+\begin_inset Formula $[b/\tau]$
+\end_inset
+
+).
+\end_layout
+
+\begin_layout Paragraph
+Additività del data stream
+\end_layout
+
+\begin_layout Standard
+Un operatore può dover consumare data stream prodotti da operatori differenti.
+ In tal caso i data stream prodotti vengono cumulati nell'operatore che
+ li consuma.
+ Vale dunque la seguente 
+\shape slanted
+proprietà di additività del data stream
+\shape default
+.
+\end_layout
+
+\begin_layout Proposition
+\begin_inset CommandInset label
+LatexCommand label
+name "prop:additività-data-stream"
+
+\end_inset
+
+Ogni nodo operazionale può consumare data stream prodotti da operatori different
+i, ovvero
+\begin_inset Formula 
+\begin{equation}
+\varphi_{j}^{in}=\sum_{(i,j)\in E_{dsp}}\varphi_{(i,j)}\qquad\forall j\in V_{dsp}\label{eq:additività-data-stream}
+\end{equation}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Proposition
+dove 
+\begin_inset Formula $\varphi_{j}^{in}$
+\end_inset
+
+ è il flusso di tuple in ingresso al nodo operazionale 
+\begin_inset Formula $j$
+\end_inset
+
+, e 
+\begin_inset Formula $\varphi_{(i,j)}$
+\end_inset
+
+ è il flusso di tuple di ogni data stream diretto al nodo operazionale 
+\begin_inset Formula $j$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Paragraph
+Omogeneità delle tuple
+\end_layout
+
+\begin_layout Standard
+Qualora un operatore consumi data stream prodotti da operatori differenti,
+ assumiamo per semplicità che la dimensione delle tuple consumate sia omogenea.
+ Vale dunque la seguente 
+\shape slanted
+proprietà di omogeneità del data stream
+\shape default
+.
+\end_layout
+
+\begin_layout Proposition
+\begin_inset CommandInset label
+LatexCommand label
+name "prop:omogeneità-data-stream"
+
+\end_inset
+
+Ogni nodo operazionale può consumare solo tuple della stessa dimensione,
+ ovvero
+\begin_inset Formula 
+\begin{equation}
+\lambda_{(i,j)}=\lambda_{j}^{in}\qquad\forall(i,j)\in E_{dsp}\label{eq:omogeneità-data-stream}
+\end{equation}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Proposition
+dove 
+\begin_inset Formula $\lambda_{(i,j)}$
+\end_inset
+
+ è la dimensione delle tuple che costituiscono il data stream 
+\begin_inset Formula $(i,j)$
+\end_inset
+
+, ed 
+\begin_inset Formula $\lambda_{j}^{in}$
+\end_inset
+
+ è la dimensione delle tuple in ingresso al nodo operazionale 
+\begin_inset Formula $j$
+\end_inset
+
+ che da esso sono consumate.
+\end_layout
+
+\begin_layout Paragraph
+Trasformazione del data stream
+\end_layout
+
+\begin_layout Standard
+In generale un operatore esegue una trasformazione del data stream.
+ Tale trasformazione può dunque conservare o meno la entità del data stream,
+ in termini di flusso e dimensione delle tuple.
+ Ogni operatore 
+\begin_inset Formula $op_{i}$
+\end_inset
+
+ è caratterizzato da una funzione di trasformazione 
+\begin_inset Formula $T_{i}:\mathbb{R}^{2}\rightarrow\mathbb{R}^{2}$
+\end_inset
+
+ che associa flusso e dimensione delle tuple in ingresso al flusso e dimensione
+ delle tuple in uscita.
+ Vale dunque la seguente 
+\shape slanted
+proprietà di trasformazione del data stream
+\shape default
+.
+\end_layout
+
+\begin_layout Proposition
+\begin_inset CommandInset label
+LatexCommand label
+name "prop:trasformazione-data-stream"
+
+\end_inset
+
+Ogni nodo operazionale può non conservare il data stream, ovvero
+\begin_inset Formula 
+\begin{equation}
+\varphi_{i}^{in}\neq\varphi_{i}^{out}\vee\lambda_{i}^{in}\neq\lambda_{i}^{out}\qquad\exists i\in V_{dsp}\label{eq:trasformazione-data-stream}
+\end{equation}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Proposition
+dove 
+\begin_inset Formula $\varphi_{i}^{in}$
+\end_inset
+
+ [
+\begin_inset Formula $\lambda_{i}^{in}$
+\end_inset
+
+] è il flusso [la dimensione] delle tuple in ingresso al nodo operazionale
+ 
+\begin_inset Formula $j$
+\end_inset
+
+, e 
+\begin_inset Formula $\varphi_{i}^{out}$
+\end_inset
+
+ [
+\begin_inset Formula $\lambda_{i}^{out}$
+\end_inset
+
+] è il flusso [la dimensione] delle tuple in uscita dal nodo operazionale
+ 
+\begin_inset Formula $j$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Paragraph
+Cammini
+\end_layout
+
+\begin_layout Standard
+In un grafo 
+\begin_inset Formula $G_{dsp}$
+\end_inset
+
+ siamo interessati a studiare il processo di trasformazione dei data stream,
+ dalla loro prima produzione in un nodo source, al loro consumo finale in
+ un nodo sink.
+ Se non diversamente specificato, 
+\begin_inset Formula $\Pi_{G_{dsp}}$
+\end_inset
+
+ indica l'insieme di tutti i cammini orientati sul grafo 
+\begin_inset Formula $G_{dsp}$
+\end_inset
+
+, tali da connettere un nodo source ad un nodo sink.
+ Un generico cammino 
+\begin_inset Formula $\pi\in\Pi_{G_{dsp}}$
+\end_inset
+
+ di dimensione 
+\begin_inset Formula $n_{\pi}$
+\end_inset
+
+ è dunque una sequenza 
+\begin_inset Formula $\pi=(i_{k}\in V_{dsp})_{k\in[1,n_{\pi}]}$
+\end_inset
+
+ di nodi appartenenti al cammino, in cui 
+\begin_inset Formula $i_{1}$
+\end_inset
+
+ è un nodo source e 
+\begin_inset Formula $i_{n_{\pi}}$
+\end_inset
+
+ è un nodo sink.
+\end_layout
+
+\begin_layout Section
+\begin_inset CommandInset label
+LatexCommand label
+name "sec:Grafo-RES"
+
+\end_inset
+
+Grafo RES
+\end_layout
+
+\begin_layout Standard
+Un'architettura distribuita è rappresentata da un grafo diretto completamente
+ connesso 
+\begin_inset Formula $G_{res}=(V_{res},E_{res})$
+\end_inset
+
+, dove 
+\begin_inset Formula $V_{res}$
+\end_inset
+
+ è l'insieme dei nodi computazionali e 
+\begin_inset Formula $E_{res}$
+\end_inset
+
+ è l'insieme del link logici (Figura 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:grafo-res"
+
+\end_inset
+
+).
+ Ogni nodo 
+\begin_inset Formula $u\in V_{res}$
+\end_inset
+
+ incapsula la offerta computazionale della risorsa.
+ Ogni arco 
+\begin_inset Formula $(u,v)\in E_{res}$
+\end_inset
+
+ incapsula le potenzialità trasmissive del link logico che connette la risorsa
+ 
+\begin_inset Formula $u\in V_{res}$
+\end_inset
+
+ alla risorsa 
+\begin_inset Formula $v\in V_{res}$
+\end_inset
+
+.
+ Qualora 
+\begin_inset Formula $(u,v)\in E_{res}$
+\end_inset
+
+, diciamo che il nodo 
+\begin_inset Formula $u$
+\end_inset
+
+ ha la possibilità di 
+\begin_inset Quotes fld
+\end_inset
+
+inviare
+\begin_inset Quotes frd
+\end_inset
+
+ un data stream al nodo 
+\begin_inset Formula $v$
+\end_inset
+
+, mentre il nodo 
+\begin_inset Formula $v$
+\end_inset
+
+ ha la possibilità di 
+\begin_inset Quotes fld
+\end_inset
+
+ricevere
+\begin_inset Quotes frd
+\end_inset
+
+ un data stream dal nodo 
+\begin_inset Formula $u$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+placement h
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\noindent
+\align center
+\begin_inset Graphics
+	filename /home/giacomo/Documents/projects/bsc-thesis/figures/optimal-placement/grafo-res.svg
+	width 12cm
+	groupId optimal-placement
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:grafo-res"
+
+\end_inset
+
+Esempio di grafo RES.
+ Ogni nodo è etichettato con il proprio identificativo.
+ La dimensione di un nodo 
+\begin_inset Formula $u$
+\end_inset
+
+ sta ad indicare la relativa offerta computazionale, in termini di risorse
+ offerte 
+\begin_inset Formula $\mathbf{C}_{u}$
+\end_inset
+
+ e speedup 
+\begin_inset Formula $S_{u}$
+\end_inset
+
+.
+ Il riquadro sta ad indicare la completa connettività del grafo.
+ La distanza tra i nodi 
+\begin_inset Formula $u,v$
+\end_inset
+
+ sta ad indicare la relativa distanza di rete, in termini di round-trip-time
+ 
+\begin_inset Formula $D_{(u,v)}$
+\end_inset
+
+ e capacità del canale trasmissivo 
+\begin_inset Formula $B_{(u,v)}$
+\end_inset
+
+.
+ I nodi 
+\begin_inset Quotes fld
+\end_inset
+
+Pin As Source
+\begin_inset Quotes frd
+\end_inset
+
+ sono quei nodi 
+\begin_inset Formula $u\in V_{res}:\exists i\in So.u\in V_{res}^{i}$
+\end_inset
+
+.
+ I nodi 
+\begin_inset Quotes fld
+\end_inset
+
+Pin As Sink
+\begin_inset Quotes frd
+\end_inset
+
+ sono quei nodi 
+\begin_inset Formula $u\in V_{res}:\exists i\in Si.u\in V_{res}^{i}$
+\end_inset
+
+.
+ I nodi 
+\begin_inset Quotes fld
+\end_inset
+
+Pin As Processing
+\begin_inset Quotes frd
+\end_inset
+
+ sono quei nodi 
+\begin_inset Formula $u\in V_{res}:\exists i\in V_{dsp}\setminus(So\cap Si).u\in V_{res}^{i}$
+\end_inset
+
+.
+ I nodi 
+\begin_inset Quotes fld
+\end_inset
+
+Unpinnable
+\begin_inset Quotes frd
+\end_inset
+
+ sono quei nodi 
+\begin_inset Formula $u\in V_{res}:\cancel{\exists}i\in V_{dsp}.u\in V_{res}^{i}$
+\end_inset
+
+.
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsection
+Nodi computazionali
+\end_layout
+
+\begin_layout Standard
+Un generico nodo 
+\begin_inset Formula $u\in V_{res}$
+\end_inset
+
+ è detto 
+\begin_inset Quotes fld
+\end_inset
+
+nodo computazionale
+\begin_inset Quotes frd
+\end_inset
+
+, in quanto può eventualmente eseguire le computazioni richieste da un nodo
+ operazionale.
+ Esso è caratterizzato da:
+\end_layout
+
+\begin_layout Labeling
+\labelwidthstring 00.00.0000
+\begin_inset Formula $\mathbf{C}_{u}$
+\end_inset
+
+ Vettore delle risorse offerte.
+\end_layout
+
+\begin_deeper
+\begin_layout Standard
+Una componente 
+\begin_inset Formula $c_{u,\varrho}\in\mathbf{C}_{u}$
+\end_inset
+
+ indica la offerta di risorsa 
+\begin_inset Formula $\varrho$
+\end_inset
+
+ per l'istanza dell'operatore.
+\end_layout
+
+\end_deeper
+\begin_layout Labeling
+\labelwidthstring 00.00.0000
+\begin_inset Formula $S_{u}$
+\end_inset
+
+ Velocità di processamento delle tuple 
+\shape slanted
+rispetto ad un processore di riferimento
+\shape default
+
+\begin_inset Foot
+status collapsed
+
+\begin_layout Plain Layout
+Una velocità 
+\begin_inset Formula $S_{u}=2$
+\end_inset
+
+ permetterà di processare il doppio delle tuple, una velocità 
+\begin_inset Formula $S_{u}=0.5$
+\end_inset
+
+ permetterà di processare la metà delle tuple, e così via.
+\end_layout
+
+\end_inset
+
+.
+ Trattandosi di un rapporto fra velocità di processamento, risulta essere
+ adimensionale.
+ 
+\end_layout
+
+\begin_layout Labeling
+\labelwidthstring 00.00.0000
+\begin_inset Formula $A_{u}$
+\end_inset
+
+ Probabilità di stato up-and-running.
+\end_layout
+
+\begin_layout Subsection
+Link logici
+\end_layout
+
+\begin_layout Standard
+Un generico arco 
+\begin_inset Formula $(u,v)\in E_{res}$
+\end_inset
+
+ è detto 
+\begin_inset Quotes fld
+\end_inset
+
+link logico
+\begin_inset Quotes frd
+\end_inset
+
+, in quanto è caratterizzato da:
+\end_layout
+
+\begin_layout Labeling
+\labelwidthstring 00.00.0000
+\begin_inset Formula $D_{(u,v)}$
+\end_inset
+
+ Round Trip Time misurato sul canale.
+ Misurato in secondi (
+\begin_inset Formula $[s]$
+\end_inset
+
+).
+\end_layout
+
+\begin_layout Labeling
+\labelwidthstring 00.00.0000
+\begin_inset Formula $B_{(u,v)}$
+\end_inset
+
+ Capacità di trasferimento del canale.
+ Misurata in bit al secondo (
+\begin_inset Formula $[b/s]$
+\end_inset
+
+).
+\end_layout
+
+\begin_layout Labeling
+\labelwidthstring 00.00.0000
+\begin_inset Formula $A_{(u,v)}$
+\end_inset
+
+ Probabilità di stato up-and-running.
+\end_layout
+
+\begin_layout Paragraph
+Connettività di rete
+\end_layout
+
+\begin_layout Standard
+Un link logico esprime la connettività di rete tra risorse computazionali,
+ siano esse remote o locali.
+ Esso può infatti essere la rappresentazione di un collegamento fisico tra
+ risorse computazionali remote (in tal caso parleremo di 
+\shape slanted
+connettività remota
+\shape default
+), o essere la rappresentazione di una tecnica IPC applicata a risorse locali
+ (in tal caso parleremo di 
+\shape slanted
+connettività locale
+\shape default
+).
+ La connettività remota, rappresentata da archi 
+\begin_inset Formula $(u,v)$
+\end_inset
+
+ con 
+\begin_inset Formula $u\neq v$
+\end_inset
+
+, rappresenta dunque la connettività di rete per nodi operazionali posizionati
+ su nodi computazionali distinti.
+ La connettività locale, rappresentata da archi 
+\begin_inset Formula $(u,u)$
+\end_inset
+
+, rappresenta la connettività di rete per nodi operazionali posizionati
+ su uno stesso nodo computazionale.
+\end_layout
+
+\begin_layout Standard
+Il grafo 
+\begin_inset Formula $G_{res}$
+\end_inset
+
+ presenta dunque archi autoentranti 
+\begin_inset Formula $(u,u)$
+\end_inset
+
+ per ogni nodo 
+\begin_inset Formula $u\in V_{res}$
+\end_inset
+
+.
+ Assumiamo per semplicità, che un link logico esprimente una connettività
+ locale non apporti alcun ritardo alla trasmissione del data stream (
+\begin_inset Formula $RTT_{(u,u)}=0$
+\end_inset
+
+), che possa attuare un trasferimento istantaneo (
+\begin_inset Formula $B_{(u,u)}=\infty$
+\end_inset
+
+) e che sia sempre disponibile (
+\begin_inset Formula $A_{(u,u)}=1$
+\end_inset
+
+).
+\end_layout
+
+\begin_layout Section
+\begin_inset CommandInset label
+LatexCommand label
+name "sec:Posizionamento"
+
+\end_inset
+
+Posizionamento
+\end_layout
+
+\begin_layout Standard
+Il problema del posizionamento degli operatori consiste nel mappare la topologia
+ operazionale, rappresentata dal grafo 
+\begin_inset Formula $G_{dsp}$
+\end_inset
+
+, nella topologia computazionale, rappresentata dal grafo 
+\begin_inset Formula $G_{res}$
+\end_inset
+
+.
+ Una mappatura di un grafo su un altro vuol dire associare ogni nodo dell'uno
+ su un nodo dell'altro.
+ Ci chiediamo dunque quale sia il modo migliore
+\begin_inset Foot
+status collapsed
+
+\begin_layout Plain Layout
+la qualità di una soluzione ad un problema di ottimizzazione è quantificata
+ da un criterio di ottimizzazione basato su uno spazio metrico.
+ Descriveremo nel seguito lo 
+\shape slanted
+spazio metrico
+\shape default
+ (Sezione 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "sec:Metriche"
+
+\end_inset
+
+) ed il 
+\shape slanted
+criterio di ottimizzazione
+\shape default
+ (Sezione 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "sec:Ottimizzazione"
+
+\end_inset
+
+) adottati nel nostro modello.
+ 
+\end_layout
+
+\end_inset
+
+ di posizionare ogni nodo operazionale 
+\begin_inset Formula $i\in V_{dsp}$
+\end_inset
+
+ su un nodo computazionale 
+\begin_inset Formula $u\in V_{res}$
+\end_inset
+
+.
+ Il problema del posizionamento degli operatori è un problema di ottimizzazione
+ combinatoria riducibile al 
+\shape slanted
+Binary Knapsack Problem (BKP) 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "Kellerer2004,Martello1990"
+
+\end_inset
+
+
+\shape default
+ ed al 
+\shape slanted
+Bin Packing Problem (BPP)
+\shape default
+ 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "Martello1987"
+
+\end_inset
+
+: esso appartiene pertanto alla classe di complessità computazionale NP-hard
+ 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "Pettorossi2014,Trevisan2002,Krentel1988"
+
+\end_inset
+
+.
+ Risulta dunque corretto, oltre che intuitivo, esprimerlo mediante un modello
+ di 
+\shape slanted
+programmazione lineare binaria (PL01)
+\shape default
+ 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "Serafini2009"
+
+\end_inset
+
+.
+ Un posizionamento degli operatori è dunque una funzione 
+\begin_inset Formula $\chi:V_{dsp}\times V_{res}\rightarrow\{0,1\}$
+\end_inset
+
+.
+ Esprimiamo tale funzione mediante notazione matriciale.
+\end_layout
+
+\begin_layout Definition
+\begin_inset CommandInset label
+LatexCommand label
+name "def:posizionamento-operatori"
+
+\end_inset
+
+Un 
+\shape slanted
+posizionamento degli operatori
+\shape default
+ è una matrice binaria 
+\begin_inset Formula $|V_{dsp}|\times|V_{res}|$
+\end_inset
+
+ 
+\begin_inset Formula 
+\begin{equation}
+\mathbf{x}\coloneqq\left(x_{i,u}\right){}_{i\in V_{dsp},u\in V_{res}}\in\{0,1\}^{|V_{dsp}||V_{res}|}\label{eq:posizionamento-operatori}
+\end{equation}
+
+\end_inset
+
+la cui generica componente 
+\begin_inset Formula $x_{i,u}$
+\end_inset
+
+ esprime il posizionamento del nodo operazionale 
+\begin_inset Formula $i\in V_{dsp}$
+\end_inset
+
+ sul nodo computazionale 
+\begin_inset Formula $u\in V_{res}$
+\end_inset
+
+.
+ Qualora il posizionamento sussista, abbiamo 
+\begin_inset Formula $x_{i,u}=1$
+\end_inset
+
+ e diciamo che l'operatore 
+\begin_inset Formula $op_{i}$
+\end_inset
+
+ 
+\begin_inset Quotes fld
+\end_inset
+
+è processato
+\begin_inset Quotes frd
+\end_inset
+
+ dal nodo computazionale 
+\begin_inset Formula $u$
+\end_inset
+
+, altrimenti abbiamo 
+\begin_inset Formula $x_{i,u}=0$
+\end_inset
+
+.
+ 
+\end_layout
+
+\begin_layout Example
+Consideriamo cinque nodi operazionali e sei nodi computazionali, tralasciando
+ per il momento qualsiasi dettaglio topologico.
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\[
+\begin{array}{cc}
+\mathbf{x_{1}}=\begin{bmatrix}1 & 0 & 0 & 0 & 0 & 0\\
+0 & 1 & 0 & 0 & 0 & 0\\
+0 & 0 & 1 & 0 & 0 & 0\\
+0 & 0 & 0 & 1 & 0 & 0\\
+0 & 0 & 0 & 0 & 1 & 0
+\end{bmatrix} & \mathbf{x_{2}}=\begin{bmatrix}1 & 0 & 0 & 0 & 0 & 0\\
+0 & 0 & 1 & 0 & 0 & 0\\
+0 & 0 & 1 & 0 & 0 & 0\\
+0 & 0 & 1 & 0 & 0 & 0\\
+0 & 0 & 0 & 0 & 1 & 0
+\end{bmatrix}\end{array}
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Nel posizionamento 
+\begin_inset Formula $\mathbf{x_{1}}$
+\end_inset
+
+ ogni operatore è processato da un nodo computazionale distinto; in particolare,
+ ogni operatore 
+\begin_inset Formula $i$
+\end_inset
+
+ è consumato da un nodo computazionale 
+\begin_inset Formula $u=i$
+\end_inset
+
+.
+ Nel posizionamento 
+\begin_inset Formula $\mathbf{x_{2}}$
+\end_inset
+
+ gli operatori 
+\begin_inset Formula $1,5$
+\end_inset
+
+ sono processati rispettivamente dai nodi computazionali 
+\begin_inset Formula $1,5$
+\end_inset
+
+, mentre gli operatori 
+\begin_inset Formula $2,3,4$
+\end_inset
+
+ sono processati dal nodo computazionale 
+\begin_inset Formula $3$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+Il posizionamento degli operatori induce un naturale posizionamento dei
+ data stream.
+ Se infatti tra due nodi operazionali 
+\begin_inset Formula $i$
+\end_inset
+
+ e 
+\begin_inset Formula $j$
+\end_inset
+
+, posizionati rispettivamente su nodi computazionali 
+\begin_inset Formula $u$
+\end_inset
+
+ e 
+\begin_inset Formula $v$
+\end_inset
+
+, fluisce un data stream 
+\begin_inset Formula $(i,j)$
+\end_inset
+
+, questo dovrà necessariamente essere trasmesso sul link logico 
+\begin_inset Formula $(u,v)$
+\end_inset
+
+.
+ E' dunque conveniente introdurre una rappresentazione vettoriale del posizionam
+ento dei data stream.
+ Vedremo nel seguito come tale rappresentazione, apparentemente ridondante,
+ possa risultare comoda nella formulazione delle metriche considerate nel
+ nostro modello (Sezione 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "sec:Metriche"
+
+\end_inset
+
+).
+\end_layout
+
+\begin_layout Definition
+\begin_inset CommandInset label
+LatexCommand label
+name "def:posizionamento-data-stream"
+
+\end_inset
+
+Un 
+\shape slanted
+posizionamento dei data stream
+\shape default
+ è una matrice binaria 
+\begin_inset Formula $|E_{dsp}|\times|E_{res}|$
+\end_inset
+
+ 
+\begin_inset Formula 
+\begin{equation}
+\mathbf{y}\coloneqq\left(y_{(i,j)(u,v)}\right){}_{(i,j)\in E_{dsp}.(u,v)\in E_{res}}\in\{0,1\}^{|E_{dsp}||E_{res}|}\label{eq:posizionamento-data-stream}
+\end{equation}
+
+\end_inset
+
+la cui generica componente 
+\begin_inset Formula $y_{(i,j)(u,v)}$
+\end_inset
+
+ esprime il posizionamento del data stream 
+\begin_inset Formula $(i,j)\in E_{dsp}$
+\end_inset
+
+ sul link logico 
+\begin_inset Formula $(u,v)\in E_{res}$
+\end_inset
+
+.
+ Qualora il posizionamento sussista, abbiamo 
+\begin_inset Formula $y_{(i,j)(u,v)}=1$
+\end_inset
+
+ e diciamo che il data stream 
+\begin_inset Formula $(i,j)$
+\end_inset
+
+ 
+\begin_inset Quotes fld
+\end_inset
+
+fluisce
+\begin_inset Quotes frd
+\end_inset
+
+ o 
+\begin_inset Quotes fld
+\end_inset
+
+è trasmesso
+\begin_inset Quotes frd
+\end_inset
+
+ sul link logico 
+\begin_inset Formula $(u,v)$
+\end_inset
+
+, altrimenti abbiamo 
+\begin_inset Formula $y_{(i,j)(u,v)}=0$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Subsection
+Ammissibilità
+\end_layout
+
+\begin_layout Standard
+Indichiamo ora i vincoli che permettono di definire l'insieme 
+\begin_inset Formula $X$
+\end_inset
+
+ delle soluzioni ammissibili per il problema del posizionamento degli operatori.
+ Poichè ogni vincolo costituisce una condizione necessaria non sufficiente
+ alla ammissibilità della soluzione, una soluzione 
+\begin_inset Formula $\mathbf{x}$
+\end_inset
+
+ è ammissibile, ovvero 
+\begin_inset Formula $\mathbf{x}\in X$
+\end_inset
+
+, se e solo se soddisfa contemporaneamente ogni vincolo di ammissibilità.
+\end_layout
+
+\begin_layout Paragraph
+Vincolo di eligibilità degli operatori
+\end_layout
+
+\begin_layout Standard
+Ad ogni nodo operazionale 
+\begin_inset Formula $i\in V_{dsp}$
+\end_inset
+
+ è associato un insieme 
+\begin_inset Formula $V_{res}^{i}\subseteq V_{res}$
+\end_inset
+
+ di nodi computazionali sui quali può essere posizionato.
+ Possiamo dunque escludere a priori alcuni posizionamenti degli operatori
+ 
+\begin_inset Formula $x_{i,u}$
+\end_inset
+
+.
+ Il seguente 
+\shape slanted
+vincolo di eligibilità
+\shape default
+ è pertanto una condizione necessaria non sufficiente alla ammissibilità
+ del posizionamento 
+\begin_inset Formula $\mathbf{x}$
+\end_inset
+
+:
+\begin_inset Formula 
+\begin{equation}
+u\notin V_{res}^{i}\Rightarrow x_{i,u}=0\qquad\forall i\in V_{dsp},u\in V_{res}\label{eq:vincolo-eligibilità-x-logico}
+\end{equation}
+
+\end_inset
+
+Volendo esprimere tale vincolo in forma algebrica, otteniamo:
+\begin_inset Formula 
+\begin{equation}
+\sum_{u\in V_{res}/V_{res}^{i}}x_{i,u}=0\qquad\forall i\in V_{dsp}\label{eq:vincolo-eligibilità-x-algebrico}
+\end{equation}
+
+\end_inset
+
+Quanto appena asserito equivale a restringere la dimensione del posizionamento
+ degli operatori.
+ Diamo dunque una definizione di posizionamento degli operatori, alternativa
+ a Equazione 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:posizionamento-operatori"
+
+\end_inset
+
+:
+\begin_inset Formula 
+\begin{equation}
+\mathbf{x}\coloneqq\left(x_{i,u}\right){}_{i\in V_{dsp},u\in V_{res}^{i}}\in\{0,1\}^{|V_{dsp}|\max\{|V_{res}^{i}|\}}\label{eq:posizionamento-x-ristretto}
+\end{equation}
+
+\end_inset
+
+Risulta dunque equivalente considerare il posizionamento nella forma standard
+ indicata in Equazione 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:posizionamento-operatori"
+
+\end_inset
+
+ vincolata da Equazione 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:vincolo-eligibilità-x-algebrico"
+
+\end_inset
+
+, oppure considerare il posizionamento nella forma ristretta indicata in
+ Equazione 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:posizionamento-x-ristretto"
+
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Paragraph
+Vincolo di eligibilità dei data stream
+\end_layout
+
+\begin_layout Standard
+Dal vincolo di eligibilità degli operatori (Equazione 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:vincolo-eligibilità-x-logico"
+
+\end_inset
+
+) segue che ad ogni data stream 
+\begin_inset Formula $(i,j)\in E_{dsp}$
+\end_inset
+
+ sia associato un insieme 
+\begin_inset Formula $V_{res}^{i}\times V_{res}^{j}\subseteq E_{res}$
+\end_inset
+
+ di link logici sui quali può essere posizionato.
+ Possiamo dunque escludere a priori alcuni posizionamenti dei data stream
+ 
+\begin_inset Formula $y_{(i,j)(u,v)}$
+\end_inset
+
+.
+ Il seguente 
+\shape slanted
+vincolo di eligibilità
+\shape default
+ è pertanto una condizione necessaria non sufficiente alla ammissibilità
+ del posizionamento 
+\begin_inset Formula $\mathbf{y}$
+\end_inset
+
+:
+\begin_inset Formula 
+\begin{equation}
+u\notin V_{res}^{i}\lor v\notin V_{res}^{j}\Rightarrow y_{(i,j)(u,v)}=0\qquad\forall(i,j)\in E_{dsp},(u,v)\in E_{res}\label{eq:vincolo-eligibilità-y-logico}
+\end{equation}
+
+\end_inset
+
+Notiamo che quanto appena asserito equivale a restringere la dimensione
+ del posizionamento dei data stream.
+ Diamo dunque una definizione alternativa a Equazione 
+\begin_inset CommandInset ref
+LatexCommand eqref
+reference "eq:posizionamento-data-stream"
+
+\end_inset
+
+: 
+\begin_inset Formula 
+\begin{equation}
+\mathbf{y}\coloneqq\left(y_{(i,j)(u,v)}\right){}_{(i,j)\in E_{dsp}.(u,v)\in V_{res}^{i}\times V_{res}^{j}}\in\{0,1\}^{|E_{dsp}|\max\{|V_{res}^{i}\times V_{res}^{j}|\}}\label{eq:posizionamento-y-ristretto}
+\end{equation}
+
+\end_inset
+
+Risulta dunque equivalente considerare il posizionamento nella forma standard
+ indicata in Equazione 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:posizionamento-data-stream"
+
+\end_inset
+
+ vincolata da Equazione 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:vincolo-eligibilità-y-logico"
+
+\end_inset
+
+, oppure considerare il posizionamento nella forma ristretta indicata in
+ Equazione 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:posizionamento-x-ristretto"
+
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Paragraph
+Vincolo di connettività
+\end_layout
+
+\begin_layout Standard
+Dalle definizioni di posizionamento risulta evidente uno stretto legame
+ tra il posizionamento degli operatori ed il posizionamento dei data stream.
+ Qualora i nodi operazionali 
+\begin_inset Formula $i$
+\end_inset
+
+ e 
+\begin_inset Formula $j$
+\end_inset
+
+ siano stati posizionati sui nodi computazionali 
+\begin_inset Formula $u$
+\end_inset
+
+ e 
+\begin_inset Formula $v$
+\end_inset
+
+, il data stream 
+\begin_inset Formula $(i,j)$
+\end_inset
+
+ deve necessariamente essere posizionato sul link logico 
+\begin_inset Formula $(u,v)$
+\end_inset
+
+.
+ Allo stesso modo, qualora il data stream 
+\begin_inset Formula $(i,j)$
+\end_inset
+
+ sia stato posizionato sul link logico 
+\begin_inset Formula $(u,v)$
+\end_inset
+
+, i nodi operazionali 
+\begin_inset Formula $i$
+\end_inset
+
+ e 
+\begin_inset Formula $j$
+\end_inset
+
+ devono necessariamente essere posizionati sui nodi computazionali 
+\begin_inset Formula $u$
+\end_inset
+
+ e 
+\begin_inset Formula $v$
+\end_inset
+
+.
+ Dato un posizionamento degli operatori 
+\begin_inset Formula $\mathbf{x}$
+\end_inset
+
+ ed un posizionamento dei data stream 
+\begin_inset Formula $\mathbf{y}$
+\end_inset
+
+, questi devono soddisfare per costruzione il seguente 
+\shape slanted
+vincolo di connettività
+\shape default
+, il quale è pertanto una condizione necessaria non sufficiente alla ammissibili
+tà del posizionamento 
+\begin_inset Formula $\mathbf{x}$
+\end_inset
+
+: 
+\begin_inset Formula 
+\begin{equation}
+y_{(i,j)(u,v)}\Longleftrightarrow x_{i,u}\wedge x_{j,v}\qquad\forall i,j\in V_{dsp},\forall u,v\in V_{res}\label{eq:vincolo-connettività-logico}
+\end{equation}
+
+\end_inset
+
+Volendo esprimere tale vincolo in forma algebrica, otteniamo:
+\begin_inset Formula 
+\begin{equation}
+\begin{cases}
+x_{i,u}+x_{j,v}-1\leq y_{(i,j)(u,v)} & \forall(i,j)\in E_{res},(u,v)\in E_{dsp}\\
+x_{i,u}+x_{j,v}\geq2y_{(i,j)(u,v)} & \forall(i,j)\in E_{res},(u,v)\in E_{dsp}
+\end{cases}\label{eq:vincolo-connettività-algebrico}
+\end{equation}
+
+\end_inset
+
+In alternativa a Equazione 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:vincolo-connettività-algebrico"
+
+\end_inset
+
+, il vincolo di connettività (Equazione 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:vincolo-connettività-logico"
+
+\end_inset
+
+) può essere espresso algebricamente nella forma di una conservazione di
+ flusso.
+ Tale formulazione alternativa è preferibile alla precedente, in quanto
+ sperimentalmente più efficiente.
+\begin_inset Formula 
+\begin{equation}
+\begin{cases}
+x_{i,u}=\sum_{(i,j)\in E_{dsp}}\sum_{v\in V_{res}^{j}}y_{(i,j)(u,v)} & \forall i\in V_{dsp}\setminus So,u\in V_{res}^{i}\\
+x_{j,v}=\sum_{(i,j)\in E_{dsp}}\sum_{u\in V_{res}^{i}}y_{(i,j)(u,v)} & \forall j\in V_{dsp}\setminus Si,v\in V_{res}^{j}
+\end{cases}\label{eq:vincolo-connettività-algebrico-alternativo}
+\end{equation}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Tale ultima rappresentazione può tuttavia risultare contro-intuitiva: in
+ finale, vi si preferisce pertanto la seguente forma:
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{equation}
+\begin{cases}
+x_{i,u}=\sum_{v\in V_{res}^{j}}y_{(i,j)(u,v)} & \forall(i,j)\in E_{dsp},u\in V_{res}^{i}\\
+x_{j,v}=\sum_{u\in V_{res}^{i}}y_{(i,j)(u,v)} & \forall(i,j)\in E_{dsp},v\in V_{res}^{j}
+\end{cases}\label{eq:vincolo-connettività-algebrico-alternativo-semplificato}
+\end{equation}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Notiamo che da quanto asserito in Equazione 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:vincolo-connettività-algebrico-alternativo-semplificato"
+
+\end_inset
+
+, segue che una soluzione al problema di posizionamento degli operatori
+ può essere espressa sia in termini di 
+\begin_inset Formula $\mathbf{x}$
+\end_inset
+
+ che in termini di 
+\begin_inset Formula $\mathbf{y}$
+\end_inset
+
+, in quanto dall'uno può essere derivato l'altro.
+ Tuttavia, nel seguito faremo riferimento ad 
+\begin_inset Formula $\mathbf{x}$
+\end_inset
+
+ come espressione della soluzione al nostro problema di posizionamento.
+\end_layout
+
+\begin_layout Paragraph
+Vincolo di unicità
+\end_layout
+
+\begin_layout Standard
+Ogni nodo operazionale deve essere posizionato su uno ed un solo nodo computazio
+nale.
+ Il seguente 
+\shape slanted
+vincolo di unicità 
+\shape default
+è pertanto una condizione necessaria non sufficiente alla ammissibilità
+ del posizionamento 
+\begin_inset Formula $\mathbf{x}$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{equation}
+\sum_{i\in V_{dsp}}x_{i,u}=1\qquad\forall u\in V_{res}\label{eq:vincolo-unicità}
+\end{equation}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Paragraph
+Vincolo di capacità
+\end_layout
+
+\begin_layout Standard
+L'offerta di risorse di ogni nodo computazionale deve poter soddisfare la
+ domanda di ogni nodo operazionale in esso posizionato.
+ Il seguente 
+\shape slanted
+vincolo di capacità 
+\shape default
+è pertanto una condizione necessaria non sufficiente alla ammissibilità
+ del posizionamento 
+\begin_inset Formula $\mathbf{x}$
+\end_inset
+
+.
+\begin_inset Formula 
+\begin{equation}
+\sum_{i\in V_{dsp}}x_{i,u}\mathbf{C}_{i}\leq\mathbf{C}_{u}\qquad\forall u\in V_{res}\label{eq:vincolo-capacità}
+\end{equation}
+
+\end_inset
+
+Sebbene possa risultare evidente, precisiamo che in Equazione 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:vincolo-capacità"
+
+\end_inset
+
+ abbiamo assunto che 
+\begin_inset Formula $\mathbf{C}_{i}\leq\mathbf{C}_{u}\Leftrightarrow\forall c_{i,\varrho}\in\mathbf{C}_{i},c_{u,\varrho}\in\mathbf{C}_{u}.c_{i,\varrho}\leq c_{u,\varrho}$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Example
+\begin_inset CommandInset label
+LatexCommand label
+name "exa:posizionamento"
+
+\end_inset
+
+Consideriamo l'applicazione DSP e l'architettura distribuita indicate in
+ Figura 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:esempio-posizionamento"
+
+\end_inset
+
+.
+ Studiamo la ammissibilità dei posizionamenti 
+\begin_inset Formula $\mathbf{x_{1}}$
+\end_inset
+
+ ed 
+\begin_inset Formula $\mathbf{x_{2}}$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Example
+\begin_inset Float figure
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\noindent
+\align center
+\begin_inset space \hfill{}
+\end_inset
+
+
+\begin_inset Float figure
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\noindent
+\align center
+\begin_inset Box Frameless
+position "c"
+hor_pos "c"
+has_inner_box 1
+inner_pos "c"
+use_parbox 1
+use_makebox 0
+width "40col%"
+special "none"
+height "1in"
+height_special "totalheight"
+status open
+
+\begin_layout Plain Layout
+\noindent
+\align center
+\begin_inset Graphics
+	filename /home/giacomo/Documents/projects/bsc-thesis/figures/optimal-placement/esempio-grafo-dsp.svg
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+ 
+\begin_inset space \hfill{}
+\end_inset
+
+
+\begin_inset Float figure
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\noindent
+\align center
+\begin_inset Box Frameless
+position "c"
+hor_pos "c"
+has_inner_box 1
+inner_pos "c"
+use_parbox 1
+use_makebox 0
+width "40col%"
+special "none"
+height "1in"
+height_special "totalheight"
+status open
+
+\begin_layout Plain Layout
+\noindent
+\align center
+\begin_inset Graphics
+	filename /home/giacomo/Documents/projects/bsc-thesis/figures/optimal-placement/esempio-grafo-res.svg
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\begin_inset space \hfill{}
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:esempio-posizionamento"
+
+\end_inset
+
+Grafi di riferimento per l'Esempio 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "exa:posizionamento"
+
+\end_inset
+
+.
+ Nel grafo DSP (a) abbiamo etichettato ogni nodo con il proprio identificativo,
+ seguito dalla relativa domanda computazionale.
+ Se non diversamente specificato, assumiamo che 
+\begin_inset Formula $\forall i\in V_{dsp}:V_{res}^{i}=V_{res}$
+\end_inset
+
+.
+ Nel grafo RES (b) abbiamo etichettato ogni nodo con il proprio identificativo,
+ seguito dalla relativa offerta computazionale.
+ Il riquadro sta ad indicare la completa connettività del grafo.
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\[
+\mathbf{x_{1}}=\left[\begin{array}{ccccccccccccc}
+1 & 0 & \cdots & \cdots & \cdots & \cdots & \cdots & \cdots & \cdots & \cdots & \cdots & \cdots & 0\\
+0 & \cdots & \cdots & \cdots & \cdots & \cdots & 0 & 1 & 0 & \cdots & \cdots & \cdots & 0\\
+0 & \cdots & \cdots & \cdots & 0 & 1 & 0 & \cdots & \cdots & \cdots & \cdots & \cdots & 0\\
+0 & \cdots & \cdots & \cdots & \cdots & 0 & 1 & 0 & \cdots & \cdots & \cdots & \cdots & 0\\
+0 & \cdots & \cdots & \cdots & \cdots & \cdots & \cdots & \cdots & \cdots & \cdots & \cdots & 0 & 1
+\end{array}\right]
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\[
+\mathbf{x_{2}}=\left[\begin{array}{ccccccccccccc}
+1 & \cdots & \cdots & 0 & 1 & 0 & \cdots & \cdots & \cdots & \cdots & \cdots & \cdots & 0\\
+0 & \cdots & \cdots & \cdots & \cdots & \cdots & \cdots & \cdots & \cdots & \cdots & \cdots & \cdots & 0\\
+0 & \cdots & 0 & 1 & 0 & \cdots & \cdots & \cdots & \cdots & \cdots & \cdots & \cdots & 0\\
+0 & \cdots & \cdots & \cdots & \cdots & 0 & 1 & 0 & \cdots & \cdots & \cdots & \cdots & 0\\
+0 & \cdots & \cdots & \cdots & \cdots & \cdots & \cdots & \cdots & \cdots & \cdots & 0 & 1 & 0
+\end{array}\right]
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Il posizionamento 
+\begin_inset Formula $\mathbf{x_{1}}$
+\end_inset
+
+ è ammissibile, mentre il posizionamento 
+\begin_inset Formula $\mathbf{x_{2}}$
+\end_inset
+
+ non lo è.
+ Il posizionamento 
+\begin_inset Formula $\mathbf{x_{2}}$
+\end_inset
+
+ viola infatti il vincolo di unicità (riga 1 e 2), il vincolo di capacità
+ (riga 3) ed il vincolo di eligibilità degli operatori (riga 5).
+\end_layout
+
+\begin_layout Section
+\begin_inset CommandInset label
+LatexCommand label
+name "sec:Metriche"
+
+\end_inset
+
+Metriche
+\end_layout
+
+\begin_layout Standard
+Dato un insieme di soluzioni ammissibili 
+\begin_inset Formula $X$
+\end_inset
+
+, la qualità di una soluzione 
+\begin_inset Formula $x\in X$
+\end_inset
+
+ è quantificata da un vettore 
+\begin_inset Formula $\mathbf{M}(x)$
+\end_inset
+
+ in uno spazio metrico 
+\begin_inset Formula $\mathcal{M}$
+\end_inset
+
+ le cui dimensioni sono le metriche 
+\begin_inset Formula $m_{i}$
+\end_inset
+
+ considerate nel problema.
+ Indichiamo con 
+\begin_inset Formula $M$
+\end_inset
+
+ l'insieme di tali metriche.
+ Ogni metrica 
+\begin_inset Formula $m\in M$
+\end_inset
+
+ assume la forma di una funzione 
+\begin_inset Formula $f_{m}:X\rightarrow A$
+\end_inset
+
+, dove 
+\begin_inset Formula $A$
+\end_inset
+
+ è un generico codominio.
+ L'obiettivo di una metrica è il criterio con cui questa debba essere ottimizzat
+a: questo può dunque essere una massimizzazione 
+\begin_inset Formula $\max_{x\in X}f_{m}(x)$
+\end_inset
+
+ o una minimizzazione 
+\begin_inset Formula $\min_{x\in X}f_{m}(x)$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Definition
+\begin_inset CommandInset label
+LatexCommand label
+name "def:metriche-antitetiche"
+
+\end_inset
+
+Due metriche 
+\begin_inset Formula $m_{1}$
+\end_inset
+
+ ed 
+\begin_inset Formula $m_{2}$
+\end_inset
+
+ sono 
+\shape slanted
+antitetiche
+\shape default
+ se caratterizzate da obiettivi opposti, ovvero se l'una deve essere massimizzat
+a e l'altra minimizzata, e viceversa.
+ Un insieme di metriche 
+\begin_inset Formula $M$
+\end_inset
+
+ è antitetico se contiene almeno due metriche antitetiche.
+ Uno spazio metrico 
+\begin_inset Formula $\mathcal{M}$
+\end_inset
+
+ è antitetico se le sue dimensioni sono elementi di un insieme antitetico.
+ In caso contrario parliamo di metriche omotetiche, insieme di metriche
+ omotetico e spazio metrico omotetico.
+\end_layout
+
+\begin_layout Definition
+\begin_inset Float figure
+placement h
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\noindent
+\align center
+\begin_inset space \hfill{}
+\end_inset
+
+
+\begin_inset Float figure
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\noindent
+\align center
+\begin_inset Box Frameless
+position "c"
+hor_pos "c"
+has_inner_box 1
+inner_pos "c"
+use_parbox 1
+use_makebox 0
+width "35col%"
+special "none"
+height "1in"
+height_special "totalheight"
+status open
+
+\begin_layout Plain Layout
+\noindent
+\align center
+\begin_inset Graphics
+	filename /home/giacomo/Documents/projects/bsc-thesis/figures/optimal-placement/spazio-metrico-omotetico.svg
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+ 
+\begin_inset space \hfill{}
+\end_inset
+
+
+\begin_inset Float figure
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\noindent
+\align center
+\begin_inset Box Frameless
+position "c"
+hor_pos "c"
+has_inner_box 1
+inner_pos "c"
+use_parbox 1
+use_makebox 0
+width "35col%"
+special "none"
+height "1in"
+height_special "totalheight"
+status open
+
+\begin_layout Plain Layout
+\noindent
+\align center
+\begin_inset Graphics
+	filename /home/giacomo/Documents/projects/bsc-thesis/figures/optimal-placement/spazio-metrico-antitetico.svg
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+
+
+\begin_inset space \hfill{}
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:spazio-metrico-omotetico-antitetico"
+
+\end_inset
+
+Spazio metrico omotetico (a) e spazio metrico antitetico (b).
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Se la qualità di una soluzione è valutata da metriche antitetiche, questa
+ deve necessariamente considerare un 
+\shape slanted
+trade-off
+\shape default
+ che esprima la priorità di una metrica rispetto all'altra.
+\end_layout
+
+\begin_layout Definition
+\begin_inset CommandInset label
+LatexCommand label
+name "def:metriche-disomogenee"
+
+\end_inset
+
+Due metriche 
+\begin_inset Formula $m_{1}$
+\end_inset
+
+ ed 
+\begin_inset Formula $m_{2}$
+\end_inset
+
+ sono 
+\shape slanted
+disomogenee
+\shape default
+ se per esse non ha senso definire un ordinamento totale.
+ Un insieme di metriche 
+\begin_inset Formula $M$
+\end_inset
+
+ è disomogeneo se contiene almeno due metriche disomogenee.
+ Uno spazio metrico 
+\begin_inset Formula $\mathcal{M}$
+\end_inset
+
+ è disomogeneo se le sue dimensioni sono elementi di un insieme disomogeneo.
+ In caso contrario, parliamo di metriche omogenee, insieme di metriche omogeneo
+ e spazio metrico omogeneo.
+\end_layout
+
+\begin_layout Definition
+\begin_inset Float figure
+placement h
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\noindent
+\align center
+\begin_inset space \hfill{}
+\end_inset
+
+
+\begin_inset Float figure
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\noindent
+\align center
+\begin_inset Box Frameless
+position "c"
+hor_pos "c"
+has_inner_box 1
+inner_pos "c"
+use_parbox 1
+use_makebox 0
+width "35col%"
+special "none"
+height "1in"
+height_special "totalheight"
+status open
+
+\begin_layout Plain Layout
+\noindent
+\align center
+\begin_inset Graphics
+	filename /home/giacomo/Documents/projects/bsc-thesis/figures/optimal-placement/metriche-omogenee.svg
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+ 
+\begin_inset space \hfill{}
+\end_inset
+
+
+\begin_inset Float figure
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\noindent
+\align center
+\begin_inset Box Frameless
+position "c"
+hor_pos "c"
+has_inner_box 1
+inner_pos "c"
+use_parbox 1
+use_makebox 0
+width "35col%"
+special "none"
+height "1in"
+height_special "totalheight"
+status open
+
+\begin_layout Plain Layout
+\noindent
+\align center
+\begin_inset Graphics
+	filename /home/giacomo/Documents/projects/bsc-thesis/figures/optimal-placement/metriche-disomogenee.svg
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\begin_inset space \hfill{}
+\end_inset
+
+
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:metriche-omogenee-disomogenee"
+
+\end_inset
+
+Metriche omogenee (a) e metriche disomogenee (b).
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Due metriche sono dunque disomogenee se rappresentate da funzioni aventi
+ codominii differenti.
+ Qualora infatti una metrica 
+\begin_inset Formula $m_{1}$
+\end_inset
+
+ assuma la forma di una funzione 
+\begin_inset Formula $f_{m_{1}}:X\rightarrow A$
+\end_inset
+
+ ed una metrica 
+\begin_inset Formula $m_{2}$
+\end_inset
+
+ assuma la forma di una funzione 
+\begin_inset Formula $f_{m_{2}}:X\rightarrow B\subset A$
+\end_inset
+
+, variazioni eguali 
+\begin_inset Formula $\triangle f_{m_{1}}$
+\end_inset
+
+ e 
+\begin_inset Formula $\triangle f_{m_{2}}$
+\end_inset
+
+ non sono tra loro confrontabili.
+ Si pensi, ad esempio, ad una metrica 
+\begin_inset Formula $m_{1}$
+\end_inset
+
+ che assuma valore in tutto 
+\begin_inset Formula $\mathbb{R}$
+\end_inset
+
+ e ad una metrica 
+\begin_inset Formula $m_{2}$
+\end_inset
+
+ che assuma valore in 
+\begin_inset Formula $[0,1]$
+\end_inset
+
+: una variazione 
+\begin_inset Formula $\triangle f_{m_{2}}=0.5$
+\end_inset
+
+ non ha lo stesso significato di una variazione 
+\begin_inset Formula $\triangle f_{m_{1}}=0.5$
+\end_inset
+
+.
+ 
+\end_layout
+
+\begin_layout Standard
+Se la qualità di una soluzione è valutata da metriche disomogenee, questa
+ deve necessariamente considerare una 
+\shape slanted
+normalizzazione
+\shape default
+ delle metriche che le renda confrontabili.
+\end_layout
+
+\begin_layout Subsection
+Metriche del modello
+\end_layout
+
+\begin_layout Standard
+Nel nostro modello consideriamo uno spazio metrico antitetico e disomogeneo
+ (Definizione 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "def:metriche-antitetiche"
+
+\end_inset
+
+ e Definizione 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "def:metriche-disomogenee"
+
+\end_inset
+
+), le cui dimensioni sono il tempo di risposta dell'applicazione DSP e la
+ disponibilità dell'architettura distribuita.
+ Il tempo di risposta e la disponibilità dell'applicazione sono indici di
+ servizio particolarmente importanti, in quanto sono i primi a contribuire
+ alla qualità percepita dall'utente finale.
+ Posizionando l'applicazione sui nodi di un'architettura distribuita, le
+ componenti di latenza e disponibilità relative alle risorse trasmissive
+ sono assai rilevati.
+ Queste infatti crescono in modo proporzionale al grado di distribuzione
+ dell'architettura.
+\end_layout
+
+\begin_layout Subsubsection
+Tempo di risposta
+\end_layout
+
+\begin_layout Standard
+Il tempo di risposta 
+\begin_inset Formula $R$
+\end_inset
+
+ di un'applicazione DSP è il tempo worst case necessario affinchè il data
+ stream prodotto da un nodo source possa essere consumato da un nodo sink.
+ Esaminiamo nel dettaglio le componenti di questa metrica.
+\end_layout
+
+\begin_layout Standard
+Dato un posizionamento degli operatori 
+\begin_inset Formula $\mathbf{x}$
+\end_inset
+
+, il generico posizionamento 
+\begin_inset Formula $x_{i,u}$
+\end_inset
+
+ induce un 
+\shape slanted
+ritardo di esecuzione
+\shape default
+ 
+\begin_inset Formula $R_{ex}(i,u)$
+\end_inset
+
+, dovuto al processamento dell'operatore 
+\begin_inset Formula $op_{i}$
+\end_inset
+
+ sul nodo computazionale 
+\begin_inset Formula $u$
+\end_inset
+
+.
+\begin_inset Formula 
+\begin{equation}
+R_{ex}(i,u)\coloneqq\frac{\varphi_{i}^{in}}{S_{u}S_{i}}\qquad\forall i\in V_{dsp},u\in V_{res}\label{eq:response-time-ex}
+\end{equation}
+
+\end_inset
+
+Dato un posizionamento dei data stream 
+\begin_inset Formula $\mathbf{y}$
+\end_inset
+
+, il generico posizionamento 
+\begin_inset Formula $y_{(i,j)(u.v)}$
+\end_inset
+
+ induce un 
+\shape slanted
+ritardo di trasferimento
+\shape default
+ 
+\begin_inset Formula $R_{tx}((i,j),(u,v))$
+\end_inset
+
+, dovuto alla trasmissione del data stream 
+\begin_inset Formula $(i,j)$
+\end_inset
+
+ sul link logico 
+\begin_inset Formula $(u,v)$
+\end_inset
+
+.
+\begin_inset Formula 
+\begin{equation}
+R_{tx}((i,j),(u,v))\coloneqq\frac{\varphi_{(i,j)}\lambda_{i}^{out}}{B_{(u,v)}}+D{}_{(u,v)}\qquad\forall(i,j)\in E_{dsp},(u,v)\in E_{res}\label{eq:response-time-tx}
+\end{equation}
+
+\end_inset
+
+Dato un cammino 
+\begin_inset Formula $\pi\in\Pi_{G_{dsp}}$
+\end_inset
+
+ ed un posizionamento degli operatori 
+\begin_inset Formula $\mathbf{x}$
+\end_inset
+
+, il 
+\shape slanted
+tempo di risposta associato al cammino
+\shape default
+ 
+\begin_inset Formula $R_{\pi}(\mathbf{x})$
+\end_inset
+
+ è composto dai ritardi di esecuzione dei nodi visitati e dai ritardi di
+ trasmissione degli archi attraversati.
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{multline}
+R_{\pi}(\mathbf{x})\coloneqq\sum_{i\in V_{dsp}}\sum_{u\in V_{res}^{i}}x_{i,u}R_{ex}(i,u)+\\
+\sum_{k=1}^{n_{\pi}-1}\sum_{(u,v)\in V_{res}^{i_{k}}\times V^{i_{k}+1}}y_{(i_{k},i_{k+1})(u,v)}R_{tx}((i,j),(u,v))\\
+\forall\pi=(i_{1},\ldots,i_{n_{\pi}})\in\Pi_{dsp}\label{eq:response-time-cammino}
+\end{multline}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Definition
+\begin_inset CommandInset label
+LatexCommand label
+name "def:tempo-risposta"
+
+\end_inset
+
+Dato un posizionamento degli operatori 
+\begin_inset Formula $\mathbf{x}$
+\end_inset
+
+, il tempo di risposta 
+\begin_inset Formula $R(\mathbf{x})$
+\end_inset
+
+ di un'applicazione DSP è il tempo worst case necessario affinchè il data
+ stream prodotto da un nodo source possa essere consumato da un nodo sink.
+\begin_inset Formula 
+\begin{equation}
+R(\mathbf{x})\coloneqq\max_{\pi\in\Pi_{dsp}}R_{\pi}(\mathbf{x})\label{eq:response-time-applicazione}
+\end{equation}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsubsection
+Disponibilità
+\end_layout
+
+\begin_layout Standard
+La disponibilità 
+\begin_inset Formula $A$
+\end_inset
+
+ di un'architettura distribuita è la probabilità di eseguire il processo
+ di trasformazione del data stream assegnandone l'esecuzione a nodi computaziona
+li up-and-running.
+ Esaminiamo nel dettaglio le componenti di questa metrica.
+\end_layout
+
+\begin_layout Standard
+Dato un posizionamento degli operatori 
+\begin_inset Formula $\mathbf{x}$
+\end_inset
+
+, il generico posizionamento 
+\begin_inset Formula $x_{i,u}$
+\end_inset
+
+ induce una 
+\shape slanted
+disponibilità di esecuzione
+\shape default
+ dovuta alla esecuzione degli operatori nei nodi computazionali in cui sono
+ posizionati.
+ La disponibilità di esecuzione dell'applicazione risulta dunque essere:
+\begin_inset Formula 
+\begin{equation}
+A_{ex}(\mathbf{x})\coloneqq\prod_{i\in V_{dsp}}\left(\sum_{u\in V_{res}^{i}}x_{i,u}A_{u}\right)\label{eq:availability-ex}
+\end{equation}
+
+\end_inset
+
+Dato un posizionamento dei data stream 
+\begin_inset Formula $\mathbf{y}$
+\end_inset
+
+, il generico posizionamento 
+\begin_inset Formula $y_{(i,j)(u.v)}$
+\end_inset
+
+ induce una 
+\shape slanted
+disponibilità di trasferimento
+\shape default
+ dovuta alla trasmissione dei data stream sui link logici.
+ La disponibilità di trasferimento dell'applicazione risulta dunque essere:
+\begin_inset Formula 
+\begin{equation}
+A_{tx}(\mathbf{y})\coloneqq\prod_{(i,j)\in E_{res}}\left(\sum_{(u,v)\in V_{res}^{i}\times V_{res}^{j}}y_{(i,j)(u,v)}A_{(u,v)}\right)\label{eq:availability-tx}
+\end{equation}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Definition
+\begin_inset CommandInset label
+LatexCommand label
+name "def:disponibilità"
+
+\end_inset
+
+Dato un posizionamento degli operatori 
+\begin_inset Formula $\mathbf{x}$
+\end_inset
+
+, la disponibilità 
+\begin_inset Formula $A(\mathbf{x})$
+\end_inset
+
+ di un'architettura distribuita è la probabilità di eseguire il processo
+ di trasformazione del data stream assegnandone l'esecuzione a nodi computaziona
+li up-and-running.
+\begin_inset Formula 
+\begin{equation}
+A(\mathbf{x})\coloneqq A_{ex}(\mathbf{x})\cdot A_{tx}(\mathbf{y})\label{eq:availability-applicazione}
+\end{equation}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+In quanto appena definito abbiamo assunto per semplicità, l'indipendenza
+ delle disponibilità di nodi computazionali e link logici.
+ E' chiaro che, da un punto di vista di evoluzione del traffico di rete,
+ la disponibilità di un link logico debba essere correlata alla disponibilità
+ delle risorse di rete connesse da tale link logico.
+ Tuttavia, il livello di astrazione a cui fa riferimento il nostro modello
+ rende lecito e conveniente assumere l'indipendenza stocastica di questi
+ eventi.
+\end_layout
+
+\begin_layout Standard
+Onde evitare il dispendio computazionale dovuto alle produttorie in Equazione
+ 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:availability-ex"
+
+\end_inset
+
+ e in Equazione 
+\begin_inset CommandInset ref
+LatexCommand eqref
+reference "eq:availability-tx"
+
+\end_inset
+
+, diamo una formulazione alternativa alla Equazione 
+\begin_inset CommandInset ref
+LatexCommand eqref
+reference "eq:availability-applicazione"
+
+\end_inset
+
+, risultante dall'applicazione delle proprietà dei logaritmi
+\begin_inset Foot
+status collapsed
+
+\begin_layout Plain Layout
+Precisiamo che la proprietà dei logaritmi è soddisfatta in quanto, per il
+ vincolo di unicità 
+\begin_inset CommandInset ref
+LatexCommand eqref
+reference "eq:vincolo-unicità"
+
+\end_inset
+
+, abbiamo che 
+\begin_inset Formula $\log\sum_{u\in V_{res}^{i}}x_{i,u}A_{u}=\sum_{u\in V_{res}^{i}}x_{i,u}\log A_{u}$
+\end_inset
+
+ e 
+\begin_inset Formula $\log\sum_{(u,v)\in V_{res}^{i}\times V_{res}^{j}}y_{(i,j)(u,v)}A_{(u,v)}=\sum_{(u,v)\in V_{res}^{i}\times V_{res}^{j}}y_{(i,j)(u,v)}\log A_{(u,v)}$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+.
+\begin_inset Formula 
+\begin{multline}
+\log A(\mathbf{x})=\sum_{i\in V_{dsp}}\left(\sum_{u\in V_{res}^{i}}x_{i,u}\log A_{u}\right)+\\
+\sum_{(i,j)\in E_{res}}\left(\sum_{(u,v)\in V_{res}^{i}\times V_{res}^{j}}y_{(i,j)(u,v)}\log A_{(u,v)}\right)\label{eq:availability-applicazione-logaritmica}
+\end{multline}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Section
+\begin_inset CommandInset label
+LatexCommand label
+name "sec:Ottimizzazione"
+
+\end_inset
+
+Ottimizzazione
+\end_layout
+
+\begin_layout Standard
+La selezione di una soluzione ammissibile 
+\begin_inset Formula $x\in X$
+\end_inset
+
+ da parte di un decisore deve essere orientata da un 
+\shape slanted
+criterio di ottimizzazione
+\shape default
+, sia essa una minimizzazione o una massimizzazione di una opportuna funzione
+ obiettivo 
+\begin_inset Formula $F(x)$
+\end_inset
+
+.
+ Qualora tale criterio aggreghi più di una metrica 
+\begin_inset Formula $m\in M$
+\end_inset
+
+, si parla di 
+\shape slanted
+ottimizzazione multi-obiettivo
+\shape default
+, o più in generale di 
+\shape slanted
+problema di ottimizzazione multi-obiettivo
+\shape default
+
+\begin_inset Foot
+status collapsed
+
+\begin_layout Plain Layout
+i 
+\shape slanted
+problemi di ottimizzazione multi-obiettivo (Multi-objective Optimization
+ Problems, MOPs)
+\shape default
+ si incontrano spesso nello studio di sistemi complessi.
+ La 
+\shape slanted
+dominanza di Pareto
+\shape default
+ è il criterio tipicamente utilizzato per valutare sia soluzioni a problemi
+ di ottimizzazione singolo-obiettivo che soluzioni MOPs.
+ Tuttavia, qualora un MOP consideri più di tre obiettivi (parliamo in tal
+ caso di 
+\shape slanted
+Many-objective Optimization Problems, MaOPs
+\shape default
+), la dominanza di Pareto risulta non essere più un criterio applicabile
+ 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "Curry2014"
+
+\end_inset
+
+.
+\end_layout
+
+\end_inset
+
+.
+ 
+\end_layout
+
+\begin_layout Standard
+Il problema del posizionamento degli operatori da noi formulato è un problema
+ multi-obiettivo con insieme di metriche antitetiche (Definizione 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "def:metriche-antitetiche"
+
+\end_inset
+
+) e disomogenee (Definizione 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "def:metriche-disomogenee"
+
+\end_inset
+
+).
+ Come suggerito in 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "Serafini2009"
+
+\end_inset
+
+, ci serviremo dell'
+\shape slanted
+approccio di Čebyšëv
+\shape default
+ per ricavare la formulazione del criterio di ottimizzazione del nostro
+ modello.
+\end_layout
+
+\begin_layout Subsection
+Approccio di Čebyšëv
+\end_layout
+
+\begin_layout Standard
+Introduciamo la nozione della norma di Čebyšëv, mostrando come questa suggerisca
+ un utile approccio alla formulazione di un criterio di ottimizzazione in
+ problemi di ottimizzazione multi-obiettivo 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "Curry2014"
+
+\end_inset
+
+, che prende pertanto il nome di 
+\shape slanted
+approccio di Čebyšëv ai problemi di ottimizzazione
+\shape default
+
+\begin_inset Foot
+status collapsed
+
+\begin_layout Plain Layout
+anche detto approccio MOP (Multi-objective Optimization Problem) di Čebyšëv.
+\end_layout
+
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Definition
+Dato uno spazio vettoriale 
+\begin_inset Formula $N$
+\end_inset
+
+-dimensionale, la 
+\shape slanted
+norma di Čebyšëv
+\shape default
+ tra due punti 
+\begin_inset Formula $p$
+\end_inset
+
+ e 
+\begin_inset Formula $q$
+\end_inset
+
+, aventi coordinate standard 
+\begin_inset Formula $p_{n\in N}$
+\end_inset
+
+ e 
+\begin_inset Formula $q_{n\in N}$
+\end_inset
+
+, è definita come:
+\begin_inset Formula 
+\begin{equation}
+dist_{Cebishev}(p,q)\coloneqq\max_{n\in N}\left\{ |p_{n}-q_{n}|\right\} 
+\end{equation}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+La nozione di norma di Čebyšëv suggerisce di minimizzare la massima distanza
+ tra valori reali, ovvero quelli ottenuti da una soluzione, e valori utopici,
+ ovvero quelli ideali desiderati.
+\end_layout
+
+\begin_layout Definition
+Siano dati un insieme di soluzioni ammissibili 
+\begin_inset Formula $X$
+\end_inset
+
+ ed un insieme di metriche 
+\begin_inset Formula $M$
+\end_inset
+
+.
+ Ogni metrica 
+\begin_inset Formula $m\in M$
+\end_inset
+
+ assuma la forma di una una funzione 
+\begin_inset Formula $f_{m}:X\rightarrow\mathbb{R}$
+\end_inset
+
+.
+ Per ogni metrica sia definito un valore utopico 
+\begin_inset Formula $\hat{f}_{m}$
+\end_inset
+
+.
+ Ad ogni metrica sia inoltre associato un peso 
+\begin_inset Formula $w_{m}\in\mathbb{R}^{+}$
+\end_inset
+
+ tale che 
+\begin_inset Formula $\sum_{m\in M}w_{m}=1$
+\end_inset
+
+, il quale esprime il trade-off tra una ottimizzazione guidata dall'una
+ o dall'altra metrica.
+ L'approccio di Čebyšëv ai problemi di ottimizzazione multi-obiettivo consiste
+ nella seguente formulazione del criterio di ottimizzazione:
+\begin_inset Formula 
+\begin{equation}
+\min_{x\in X}\max\left\{ w_{m}|f_{m}(x)-\hat{f}_{m}|\right\} _{m\in M}\label{eq:approccio-chebishev}
+\end{equation}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsection
+Funzione obiettivo del modello
+\end_layout
+
+\begin_layout Standard
+Il problema del posizionamento degli operatori da noi formulato è un problema
+ multi-obiettivo con insieme di metriche antitetiche (Definizione 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "def:metriche-antitetiche"
+
+\end_inset
+
+) e disomogenee (Definizione 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "def:metriche-disomogenee"
+
+\end_inset
+
+).
+ L'approccio di Čebyšëv 
+\begin_inset CommandInset ref
+LatexCommand eqref
+reference "eq:approccio-chebishev"
+
+\end_inset
+
+ può certamente essere applicato ad uno spazio metrico antitetico, ma non
+ ad uno spazio metrico disomogeneo.
+ Inoltre, esso presenta due passi di ottimizzazione: una massimizzazione
+ innestata in una minimizzazione.
+ Esso può dunque essere un ottimo punto di partenza per la formulazione
+ del nostro criterio di ottimizzazione, ma devono essere apportate delle
+ modifiche.
+ 
+\end_layout
+
+\begin_layout Standard
+Esprimiamo la Equazione 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:approccio-chebishev"
+
+\end_inset
+
+ di modo che possa essere formulata con un unico passo di ottimizzazione,
+ ovvero con una massimizzazione semplice.
+ A tal fine partizioniamo l'insieme delle metriche 
+\begin_inset Formula $M$
+\end_inset
+
+ nell'insieme 
+\begin_inset Formula $M_{1}$
+\end_inset
+
+ delle metriche da minimizzare ed 
+\begin_inset Formula $M_{2}$
+\end_inset
+
+ delle metriche da massimizzare.
+ Otteniamo:
+\begin_inset Formula 
+\begin{equation}
+\max_{x\in X}\sum_{m\in M_{1}}w_{m}\left(f_{m}^{max}-f_{m}(x)\right)+\sum_{m\in M_{2}}w_{m}\left(f_{m}(x)-f_{m}^{min}\right)\label{eq:multiobiettivo-antitetico}
+\end{equation}
+
+\end_inset
+
+dove 
+\begin_inset Formula $f_{m}^{max}$
+\end_inset
+
+ è il valore ideale di una metrica da minimizzare, ed 
+\begin_inset Formula $f_{m}^{min}$
+\end_inset
+
+ è il valore ideale di una metrica da massimizzare.
+\end_layout
+
+\begin_layout Standard
+Qualora 
+\begin_inset Formula $M$
+\end_inset
+
+ sia un insieme di metriche antitetiche e disomogenee, le funzioni 
+\begin_inset Formula $f_{m}$
+\end_inset
+
+ devono essere normalizzate in modo da permettere una definizione significativa
+ di un ordinamento totale.
+ Otteniamo:
+\begin_inset Formula 
+\begin{equation}
+\max_{x\in X}\sum_{m\in M_{1}}w_{m}\frac{f_{m}^{max}-f_{m}(x)}{f_{m}^{max}-f_{m}^{min}}+\sum_{m\in M_{2}}w_{m}\frac{f_{m}(x)-f_{m}^{min}}{f_{m}^{max}-f_{m}^{min}}\label{eq:multiobiettivo-antitetico-disomogeneo}
+\end{equation}
+
+\end_inset
+
+dove 
+\begin_inset Formula $f_{m}^{max}$
+\end_inset
+
+ ed 
+\begin_inset Formula $f_{m}^{min}$
+\end_inset
+
+ sono rispettivamente l'estremo superiore ed inferiore della normalizzazione.
+ Notiamo che, in seguito alla normalizzazione, ogni metrica è compesa in
+ una intervallo 
+\begin_inset Formula $[0,1]$
+\end_inset
+
+, dove 
+\begin_inset Formula $0$
+\end_inset
+
+ corrisponde al worst case ed 
+\begin_inset Formula $1$
+\end_inset
+
+ corrisponde al best case.
+\end_layout
+
+\begin_layout Standard
+In generale dunque, la funzione obiettivo di un problema multi-obiettivo
+ con spazio metrico 
+\begin_inset Formula $M$
+\end_inset
+
+ antitetico e disomogeneo assume la seguente forma da massimizzare:
+\begin_inset Formula 
+\begin{equation}
+F(x)=\sum_{m\in M_{1}}w_{m}\frac{f_{m}^{max}-f_{m}(x)}{f_{m}^{max}-f_{m}^{min}}+\sum_{m\in M_{2}}w_{m}\frac{f_{m}(x)-f_{m}^{min}}{f_{m}^{max}-f_{m}^{min}}\label{eq:funzione-obiettivo-generale}
+\end{equation}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Ci serviamo della Equazione 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:funzione-obiettivo-generale"
+
+\end_inset
+
+ per formulare la funzione obiettivo del nostro modello:
+\begin_inset Formula 
+\begin{equation}
+F(\mathbf{x})=w_{R}\frac{R_{max}-R(\mathbf{x})}{R_{max}-R_{min}}+w_{A}\frac{\log A(\mathbf{x})-\log A_{min}}{\log A_{max}-\log A_{min}}\label{eq:funzione-obiettivo}
+\end{equation}
+
+\end_inset
+
+I pesi 
+\begin_inset Formula $w_{R},w_{A}\in\mathbb{R}^{+}$
+\end_inset
+
+ tali che 
+\begin_inset Formula $w_{R}+w_{A}=1$
+\end_inset
+
+, esprimono il trade-off tra una ottimizzazione guidata dalla minimizzazione
+ del tempo di risposta ed una guidata dalla massimizzazione della disponibilità.
+ I valori 
+\begin_inset Formula $R_{max}$
+\end_inset
+
+ ed 
+\begin_inset Formula $R_{min}$
+\end_inset
+
+ denotano rispettivamente il massimo ed il minimo tempo di risposta atteso.
+ I valori 
+\begin_inset Formula $A_{max}$
+\end_inset
+
+ ed 
+\begin_inset Formula $A_{min}$
+\end_inset
+
+ denotano rispettivamente la massima e la minima disponibilità attesa.
+\end_layout
+
+\begin_layout Paragraph
+Funzione obiettivo semplificata
+\end_layout
+
+\begin_layout Standard
+La funzione obiettivo espressa in Equazione 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:funzione-obiettivo"
+
+\end_inset
+
+ ha lo svantaggio di pretendere la conoscenza di quattro valori: 
+\begin_inset Formula $R_{max}$
+\end_inset
+
+, 
+\begin_inset Formula $R_{min}$
+\end_inset
+
+, 
+\begin_inset Formula $A_{max}$
+\end_inset
+
+ e 
+\begin_inset Formula $A_{min}$
+\end_inset
+
+.
+ Formuliamo dunque una funzione obiettivo semplificata, nella quale sia
+ necessaria la conoscenza di solo due valori.
+ Tale funzione semplificata assume la seguente forma da massimizzare:
+\begin_inset Formula 
+\begin{equation}
+\tilde{F}(\mathbf{x})=-w_{R}\frac{R(\mathbf{x})}{\tilde{R}_{max}}-w_{A}\frac{\log A(\mathbf{x})}{\log\tilde{A}_{min}}\label{eq:funzione-obiettivo-semplificata}
+\end{equation}
+
+\end_inset
+
+dove 
+\begin_inset Formula $\tilde{R}_{max}$
+\end_inset
+
+ è il massimo tempo di risposta accettato e 
+\begin_inset Formula $\tilde{A}_{min}$
+\end_inset
+
+ è la minima disponibilità accettata.
+\end_layout
+
+\begin_layout Section
+\begin_inset CommandInset label
+LatexCommand label
+name "sec:Formulazione"
+
+\end_inset
+
+Formulazioni
+\end_layout
+
+\begin_layout Standard
+Concludiamo questo capitolo dando le formulazioni in programmazione lineare
+ binaria del nostro modello per il problema del posizionamento degli operatori.
+ 
+\end_layout
+
+\begin_layout Subsection
+Modello OPPStandard
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{equation}
+\begin{array}{cccc}
+\mathbf{maximize:} & F(\mathbf{x})\\
+\mathbf{subject\,to:}\\
+{\displaystyle \sum_{i\in V_{dsp}}x_{i,u}\mathbf{C}_{i}} & \leq & \mathbf{C}_{u} & \forall u\in V_{res}\\
+{\displaystyle \sum_{u\in V_{res}}x_{i,u}} & = & 1 & \forall i\in V_{dsp}\\
+{\displaystyle \sum_{u\in V_{res}\setminus V_{res}^{i}}x_{i,u}} & = & 0 & \forall i\in V_{dsp}\\
+x_{i,u}+x_{j,v}-1 & \leq & y_{(i,j)(u,v)} & \forall(i,j)\in E_{res},(u,v)\in E_{dsp}\\
+x_{i,u}+x_{j,v} & \geq & 2y_{(i,j)(u,v)} & \forall(i,j)\in E_{res},(u,v)\in E_{dsp}\\
+x_{i,u} & \in & \{0,1\} & \forall i\in V_{dsp},u\in V_{res}\\
+y_{(i,j)(u,v)} & \in & \{0,1\} & \forall(i,j)\in E_{dsp},(u,v)\in E_{res}
+\end{array}\label{eq:modello-standard}
+\end{equation}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsection
+Modello OPPRestricted
+\end_layout
+
+\begin_layout Standard
+Forniamo inoltre una formulazione alternativa alla Equazione 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:modello-standard"
+
+\end_inset
+
+, la quale considera il posizionamento ristretto degli operatori (Equazione
+ 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:posizionamento-x-ristretto"
+
+\end_inset
+
+) e dei data stream (Equazione 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:posizionamento-y-ristretto"
+
+\end_inset
+
+).
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{equation}
+\begin{array}{cccc}
+\mathbf{maximize:} & F(\mathbf{x})\\
+\mathbf{subject\,to:}\\
+{\displaystyle \sum_{i\in V_{dsp}}x_{i,u}\mathbf{C}_{i}} & \leq & \mathbf{C}_{u} & \forall u\in V_{res}\\
+{\displaystyle \sum_{u\in V_{res}^{i}}x_{i,u}} & = & 1 & \forall i\in V_{dsp}\\
+x_{i,u}+x_{j,v}-1 & \leq & y_{(i,j)(u,v)} & \forall(i,j)\in E_{res},(u,v)\in E_{dsp}\\
+x_{i,u}+x_{j,v} & \geq & 2y_{(i,j)(u,v)} & \forall(i,j)\in E_{res},(u,v)\in E_{dsp}\\
+x_{i,u} & \in & \{0,1\} & \forall i\in V_{dsp},u\in V_{res}^{i}\\
+y_{(i,j)(u,v)} & \in & \{0,1\} & \forall(i,j)\in E_{dsp},(u,v)\in V_{res}^{i}\times V_{res}^{j}
+\end{array}\label{eq:modello-restricted}
+\end{equation}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsection
+Modello OPPConservative
+\end_layout
+
+\begin_layout Standard
+Forniamo inoltre una formulazione alternativa alla Equazione 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:modello-standard"
+
+\end_inset
+
+, la quale considera il posizionamento ristretto degli operatori (Equazione
+ 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:posizionamento-x-ristretto"
+
+\end_inset
+
+) e dei data stream (Equazione 
+\begin_inset CommandInset ref
+LatexCommand eqref
+reference "eq:posizionamento-y-ristretto"
+
+\end_inset
+
+), nonchè il vincolo di connettività espresso come conservazione del flusso
+ (Equazione 
+\begin_inset CommandInset ref
+LatexCommand eqref
+reference "eq:vincolo-connettività-algebrico-alternativo"
+
+\end_inset
+
+).
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{equation}
+\begin{array}{cccc}
+\mathbf{maximize:} & F(\mathbf{x})\\
+\mathbf{subject\,to:}\\
+{\displaystyle \sum_{i\in V_{dsp}}x_{i,u}\mathbf{C}_{i}} & \leq & \mathbf{C}_{u} & \forall u\in V_{res}\\
+{\displaystyle \sum_{u\in V_{res}^{i}}x_{i,u}} & = & 1 & \forall i\in V_{dsp}\\
+{\displaystyle \sum_{v\in V_{res}^{j}}y_{(i,j)(u,v)}} & = & x_{i,u} & \forall(i,j)\in E_{dsp},u\in V_{res}^{i}\\
+{\displaystyle \sum_{u\in V_{res}^{i}}y_{(i,j)(u,v)}} & = & x_{j,v} & \forall(i,j)\in E_{dsp},v\in V_{res}^{j}\\
+x_{i,u} & \in & \{0,1\} & \forall i\in V_{dsp},u\in V_{res}^{i}\\
+y_{(i,j)(u,v)} & \in & \{0,1\} & \forall(i,j)\in E_{dsp},(u,v)\in V_{res}^{i}\times V_{res}^{j}
+\end{array}\label{eq:modello-conservative}
+\end{equation}
+
+\end_inset
+
+
+\end_layout
+
+\end_body
+\end_document

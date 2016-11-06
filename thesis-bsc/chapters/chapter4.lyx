@@ -1,0 +1,946 @@
+#LyX 2.1 created this file. For more info see http://www.lyx.org/
+\lyxformat 474
+\begin_document
+\begin_header
+\textclass report
+\begin_preamble
+\numberwithin{equation}{chapter}
+\end_preamble
+\use_default_options true
+\master ../thesis.lyx
+\begin_modules
+customHeadersFooters
+theorems-bytype
+theorems-chap-bytype
+\end_modules
+\maintain_unincluded_children false
+\language italian
+\language_package default
+\inputencoding auto
+\fontencoding global
+\font_roman lmodern
+\font_sans lmss
+\font_typewriter lmtt
+\font_math auto
+\font_default_family rmdefault
+\use_non_tex_fonts false
+\font_sc false
+\font_osf false
+\font_sf_scale 100
+\font_tt_scale 100
+\graphics default
+\default_output_format default
+\output_sync 0
+\bibtex_command default
+\index_command default
+\paperfontsize 12
+\spacing onehalf
+\use_hyperref true
+\pdf_bookmarks true
+\pdf_bookmarksnumbered false
+\pdf_bookmarksopen false
+\pdf_bookmarksopenlevel 1
+\pdf_breaklinks false
+\pdf_pdfborder true
+\pdf_colorlinks false
+\pdf_backref false
+\pdf_pdfusetitle true
+\papersize a4paper
+\use_geometry true
+\use_package amsmath 1
+\use_package amssymb 1
+\use_package cancel 1
+\use_package esint 1
+\use_package mathdots 1
+\use_package mathtools 1
+\use_package mhchem 1
+\use_package stackrel 1
+\use_package stmaryrd 1
+\use_package undertilde 1
+\cite_engine basic
+\cite_engine_type default
+\biblio_style plain
+\use_bibtopic false
+\use_indices false
+\paperorientation portrait
+\suppress_date false
+\justification true
+\use_refstyle 1
+\index Index
+\shortcut idx
+\color #008000
+\end_index
+\leftmargin 3cm
+\topmargin 2.5cm
+\rightmargin 3cm
+\bottommargin 4cm
+\headsep 1cm
+\footskip 1.5cm
+\secnumdepth 3
+\tocdepth 3
+\paragraph_separation skip
+\defskip medskip
+\quotes_language french
+\papercolumns 1
+\papersides 2
+\paperpagestyle default
+\tracking_changes false
+\output_changes false
+\html_math_output 0
+\html_css_as_file 0
+\html_be_strict false
+\end_header
+
+\begin_body
+
+\begin_layout Chapter
+\begin_inset CommandInset label
+LatexCommand label
+name "chap:analisi-sperimentale"
+
+\end_inset
+
+Analisi Sperimentale
+\end_layout
+
+\begin_layout Standard
+In questa sezione forniamo la metodologia e i risultati dell'analisi sperimental
+e condotta sui tre modelli di ottimizzazione proposti per il problema del
+ posizionamento degli operatori.
+ L'oggetto dell'analisi è la comparazione delle performance di ogni modello,
+ in funzione della dimensione e distribuzione dell'input.
+ Confrontiamo ogni modello, prendendone in esame sia il processo di compilazione
+ che quello di risoluzione.
+ Il tempo di risposta percepito da un agente che necessiti di una soluzione
+ di posizionamento, non è infatti dovuto esclusivamente all'esecuzione di
+ un algoritmo risolutivo sul modello, bensì anche dal tempo necessario alla
+ creazione delle strutture dati adibite alla sua rappresentazione.
+ Vedremo infatti come tale tempo di compilazione possa, sotto determinate
+ condizioni, risultare non trascurabile.
+\end_layout
+
+\begin_layout Standard
+Ricordiamo, per comodità del lettore, i fattori essenziali che distinguono
+ un modello dall'altro.
+\end_layout
+
+\begin_layout Description
+OPPStandard il dominio delle variabili decisionali considera ogni possibile
+ combinazione di posizionamento di nodi operazionali su nodi computazionali.
+ La pinnabilità di un nodo operazionale su uno specifico sottoinsieme di
+ nodi computazionali è espressa dal vincolo di eligibilità.
+ I vincoli di connettività sono espressi come traduzione algebrica diretta
+ del vincolo logico.
+\end_layout
+
+\begin_layout Description
+OPPRestricted il dominio delle variabili decisionali è ristretto alle sole
+ combinazioni di posizionamento considerate ammissibili dalla pinnabilità
+ dei nodi operazionali.
+ Il vincolo di eligibilità viene dunque a mancare, in quanto implicito nella
+ definizione del dominio.
+ I vincoli di connettività sono espressi come traduzione algebrica diretta
+ del vincolo logico.
+\end_layout
+
+\begin_layout Description
+OPPConservative il dominio delle variabili decisionali è ristretto alle
+ sole combinazioni di posizionamento considerate ammissibili dalla pinnabilità
+ dei nodi operazionali.
+ Il vincolo di eligibilità viene dunque a mancare, in quanto implicito nella
+ definizione del dominio.
+ I vincoli di connettività sono espressi secondo la formulazione della conservaz
+ione del flusso.
+\end_layout
+
+\begin_layout Standard
+Confrontando le formulazioni matematiche dei modelli (Equazioni 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:modello-standard"
+
+\end_inset
+
+, 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:modello-restricted"
+
+\end_inset
+
+, 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:modello-conservative"
+
+\end_inset
+
+), ci si rende presto conto di come queste consistano nella modifica di
+ quantificatori o, al più, nel modo di esprimere uno specifico vicnolo.
+ Vedremo come tali semplici differenze possano avere una forte incidenza
+ in termini di performance, sia dal punto di vista della compilazione del
+ modello che della sua risoluzione.
+\end_layout
+
+\begin_layout Section
+Dimensione e distribuzione dell'input
+\end_layout
+
+\begin_layout Standard
+I grafi orientati dell'architettura distribuita e dell'applicazione DSP
+ costituiscono l'input del nostro problema.
+ Per dimesione dell'input intendiamo dunque l'ordine e la dimensione di
+ tali grafi, ovvero la cardinalità del loro insieme di nodi e del loro insieme
+ di archi.
+ Per distribuzione intendiamo invece la caratterizzazione interna dei loro
+ nodi ed archi, ovvero il valore degli attributi con i quali abbiamo stabilito
+ di definirli.
+\end_layout
+
+\begin_layout Standard
+La dimensione dell'input determina la dimensione del modello, ovvero il
+ numero delle realizzazioni dei suoi vincoli e dei termini presenti in ognuna
+ di esse.
+ E' dunque prevedibile che essa incida fortemente sia sulla compilazione
+ del modello che sulla sua risoluzione.
+ Tra la dimensione dell'input e la dimensione del modello può sussistere
+ un legame diretto o indiretto.
+ In OPPStandard il legame è diretto, in quanto i vincoli sono quantificati
+ dagli insiemi di nodi ed archi, a prescindere dalla loro pinnabilità.
+ In OPPRestricted ed OPPConservative il legame è indiretto, in quanto i
+ vincoli sono quantificati dagli insiemi di nodi ed archi pinnabili.
+ In questi due modelli è dunque il grado di pin a determinare la dimensione
+ del modello: la dimensione dell'input vi stabilisce un limite superiore.
+\end_layout
+
+\begin_layout Standard
+La distribuzione dell'input determina l'eterogeneità delle soluzioni ammissibili
+ del modello.
+ Pertanto essa incide fortemente sulla sua risoluzione.
+ Ciò è vero in generale in quanto una maggiore eterogeneità permette sempre
+ una maggiore efficienza nel discriminare la bontà delle soluzioni ammissibili.
+ Questo principio è particolarmente vero nel nostro caso, in quanto adottiamo
+ l'ottimizzatore IBM MIP Optimizer con risolutore Simplex Solver 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "IBMCPLEXUserManual,IBMCPLEXPerformance"
+
+\end_inset
+
+, il quale implementa l'algoritmo del Simplesso 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "Dantzig1955"
+
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Section
+Metrica
+\end_layout
+
+\begin_layout Standard
+Le performance sono valutate adottando come metrica la mediana del tempo
+ di esecuzione in millisecondi, valutata su un campione di 20 iterazioni.
+ Abbiamo utilizzato la mediana, piuttosto che la media, in quanto risulta
+ più robusta ai valori outlier registrabili durante le osservazioni 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "Ross2015"
+
+\end_inset
+
+.
+ Possono infatti verificarsi fluttuazioni nei tempi di esecuzione dovuti
+ all'incapsulamento degli esperimenti nelle test-suite JUnit, alla liberazione
+ della memoria
+\begin_inset Foot
+status collapsed
+
+\begin_layout Plain Layout
+l'occupazione di memoria da parte delle strutture dati per la compilazione
+ e risoluzione dei modelli è così ingente da rendere necessaria una liberazione
+ esplicita al termine di ogni iterazione.
+ Ciò è vero sia a livello Java Concert Technology che a livello CPLEX Core.
+ Ad ogni iterazione dunque, la Java Virtual Machine (JVM) deve invocare
+ il Java Garbage Collector (JGC), e al contempo la Java Native Interface
+ (JNI) induce lo strato nativo ad uno uso massiccio delle free di sistema.
+ A ciò si aggiungono le naturali invocazioni del JGC indotte dal framework
+ JUnit.
+\end_layout
+
+\end_inset
+
+ da una iterazione all'altra dell'esperimento, nonchè all'interazione della
+ JNI con la libreria nativa CPlex.
+ Consideriamo tali fluttuazioni come osservazioni anomale, in quanto una
+ implementazione dei modelli libera dalla necessità di una prototipazione
+ rapida ne eliminerebbe i fattori scatenanti.
+\end_layout
+
+\begin_layout Section
+Ambiente di esecuzione
+\end_layout
+
+\begin_layout Standard
+L'applicazione OPMap è stata installata ed eseguita su un laptop HP
+\begin_inset script superscript
+
+\begin_layout Plain Layout
+®
+\end_layout
+
+\end_inset
+
+ Pavilion Sleekbook 15-B030EL con processore a 64bit Intel
+\begin_inset script superscript
+
+\begin_layout Plain Layout
+®
+\end_layout
+
+\end_inset
+
+ Core i5-3317U CPU @ 1.70GHz, memoria DDR3 da 4GB e hard-disk Seagate
+\begin_inset script superscript
+
+\begin_layout Plain Layout
+®
+\end_layout
+
+\end_inset
+
+ Momentus SpinPoint M8 SATA 500GB @ 3Gbps.
+ La macchina monta il sistema operativo Linux
+\begin_inset script superscript
+
+\begin_layout Plain Layout
+®
+\end_layout
+
+\end_inset
+
+ Ubuntu 15.04, compilatore Oracle
+\begin_inset script superscript
+
+\begin_layout Plain Layout
+®
+\end_layout
+
+\end_inset
+
+ Java 1.8, ambiente di test JUnit4.0 e libreria IBM
+\begin_inset script superscript
+
+\begin_layout Plain Layout
+®
+\end_layout
+
+\end_inset
+
+ CPlex 12.6.2 Academic Edition.
+\end_layout
+
+\begin_layout Section
+Esperimenti e Risultati
+\end_layout
+
+\begin_layout Standard
+Mostriamo e commentiamo ora i risultati ottenuti dagli esperimenti.
+ In ogni esperimento viene preso in esame uno specifico parametro dell'input.
+ I restanti parametri sono opportunamente fissati, considerando valori uniformem
+ente distribuiti su range realistici.
+ In particolare, per la latenza e la disponibilità della rete abbiamo preso
+ come riferimento le misure registrate da InternetPulse 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "InternetPulse,Spring2004,Mahajan2002"
+
+\end_inset
+
+.
+ Precisiamo infine che i risultati degli esperimenti sono mostrati in scala
+ logaritmica per garantire una maggiore espressività delle curve.
+\end_layout
+
+\begin_layout Paragraph
+Nomenclatura
+\end_layout
+
+\begin_layout Standard
+Nel progetto OPMap e nel seguito adottiamo la seguente nomenclatura per
+ gli esperimenti eseguiti: 
+\end_layout
+
+\begin_layout Standard
+\noindent
+\align center
+
+\shape slanted
+[scopo-parametro]
+\end_layout
+
+\begin_layout Standard
+dove lo scopo può essere la compilazione (C) o la risoluzione (R) del modello;
+ mentre il parametro può essere il numero di nodi computazionali (EXNode),
+ il numero di nodi operazionali (OPNode), il fattore di pinnabilità (PINFactor)
+ o il fattore di eterogeneità (DIVFactor) sia dell'architettura che dell'applica
+zione.
+ Ad esempio, l'esperimento [R-OPNode] ha lo scopo di valutare le performance
+ della risoluzione del modello al variare del numero di nodi operazionali.
+\end_layout
+
+\begin_layout Subsection
+Esperimenti sulla compilazione
+\end_layout
+
+\begin_layout Standard
+In questa suite di esperimenti mostriamo la sensibilità dei modelli in funzione
+ della dimensione dell'input, durante la fase di compilazione.
+ Lo scopo non è solo individuare quale sia il modello compilabile più rapidament
+e, bensì anche verificare se incida maggiormente sulle performance un aumento
+ in dimensione dell'architettura o uno stesso aumento in dimensione dell'applica
+zione.
+\end_layout
+
+\begin_layout Paragraph
+Esperimento [C-EXNode]/[C-OPNode]
+\end_layout
+
+\begin_layout Standard
+Con l'esperimento C-EXNode vogliamo osservare il comportamento dei modelli
+ durante il processo di compilazione, in risposta all'aumento del numero
+ di nodi computazionali.
+ Con l'esperimento C-OPNode vogliamo invece osservare lo stesso comportamento,
+ in risposta all'aumento del numero di nodi operazionali.
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+placement h
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\noindent
+\align center
+\begin_inset Graphics
+	filename /home/giacomo/Documents/projects/bsc-thesis/figures/experimental-analysis/c-exnode-log.png
+	lyxscale 30
+	width 12cm
+	groupId experimentC
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:CEXNode"
+
+\end_inset
+
+Risultati esperimento [C-EXNode].
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+placement h
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\noindent
+\align center
+\begin_inset Graphics
+	filename /home/giacomo/Documents/projects/bsc-thesis/figures/experimental-analysis/c-opnode-log.png
+	lyxscale 30
+	width 12cm
+	groupId experimentC
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:COPNode"
+
+\end_inset
+
+Risultati esperimento [C-OPNode].
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Confrontando i risultati degli esperimenti in Figura 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:CEXNode"
+
+\end_inset
+
+ e Figura 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:COPNode"
+
+\end_inset
+
+, notiamo come tutti i modelli ottengano tempi minori ed una maggiore robustezza
+ in corrispondenza di un aumento di nodi operazionali piuttosto che di un
+ eguale aumento di nodi computazionali.
+ In entrambi gli esperimenti, i modelli OPPStandard e OPPRestricted sono
+ caratterizzati dagli stessi andamenti, mentre il modello OPPConservative
+ se ne distacca sensibilmente, dimostrando di poter ammortizzare meglio
+ degli altri sia l'aumento dei nodi computazionali che di quelli operazionali.
+ Possiamo dunque concludere che in fase di compilazione, ogni modello è
+ più robusto all'aumento di nodi operazionali che ad un eguale aumento di
+ nodi computazionali, e che i vincoli di connettività espressi con la formulazio
+ne della conservazione del flusso garantiscono una forte riduzione nella
+ dimensione del modello.
+\end_layout
+
+\begin_layout Paragraph
+Esperimento [C-PINFactor]
+\end_layout
+
+\begin_layout Standard
+Con l'esperimento C-PINFactor vogliamo osservare il comportamento dei modelli
+ durante il processo di compilazione, in risposta all'aumento del fattore
+ di pin, dunque del conseguente grado di pin di ogni nodo operazionale.
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+placement h
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\noindent
+\align center
+\begin_inset Graphics
+	filename /home/giacomo/Documents/projects/bsc-thesis/figures/experimental-analysis/c-pinfactor.png
+	lyxscale 30
+	width 12cm
+	groupId experimentC
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:CPINFactor"
+
+\end_inset
+
+Risultati esperimento [C-PINFactor].
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Osservando i risultati dell'esperimento in Figura 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:CPINFactor"
+
+\end_inset
+
+, notiamo profonde differenze nelle curve in termini di valore iniziale
+ ed elasticità.
+ La curva OPPStandard ha un valore iniziale relativamente elevato, e rimane
+ pressochè inelastica all'aumento del fattore di pin.
+ La curva OPPRestricted ha un valore iniziale tedente a zero ed una apprezzabile
+ elasticità.
+ La curva OPPConservative ha un valore iniziale tendente a zero ed una elasticit
+à molto ridotta.
+ Possiamo dunque concludere che in fase di compilazione, l'aumento del fattore
+ di pin incide sulle performance dei soli modelli OPPRestricted ed OPPConservati
+ve, mentre è pressochè ininfluente per il modello OPPStandard.
+ Ciò è certamente dovuto alla restrizione del dominio.
+ Inoltre deduciamo che i vincoli di connettività espressi con la formulazione
+ della conservazione del flusso garantiscono una maggiore robustezza all'aumento
+ del fattore di pin.
+\end_layout
+
+\begin_layout Subsection
+Esperimenti sulla risoluzione
+\end_layout
+
+\begin_layout Standard
+In questa suite di esperimenti mostriamo la sensibilità dei modelli in funzione
+ della dimensione e distribuzione dell'input, durante la fase di risoluzione.
+ Lo scopo non è solo determinare il modello più performante, bensì anche
+ verificare se incida maggiormente sulle performance un aumento in dimensione
+ dell'architettura o uno stesso aumento in dimensione dell'applicazione.
+ 
+\end_layout
+
+\begin_layout Standard
+Questi esperimenti mostrano risultati direttamente correlati a quelli ottenuti
+ per la fase di compilazione, in quanto la dimensione del modello incide
+ fortemente sui tempi di risoluzione, sia durante il preprocessamento che
+ durante l'effettiva applicazione dell'algoritmo risolutivo.
+\end_layout
+
+\begin_layout Paragraph
+Esperimento [R-EXNode]/[R-OPNode]
+\end_layout
+
+\begin_layout Standard
+Con l'esperimento R-EXNode vogliamo osservare il comportamento dei modelli
+ durante il processo di risoluzione, in risposta all'aumento del numero
+ di nodi computazionali.
+ Con l'esperimento R-OPNode vogliamo invece osservare lo stesso comportamento,
+ in risposta all'aumento del numero di nodi operazionali.
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\noindent
+\align center
+\begin_inset Graphics
+	filename /home/giacomo/Documents/projects/bsc-thesis/figures/experimental-analysis/r-exnode-log.png
+	lyxscale 30
+	width 12cm
+	groupId experimentR
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:REXNode"
+
+\end_inset
+
+Risultati esperimento [R-EXNode].
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\noindent
+\align center
+\begin_inset Graphics
+	filename /home/giacomo/Documents/projects/bsc-thesis/figures/experimental-analysis/r-opnode-log.png
+	lyxscale 30
+	width 12cm
+	groupId experimentR
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:ROPNode"
+
+\end_inset
+
+Risultati esperimento [R-OPNode].
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Confrontando i risultati degli esperimenti in Figura 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:REXNode"
+
+\end_inset
+
+ e Figura 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:ROPNode"
+
+\end_inset
+
+, notiamo come tutti i modelli ottengano tempi minori ed una maggiore robustezza
+ in corrispondenza di un aumento di nodi operazionali piuttosto che di un
+ eguale aumento di nodi computazionali.
+ Ancora una volta, gli andamenti dei modelli OPPStandard ed OPPRestricted
+ risultano pressochè analoghi.
+ Questa volta però riscontriamo una particolare esposizione dei due modelli
+ a fluttuazioni imputabili alla gestione della memoria in corrispondenza
+ dell'aumento dei nodi computazionali
+\begin_inset Foot
+status collapsed
+
+\begin_layout Plain Layout
+esperimenti condotti più volte sui modelli OPPStandard e OPPRestricted con
+ dimesioni di input maggiori di quelle riportate, mostrano picchi di latenza
+ isolati analoghi a quello riscontrato in Figura 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:REXNode"
+
+\end_inset
+
+.
+\end_layout
+
+\end_inset
+
+.
+ Il modello OPPConservative si mostra più efficiente degli altri, ma con
+ una escursione minore rispetto a quella rilevata in fase di compilazione.
+ 
+\end_layout
+
+\begin_layout Paragraph
+Esperimento [R-PINFactor]
+\end_layout
+
+\begin_layout Standard
+Con l'esperimento R-PINFactor vogliamo osservare il comportamento dei modelli
+ durante il processo di risoluzione, in risposta all'aumento del fattore
+ di pin, dunque del conseguente grado di pin di ogni nodo operazionale.
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\noindent
+\align center
+\begin_inset Graphics
+	filename /home/giacomo/Documents/projects/bsc-thesis/figures/experimental-analysis/r-pinfactor.png
+	lyxscale 30
+	width 12cm
+	groupId experimentR
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:RPINFactor"
+
+\end_inset
+
+Risultati esperimento [R-PINFactor].
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Osservando i risultati dell'esperimento in Figura 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:RPINFactor"
+
+\end_inset
+
+, notiamo un comportamento profondamente diverso rispetto a quello riscontrato
+ nel corrispondente C-PINFactor in Figura 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:CPINFactor"
+
+\end_inset
+
+.
+ Il modello OPPStandard non risulta più insesibile all'aumento del fattore
+ di pin.
+ Il modello OPPRestricted assume presto l'andamento di OPPStandard.
+ Il modello OPPCoservative si mostra sempre più robusto degli altri due,
+ ma meno di quanto riscontrato in fase di compilazione.
+\end_layout
+
+\begin_layout Paragraph
+Esperimento [R-DIVFactor]
+\end_layout
+
+\begin_layout Standard
+Con l'esperimento R-DIVFactor vogliamo osservare il comportamento dei modelli
+ durante il processo di risoluzione, in risposta all'aumento del fattore
+ di eterogeneità dell'architettura e dell'applicazione.
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\noindent
+\align center
+\begin_inset Graphics
+	filename /home/giacomo/Documents/projects/bsc-thesis/figures/experimental-analysis/r-divfactor.png
+	lyxscale 30
+	width 12cm
+	groupId experimentR
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:RDIVFactor"
+
+\end_inset
+
+Risultati esperimento [R-DIVFactor].
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Osservando i risultati dell'esperimento in Figura 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:RDIVFactor"
+
+\end_inset
+
+, notiamo la robustezza del modello OPPConservative al fattore di eterogeneità.
+ Nei modelli OPPStandard ed OPPRestricted si nota invece la predispozione
+ a fluttuazioni dovute (i) alla gestione della memoria
+\begin_inset Foot
+status collapsed
+
+\begin_layout Plain Layout
+esperimenti ripetuti sui modelli OPPStandard e OPPRestricted con dimesioni
+ di input maggiori di quelle riportate, mostrano picchi di latenza isolati
+ analoghi a quelli riscontrati in Figura 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:RDIVFactor"
+
+\end_inset
+
+.
+\end_layout
+
+\end_inset
+
+ e (ii) alla strategia di branch and bound adottata dal risolutore.
+ Possiamo dunque concludere che il fattore di eterogeneità ha poca influenza
+ sulle performance in fase di risoluzione.
+\end_layout
+
+\end_body
+\end_document

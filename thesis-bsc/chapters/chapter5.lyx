@@ -1,0 +1,144 @@
+#LyX 2.1 created this file. For more info see http://www.lyx.org/
+\lyxformat 474
+\begin_document
+\begin_header
+\textclass report
+\begin_preamble
+\numberwithin{equation}{chapter}
+\end_preamble
+\use_default_options true
+\master ../thesis.lyx
+\begin_modules
+customHeadersFooters
+theorems-bytype
+theorems-chap-bytype
+\end_modules
+\maintain_unincluded_children false
+\language italian
+\language_package default
+\inputencoding auto
+\fontencoding global
+\font_roman lmodern
+\font_sans lmss
+\font_typewriter lmtt
+\font_math auto
+\font_default_family rmdefault
+\use_non_tex_fonts false
+\font_sc false
+\font_osf false
+\font_sf_scale 100
+\font_tt_scale 100
+\graphics default
+\default_output_format default
+\output_sync 0
+\bibtex_command default
+\index_command default
+\paperfontsize 12
+\spacing onehalf
+\use_hyperref true
+\pdf_bookmarks true
+\pdf_bookmarksnumbered false
+\pdf_bookmarksopen false
+\pdf_bookmarksopenlevel 1
+\pdf_breaklinks false
+\pdf_pdfborder true
+\pdf_colorlinks false
+\pdf_backref false
+\pdf_pdfusetitle true
+\papersize a4paper
+\use_geometry true
+\use_package amsmath 1
+\use_package amssymb 1
+\use_package cancel 1
+\use_package esint 1
+\use_package mathdots 1
+\use_package mathtools 1
+\use_package mhchem 1
+\use_package stackrel 1
+\use_package stmaryrd 1
+\use_package undertilde 1
+\cite_engine basic
+\cite_engine_type default
+\biblio_style plain
+\use_bibtopic false
+\use_indices false
+\paperorientation portrait
+\suppress_date false
+\justification true
+\use_refstyle 1
+\index Index
+\shortcut idx
+\color #008000
+\end_index
+\leftmargin 3cm
+\topmargin 2.5cm
+\rightmargin 3cm
+\bottommargin 4cm
+\headsep 1cm
+\footskip 1.5cm
+\secnumdepth 3
+\tocdepth 3
+\paragraph_separation skip
+\defskip medskip
+\quotes_language french
+\papercolumns 1
+\papersides 2
+\paperpagestyle default
+\tracking_changes false
+\output_changes false
+\html_math_output 0
+\html_css_as_file 0
+\html_be_strict false
+\end_header
+
+\begin_body
+
+\begin_layout Chapter
+\begin_inset CommandInset label
+LatexCommand label
+name "chap:conclusioni"
+
+\end_inset
+
+Conclusioni
+\end_layout
+
+\begin_layout Standard
+In questo lavoro di tesi è stato presentato il problema del posizionamento
+ degli operatori per applicazioni di Data Stream Processing.
+ Il problema è stato contestualizzato all'interno del fenomeno dei Big Data
+ e dell'Information Flow Processing per far assaporare al lettore l'attuale
+ valore dei modelli di ottimizzazione applicati al processamento dei big
+ dataset.
+\end_layout
+
+\begin_layout Standard
+Del problema di posizionamento sono state fornite tre distinte formulazioni:
+ OPPStandard, OPPRestricted e OPPConservative.
+ E' stata descritta l'implementazione dei tre modelli all'interno del progetto
+ OPMap, il quale utilizza la libreria IBM CPlex per la loro compilazione
+ e risoluzione.
+ 
+\end_layout
+
+\begin_layout Standard
+Tali modelli sono stati poi sottoposti ad un'analisi sperimentale volta
+ ad enfatizzarne le differenze prestazionali in funzione della dimensione
+ e distribuzione dell'input.
+ L'analisi sperimentale ha verificato le migliori performance della formulazione
+ OPPConservative, sia in fase di compilazione del modello che durante quella
+ della sua risoluzione.
+ La formulazione in questione registra, rispetto alle altre, bassi tempi
+ di esecuzione ed una comoda inelasticità alle fondamentali variazioni dell'inpu
+t.
+ 
+\end_layout
+
+\begin_layout Standard
+In futuro, speriamo che il progetto OPMap possa diventare un utile strumento
+ per la prototipazione rapida di modelli OPP e che possa fornire strumenti
+ di benchmark a supporto dello sviluppo di soluzioni euristiche al problema.
+\end_layout
+
+\end_body
+\end_document
