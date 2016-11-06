@@ -1,0 +1,405 @@
+% Marciani Normal Form, On semidecidability of context-free language regularity
+% Authors: Giacomo Marciani
+%
+% Style: acmsmall.cls v 1.3
+
+\documentclass[prodmode,acmtecs]{acmsmall}
+
+\usepackage[ruled]{algorithm2e}
+\renewcommand{\algorithmcfname}{ALGORITHM}
+\SetAlFnt{\small}
+\SetAlCapFnt{\small}
+\SetAlCapNameFnt{\small}
+\SetAlCapHSkip{0pt}
+\IncMargin{-\parindent}
+
+% METADATA INFORMATION
+\acmVolume{9}
+\acmNumber{4}
+\acmArticle{39}
+\acmYear{2016}
+\acmMonth{3}
+
+% COPYRIGHT
+%\setcopyright{acmcopyright}
+%\setcopyright{acmlicensed}
+%\setcopyright{rightsretained}
+%\setcopyright{usgov}
+%\setcopyright{usgovmixed}
+%\setcopyright{cagov}
+%\setcopyright{cagovmixed}
+
+% DOI
+\doi{0000001.0000001}
+
+%ISSN
+\issn{1234-56789}
+
+\begin{document}
+
+%PAGE HEADS
+\markboth{G. Marciani et al.}{Marciani Normal Form}
+
+%TITLE
+\title{Marciani Normal Form}
+\author{Giacomo Marciani
+\affil{University of Rome Tor Vergata}
+Alberto Pettorossi
+\affil{University of Rome Tor Vergata}
+}
+
+% ABSTRACT
+\begin{abstract}
+We prove the semidecidability of the problem of saying wheter or not a context-free
+grammar generates a regular language.
+We introduce the notion of context-free grammars in Marciani Normal Form.
+We prove that a context-free grammar in Marciani Normal Form always generates a
+regular language.
+\end{abstract}
+
+% CATEGORIES
+\begin{CCSXML}
+	<ccs2012>
+	<concept>
+	<concept_id>10003752.10003766.10003771</concept_id>
+	<concept_desc>Theory of computation~Grammars and context-free languages</concept_desc>
+	<concept_significance>500</concept_significance>
+	</concept>
+	</ccs2012>
+\end{CCSXML}
+
+\ccsdesc[500]{Theory of computation~Grammars and context-free languages}
+
+\acmformat{Giacomo Marciani and Alberto Pettorossi, 2016. Marciani Normal Form.}
+
+\begin{bottomstuff}
+This work is supported by the National Science Foundation, under
+grant CNS-0435060, grant CCR-0325197 and grant EN-CS-0329609.
+
+Author's addresses: G. Marciani {and} A. Pettorossi, Computer Science Department, University of Rome Tor Vergata.
+\end{bottomstuff}
+
+\maketitle
+
+\section{Introduction}
+
+In Section 2, we give some preliminary definitions about language
+equations and regularity problem. In particular, we introduce the
+class of both-linear equations, the pseudo-regular partition and the
+looking forward property.
+
+In Section 3, we state and prove the Marciani's Rule, that exposes
+a method to solve the class of both-linear language equations.
+
+In Section 4, we introduce the notion of Marciani Normal Form for
+context-free grammars, and we prove that a context-free grammar in
+Marciani Normal Form always generates a regular language.
+
+In Section 5, we prove the semidecidability and the undecidability
+of the context-free regularity problem.
+
+In Section 6, we give some example of the Marciani's Rule and the
+Marciani Normal Form.
+
+\section{Definitions}
+\begin{definition}[Left-Linear Equations]
+	A left-linear language equation in
+	the unknown $r$ is a language equation of the form
+	\begin{equation}
+	r=ar+s
+	\end{equation}
+\end{definition}
+
+\begin{definition}[Right-Linear Equations]
+	A right-linear language equation
+	in the unknown $r$ is a language equation of the form
+	\begin{equation}
+	r=ra+s
+	\end{equation}
+\end{definition}
+
+\begin{definition}[Both-Linear Equations]
+	A both-linear language equation in
+	the unknown $r$ is a language equation of the form
+	\begin{equation}
+	r=ar+rb+s
+	\end{equation}
+\end{definition}
+
+\begin{definition}[Looking Forward Property]
+	A grammar $G=(V_{T},V_{N},S,P)$
+	enjoys the looking forward property iff the digraph $D_{G}$ constructed
+	as follows does not have any cicle.
+
+	Let $D_{G}$ be a digraph such that for all nonterminal symbol in
+	$V_{T}$ there exists a node in $D_{G}$, and for all production $A\rightarrow\alpha$
+	in $P$ there exists an arc from $A$ to every nonterminal symbol
+	in $\alpha$, with the exception of $A$ itself.
+\end{definition}
+
+\begin{definition}[Pseudo-Regular Partition]
+	Given a grammar $G=(V_{T},V_{N},S,P)$,
+	a symbol $A\in V_{N}$ and the subset $P_{A}\subseteq P$ of productions
+	for the nonterminal $A$, the pseudo-regular partition induced by
+	$A$ is the partition $\Upsilon_{A}$ of $P_{A}$ defined as follows:
+	\begin{equation}
+	\Upsilon_{A}=\{\{p|p\in P_{A},A\rightarrow\alpha A\},\{p|p\in P_{A},A\rightarrow A\beta\},\{p|p\in P_{A},A\rightarrow\gamma\}\}
+	\end{equation}
+	where $\alpha,\beta,\gamma\in\left(V_{T}\cup V_{N}\setminus\{A\}\right)^{*}$.
+\end{definition}
+
+\begin{definition}[CF Regularity Problem]
+	The CF Regularity Problem is the
+	subset $\Re$ of $\{0,1\}^{*}$ defined as follows:
+	\begin{equation}
+	\Re=\{\underline{G}|G\in[G_{CS}]\wedge L(G)\in[L_{REG}]\}
+	\end{equation}
+	where $\underline{G}$ is the encoding of a context-free grammar $G$
+	as a string in $\{0,1\}^{*}$ \cite{Pettorossi13}, $[G_{CS}]$ is the class
+	of context-free grammars, and $[L_{REG}]$ is the class of regular
+	languages.
+\end{definition}
+
+\section{Marciani's Rule}
+It is well known that the Arden's Rule permits the resolution of left-linear
+and right-linear language equations \cite{Pettorossi13}.
+Now, we state and prove a theorem that permits the resolution of both-linear
+language equations.
+
+\begin{theorem}[Marciani's Rule]
+	Given the language equation $r=ar+rb+s$
+	in the unknown $r$, its least solution is $a^{*}sb^{*}$.
+\end{theorem}
+
+\begin{proof}
+	Let us divide the proof in the following three point (a), (b), (c).
+	\\
+	(a) We will first show that the language equation $r=ar+rb+s$ is
+	equivalent to the language equation $r=a^{*}(rb+s)$. \\
+	(b) Then, we will show that $a^{*}sb^{*}$ is a solution for $r$
+	of the language equation $r=a^{*}(rb+s)$. \\
+	(c) Finally, we will show that $a^{*}sb^{*}$ is the minimal solution
+	for $r$ of the language equation $r=a^{*}(rb+s)$, that is, for
+	any other solution $z$ we have that $L(a^{*}sb^{*})\subseteq L(z)$.\\
+
+	Proof (a): By the application of the Arden Rule on $r=ar+rb+s$ ,
+	we obtain $r=a^{*}(rb+s)$. So $ar+rb+s=a^{*}(rb+s)$\cite{Pettorossi13}.\\
+
+	Proof (b): Notice that $a^{*}((a^{*}sb^{*})b+s)=a^{*}a^{*}sb^{*}b+a^{*}s=a^{*}sb^{*}b+a^{*}s$,
+	so we have to show that (b.1) $a^{*}sb^{*}\subseteq a^{*}sb^{*}b+a^{*}s$
+	and (b.2) $\beta.2$ $a^{*}sb^{*}b+a^{*}s\subseteq a^{*}sb^{*}$.\\
+
+	Proof (b.1): The following inclusion holds $a^{*}sb^{*}=a^{*}s(b^{+}+\varepsilon)\subseteq a^{*}s(b^{*}b+\varepsilon)=a^{*}sb^{*}b+a^{*}s$.\\
+
+	Proof (b.2): The following inclusions holds $a^{*}sb^{*}b\subseteq a^{*}sb^{*}$
+	and $a^{*}s\subseteq a^{*}sb^{*}$.\\
+
+	Proof (c): We assume that $z$ is a solution of $r=a^{*}(rb+s)$,
+	that is $z=a^{*}(zb+s)$, and we show that $a^{*}sb^{*}\subseteq z$,
+	that is $\bigcup_{i,j\geq0}a^{i}sb^{j}\subseteq z$. The proof can
+	be done by induction on $i,j\geq0$.\\
+	\textsl{(Basis $i,j=0$):} $s\subseteq z$ holds because
+	$z=a^{*}(zb+s)$.\\
+	\textsl{(Step: $i\geq0,j=0$):} We have to show the following implication
+	$\bigcup_{i\geq0}a^{i}s\subseteq z\rightarrow\bigcup_{i\geq0}a^{i+1}s\subseteq z$.
+	This holds because $\bigcup_{i\geq0}a^{i+1}s\subseteq a\bigcup_{i\geq0}a^{i}s\subseteq az\subseteq z$.
+	\\
+	\textsl{(Step: $i,j\geq0$):} We have to show the following implication
+	$\bigcup_{i,j\geq0}a^{i}sb^{j}\subseteq z\rightarrow\bigcup_{i,j\geq0}a^{i}sb^{j+1}\subseteq z$.
+	This holds because $\bigcup_{i,j\geq0}a^{i}sb^{j+1}\subseteq\bigcup_{i,j\geq0}a^{i}sb^{j}b\subseteq zb\subseteq z$.
+\end{proof}
+
+\section{Marciani Normal Form}
+We introduce the notion of context-free grammars in Marciani Normal
+Form. We prove that every grammar in Marciani Normal Form generates
+a regular language.
+
+\begin{definition}[Grammar in MNF]
+	A context-free grammar $G=(V,V_{N},S,P)$
+	is said to be in Marciani Normal Form iff $G$ enjoys the looking
+	forward property and for all symbol $A\in V_{T}$ there exists a pseudo-regular
+	partition $\Upsilon_{A}$.
+\end{definition}
+
+\begin{theorem}[Regularity of context-free grammar in MNF]
+	A context-free grammar $G=(V_{T},V_{N},S,P)$ in Marciani Normal Form always generates
+	a regular language.
+\end{theorem}
+
+\begin{proof}
+	If $G$ is in Marciani Normal Form, then for each nonterminal $A$
+	there exists a pseudo-regular partition $\Upsilon_{A}$. Notice that
+	to every pseudo-regular partition $\Upsilon_{A}=\{\{p|p\in P_{A},A\rightarrow\alpha A\},\{p|p\in P_{A},A\rightarrow A\beta\},\{p|p\in P_{A},A\rightarrow\gamma\}\}$
+	can be associated a both-linear language equation $A=\alpha A+A\beta+\gamma$.
+	By the application of the Marciani's Rule, we know that the least
+	solution of the previous equation is $\alpha^{*}\gamma\beta^{*}$,
+	so $L(A)=L(\alpha^{*}\gamma\beta^{*})$.
+
+	As a conseguece of the previous results and the looking forward property,
+	there exists a regular expression $e$ such that $L(S)=L(e)$, then
+	$L(S)$ is a regular language, that is $G$ is regular.
+\end{proof}
+
+
+\section{Semidecidability of the CF Regularity Problem}
+We know that the context-free regularity problem is undecidable \cite{Pettorossi13},
+due to its reduction to the undecidable Post Correspondence Problem
+\cite{Hopcroft06}.
+
+We prove the semidecidability and the undecidability of the context-free
+regularity problem.
+
+\begin{theorem}
+	Given a context-free grammar, the problem of saying wheter or not
+	there exists an equivalent grammar in Marciani Normal Form is semidecidable
+	and undecidable.
+\end{theorem}
+
+\begin{proof}
+	Let us consider a context-free grammar in Chomsky Normal Form. Let
+	us derive an equivalent grammar by unfolding every production, until
+	getting the productions for the axiom only. Now, it' easy to check
+	if the derived grammar is in Marciani Normal Form. So, given any context-free
+	grammar in Chomsky Normal Form, it is always possible to check if
+	there exists an equivalent context-free grammar in Marciani Normal
+	Form.
+
+	As this possibility holds for grammars in Chomsky Normal Form, then
+	it holds for every context-free grammar \cite{Pettorossi13}.
+\end{proof}
+
+\begin{theorem}[Semidecidability of the CF Regularity Problem]
+	The context-free regularity problem is semidecidable and undecidable.
+\end{theorem}
+
+\begin{proof}
+	Follows from the semidecidability and undecidability of the problem
+	of saying wheter or not, given a context-free grammar, there exists
+	an equivalent grammar in Marciani Normal Form, and from the regularity
+	of the language generated by a context-free grammar in Marciani Normal
+	Form.
+\end{proof}
+
+\section{Conclusions}
+Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.
+Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+
+\appendix
+\section*{APPENDIX}
+\setcounter{section}{1}
+
+\begin{example}
+	Let us consider the context-free grammar $G$ with axiom $S$ and
+	the following productions
+
+	\[
+	S\rightarrow abcS|Sdef|ghi|\varepsilon
+	\]
+
+
+	The language generated by $G$ is denoted by the regular expression
+	\[
+	(abc)^{*}(ghi+\varepsilon)(def)^{*}
+	\]
+
+\end{example}
+
+\begin{example}
+	Let us consider the context-free grammar $G$ with axiom $S$ and
+	the following productions
+
+	\[
+	S\rightarrow aAS|SBdef|CD|\varepsilon
+	\]
+	\[
+	A\rightarrow uA|Av|m
+	\]
+	\[
+	B\rightarrow xB|By|n
+	\]
+	\[
+	C\rightarrow gC|Ch|i
+	\]
+	\[
+	D\rightarrow pD|Dq|r
+	\]
+
+
+	The language generated by $G$ is denoted by the regular expression
+	\[
+	(au^{*}mv^{*})^{*}(g^{*}ih^{*}p^{*}rq^{*}+\varepsilon)(x^{*}ny^{*}def)^{*}
+	\]
+\end{example}
+
+\begin{example}
+	Let us consider the context-free grammar $G$ in \textsl{Chomsky Normal
+		Form} with axiom $S$ and the following productions
+
+	\[
+	S\rightarrow AS|SB|CD|z|\varepsilon
+	\]
+	\[
+	A\rightarrow UA|AU|m
+	\]
+	\[
+	B\rightarrow XB|BX|n
+	\]
+	\[
+	C\rightarrow UC|CU|i
+	\]
+	\[
+	D\rightarrow XD|DX|r
+	\]
+
+
+	\[
+	U\rightarrow u
+	\]
+	\[
+	X\rightarrow x
+	\]
+
+	The language generated by $G$ is denoted by the regular expression
+	\[
+	(u^{*}mu^{*})^{*}(u^{*}iu^{*}x^{*}rx^{*}+z+\varepsilon)(x^{*}nx^{*})^{*}
+	\]
+\end{example}
+
+\appendixhead{ZHOU}
+
+\begin{acks}
+Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.
+Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+\end{acks}
+
+% Bibliography
+\bibliographystyle{ACM-Reference-Format-Journals}
+\bibliography{references}
+
+% History dates
+\received{February 2007}{March 2009}{June 2009}
+
+% Electronic Appendix
+\elecappendix
+
+\medskip
+
+\section{This is an example of Appendix section head}
+
+Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.
+Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+
+\section{Appendix section head}
+
+Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.
+Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+
+\end{document}
