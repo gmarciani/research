@@ -1,0 +1,124 @@
+%*******************************************************************************
+% Title: A botnet showcase
+%
+% Conference: Cool Conference 2016
+%
+% Authors: Giacomo Marciani <gmarciani@ieee.org>
+% Authors: Michele Porretta <mporretta@acm.org>
+%
+% Institution: Department of Civil Engineering and Computer Science Engineering,
+% 			   University of Rome Tor Vergata, Italy
+%
+% Style: ACM Large VERSION 1.7
+%*******************************************************************************
+
+\documentclass[prodmode,gmportfolio]{acmlarge}
+
+%*******************************************************************************
+% Packages
+%*******************************************************************************
+\usepackage{amsmath}
+\usepackage{lipsum}
+\usepackage{xr}
+\usepackage{hyperref}
+\usepackage{cleveref}
+
+%*******************************************************************************
+% Details
+%*******************************************************************************
+\acmVolume{2}
+\acmNumber{1}
+\acmArticle{1}
+\articleSeq{1}
+\acmMonth{2}
+\acmYear{2017}
+
+\issn{1234-56789}
+\doi{0000001.0000001}
+
+%*******************************************************************************
+% Copyright
+%*******************************************************************************
+\setcopyright{rightsretained}
+
+%*******************************************************************************
+% Algorithm
+%*******************************************************************************
+\usepackage[ruled]{algorithm2e}
+\SetAlFnt{\algofont}
+\SetAlCapFnt{\algofont}
+\SetAlCapNameFnt{\algofont}
+\SetAlCapHSkip{0pt}
+\IncMargin{-\parindent}
+\renewcommand{\algorithmcfname}{ALGORITHM}
+
+%*******************************************************************************
+% Numbering
+%*******************************************************************************
+\numberwithin{equation}{section}
+
+%*******************************************************************************
+% References
+%*******************************************************************************
+\crefname{lem}{lemma}{lemmata}
+\Crefname{lem}{Lemma}{Lemmata}
+\crefname{cor}{corollary}{corollaries}
+\Crefname{cor}{Corollary}{Corollaries}
+\crefname{alg}{algorithm}{algorithms}
+\Crefname{alg}{Algorithm}{Algorithms}
+\externaldocument{sec/introduction}
+\externaldocument{sec/main-section}
+\externaldocument{sec/conclusions}
+\externaldocument{sec/app/latex-formats}
+
+%*******************************************************************************
+% Title and Authors
+%*******************************************************************************
+\markboth{G. Marciani, M. Porretta}{A botnet showcase}
+\title{A botnet showcase}
+\author{GIACOMO MARCIANI and MICHELE PORRETTA \affil{University of Rome Tor Vergata}}
+
+%*******************************************************************************
+% Front Content
+%*******************************************************************************
+\input{sec/abstract}
+\input{sec/ccs-keywords}
+\acmformat{Giacomo Marciani and Michele Porretta. 2016. A botnet showcase}
+
+\begin{document}
+	
+%*******************************************************************************
+% Bottom Content
+%*******************************************************************************
+\begin{bottomstuff}
+	This work is supported by the Department of Civil Engineering and Computer Science
+	Engineering, University of Rome Tor Vergata, Italy.\\
+	Author's address: 
+	G. Marciani, Via del Politecnico 1, Rome, RM 00133, Italy;
+	email: gmarciani@ieee.org;
+	M. Porretta, Via del Politecnico 1, Rome, RM 00133, Italy;
+	email: mporretta@acm.org;
+\end{bottomstuff}
+
+\maketitle
+
+%*******************************************************************************
+% Core Content
+%*******************************************************************************
+\input{sec/introduction}
+\input{sec/main-section}
+\input{sec/conclusions}
+
+%*******************************************************************************
+% Bibliography
+%*******************************************************************************
+\bibliographystyle{acmreferences}
+\bibliography{./ref/biblio}
+
+%*******************************************************************************
+% Online Appendix
+%*******************************************************************************
+\elecappendix
+\input{sec/app/latex-formats}
+
+\end{document}
