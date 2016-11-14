@@ -22,6 +22,16 @@ Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deseru
 ## Bibliography
 Marciani, G., Piu, M., Porretta, M., Nardelli, M. and Cardellini, V., 2016, June. Real-time analysis of social networks leveraging the flink framework. *In Proceedings of the 10th ACM International Conference on Distributed and Event-based Systems* (pp. 386-389). ACM.
 
+Marciani, G., 2016, November. Marciani Normal Form for Context-free Grammars. *Arxiv pre-print*. Arxiv.
+
+Marciani, G., Porretta, M., 2017, February. A Botnet showcase. *Course Work*. Computer Security.
+
+Marciani, G., 2017, February. A performance modeling showcase for multi-tiered web services. *Course Work*. Performance Modeling of Computer Systems and Networks.
+
+Marciani, G., 2017, February. A optimization showcase *Course Work*. Methods for Big Data Optimization.
+
+Marciani, G., 2017, February. A multy/many core programming showcase *Course Work*. Multi-Core Many-Core Programming.
+
 ## Authors
 Giacomo Marciani, [gmarciani@acm.org](mailto:gmarciani@acm.org)
 
