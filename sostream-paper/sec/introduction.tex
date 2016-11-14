@@ -1,0 +1,26 @@
+\section{Introduction}
+\label{sec:introduction}
+
+Social network analysis aims at discovering and investigating social phenomena and trends through the exploitation of methodologies and tools.
+With the spread diffusion of social networks, scientific communities from different fields and commercial companies have investigated how to effectively extract valuable information from the great amount of daily produced data. 
+%
+An emerging activity, which is gaining strategic value, is the real-time identification of communities within social networks that mostly stimulate the interest and interaction among their users. Indeed, companies often rely on these communities to conduct advertising campaigns with focused targets.
+%
+The diffusion of on-demand computing resources (i.e., Cloud computing) and the consolidation of enabling technologies for real-time analytics (e.g., stream processing) 
+have enriched decision-making processes that can now be supported by data, which, for example, can be gathered from communities, user reactions, and trending topics.
+%
+Differently from other contexts, the real-time analysis of social networks is challenging, because it requires to handle an evolving social structure. Moreover, this structure is usually represented by graphs, which, per se, may require to apply algorithms with not negligible complexity.
+%
+The sixth edition of the DEBS Grand Challenge~\cite{GrandChallenge:2016} focuses on these problems and calls for applications that provide real-time analysis of an evolving social-network graph. Specifically, an application should collect streams of social events, such as friendships, posts, comments, likes, so to (1) determine the posts that currently trigger the most activity in the social network, and (2) identify large communities that are currently involved in a topic.
+
+In this paper, we present our efficient and easily tunable solution to the Grand Challenge. 
+It can run on a single node as requested for the  Grand Challenge evaluation, but we design its architecture to be executed in a distributed environment. 
+To this end, we rely on Apache Flink~\cite{Flink}, an emerging open source and scalable data stream processing framework.
+
+The paper is organized as follow. 
+%
+In Section~\ref{sec:solution} we present the design approach of our solution and the topologies that address the Grand Challenge queries.
+%
+In Section~\ref{sec:evaluation} we present some performance results. 
+%
+Finally, we conclude in Section~\ref{sec:conclusions} identifying some further improvements for future work. 

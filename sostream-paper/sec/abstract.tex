@@ -1,0 +1,13 @@
+\begin{abstract}
+	
+In this paper, we present a solution to the DEBS 2016 Grand Challenge that leverages Apache Flink, an open source platform for distributed stream and batch processing. 
+%
+We design the system architecture focusing on the exploitation of parallelism and memory efficiency so to enable an effective processing of high volume data streams on a distributed infrastructure.
+%
+Our solution to the first query relies on a distributed and fine-grain approach for updating the post scores and determining partial ranks, which are then merged into a single final rank. Furthermore, changes in the final rank are identified so to update the output only if needed.
+%
+The second query efficiently represents in-memory the evolving social graph and uses a customized Bron-Kerbosch algorithm to identify the largest communities active on a topic. We leverage on an in-memory caching system to keep the largest connected components which have been previously identified by the algorithm, thus saving computational time.
+
+The experimental results show that, on a portion of the dataset large half that provided for the Grand Challenge, our system can process up to 400~tuples/s with an average latency of 2.5~ms for the first query, and up to 370~tuples/s with an average latency of 2.7~ms for the second query.
+		
+\end{abstract}

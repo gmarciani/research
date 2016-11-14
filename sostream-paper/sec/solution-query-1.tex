@@ -1,0 +1,52 @@
+\subsection{Query 1}
+\label{sec:solution-q1}
+
+The goal of the first query is to determine the updates of the top-3 (i.e., $k=3$) most influential posts in the social network, that is, those that maintain over time a high rate of interaction via comments. 
+The scoring discipline encapsulate this concept, and is computed as follows. 
+When a post/comment is created, its initial score is set to $10$ and is then decreased by 1 once a day. The post score is the sum of its value plus the score of every direct and indirect comment rooted in it. Once the score reaches zero, the post expires and does not compete for any ranking.
+%
+We now describe the operators involved in the first query, whose topology is shown in Figure~\ref{fig:q1-architecture}.  
+
+\begin{figure*}[ht]
+	\centering
+	\includegraphics[width=.75\textwidth]{fig/query-2-architecture}
+	\caption{The topology for Query 2.}
+	\label{fig:q2-architecture}
+\end{figure*}
+
+The \textit{Event Dispatcher} is a centralized operator that reads in parallel posts and comments from several data sources. It converts each entry in a tuple containing only the fields that are strictly necessary to the following operators. Taking advantage of the ascending events timestamp, it can efficiently carry out the interlacing of events. 
+%
+Afterwards, the \textit{Comment Mapper} maps each comment to the related post. 
+%
+Observe that this operator also assigns indirect comments (i.e., comments of a post's comment) to the related post by maintaining in-memory a mapping table that links each post with its comments.
+%
+Storing this mapping table is challenging because it can potentially grow unlimited, thus saturating the memory. 
+%
+To handle this situation, we exploit the feedback mechanism, which allows us to store only the mapping of not yet expired posts.
+%
+The \textit{Post Score Updater} is a parallel operator that receives the streams of posts and comments and updates the post score and number of commenters of the post. 
+To preserve the application integrity with parallelism, the incoming streams are partitioned by the post identifier.
+%
+To synchronize the parallel instances of this operator, so to properly update the scores, the upstream operator \textit{Comment Mapper} broadcasts a \textit{time sync} message when the time associated to posts and comments moves forward.
+%
+The \textit{Aggregator} is a parallel rolling counting operator that merges the single score updates to produce the total score for each post. 
+%
+Moreover, this operator is in charge of emitting the \textit{Feedback Stream}.
+%
+The \textit{Post Rank} defines the partial top-3 ranking of posts handled by its upstreams operators; the ranking is sorted by the post score. 
+%
+Then, the \textit{Post Rank Merger} merges all the partial rankings into a global one and identifies the top-3 posts that trigger the most activity in the social network. 
+%
+The latest two operators optimize the sorting operations by
+%
+(1) reducing the elements to be sorted thanks to the parallelization;
+%
+(2) pruning the expired posts; and 
+%
+(3) avoiding to sort the elements that cannot actually generate a ranking update (i.e., elements whose score is less than the lowest in the rankings). 
+% 
+%
+Finally, the \textit{Post Rank Filter} produces an updated result every time the top-3 most active posts change.
+
+
+

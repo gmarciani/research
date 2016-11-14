@@ -1,0 +1,124 @@
+%********************************************************************************
+% Title: Grand Challenge: Real-time Analysis of Social Networks
+%		 Leveraging the Flink Framework
+%
+% Conference: ACM DEBS 2016
+%
+% Authors: Giacomo Marciani <giacomo.marciani@gmail.com>,
+% 		   Marco Piu <pyumarco@gmail.com>,
+%		   Michele Porretta <micheleporretta@gmail.com>,
+%		   Matteo Nardelli <nardelli@ing.uniroma2.it>,
+%		   Valeria Cardellini <cardellini@ing.uniroma2.it>
+%
+% Institution: Department of Civil Engineering and Computer Science Engineering,
+% 			   University of Rome Tor Vergata, Italy
+%
+% Style: SIG Proceedings Alternate VERSION 2.8
+%********************************************************************************
+
+\documentclass{sig-alternate-05-2015}
+
+\usepackage{graphicx}
+\usepackage{epstopdf}
+\usepackage{subfig}
+\usepackage{bm}
+\usepackage{url}
+
+%% XXX: --- cancellare questa sezione ---
+\usepackage[usenames,dvipsnames]{color}
+\newcommand{\hlr}[1] {\emph{{\color{red}#1}}}
+\newcommand{\hlb}[1] {\emph{{\color{blue}#1}}}
+%% XXX: FINE --- cancellare questa sezione ---
+
+
+%********************************************************************************
+% Paper Size as US Letter
+%********************************************************************************
+\setlength{\paperheight}{11in}
+\setlength{\paperwidth}{8.5in}
+\usepackage[pass]{geometry}
+
+%********************************************************************************
+% Custom Rules
+%********************************************************************************
+
+\def\sharedaffiliation{%
+\end{tabular}
+\begin{tabular}{c}}
+
+\newfont{\eaddfntresz}{phvr8t at 11pt}
+
+\hyphenation{sched-uler par-a-digm adopt-ed evolv-ing th}
+
+%********************************************************************************
+% Avoid beaking after first/last line of a paragraph
+%********************************************************************************
+
+\clubpenalty=10000
+\widowpenalty=10000
+
+\begin{document}
+
+%********************************************************************************
+% Paper ACM Details
+%********************************************************************************
+
+\CopyrightYear{2016}
+\setcopyright{rightsretained}
+\conferenceinfo{DEBS '16}{June 20-24, 2016, Irvine, CA, USA}
+\isbn{978-1-4503-4021-2/16/06}
+\doi{http://dx.doi.org/10.1145/2933267.2933517}
+
+
+%********************************************************************************
+% Title and Authors
+%********************************************************************************
+
+\title{Grand Challenge: Real-time Analysis of Social Networks \\ Leveraging the Flink Framework}
+
+\numberofauthors{5}
+\author{
+\alignauthor
+	Giacomo Marciani\\
+	\email{{\eaddfntresz giacomo.marciani@gmail.com}}
+\alignauthor
+	Marco Piu\\
+	\email{pyumarco@gmail.com}
+\alignauthor
+	Michele Porretta\\
+	\email{micheleporretta@gmail.com}
+\and
+\alignauthor
+	Matteo Nardelli\\
+	\email{nardelli@ing.uniroma2.it}
+\alignauthor
+	Valeria Cardellini\\
+	\email{cardellini@ing.uniroma2.it}
+\sharedaffiliation
+	\affaddr{Department of Civil Engineering and Computer Science Engineering}  \\
+	\affaddr{University of Rome Tor Vergata, Italy}
+}
+
+\maketitle
+
+%********************************************************************************
+% Content
+%********************************************************************************
+
+\input{sec/abstract}
+\input{sec/ccs-keywords}
+\input{sec/introduction}
+\input{sec/solution}
+\input{sec/solution-query-1}
+\input{sec/solution-query-2}
+\input{sec/evaluation}
+\input{sec/conclusions}
+
+%********************************************************************************
+% Bibliography
+%********************************************************************************
+
+\bibliographystyle{abbrv}
+\bibliography{./ref/sostream}
+
+\end{document}

@@ -1,0 +1,37 @@
+\subsection{Query 2}
+\label{sec:solution-q2}
+
+The second query focuses on identifying the $ k $ recent comments that are supported by the larger communities.
+The value of \textit{k} is provided as parameter, whereas a community is defined as the set of users, friends each other, who have liked that comment. 
+% 
+The topology of our solution is represented in Figure~\ref{fig:q2-architecture}. 
+%
+The \textit{Event Dispatcher} is a centralized operator that reads in parallel comments, like events, and friendship events from several data sources and, preserving their timestamp order, sends them downstream.
+%
+The \textit{Friendships Operator} receives the friendship events and updates the social graph, connecting the users that establish a new friend relation. 
+The social graph is stored into Redis, where it is represented with adjacency lists indexed by the user identifier.
+%
+This representation allows us to efficiently retrieve all the user's friends, that are needed to compute the largest community supporting a comment. 
+%
+The \textit{Comment Score Updater} receives comments and like events, and computes the score associated to each comment as follows. 
+%
+From each comment that was created not more than \textit{d} seconds ago, where \textit{d} is an input parameter, the operator extracts the set of users $ U $ that have liked it. 
+%
+For each user $ u \in U $, the \textit{Comment Score Updater} creates a user-based social graph $ G_u $, containing the user $ u $, his/her friends, and the friends of his/her friends; in $ G_u $ the users are interconnected with respect to their friendships. 
+%
+Afterwards, for each user-based social graph $ G_u, \forall u \in U $, the operator runs a customized version of the well-known and widely used Bron-Kerbosch algorithm~\cite{BronKerbosch1973} to identify the largest clique $ C_u $ associated to each user.
+%
+Observe that, at this point, the computed cliques depend only on the user-based social graph (i.e., his/her friendships) and also include users who have not liked the comment. 
+Therefore, \textit{Comment Score Updater} removes from each clique $ C_u $ the users who have not liked the comment, thus identifying the largest one as the community that supports the comment.
+%
+Determining the cliques within a graph is an NP-hard problem, so we adopted a lazy approach that executes the Bron-Kerbosch algorithm 
+(1) on subgraphs of the social network that, relying on friendships and being independent from like events, should change slowly; and
+(2) just on comments that have received a new like event, i.e., avoiding to recompute the clique if not needed.
+%
+Nevertheless, when a new friendship relation is established, the \textit{Comment Score Updater} invalidates and recomputes all the cliques.
+%
+Since this operator performs critical operations, we deploy multiple instances of it; to preserve the application integrity while increasing the parallelism, the incoming streams are partitioned relying on the comment identifier.
+%
+Similarly to the first query, i.e., using a step-wise approach, the \textit{Comment Score Rank} and the \textit{Comment Rank Merger} rank the comments and identify the top-$ k $ ones that are supported by the larger communities.
+
+

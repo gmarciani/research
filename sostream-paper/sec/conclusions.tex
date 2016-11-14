@@ -1,0 +1,19 @@
+\section{Conclusions}
+\label{sec:conclusions}
+
+We have presented the design, implementation, and evaluation of our Flink-based solution to the DEBS 2016 Grand Challenge.
+%
+Despite its young age, Flink turned out to be a solid stream processing framework with some interesting features.   
+%
+An example is represented by the feedback stream, which has allowed us to minimize the wastage of memory, keeping its occupation low and steady, and 
+to avoid back-pressure and performance degradation.
+%
+The experimental results, conducted in the reference environment, show that our solution can process up to 400 tuples/s with an average latency of 2.5~ms for the first query, and up to 370 tuples/s with an average latency of 2.7~ms for the second query, considering 50\% of the original Grand Challenge larger dataset.  
+
+Leveraging the experience gathered to answer the Grand Challenge, we identify the following improvements as future work. 
+%
+We will exploit a finer-grained parallelism by enhancing the application components with more sophisticated data structures and operations, which enable concurrent and efficient updates.
+%
+To further reduce the average application latency, we will decouple the social events (e.g., post, comment, like) from their content (e.g., post message), so to reduce the streams transmission time.
+%
+Finally, we could make the feedback stream self-adaptive, so to properly handle the  back-pressure mechanism, even when posts expire with an unpredictable rate.
