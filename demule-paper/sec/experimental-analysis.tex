@@ -1,0 +1,11 @@
+\section{Experimental Environment}
+\label{sec:experimental-analysis}
+
+The experiments have been conducted on an Amazon EC2 c3.8xlarge instance, which is really indicated for high performance science and engineering applications\footnote{https://aws.amazon.com/ec2/instance-types/}. 
+The instance is equipped with 32 vCPU based on an Intel Xeon E5-2680 v2 (Ivy Bridge) processor, 30 GB of RAM and SSD with 900 IOPS. 
+It runs Debian 8.3 (Jessie), Python 3.5.2, and the Python-ported version of the official Leemis library for discrete-event simulation, indicated in \cite{leemis2006discrete}.
+
+Our solution has been developed in Python, following the de-facto standard best-practices, stated in \cite{reitz2016,GooglePythonStyleguide}. For the production of plots Matplotlib 1.5.3 has been used.
+
+The simulations are replicated several times to clear out the weight of unrepresentative subsequences.
+Statisticians discard outliers as being unrepresentative, but it is not appropriate to do it in simulation.
