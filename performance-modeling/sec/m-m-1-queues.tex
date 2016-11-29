@@ -1,0 +1,69 @@
+\section{M/M/1 Queues}
+\label{sec:M-M-1-queues}
+
+A $M/M/1$ is a queue where 
+(i) the arrival process is Poissonian with rate $\lambda$,
+(ii) the service process is Exponential with rate $\mu$,
+(iii) there is one servers,
+(iv) the buffer has infinite capacity,
+(v) the scheduling policy is FCFS.
+
+%\begin{figure}[tp]
+%\label{fig:M-M-1-queue}	
+%	\centering
+%	\includegraphics{fig/M-M-1-Queue}
+%	\caption{An M/M/1 queue and its corresponding CTMC.}
+%\end{figure}
+	
+\begin{theorem}[State Probability]
+\label{thm:M-M-1-probability-state}	
+	For any $M/M/1$, the state probability is
+	
+	\begin{equation}
+	\label{eqn:M-M-1-probability-state}
+	\pi_{i} = \varrho^{i}(1-\varrho)
+	\end{equation}
+	
+	\begin{proof}
+		For a formal demonstration, see \cite{harchol2013performance} on page 258-259.
+	\end{proof}
+\end{theorem}
+
+\begin{theorem}[Mean System Jobs]
+\label{thm:M-M-1-System-Jobs}	
+	For any $M/M/1$, the expected number of jobs is
+	
+	\begin{equation}
+	\label{eqn:M-M-1-System-Jobs}
+	\expected{N} = \frac{\varrho}{(1-\varrho)}
+	\end{equation}
+	
+	\begin{proof}
+		\begin{equation*}
+		\expected{N} = \sum_{i=0}^{\infty} i \pi_{i} = \frac{\varrho}{(1-\varrho)}
+		\end{equation*}
+	\end{proof}
+\end{theorem}
+
+The remaining metrics ($\expected{N_{Q}},\expected{T},\expected{T_{Q}}$) could be determined by applying the Little's Law, the basic definitions 
+$\expected{N}=\expected{N_{Q}}+\expected{N_{S}}$, 
+$\expected{N_{S}}=\varrho$, 
+$\expected{T}=\expected{T_{Q}}+\expected{T_{S}}$, and
+$\expected{T_{S}}=\frac{1}{\mu}$.
+
+In particular we obtain:
+
+\begin{equation}
+\label{eqn:M-M-1-Queue-Jobs}
+\expected{N_{Q}} = \frac{\varrho^{2}}{(1-\varrho)}
+\end{equation}
+
+\begin{equation}
+\label{eqn:M-M-1-Delay}
+\expected{T_{Q}} = \frac{1}{\mu} \cdot \frac{\varrho}{(1-\varrho)}
+\end{equation}
+
+\begin{equation}
+\label{eqn:M-M-1-Response-Time}
+\expected{T} = \frac{1}{\mu - \lambda}
+\end{equation}

@@ -1,0 +1,159 @@
+\section{M/M/m Queues}
+\label{sec:M-M-m-Queues}
+
+A $M/M/m$ is a queue where 
+(i) the arrival process is Poissonian with rate $\lambda$,
+(ii) the service process is Exponential with rate $\mu$,
+(iii) there are $m$ servers,
+(iv) the buffer has infinite capacity,
+(v) the scheduling policy is FCFS.
+
+%\begin{figure}[tp]
+%\label{fig:M-M-m-Queue}	
+%	\centering
+%	\includegraphics{fig/M-M-m-Queue}
+%	\caption{An M/M/m queue and its corresponding CTMC.}
+%\end{figure}
+
+The key question in these types of systems is determining the \textit{Queue Probability} $P_{Q}$, that is the probability that an arriving job is enqueued.
+
+\begin{definition}[Utilization]
+\label{def:M-M-m-Utilization}
+	For any $M/M/m$, the system utilization is
+	
+	\begin{equation}
+	\label{eqn:M-M-m-Utilization}
+	\varrho = \frac{\lambda}{m \mu}
+	\end{equation}
+\end{definition}
+
+\begin{definition}[Resource Requirement]
+\label{def:M-M-m-Resource-Requirement}
+	For any $M/M/m$, the resource requirement is
+	
+	\begin{equation}
+	\label{eqn:M-M-m-Resource-Requirement}	
+	R = \frac{\lambda}{\mu}
+	\end{equation}
+\end{definition}
+
+The resource requirement $R$ is 
+(i) the minimum number of servers needed to keep the system stable,
+(ii) the expected number of busy servers, and 
+(iii) the expected number of jobs in service.
+	
+\begin{theorem}[State Probability]
+\label{thm:M-M-m-Probability-State}	
+	For any $M/M/m$, the state probability is
+	
+	\begin{equation}
+	\label{eqn:M-M-m-Probability-State}
+	\pi_{i} = \frac{m^{q} \varrho^{i}}{q!} \cdot \pi_{0}
+	\end{equation}
+	
+	with
+	
+	\begin{equation}
+	\label{eqn:M-M-m-Probability-State-Zero}	
+	\pi_{0} = \Big[ \sum_{i=0}^{m-1} \frac{(m \varrho)^{i}}{i!} + \frac{(m \varrho)^{m}}{m! (1- \varrho)} \Big]^{-1}
+	\end{equation}
+	
+	where
+	
+	$q=\min\{i,m\}$ is the number of busy servers.
+	
+	\begin{proof}
+		For a formal demonstration, see \cite{harchol2013performance} on page 258-259.
+	\end{proof}
+\end{theorem}
+
+\begin{theorem}[Queue Probability]
+	\label{thm:M-M-m-Probability-Queue}	
+	For any $M/M/m$, the queue probability is
+	
+	\begin{equation}
+	\label{eqn:M-M-m-Probability-Queue}
+	P_{Q} = \frac{(m \varrho)^{m}}{m!(1-\varrho)} \cdot \pi_{0}
+	\end{equation}
+	
+	\begin{proof}
+		For a formal demonstration, see \cite{harchol2013performance} on page 260.
+	\end{proof}
+\end{theorem}
+
+\Cref{thm:M-M-m-Probability-Queue} is called \textit{Erlang-C Formula}.
+
+\begin{theorem}[Mean Queue Jobs]
+	\label{thm:M-M-m-Mean-Queue-Jobs}	
+	For any $M/M/m$, the expected number of jobs in queue is
+	
+	\begin{equation}
+	\label{eqn:M-M-m-Mean-Queue-Jobs}
+	\expected{N_{Q}} = \frac{\varrho}{(1-\varrho)} \cdot P_{Q}
+	\end{equation}
+	
+	\begin{proof}
+		For a formal demonstration, see \cite{harchol2013performance} on page 262.
+	\end{proof}
+\end{theorem}
+
+The remaining metrics ($\expected{N},\expected{T},\expected{T_{Q}}$) could be determined by applying the Little's Law, the basic definitions 
+$\expected{N}=\expected{N_{Q}}+\expected{N_{S}}$, 
+$\expected{N_{S}}=R$, 
+$\expected{T}=\expected{T_{Q}}+\expected{T_{S}}$, and
+$\expected{T_{S}}=\frac{1}{\mu}$.
+
+In particular we obtain:
+
+\begin{equation}
+\label{eqn:M-M-m-Delay}
+\expected{T_{Q}} = \frac{1}{\lambda} P_{Q} \frac{\varrho}{(1-\varrho)}
+\end{equation}
+
+\begin{equation}
+\label{eqn:M-M-m-Reponse-Time}
+\expected{T} = \frac{1}{\lambda} P_{Q} \frac{\varrho}{(1-\varrho)} + \frac{1}{\mu}
+\end{equation}
+
+\begin{equation}
+\label{eqn:M-M-m-System-Jobs}
+\expected{N} = P_{Q} \frac{\varrho}{(1-\varrho)} + m\varrho
+\end{equation}
+
+
+
+
+\subsection{Comparison between M/M/m and M/M/1}
+\label{sec:Comparison-M-M-m-And-M-M-1}
+
+Let us consider 
+(i) a $M/M/m$ with average arrival rate $\lambda$ and average service rate $\mu$, and
+(ii) a $M/M/1$ with average arrival rate $\lambda$ and average service rate $m \mu$.
+
+Under light load, in (i) jobs are served by few servers with rate $\mu$; whereas in (ii) jobs are served with rate $m \mu$.
+Under high load, in (i) the state is always greater than $m$ and it behaves just like (ii).
+
+Hence, if $\lambda^{M/M/1} = \lambda^{M/M/m}$ and $\mu^{M/M/1} = m \mu^{M/M/m}$, then $M/M/1$ is always at least $m$ time faster than $M/M/m$.
+
+
+
+
+\subsection{Comparison between M/M/m/m and M/M/m}
+\label{sec:Comparison-M-M-m-m-And-M-M-m}
+
+It is interesting to compare the block probability of a $M/M/m/m$ with the queue probability of an equivalent $M/M/m$.
+The following theorem compares $P_{block}^{M/M/m/m}$ with $P_{Q}^{M/M/m}$.
+
+\begin{theorem}[Relation $P_{block}^{M/M/m/m}$ with $P_{Q}^{M/M/m}$]
+\label{thm:Relation-Probability-Block-Probability-Queue}	
+	For any $M/M/m/m$ with block probability $P_{block}$ and any $M/M/m$ with queue probability $P_{Q}$, we have that
+	 
+	\begin{equation}
+	\label{eqn:Relation-Probability-Block-Probability-Queue}
+	P_{block} = \frac{(1-\varrho)P_{Q}}{1-\varrho P_{Q}}
+	\end{equation}
+	
+	\begin{proof}
+		For a formal demonstration, see \cite{harchol2013performance} on page 261.
+	\end{proof}
+\end{theorem}

@@ -1,0 +1,23 @@
+\section{Tips and Tricks}
+\label{sec:tips-and-tricks}
+
+Always take into account the following (often counterintuitive) know hows:
+\begin{itemize}
+	\item When job variability is high, we prefer many slow server instead of one fast server because we do not want short jobs getting stuck behind long ones.
+	
+	\item When load is low, we prefer one fast server because we do not want unutilized servers.
+	
+	\item If jobs are preemptible, we could always use one fast server to simulate many slow servers.
+	
+	\item In a closed system, the service rate does not influence neither mean time nor throughput, because arrival times depend on completion times.
+	
+	\item In an open system, the service rate does influence both the mean time and throughput, because arrival times are independent of service completions.
+	
+	\item Non-preemptive scheduling policies have all the same mean response time as FCFS.
+	
+	\item In case of finite buffer, $X=\varrho \cdot \mu$ but we need stochastic analysis to determine $\varrho$ because some arrivals can be dropped.
+	
+	\item For large loads, improvements can be achieved decreasing the demand to bottleneck server.
+	
+	\item high value of utilization does not imply hard delays, provided that there are sufficient servers.
+\end{itemize}

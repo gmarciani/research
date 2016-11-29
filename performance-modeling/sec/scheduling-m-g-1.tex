@@ -1,0 +1,75 @@
+\section{Scheduling for M/G/1}
+\label{sec:Scheduling-M-G-1}
+
+The scheduling policy can hugely influence the mean response time and other metrics.
+Scheduling policies can be categorized based on whether the policy is preemptive or not, and whether it assumes knowledge of job size or not.
+
+A \textit{work-conserving} scheduling policy is one that always performs work on some job when there is a job in the system, and does not create new work.
+Given an arrival sequence and a time, all work-conserving policies have the same work left in system and server utilization.This does not imply that all work-conserving policies have the same mean response time.
+
+When evaluating a scheduling policy, we take into account the following metrics:
+
+\begin{description}
+	
+	\item [Response Time ($T$)]
+	We denote with $T(x)$ the response time for job size $x$.
+	
+	\item [Queueing Time ($T_{Q}$)]
+	
+	\item [System Jobs ($N$)]
+	
+	\item [Queueing Jobs ($N_{Q}$)]
+	
+	\item [Slowdown ($Slowdown$)]
+	\begin{equation}
+	\label{eqn:Slowdown}
+	Slowdown=\frac{T}{S}
+	\end{equation}
+	We denote with $Slowdown(x)$ the slowdown for job size $x$.
+	
+	\item [Tail Behavior ($Tail-Behavior$)]
+	\begin{equation}
+	\label{eqn:Tail-Behavior}
+	Tail-Behavior=\probability{T>x}
+	\end{equation}
+	
+	\item [Starvation]
+	We say that policy $\mathit{P}$ produces \textit{starvation} if for some $x$
+	\begin{equation}
+	\label{eqn:Starvation}
+	\expected{Slowdown^{\mathit{P}}(x)}>\expected{Slowdown^{\mathit{PS}}(x)}
+	\end{equation}
+	where $\mathit{PS}$ is the Processor-Sharing scheduling policy.
+	
+	\item [Fairness]
+	We say that policy $\mathit{P}$ is fair if for all $x$
+	\begin{equation}
+	\label{eqn:Fairness}
+	\expected{Slowdown^{\mathit{P}}(x)}<\expected{Slowdown^{\mathit{PS}}(x)}
+	\end{equation}
+	where $\mathit{PS}$ is the Processor-Sharing scheduling policy.
+	Alternatively, we say that policy $\mathit{P}$ is fair if $Slowdown^{\mathit{P}}(x)$ is equal for all $x$.
+	
+\end{description}
+
+More often we consider absolute mean metrics and mean metrics with respect to job sizes.
+Sometimes however, variance in response time and variance in slowdown are more important than the respective means.
+
+Few books analyze scheduling policies in stochastic environment: the best are \cite{conway2012theory,kleinrock1976queueing}.
+The fairness metric we used is defined in \cite{bansal2001analysis}. The slowdown metric has received attention only recently in \cite{hyytia2012minimizing}.
+
+In the following sections, we evaluate various scheduling policies for $M/G/1$. We base our evaluation on $\expected{T},\expected{T(x)},\expected{Slowdown(x)}$.
+
+Notice that $\expected{Slowdown}\neq\frac{\expected{T}}{\expected{S}}$. We derive the Slowdown as follows:
+
+\begin{equation*}
+\expected{Slowdown(x)}=\expected{\frac{T}{S}|S=x}=\expected{\frac{T(x)}{x}}=\frac{\expected{T(x)}}{x}
+\end{equation*}
+
+and
+
+\begin{equation*}
+\expected{Slowdown}=\int_{x}\expected{Slowdown(x)}f_{S}(x)\partial x=\int_{x}\frac{\expected{T(x)}}{x}f_{S}(x)\partial x
+\end{equation*}
+
+The \textit{job age} is the total service it has received so far. If job size distribution has decreasing failure rate, then the greater the job age, the greater its expected remaining service time.

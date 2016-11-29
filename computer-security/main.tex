@@ -1,0 +1,95 @@
+%*******************************************************************************
+% Title: Computer Security
+%
+% Conference: Computer Science Lectures 2017
+%
+% Authors: Giacomo Marciani <gmarciani@acm.org>
+%
+% Institution: Department of Civil Engineering and Computer Science Engineering,
+% 			   University of Rome Tor Vergata, Italy
+%
+%*******************************************************************************
+
+\documentclass[12pt,a4paper,oneside,final]{amsbook}
+
+%*******************************************************************************
+% Packages
+%*******************************************************************************
+\usepackage[utf8]{inputenc}
+\usepackage{amsfonts,amstext,amsmath,amsthm,amssymb,mathrsfs}
+\usepackage{algorithm, program}
+\usepackage{lipsum}
+\usepackage{xr}
+\usepackage[hidelinks=true]{hyperref}
+\usepackage{cleveref}
+
+
+%*******************************************************************************
+% Details
+%*******************************************************************************
+
+%*******************************************************************************
+% Copyright
+%*******************************************************************************
+
+%*******************************************************************************
+% Notations
+%*******************************************************************************
+\newcommand{\probability}[1]{
+	\mathbf{P}[#1]
+}
+
+%*******************************************************************************
+% Numbering
+%*******************************************************************************
+\numberwithin{equation}{section}
+
+%*******************************************************************************
+% References
+%*******************************************************************************
+\crefname{lem}{lemma}{lemmata}
+\Crefname{lem}{Lemma}{Lemmata}
+\crefname{cor}{corollary}{corollaries}
+\Crefname{cor}{Corollary}{Corollaries}
+\crefname{alg}{algorithm}{algorithms}
+\Crefname{alg}{Algorithm}{Algorithms}
+\externaldocument{sec/introduction}
+\externaldocument{sec/main-section}
+\externaldocument{sec/conclusions}
+\externaldocument{sec/app/latex-formats}
+
+\begin{document}
+	.
+\newtheorem{definition}{Definition}
+\newtheorem{theorem}{Theorem}
+
+\title{Sicurezza Informatica}
+
+\author{Giacomo Marciani}
+
+\address{University of Rome Tor Vergata}
+
+\tableofcontents
+
+%*******************************************************************************
+% Core Content
+%*******************************************************************************
+\chapter{First part}
+\input{sec/introduction}
+\input{sec/main-section}
+\chapter{Second part}
+\input{sec/conclusions}
+
+%*******************************************************************************
+% Bibliography
+%*******************************************************************************
+%\bibliographystyle{acmreferences}
+\bibliography{./ref/biblio}
+
+%*******************************************************************************
+% Online Appendix
+%*******************************************************************************
+%\elecappendix
+%\input{sec/app/latex-formats}
+
+\end{document}

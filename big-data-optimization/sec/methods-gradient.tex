@@ -1,0 +1,144 @@
+\chapter{Metodo del gradiente}
+\label{chp:methods.gradient}
+Il metodo del gradiente \footnote{anche detto \textit{metodo della discesa più ripida} o \textit{steepest descent method}.} si basa sull'uso dell'antigradiente
+come direzione di ricerca, ovvero
+
+\begin{equation*}
+\label{eqn.methods.gradient.direction}
+  d_{k}=-\nabla f(x_{k})
+\end{equation*}
+
+Tale scelta definisce una direzione di discesa continua rispetto ad $x$ che si
+annulla se e solo se $x$ è un punto stazionario. Data un'opportuna scelta del
+passo mediante un algoritmo di line search, tale direzione assicura la
+convergenza globale dell'algoritmo.
+
+L'algoritmo generale del metodo del gradiente è mostrato in
+\Cref{alg:methods.gradient}.
+
+\begin{algorithm}
+\label{alg:methods.gradient}
+\caption{Gradient}
+  $x_{0}\in\Re^{n}$ \\
+  \textbf{while true} \\
+  Calcola $\nabla f(x_{k})$ \\
+  \textbf{if} $\nabla f(x_{k}) == 0$ \textbf{break} \\
+  $d_{k}=-\nabla f(x_{k})$ \\
+  Calcola $\alpha_{k}$ con un \textit{algoritmo di line search} \\
+  $x_{k+1}=x_{k}+\alpha_{k}d_{k}$ \\
+  \textbf{end while} \\
+\end{algorithm}
+
+Il metodo del gradiente è il più noto in letteratura- Aspetti riguardanti la rapidità di convergenza sono approfonditi in \cite{bertsekas1999nonlinear}.
+
+
+\subsection{Terminazione e convergenza}
+\label{sec:methods.gradient.termination.convergence}
+Dimostriamo ora la terminazione e la convergenza dell'algoritmo di del gradiente.
+
+\begin{theorem}[Convergenza del Metodo del Gradiente]
+	\label{thm:methods.gradient.convergence}
+	Sia $f:\Re^{n}\rightarrow\Re$ una funzione continuamente differenziabile su	$\Re^{n}$. Sia l'insieme di livello $\mathcal{L}_{0}$ compatto.	Sia $\{x_{k}\}$ la successione di punti prodotta dal metodo del gradiente.
+  Se la line search soddisfa le seguenti:
+
+  \begin{enumerate}
+    \item $f(x_{k+1})<f(x_{k})\quad\forall x_{k}.\nabla f(x_{k})\neq 0$;
+    \item $\nabla f(x_{k})\neq 0\quad\forall x_{k}\Rightarrow\lim_{k\rightarrow\infty}\frac{\nabla f(x_{k})^{T}d_{k}}{\norm{d_{k}}}=0$
+  \end{enumerate}
+
+  allora, o l'algoritmo converge finitamente, oppure viene prodotto una successione infinita tale che ogni punto di accumulazione $\overline{x}_{k}\in\{x_{k}\}$ appartiene a $\mathcal{L}_{0}$ e $\nabla f(\overline{x}_{k})=0$
+
+  \begin{proof}
+  	INSERT HERE THE THEOREM PROOF.
+  \end{proof}
+\end{theorem}
+
+Da \Cref{thm:methods.gradient.convergence} segue che una qualunque tecnica di line search assicura la convergenza dell'algoritmo del gradiente.
+Il metodo del gradiente è un prototipo di algoritmo globalmente convergente e può essere usato, in associazione a metodi dotati di migliori caratteristiche di convergenza locale, per assicurare la convergenza globale.
+
+In particolare, se il metodo del gradiente viene utilizzato sulla successione infinita di punti prodotti da un qualunque algoritmo di discesa, esso può garantire l'esistenza di un punto di accumulazione che sia stazionario.
+
+\begin{theorem}[Metodo del gradiente, stazionarietà]
+  \label{thm:methods.gradient.stationariety}
+  	Sia $f:\Re^{n}\rightarrow\Re$ una funzione continuamente differenziabile su	$\Re^{n}$. Sia l'insieme di livello $\mathcal{L}_{0}$ compatto.	Sia $\{x_{k}\}$ la successione di punti prodotta dalla line search.
+    Se valgono le seguenti:
+    \begin{enumerate}
+      \item $f(x_{k+1})\leq f(x_{k})\quad\forall k$;
+      \item esiste una sottosuccessione $\{x_{k}\}_{K}$ per la quale $d_{k}=-\nabla f(x_{k})$ ed il passo $\alpha_{k}$ è calcolato con line search Armijo-like;
+    \end{enumerate}
+    Allora, o l'algoritmo converge finitamente, oppure l'algoritmo non termina e ogni punto di accumulazione in $\{x_{k}\}_{K}$ è un punto stazionario.
+
+    \begin{proof}
+      INSERT HERE THE THEOREM PROOF.
+    \end{proof}
+\end{theorem}
+
+
+\subsection{Metodo del gradiente a passo costante}
+\label{sec:methods.gradient.constant.pace}
+Sotto opportune ipotesi di regolarità (Lipschitz continuità), il metodo del gradiente converge globalmente anche se si considera un passo costante $\alpha_{k}=\eta>0$ per tutte le iterazioni.
+In generale è preferibile un passo adattativo, piuttosto che uno costante. Questo è intuibile perchè il passo costante deve necessariamente essere piccolo, comportando così numerose iterazioni dell'algoritmo. Questo metodo risulta efficiente solo quando è possibile garantire la Lipschitz continuità. È stato spesso utilizzato come metodo euristico negli algoritmi di addestramento delle reti neurali. In tale contesto il metodo è chiamato \textit{metodo di backpropagation} ed il passo costante è chiamato \textit{learning rate}.
+
+\begin{theorem}[Convergenza del Metodo del Gradiente a passo costante]
+	\label{thm:methods.gradient.convergence.constant.pace}
+	Sia $f:\Re^{n}\rightarrow\Re$ una funzione continuamente differenziabile su	un insieme convesso $C$ contenente l'insieme di livello $\mathcal{L}_{0}$ compatto.	Sia il gradiente $\nabla f(x)$ Lipshitz continuo con \textit{costante di Lipschitz} $L$.
+  Se il passo è costante $\alpha_{k}=\eta$ tale che:
+  \begin{equation}
+    \label{eqn:methods.gradient.constant.pace}
+    \eta\in\Big[\epsilon,\frac{2-\epsilon}{L}\Big]
+  \end{equation}
+  allora, o l'algoritmo converge finitamente, oppure viene prodotta una successione infinita di punti tale che ogni punto di accumulazione della successione appartiene a $\mathcal{L}_{0}$ e $\nabla f(\overline{x})=0$.
+
+  \begin{proof}
+  	INSERT HERE THE THEOREM PROOF.
+  \end{proof}
+\end{theorem}
+
+
+\subsection{Metodo del gradiente nel caso quadratico}
+\label{sec:methods.gradient.quadratic}
+La rapidità di convergenza nel caso quadratico dipende dal condizionamento della matrice hessiana della funzione obiettivo.
+Se la matrice hessiana è perfettamente condizionata, le curve di livello di $f$ sono circolari, e l'algoritmo converge in una sola iterazione.
+Se la matrice hessina è malcondizionata, le curve di livello sono schiacciate, e l'algoritmo converge in molte più iterazioni.
+
+Un rimedio al malcondizionamento della matrice hessiana è l'applicazione del \textit{precondizionamento}, ovvero considerare come direzione la seguente:
+
+\begin{equation}
+  \label{eqn:methods.gradient.preconditioning}
+  d_{k}=-H_{k}\nabla f(x_{k})
+\end{equation}
+
+dove $H_{k}$ è una matrice diagonale che approssima la matrice hessiana.
+
+Consideriamo ora il caso di funzione quadratica strettamente convessa di ordine $n$. Il metodo del gradiente converge finitamente al punto di minimo globale se si utilizzano come passi lungo l'antigradiente la successione degli autovalori esatti del hessiano.
+
+\begin{theorem}[Metodo del Gradiente, caso quadratico]
+  \label{methods.gradient.quadratic}
+  Sia $f:\Re^{n}\rightarrow\Re$ una funzione quadratica strettamente convessa con matrice hessiana $Q$. Siano $\lambda_{1},\lambda_{2},...,\lambda_{n}$ gli autovalori di $Q$. Il metodo del gradiente definito dall'iterazione
+  \begin{equation}
+    \label{eqn:methods.gradient.quadratic}
+    x_{k+1}=x_{k}-\frac{1}{\lambda_{k}}\nabla f(x_{k})
+  \end{equation}
+  converge finitamente al minimo globale in al più $n$ iterazioni.
+\end{theorem}
+
+Tale versione del metodo del gradiente è chiamata \textit{metodo spettrale del gradiente}. Nel caso di matrici grandi, tale metodo non è efficiente in quanto il calcolo degli autovalori di una matrice ha un costo computazionale elevato.
+Sono stati sviluppati metodi alternativi che facciano uso di una approssimazione degli autovalori tale da ridurre la complessità computazionale e rendere questo metodo più applicabile.
+
+
+
+\subsection{Metodo Heavy Ball}
+\label{sec:method.heavyball}
+Gli algoritmi visti finora sono algoritmi senza memoria, ovvero determinano direzione e passo sfruttando le sole informazioni dell'iterazione corrente. Gli algoritmi con memoria (a $n$ passi) sfruttano le informazioni delle ($n$) iterazioni precedenti.
+
+Il metodo Heavy Ball è un algoritmo di line search con memoria a 2 passi.
+
+L'iterazione generica del metodo è la seguente:
+\begin{equation}
+  \label{eqn:method.heavyball}
+  x_{k+1}=x_{k}-\alpha\nabla f(x_{k})+\beta(x_{k}-x_{k-1})
+\end{equation}
+con $\alpha>0,\beta\geq0$.
+
+Tale metodo è descritto e approfondito in \cite{poljak1987introduction}.
+Si utilizzano tecniche euristiche per calcolare $\alpha$ e $\beta$ allo scopo di velocizzare la convergenza dell'algoritmo.

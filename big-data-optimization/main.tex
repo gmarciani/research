@@ -1,0 +1,129 @@
+%*******************************************************************************
+% Title: Big Data Optimization Methods
+%
+% Conference: Computer Science Lectures 2017
+%
+% Authors: Giacomo Marciani <gmarciani@acm.org>
+%
+% Institution: Department of Civil Engineering and Computer Science Engineering,
+% 			   University of Rome Tor Vergata, Italy
+%
+%*******************************************************************************
+
+\documentclass[11pt,a4paper,oneside,final,reqno]{amsbook}
+
+%*******************************************************************************
+% Packages
+%*******************************************************************************
+\usepackage[utf8]{inputenc}
+\usepackage{amsfonts,amstext,amsmath,amsthm,amssymb,mathrsfs,amsrefs}
+\usepackage{algorithm2e}
+\usepackage{lipsum}
+\usepackage{xr}
+\usepackage[hidelinks=true]{hyperref}
+\usepackage{cleveref}
+
+%*******************************************************************************
+% Details
+%*******************************************************************************
+
+
+%*******************************************************************************
+% Copyright
+%*******************************************************************************
+
+%*******************************************************************************
+% Notations
+%*******************************************************************************
+\newcommand{\probability}[1]{
+	\mathbf{P}[#1]
+}
+\newcommand{\norm}[1]{
+	\parallel #1 \parallel
+}
+\newcommand{\abs}[1]{
+	\mid #1 \mid
+}
+
+%*******************************************************************************
+% Environments
+%*******************************************************************************
+\newtheorem{definition}{Definition}
+\newtheorem{theorem}{Theorem}
+
+%*******************************************************************************
+% Numbering
+%*******************************************************************************
+\numberwithin{equation}{section}
+
+%*******************************************************************************
+% References
+%*******************************************************************************
+\crefname{lem}{lemma}{lemmata}
+\Crefname{lem}{Lemma}{Lemmata}
+\crefname{cor}{corollary}{corollaries}
+\Crefname{cor}{Corollary}{Corollaries}
+\crefname{alg}{algorithm}{algorithms}
+\Crefname{alg}{Algorithm}{Algorithms}
+\externaldocument{sec/optimization-problems}
+\externaldocument{sec/optimality}
+\externaldocument{sec/convergence}
+\externaldocument{sec/methods-line-search}
+\externaldocument{sec/methods-armijo}
+\externaldocument{sec/methods-gradient}
+\externaldocument{sec/methods-newton}
+\externaldocument{sec/methods-decomposition}
+\externaldocument{sec/big-data}
+\externaldocument{sec/machine-learning}
+\externaldocument{sec/neural-networks-introduction}
+\externaldocument{sec/neural-networks-perceptron}
+\externaldocument{sec/neural-networks-multilayered}
+\externaldocument{sec/neural-networks-learning-algorithms}
+\externaldocument{sec/app/questions}
+\externaldocument{sec/app/ampl}
+\externaldocument{sec/app/linear-algebra}
+\externaldocument{sec/app/mathematical-analysis}
+\externaldocument{sec/app/derivation}
+\externaldocument{sec/app/convexity}
+
+\begin{document}
+
+%*******************************************************************************
+% Core Content
+%*******************************************************************************
+\part{Problemi di Ottimizzazione}
+\input{sec/optimization-problems}
+\input{sec/optimality}
+\part{Algoritmi di Ottimizzazione}
+\input{sec/convergence}
+\input{sec/methods-line-search}
+\input{sec/methods-armijo}
+\input{sec/methods-gradient}
+\input{sec/methods-newton}
+\input{sec/methods-decomposition}
+\part{Reti Neurali}
+\input{sec/big-data}
+\input{sec/machine-learning}
+\input{sec/neural-networks-introduction}
+\input{sec/neural-networks-perceptron}
+\input{sec/neural-networks-multilayered}
+\input{sec/neural-networks-learning-algorithms}
+
+%*******************************************************************************
+% Bibliography
+%*******************************************************************************
+%\bibliographystyle{acmreferences}
+\bibliography{./ref/biblio}
+
+%*******************************************************************************
+% Appendix
+%*******************************************************************************
+\part{Appendice}
+\appendix
+\input{sec/app/questions}
+\input{sec/app/linear-algebra}
+\input{sec/app/mathematical-analysis}
+\input{sec/app/derivation}
+\input{sec/app/convexity}
+
+\end{document}

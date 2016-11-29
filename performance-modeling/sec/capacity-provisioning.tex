@@ -1,0 +1,27 @@
+\section{Capacity Provisioning}
+\label{sec:Capacity-Provisioning}
+
+\begin{theorem}[Square-Root Staffing Rule]
+\label{thm:Square-Root-Staffing-Rule}	
+	For any $M/M/m$ with high resource requirement $R$, the minimum number of servers $m_{\alpha}^{*}$ to ensure $P_{Q} < \alpha$ is
+	
+	\begin{equation}
+	\label{eqn:Square-Root-Staffing-Rule}
+	m_{\alpha}^{*} \approx R + c \sqrt{R}
+	\end{equation}
+	
+	with $c$ solution of the equation
+	
+	\begin{equation}
+	\label{eqn:Square-Root-Staffing-Rule-c}
+		\frac{c \Phi(c)}{\phi(c)} = \frac{1 - \alpha}{\alpha}
+	\end{equation}	
+	
+	where
+	$\Phi(\cdot)$ is the c.d.f. of the Standard Normal, and
+	$\phi(\cdot)$ is its p.d.f.
+	
+	\begin{proof}
+		For a formal demonstration, see \cite{harchol2013performance}.
+	\end{proof}
+\end{theorem}

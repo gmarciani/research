@@ -1,0 +1,67 @@
+\chapter{Richiami sulla differenziazione}
+\label{chp:foundations-derivation}
+In questa sezione richiamiamo i concetti fondamentali della derivazione in $\Re^{n}$.
+
+Un qualunque vettore $d\in\Re^{n}$ individua una direzione in $\Re^{n}$.
+
+\begin{definition}[Derivata direzionale]
+	\label{dfn:directional-derivation}
+	Una funzione $f:\Re^{n}\rightarrow\Re$ ammette derivata direzionale $Df(x,d)$ nel punto $x\in\Re^{n}$ lungo la direzione $d \in\Re^{n}$ se esiste finito il limite
+	\begin{equation}
+	\label{eqn:directional-derivation}
+		D(f,d):=\lim_{t\rightarrow0^{+}}\frac{f(x+td)-f(x)}{t}
+	\end{equation}
+\end{definition}
+
+\begin{definition}[Derivata parziale]
+	\label{dfn:partial-derivation}
+	Una funzione $f:\Re^{n}\rightarrow\Re$ ammette derivata parziale $\frac{\partial f(x,d)}{\partial x_{j}}$ nel punto $x\in\Re^{n}$ rispetto alla variabile $x_{j}$ se esiste finito il limite
+	\begin{equation}
+	\label{eqn:partial-derivation}
+	\frac{\partial f(x,d)}{\partial x_{j}}:=\lim_{t\rightarrow0^{+}}\frac{f(x_{1},\ldots,x_{j}+t,\ldots,x_{n})-f(x_{1},\ldots,x_{j},\ldots,x_{n})}{t}
+	\end{equation}
+\end{definition}
+
+\begin{definition}[Gradiente]
+	\label{dfn:gradient}
+	Una funzione $f:\Re^{n}\rightarrow\Re$ che ammette derivate parziali rispetto a tutte le componenti, è caratterizzata da un gradiente $\nabla f(x)$ definito come
+	\begin{equation}
+	\label{eqn:gradient}
+	\nabla f(x):=
+	\begin{pmatrix}
+	\frac{\partial f(x,d)}{\partial x_{1}} \\
+	\vdots \\
+	\frac{\partial f(x,d)}{\partial x_{n}} \\
+	\end{pmatrix}
+	\end{equation}
+\end{definition}
+
+\begin{definition}[Matrice Jacobiana]
+	\label{dfn:jacobian-matrix}
+	Sia dato un vettore di $m$ funzioni in $n$ incognite $f:\Re^{n}\rightarrow\Re^{m}$ con $x\in\Re^{n}$, parzialmente differenziabili in ogni incognita. La matrice Jacobiana $J(x)$ è una matrice $m\times n$ definita come
+	\begin{equation}
+	\label{eqn:jacobian-matrix}
+	J(x):=
+	\begin{pmatrix}
+	\frac{\partial f_{1}(x,d)}{\partial x_{1}} && \ldots && \frac{\partial f_{1}(x,d)}{\partial x_{n}} \\
+	\ldots && \ldots && \ldots \\
+	\frac{\partial f_{m}(x,d)}{\partial x_{1}} && \ldots && \frac{\partial f_{m}(x,d)}{\partial x_{n}} \\
+	\end{pmatrix}
+	\end{equation}
+\end{definition}
+
+\begin{definition}[Matrice Hessiana]
+	\label{dfn:hexian-matrix}
+	Sia data una funzione $f:\Re^{n}\rightarrow\Re$ con $x\in\Re^{n}$, parzialmente differenziabile due volte in ogni incognita. La matrice Hessiana $\nabla^{2}f(x)$ è una matrice $n\times n$ definita come
+	\begin{equation}
+	\label{eqn:hexian-matrix}
+	\nabla^{2}f(x):=
+	\begin{pmatrix}
+	\frac{\partial^{2}f(x,d)}{\partial x_{1}^{2}} && \ldots && \frac{\partial^{2}f(x,d)}{\partial x_{1}\partial x_{n}} \\
+	\ldots && \ldots && \ldots \\
+	\frac{\partial^{2}f(x,d)}{\partial x_{n}\partial x_{1}} && \ldots && \frac{\partial^{2}f(x,d)}{\partial x_{n}^{2}} \\
+	\end{pmatrix}
+	\end{equation}
+\end{definition}
+
+La matrice Hessiana $\nabla^{2}f(x)$ può dunque essere interpretata come matrice Jacobiana del gradiente $\nabla f(x)$.

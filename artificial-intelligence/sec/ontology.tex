@@ -1,0 +1,224 @@
+\chapter{Ontologie}
+\label{chp:ontologies}
+
+Una ontologia è una rappresentazione formale, condivisa ed esplicita di una concettualizzazione di un dominio di interesse.
+Essa è una teoria assiomatica del primo ordine esprimibile in una logica descrittiva.
+I sistemi informatici possono usare l'ontologia per eseguire ragionamento induttivo, classificazione e problem solving.
+
+La definizione di ontologia più conosciuta in AI è quella fornita da Tom Gruber: "Una ontologia è una specificazione esplicita di una concettualizzazione".
+La definizione di ontologia più legata al mondo NLP è quella fornita da J.Sowa: "Una ontologia è un catalogo di tipi di cose che sono assunte esistere in un dominio di interesse da punto di vista di una persona che utilizza un linguaggio per parlarne".
+
+Per un sistema intelligente ciò che esiste è l'universo del discorso, ovvero tutto ciò che può essere rappresentato in un foralismo dichiarativo.
+
+Una ontologia non può rappresentare la stessa conoscenza dell'essere umano, in quanto la sua dimensione provocherebbe un eccessiva complessità computazionale. Per questo viene ridotta ad uno specifico dominio. La granularità della rappresentazione è valutata nel contesto di uno specifico dominio applicativo. È necessario un livello di granularità tale da permetter ela distinzione semantica all'interno del dominio
+
+Conoscenza e reasoning devono essere implementati per essere nativamente condivisi. Una ontologia realizza lo sharing of meaning, ovvero rappresenta la cnoscenza di riferimento in un processo di comunicazione. Una ontologia definisce un vocabolario condiviso.
+
+L'ontologia è un grafo. I concetti (nodi) sono definiti e posti in relazione tra loro (archi). I concetti da soli non bastano a definire una ontologia, servono le relazioni. Le relazioni ontologiche sono relazioni gerarchiche.
+
+Un sistema non può capire tutto perchè vi è un limite computazionale nella rappresentazione della cnoscenza per infiniti ragionamenti.
+
+L'ontologia specifica esplicitamente la conoscenza di un dominio a supporto del ragionamento.
+L'ontologia serve a ragionare a livello più generale possibile per ciò che serve nel dominio applicativo.
+L'ontologia supporta il ragionamento mediante specificazione esplicita della conoscenza.
+
+Una ontologia illustra e guida il processo di interpretazione di una frase, definendo tipo struttura e granularità della rappresentazione semantica.
+
+Una ontologia dichiara: concetti, proprietà dei concetti, vincoli sulle proprietà ed (eventualmente) istanze. Una ontologia definisce dunque un vocabolario ed un modo di ragionare.
+
+Una ontologia permette di risolvere ambiguità terminologiche, semantiche e di interpretazione.
+
+Sviluppare ontologie è utile per condividere conoscenza modulare e riusabile, separare la conoscenza di dominio dalla conoscenza operazionale.
+
+Quindi le ontologie rappresentano la conoscenza condvisa e sono essenziali per la ricerca, la scoperta e lo scambio di conoscenza.
+
+
+\subsection{Lessicalizzazione}
+L'ontologia deve essere indipendente dal linguaggio naturale. Per ogni ontologia esistono più ontology lexicon, ognuno dei quali permette di referenziare i concetti secondo una specifica lingua. I concetti e le relazioni ontologiche hanno identificatori. Questo permette la lessicalizzazione della ontologia.
+Lessicalizzare una ontologia vuol dire fornire un mmaping tra uno specifico vocabolario ed i suoi concetti.
+
+
+\subsection{Teoria ontologica}
+I fatti devono rappresentare situazioni stabili. I predicati devono esprimere relazioni tra oggetti della base di conoscenza. In una teroai ontologica ci sono formule che sono sempre vere.
+
+
+\subsection{Ontologie in filosofia e in AI}
+Il filosofo si occupa dell'essenza della realtà nel più alto livello di astrazione. Ricerca la migliore ed unica ontologia in senso assoluto. 
+
+Il ricercatore di AI si occupa della rappresentazione della realtà in uno specifico dominio applicativo. Ricerca la migliore ontologia per uno specifico dominio applicativo.
+
+
+\subsection{Valutazione di una ontologia}
+Per valutare la qualità di una ontologia devo considerare le interrogazioni supportate, le performance, la adattabilità a domini differenti.
+
+
+\subsection{Relazioni ontologiche}
+Le relazioni ontologiche definiscono una struttura gerarchica. 
+
+\begin{enumerate}
+	
+	\item Iponimia: is-A tra due entità
+	
+	\item Tassonomia: is-kind-of 
+	
+	\item Meronimia: is-part-of (e.g. la "mano" è una parte del "corpo").
+	
+	\item Troponimia: relazione tra verbi (e.g. "camminare" e "correre" sono verbi di movimento).
+	
+\end{enumerate}
+
+\subsection{Ragionamento}
+L'uso della conoscenza da parte di un sistema intelligente si articola nelle seguenti fasi
+
+\begin{enumerate}
+	
+	\item acquisizione della conoscenza: aggiungere nuovi fatti alla base di conoscenza e stabilire relazioni esplicite tra i nuovi fatti e la conoscenza pregressa.
+	
+	\item ricerca: determinare la conoscenza rilevante per uno specifico problema mediante inferenza di collegamenti (eventualmente nuovi) e classificazioni.
+	
+	\item ragionamento: il ragionamento consiste nel determinare cosa è necessario sapere da ciò che già si conosce.
+	
+\end{enumerate}
+
+Il ragionamento può essere:
+
+\begin{enumerate}
+	
+	\item ragionamento formale: manipolare strutture dati per dedurne di nuove secondo specifiche regole di inferenza.
+	
+	\item ragionamento procedurale: usare la simulazione per rispondere a domande o risolvere problemi.
+	
+	\item ragionamento per analogia: applicazione di casi simili di cui si è a conoscenza per analizzare il caso in esame.
+	
+	\item ragionamento per astrazione: generalizzare una regola dall'osservazioni in diverse contestualizzazioni.
+	
+	\item ragionamento di meta-livello: utilizzare sia la conoscenza di fatti, che la loro priorità.
+\end{enumerate}
+
+Il ragionamento su una conoscenza codificata è guidato dalle procedure di inferenza. Tali procedure devono essere efficienti ed efficaci indipendentemente dalla rappresentazione della conoscenza.
+
+\subsection{Concettualizzazione}
+Una concettualizzazione è una struttura formale che definisce l'insieme di regole che rappresentano uno specifico aspetto della realtà. La concettualizzazione deve essere indipendente dal vocabolario e dall'occorrenza di una situazione specifica (e.g.: "apple" e "mela" hanno la stessa concettualizzazione; la "mela sul tavolo" e la "mela in mano" sono sempre una "mela").
+
+Una concettualizzazione è una tripla $C=(D,WR)$, dove $D$ è l'universo del discorso, $W$ è un insieme di mondi possibili, $R$ è un insieme di relazioni $(D,W)$.
+
+\subsection{Regole su una base di conoscenza}
+Su una base di conoscenza possono essere definite:
+
+\begin{enumerate}
+	
+	\item regole generali: esprimono l'ontologia del dominio. \\
+	$Orso(a)\\
+	\forall b.Orso(b)\Rightarrow Animale(b)\\
+	\forall b.Animale(b)\Rightarrow CosaFisica(b)$
+	
+	\item regole di grandezza: esprimono dimensioni assolute e relative. \\
+	$
+	DimRel(Cervello(a),Cervello(b)=Molto(Piccolo)
+	$
+	
+	\item regole di relazione: esprimono la composizione di una entità. \\
+	$
+	\forall a.Animale(a)\Leftrightarrow Cervello(CervelloDi(a))\\
+	\forall a.ParteDi(CervelloDi(a),a)
+	$
+	
+	\item regole di meta-ragionamento: esprimono regole valide in più contesti. \\
+	$
+	\forall x,y.ParteDi(x,y)\wedge CosaFisica(y)\Rightarrow CosaFisica(x)
+	$
+	
+	\item regole di ragionamento complesso: espirmono regole valide in uno specifico dominio applicativo. \\
+	$
+	\forall x.DimRel(Cervello(x),CervelloTipico(SpeciedDi(x))\leq Piccolo \Rightarrow Stupido(x)
+	$
+	
+	\item regole di relazione tra misure \\
+	$
+	\forall x>Medio\Rightarrow Molto(x)>x \\
+	\forall x<Medio\Rightarrow Molto(x)<x \\
+	$
+\end{enumerate}
+
+
+\subsection{Ingegneria della conoscenza}
+L'ingegnere della conoscenza delimita il dominio applicativo, definisce un vocabolario, codifica la conoscenza assiomatica, codifica l'istanza specifica del problema, definisce le interrogazioni.
+
+
+\subsection{Base di conoscenza}
+Una base di conoscenza è formata da una ontologia, una collezione di sue istanze e da regole di inferenza.
+L'universo del discorso è l'insieme di oggetti che rappresentano la conoscenza di un dominio. Essi costituiscono un vocabolario.
+
+
+\subsection{Tassonomia}
+Una tassonomia è una struttura gerarchica di categorie. Essa semplifica l'ontologia e facilita le modalità di ragionamento.
+Si riconosce un oggetto, lo si classifica (si inferisce la sua appartenenza ad una classe dalle proprietà riconosciute), si inferiscono ulteriori proprietà dell'oggetto in questione.
+Si può fare inferenza anche senza capire il significato frasale.
+
+Un oggetto appartiene ad una categoria. Una categoria può essere sottoclasse di un'altra. Ogni categoria ha proprietà distintive. Sottoclassi di una stessa categoria sono insiemi disgiunti. Gli elementi di una categoria condividono le sue proprietà e quelle ereditate dalle sue superclassi.
+
+
+\subsection{Linguaggi ontologici}
+Un linguaggio ontologico introduce, concetti, proprietà dei concetti, relazioni tra concetti e vincoli addizionali.
+Un linguaggio ontologico può essere:
+
+\begin{enumerate}
+	
+	\item semplice: solo concetti
+	
+	\item frame-based: concetti e proprietà.
+	
+	\item logic-based: concetti, proprietà, relazioni, vincoli.
+	
+\end{enumerate}
+
+Data una ontologia è possibile inferire ulteriori vincoli. 
+
+
+\subsection{Information Retrieval ed Information Extraction}
+L'information retrieval non riconosce le differenti concettualizzazioni, bensì solo differenti terminologie. L'information retrieval analizza dunque il testo di un documento.
+
+L'information extraction riconosce le differenti concettualizzazioni. L'information extraction analizza il contenuto di un documento.
+
+
+\subsection{Ontologia lessicale}
+Una ontologia lessicale definisce il significato delle parole di un linguaggio. Queste ontologie tendono ad una generalizzazione del senso comune.
+
+
+\subsection{Commitment ontologico}
+Si ha un commitment ontologico quando le azioni osservabili di un agente sono consistenti con una ontologia. Affinchè più agenti possano comunicare, questi devono eseguire un commitment ontologico nei confronti di ontologie condivise.
+Un commitment ontologico definisce come i simboli di una ontologia siano interpretati rispetto ad una concettualizzazione.
+Sia data una ontologia $T$ espressa con vocabolario $V$.
+Un commitment ontologico per $T$ è una coppia $K=(C,I)$, dove $C=(D,W,R)$ è una concettualizzazione, e $I:V\rightarrow D\cup R$ è una funzione di interpretazione della concettualizzazione.
+
+Un intended model di una ontologia è ciò che rappresenta una situazione corrispondente ad un mondo possibile in accordo ad una concettualizzazione.
+Un intended model è una coppia $M=((D,R),I)$, dove $(D,R)$ è il dominio definito da individui e relazioni.
+
+Per le costanti la funzione di interpretazione del modello e il commitment ontologico mappano quella costante allo stesso elemento in D.
+
+
+\subsection{Scrittura di una ontologia}
+I simboli usati in una ontologia sono parole, ma non hanno corrispondenza nel linguaggio naturale, sono solo simboli, come nomi di variabile.
+Per costruire ontologie si può partire da (i) database, (ii) tassonomie, (iii) dizionari o (iv) documenti.
+La costruzione di una ontologia è un processo iterativo.
+Il processo di costruzione di una ontologia a partire da un documento prevede 
+
+\begin{enumerate}
+	
+	\item segmentation: divisione del testo in paragrafi, frasi e parole;
+	
+	\item tagging: indentificazione dei POS (part of Speech), ovvero identificazione del ruolo logico dei termini (nomi, aggettivi, verbi,...);
+	
+	\item lemmatization: portare a forma canonica parole flesse e verbi coniugati;
+	
+	\item terms extraction: identificazione di parole/espressioni che aggiungono significato al contesto;
+	
+	\item relations extraction: identificazione di interazioni semantiche tra temini;
+	
+\end{enumerate}
+
+Per ogni tipologia di relazione individuata:
+si costruisce una lista di termini per i quali è stata individata la relazione, 
+si collezionano frasi del documento in cui tali termini co-occorrono,
+si identificano i pattern frasali indicativi della relazione,
+se si identifica un pattern valido, usare take pattern per trovare coppie in relazione.

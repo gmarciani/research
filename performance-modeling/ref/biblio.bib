@@ -1,0 +1,665 @@
+%%% ====================================================================
+%%%  BibTeX-file{
+%%%     author          = "Gerry Murray",
+%%%     version         = "1.2",
+%%%     date            = "2 April 2012",
+%%%     filename        = "acmlarge-sample-bibfile.bib",
+%%%     address         = "ACM, NY",
+%%%     email           = "murray at hq.acm.org",
+%%%     codetable       = "ISO/ASCII",
+%%%     keywords        = "ACM Reference Format, bibliography, citation, references",
+%%%     supported       = "yes",
+%%%     docstring       = "This BibTeX database file contains 'bibdata' entries
+%%%                        that 'match' the examples provided in the Specifications Document
+%%%                        AND, also, 'legacy'-type bibs. It should assist authors in 
+%%%                        choosing the 'correct' at-bibtype and necessary bib-fields
+%%%                        so as to obtain the appropriate ACM Reference Format output. 
+%%%			   It also contains many 'Standard Abbreviations'. "
+%%%  }
+%%% ====================================================================
+
+% Journals
+
+% First the Full Name is given, then the abbreviation used in the AMS Math
+% Reviews, with an indication if it could not be found there.
+% Note the 2nd overwrites the 1st, so swap them if you want the full name.
+
+ %{AMS}
+ @String{AMSTrans = "American Mathematical Society Translations" }
+ @String{AMSTrans = "Amer. Math. Soc. Transl." }
+ @String{BullAMS = "Bulletin of the American Mathematical Society" }
+ @String{BullAMS = "Bull. Amer. Math. Soc." }
+ @String{ProcAMS = "Proceedings of the American Mathematical Society" }
+ @String{ProcAMS = "Proc. Amer. Math. Soc." }
+ @String{TransAMS = "Transactions of the American Mathematical Society" }
+ @String{TransAMS = "Trans. Amer. Math. Soc." }
+
+ %ACM
+ @String{CACM = "Communications of the {ACM}" }
+ @String{CACM = "Commun. {ACM}" }
+ @String{CompServ = "Comput. Surveys" }
+ @String{JACM = "J. ACM" }
+ @String{ACMMathSoft = "{ACM} Transactions on Mathematical Software" }
+ @String{ACMMathSoft = "{ACM} Trans. Math. Software" }
+ @String{SIGNUM = "{ACM} {SIGNUM} Newsletter" }
+ @String{SIGNUM = "{ACM} {SIGNUM} Newslett." }
+
+ @String{AmerSocio = "American Journal of Sociology" }
+ @String{AmerStatAssoc = "Journal of the American Statistical Association" }
+ @String{AmerStatAssoc = "J. Amer. Statist. Assoc." }
+ @String{ApplMathComp = "Applied Mathematics and Computation" }
+ @String{ApplMathComp = "Appl. Math. Comput." }
+ @String{AmerMathMonthly = "American Mathematical Monthly" }
+ @String{AmerMathMonthly = "Amer. Math. Monthly" }
+ @String{BIT = "{BIT}" }
+ @String{BritStatPsych = "British Journal of Mathematical and Statistical
+          Psychology" }
+ @String{BritStatPsych = "Brit. J. Math. Statist. Psych." }
+ @String{CanMathBull = "Canadian Mathematical Bulletin" }
+ @String{CanMathBull = "Canad. Math. Bull." }
+ @String{CompApplMath = "Journal of Computational and Applied Mathematics" }
+ @String{CompApplMath = "J. Comput. Appl. Math." }
+ @String{CompPhys = "Journal of Computational Physics" }
+ @String{CompPhys = "J. Comput. Phys." }
+ @String{CompStruct = "Computers and Structures" }
+ @String{CompStruct = "Comput. \& Structures" }
+ @String{CompJour = "The Computer Journal" }
+ @String{CompJour = "Comput. J." }
+ @String{CompSysSci = "Journal of Computer and System Sciences" }
+ @String{CompSysSci = "J. Comput. System Sci." }
+ @String{Computing = "Computing" }
+ @String{ContempMath = "Contemporary Mathematics" }
+ @String{ContempMath = "Contemp. Math." }
+ @String{Crelle = "Crelle's Journal" }
+ @String{GiornaleMath = "Giornale di Mathematiche" }
+ @String{GiornaleMath = "Giorn. Mat." } % didn't find in AMS MR., ibid.
+
+ %IEEE
+ @String{Computer = "{IEEE} Computer" }
+ @String{IEEETransComp = "{IEEE} Transactions on Computers" }
+ @String{IEEETransComp = "{IEEE} Trans. Comput." }
+ @String{IEEETransAC = "{IEEE} Transactions on Automatic Control" }
+ @String{IEEETransAC = "{IEEE} Trans. Automat. Control" }
+ @String{IEEESpec = "{IEEE} Spectrum" } % didn't find in AMS MR
+ @String{ProcIEEE = "Proceedings of the {IEEE}" }
+ @String{ProcIEEE = "Proc. {IEEE}" } % didn't find in AMS MR
+ @String{IEEETransAeroElec = "{IEEE} Transactions on Aerospace and Electronic
+     Systems" }
+ @String{IEEETransAeroElec = "{IEEE} Trans. Aerospace Electron. Systems" }
+
+ @String{IMANumerAna = "{IMA} Journal of Numerical Analysis" }
+ @String{IMANumerAna = "{IMA} J. Numer. Anal." }
+ @String{InfProcLet = "Information Processing Letters" }
+ @String{InfProcLet = "Inform. Process. Lett." }
+ @String{InstMathApp = "Journal of the Institute of Mathematics and
+     its Applications" }
+ @String{InstMathApp = "J. Inst. Math. Appl." }
+ @String{IntControl = "International Journal of Control" }
+ @String{IntControl = "Internat. J. Control" }
+ @String{IntNumerEng = "International Journal for Numerical Methods in
+     Engineering" }
+ @String{IntNumerEng = "Internat. J. Numer. Methods Engrg." }
+ @String{IntSuper = "International Journal of Supercomputing Applications" }
+ @String{IntSuper = "Internat. J. Supercomputing Applic." } % didn't find
+%% in AMS MR
+ @String{Kibernetika = "Kibernetika" }
+ @String{JResNatBurStand = "Journal of Research of the National Bureau
+     of Standards" }
+ @String{JResNatBurStand = "J. Res. Nat. Bur. Standards" }
+ @String{LinAlgApp = "Linear Algebra and its Applications" }
+ @String{LinAlgApp = "Linear Algebra Appl." }
+ @String{MathAnaAppl = "Journal of Mathematical Analysis and Applications" }
+ @String{MathAnaAppl = "J. Math. Anal. Appl." }
+ @String{MathAnnalen = "Mathematische Annalen" }
+ @String{MathAnnalen = "Math. Ann." }
+ @String{MathPhys = "Journal of Mathematical Physics" }
+ @String{MathPhys = "J. Math. Phys." }
+ @String{MathComp = "Mathematics of Computation" }
+ @String{MathComp = "Math. Comp." }
+ @String{MathScand = "Mathematica Scandinavica" }
+ @String{MathScand = "Math. Scand." }
+ @String{TablesAidsComp = "Mathematical Tables and Other Aids to Computation" }
+ @String{TablesAidsComp = "Math. Tables Aids Comput." }
+ @String{NumerMath = "Numerische Mathematik" }
+ @String{NumerMath = "Numer. Math." }
+ @String{PacificMath = "Pacific Journal of Mathematics" }
+ @String{PacificMath = "Pacific J. Math." }
+ @String{ParDistComp = "Journal of Parallel and Distributed Computing" }
+ @String{ParDistComp = "J. Parallel and Distrib. Comput." } % didn't find
+%% in AMS MR
+ @String{ParComputing = "Parallel Computing" }
+ @String{ParComputing = "Parallel Comput." }
+ @String{PhilMag = "Philosophical Magazine" }
+ @String{PhilMag = "Philos. Mag." }
+ @String{ProcNAS = "Proceedings of the National Academy of Sciences
+                    of the USA" }
+ @String{ProcNAS = "Proc. Nat. Acad. Sci. U. S. A." }
+ @String{Psychometrika = "Psychometrika" }
+ @String{QuartMath = "Quarterly Journal of Mathematics, Oxford, Series (2)" }
+ @String{QuartMath = "Quart. J. Math. Oxford Ser. (2)" }
+ @String{QuartApplMath = "Quarterly of Applied Mathematics" }
+ @String{QuartApplMath = "Quart. Appl. Math." }
+ @String{RevueInstStat = "Review of the International Statisical Institute" }
+ @String{RevueInstStat = "Rev. Inst. Internat. Statist." }
+
+ %SIAM
+ @String{JSIAM = "Journal of the Society for Industrial and Applied
+     Mathematics" }
+ @String{JSIAM = "J. Soc. Indust. Appl. Math." }
+ @String{JSIAMB = "Journal of the Society for Industrial and Applied
+     Mathematics, Series B, Numerical Analysis" }
+ @String{JSIAMB = "J. Soc. Indust. Appl. Math. Ser. B Numer. Anal." }
+ @String{SIAMAlgMeth = "{SIAM} Journal on Algebraic and Discrete Methods" }
+ @String{SIAMAlgMeth = "{SIAM} J. Algebraic Discrete Methods" }
+ @String{SIAMAppMath = "{SIAM} Journal on Applied Mathematics" }
+ @String{SIAMAppMath = "{SIAM} J. Appl. Math." }
+ @String{SIAMComp = "{SIAM} Journal on Computing" }
+ @String{SIAMComp = "{SIAM} J. Comput." }
+ @String{SIAMMatrix = "{SIAM} Journal on Matrix Analysis and Applications" }
+ @String{SIAMMatrix = "{SIAM} J. Matrix Anal. Appl." }
+ @String{SIAMNumAnal = "{SIAM} Journal on Numerical Analysis" }
+ @String{SIAMNumAnal = "{SIAM} J. Numer. Anal." }
+ @String{SIAMReview = "{SIAM} Review" }
+ @String{SIAMReview = "{SIAM} Rev." }
+ @String{SIAMSciStat = "{SIAM} Journal on Scientific and Statistical
+     Computing" }
+ @String{SIAMSciStat = "{SIAM} J. Sci. Statist. Comput." }
+
+ @String{SoftPracExp = "Software Practice and Experience" }
+ @String{SoftPracExp = "Software Prac. Experience" } % didn't find in AMS MR
+ @String{StatScience = "Statistical Science" }
+ @String{StatScience = "Statist. Sci." }
+ @String{Techno = "Technometrics" }
+ @String{USSRCompMathPhys = "{USSR} Computational Mathematics and Mathematical
+     Physics" }
+ @String{USSRCompMathPhys = "{U. S. S. R.} Comput. Math. and Math. Phys." }
+ @String{VLSICompSys = "Journal of {VLSI} and Computer Systems" }
+ @String{VLSICompSys = "J. {VLSI} Comput. Syst." }
+ @String{ZAngewMathMech = "Zeitschrift fur Angewandte Mathematik und
+     Mechanik" }
+ @String{ZAngewMathMech = "Z. Angew. Math. Mech." }
+ @String{ZAngewMathPhys = "Zeitschrift fur Angewandte Mathematik und Physik" }
+ @String{ZAngewMathPhys = "Z. Angew. Math. Phys." }
+
+% Publishers % ================================================= |
+
+ @String{Academic = "Academic Press" }
+ @String{ACMPress = "{ACM} Press" }
+ @String{AdamHilger = "Adam Hilger" }
+ @String{AddisonWesley = "Addison-Wesley" }
+ @String{AllynBacon = "Allyn and Bacon" }
+ @String{AMS = "American Mathematical Society" }
+ @String{Birkhauser = "Birkha{\"u}ser" }
+ @String{CambridgePress = "Cambridge University Press" }
+ @String{Chelsea = "Chelsea" }
+ @String{ClaredonPress = "Claredon Press" }
+ @String{DoverPub = "Dover Publications" }
+ @String{Eyolles = "Eyolles" }
+ @String{HoltRinehartWinston = "Holt, Rinehart and Winston" }
+ @String{Interscience = "Interscience" }
+ @String{JohnsHopkinsPress = "The Johns Hopkins University Press" }
+ @String{JohnWileySons = "John Wiley and Sons" }
+ @String{Macmillan = "Macmillan" }
+ @String{MathWorks = "The Math Works Inc." }
+ @String{McGrawHill = "McGraw-Hill" }
+ @String{NatBurStd = "National Bureau of Standards" }
+ @String{NorthHolland = "North-Holland" }
+ @String{OxfordPress = "Oxford University Press" }  %address Oxford or London?
+ @String{PergamonPress = "Pergamon Press" }
+ @String{PlenumPress = "Plenum Press" }
+ @String{PrenticeHall = "Prentice-Hall" }
+ @String{SIAMPub = "{SIAM} Publications" }
+ @String{Springer = "Springer-Verlag" }
+ @String{TexasPress = "University of Texas Press" }
+ @String{VanNostrand = "Van Nostrand" }
+ @String{WHFreeman = "W. H. Freeman and Co." }
+
+%Entries
+
+@book{harchol2013performance,
+	title={Performance Modeling and Design of Computer Systems: Queueing Theory in Action},
+	author={Harchol-Balter, Mor},
+	year={2013},
+	publisher={Cambridge University Press}
+}
+
+@article{gupta2010inapproximability,
+	title={On the inapproximability of M/G/K: why two moments of job size distribution are not enough},
+	author={Gupta, Varun and Harchol-Balter, Mor and Dai, JG and Zwart, Bert},
+	journal={Queueing Systems},
+	volume={64},
+	number={1},
+	pages={5--48},
+	year={2010},
+	publisher={Springer}
+}
+
+@article{kendall1953stochastic,
+	title={Stochastic processes occurring in the theory of queues and their analysis by the method of the imbedded Markov chain},
+	author={Kendall, David G},
+	journal={The Annals of Mathematical Statistics},
+	pages={338--354},
+	year={1953},
+	publisher={JSTOR}
+}
+
+@inproceedings{schroeder2006open,
+	title={Open Versus Closed: A Cautionary Tale.},
+	author={Schroeder, Bianca and Wierman, Adam and Harchol-Balter, Mor},
+	booktitle={NSDI},
+	volume={6},
+	pages={18--18},
+	year={2006}
+}
+
+@book{bramson2008stability,
+	title={Stability of queueing networks},
+	author={Bramson, Maury},
+	year={2008},
+	publisher={Springer}
+}
+
+@book{lazowska1984quantitative,
+	title={Quantitative system performance: computer system analysis using queueing network models},
+	author={Lazowska, Edward D and Zahorjan, John and Graham, G Scott and Sevcik, Kenneth C},
+	year={1984},
+	publisher={Prentice-Hall, Inc.}
+}
+
+@book{menasce2001capacity,
+	title={Capacity Planning for Web Services: metrics, models, and methods},
+	author={Menasce, Daniel A and Almeida, Virgilio},
+	year={2001},
+	publisher={Prentice Hall PTR}
+}
+
+@article{bondi1986influence,
+	title={The influence of service-time variability in a closed network of queues},
+	author={Bondi, Andr{\'e}B and Whitt, Ward},
+	journal={Performance Evaluation},
+	volume={6},
+	number={3},
+	pages={219--234},
+	year={1986},
+	publisher={Elsevier}
+}
+
+@article{whitt1984open,
+	title={Open and closed models for networks of queues},
+	author={Whitt, Ward},
+	journal={AT\&T Bell Laboratories Technical Journal},
+	volume={63},
+	number={9},
+	pages={1911--1979},
+	year={1984},
+	publisher={Wiley Online Library}
+}
+
+@article{tay2013analytical,
+	title={Analytical performance modeling for computer systems},
+	author={Tay, YC},
+	journal={Synthesis Lectures on Computer Science},
+	volume={4},
+	number={3},
+	pages={1--141},
+	year={2013},
+	publisher={Morgan \& Claypool Publishers}
+}
+
+@article{little1961proof,
+	title={A proof for the queuing formula: L= $\lambda$ W},
+	author={Little, John DC},
+	journal={Operations research},
+	volume={9},
+	number={3},
+	pages={383--387},
+	year={1961},
+	publisher={INFORMS}
+}
+
+@article{bertsimas1995distributional,
+	title={The distributional Little's law and its applications},
+	author={Bertsimas, Dimitris and Nakazato, Daisuke},
+	journal={Operations Research},
+	volume={43},
+	number={2},
+	pages={298--310},
+	year={1995},
+	publisher={INFORMS}
+}
+
+@article{brumelle1972generalization,
+	title={A generalization of L= $\lambda$ W to moments of queue length and waiting times},
+	author={Brumelle, Shelby L},
+	journal={Operations Research},
+	volume={20},
+	number={6},
+	pages={1127--1136},
+	year={1972},
+	publisher={INFORMS}
+}
+
+@book{el2012sample,
+	title={Sample-path analysis of queueing systems},
+	author={El-Taha, Muhammad and Stidham Jr, Shaler},
+	volume={11},
+	year={2012},
+	publisher={Springer Science \& Business Media}
+}
+
+@article{miyazawa1994rate,
+	title={Rate conservation laws: a survey},
+	author={Miyazawa, Masakiyo},
+	journal={Queueing Systems},
+	volume={15},
+	number={1},
+	pages={1--58},
+	year={1994},
+	publisher={Springer}
+}
+
+@article{wolff1982poisson,
+	title={Poisson arrivals see time averages},
+	author={Wolff, Ronald W},
+	journal={Operations Research},
+	volume={30},
+	number={2},
+	pages={223--231},
+	year={1982},
+	publisher={INFORMS}
+}
+
+@book{ross2014introduction,
+	title={Introduction to probability models},
+	author={Ross, Sheldon M},
+	year={2014},
+	publisher={Academic press}
+}
+
+@book{ross1996stochastic,
+	title={Stochastic processes},
+	author={Ross, Sheldon M and others},
+	volume={2},
+	year={1996},
+	publisher={John Wiley \& Sons New York}
+}
+
+@article{van1988conditional,
+	title={Conditional pasta},
+	author={Van Doorn, Erik A and Regterschot, GJK},
+	journal={Operations Research Letters},
+	volume={7},
+	number={5},
+	pages={229--232},
+	year={1988},
+	publisher={Elsevier}
+}
+
+@article{asmussen2003queueing,
+	title={Queueing Networks and Insensitivity},
+	author={Asmussen, S{\o}ren},
+	journal={Applied Probability and Queues},
+	pages={114--136},
+	year={2003},
+	publisher={Springer}
+}
+
+@book{tijms2003first,
+	title={A first course in stochastic models},
+	author={Tijms, Henk C},
+	year={2003},
+	publisher={John Wiley and Sons}
+}
+
+@article{burke1956output,
+	title={The output of a queuing system},
+	author={Burke, Paul J},
+	journal={Operations research},
+	volume={4},
+	number={6},
+	pages={699--704},
+	year={1956},
+	publisher={INFORMS}
+}
+
+@book{bertsekas1992data,
+	title={Data networks},
+	author={Bertsekas, Dimitri P and Gallager, Robert G and Humblet, Pierre},
+	volume={2},
+	year={1992},
+	publisher={Prentice-Hall International New Jersey}
+}
+
+@article{jackson1963jobshop,
+	title={Jobshop-like queueing systems},
+	author={Jackson, James R},
+	journal={Management science},
+	volume={10},
+	number={1},
+	pages={131--142},
+	year={1963},
+	publisher={INFORMS}
+}
+
+@article{harrison1985technical,
+	title={Technical Note—On Normalizing Constants in Queueing Networks},
+	author={Harrison, PG},
+	journal={Operations research},
+	volume={33},
+	number={2},
+	pages={464--468},
+	year={1985},
+	publisher={INFORMS}
+}
+
+@article{gordon1990evaluation,
+	title={The evaluation of normalizing constants in closed queueing networks},
+	author={Gordon, JJ},
+	journal={Operations Research},
+	volume={38},
+	number={5},
+	pages={863--869},
+	year={1990},
+	publisher={INFORMS}
+}
+
+@article{choudhury1995calculating,
+	title={Calculating normalization constants of closed queueing networks by numerically inverting their generating functions},
+	author={Choudhury, Gagan L and Leung, Kin K and Whitt, Ward},
+	journal={Journal of the ACM (JACM)},
+	volume={42},
+	number={5},
+	pages={935--970},
+	year={1995},
+	publisher={ACM}
+}
+
+@article{reiser1980mean,
+	title={Mean-value analysis of closed multichain queuing networks},
+	author={Reiser, Martin and Lavenberg, Stephen S},
+	journal={Journal of the ACM (JACM)},
+	volume={27},
+	number={2},
+	pages={313--322},
+	year={1980},
+	publisher={ACM}
+}
+
+@book{bolch2006queueing,
+	title={Queueing networks and Markov chains: modeling and performance evaluation with computer science applications},
+	author={Bolch, Gunter and Greiner, Stefan and de Meer, Hermann and Trivedi, Kishor S},
+	year={2006},
+	publisher={John Wiley \& Sons}
+}
+
+@book{allen2014probability,
+	title={Probability, statistics, and queueing theory},
+	author={Allen, Arnold O},
+	year={2014},
+	publisher={Academic Press}
+}
+
+@article{schrage1968letter,
+	title={Letter to the editor—a proof of the optimality of the shortest remaining processing time discipline},
+	author={Schrage, Linus},
+	journal={Operations Research},
+	volume={16},
+	number={3},
+	pages={687--690},
+	year={1968},
+	publisher={INFORMS}
+}
+
+@inproceedings{leonardi1997approximating,
+	title={Approximating total flow time on parallel machines},
+	author={Leonardi, Stefano and Raz, Danny},
+	booktitle={Proceedings of the twenty-ninth annual ACM symposium on Theory of computing},
+	pages={110--119},
+	year={1997},
+	organization={ACM}
+}
+
+@inproceedings{avrahami2003minimizing,
+	title={Minimizing total flow time and total completion time with immediate dispatching},
+	author={Avrahami, Nir and Azar, Yossi},
+	booktitle={Proceedings of the fifteenth annual ACM symposium on Parallel algorithms and architectures},
+	pages={11--18},
+	year={2003},
+	organization={ACM}
+}
+
+@article{crovella1997self,
+	title={Self-similarity in World Wide Web traffic: evidence and possible causes},
+	author={Crovella, Mark E and Bestavros, Azer},
+	journal={IEEE/ACM Transactions on networking},
+	volume={5},
+	number={6},
+	pages={835--846},
+	year={1997},
+	publisher={IEEE}
+}
+
+@article{ghosh2004analysis,
+	title={Analysis and control of correlated web server queues},
+	author={Ghosh, Soumyadip and Squillante, Mark S},
+	journal={Computer Communications},
+	volume={27},
+	number={18},
+	pages={1771--1785},
+	year={2004},
+	publisher={Elsevier}
+}
+
+@book{squillante1999internet,
+	title={Internet traffic: Periodicity, tail behavior and performance implications},
+	author={Squillante, Mark S and Zhang, Li and Yao, David D},
+	year={1999},
+	publisher={IBM TJ Watson Research Center}
+}
+
+@article{gupta2007analysis,
+	title={Analysis of join-the-shortest-queue routing for web server farms},
+	author={Gupta, Varun and Balter, Mor Harchol and Sigman, Karl and Whitt, Ward},
+	journal={Performance Evaluation},
+	volume={64},
+	number={9},
+	pages={1062--1081},
+	year={2007},
+	publisher={Elsevier}
+}
+
+@article{pollaczek1930aufgabe,
+	title={{\"U}ber eine aufgabe der wahrscheinlichkeitstheorie. I},
+	author={Pollaczek, Felix},
+	journal={Mathematische Zeitschrift},
+	volume={32},
+	number={1},
+	pages={64--100},
+	year={1930},
+	publisher={Springer}
+}
+
+@techreport{khinchin1967mathematical,
+	title={The mathematical theory of a stationary queue},
+	author={Khinchin, A Ya},
+	year={1967},
+	institution={DTIC Document}
+}
+
+@book{bansal2001analysis,
+	title={Analysis of SRPT scheduling: Investigating unfairness},
+	author={Bansal, Nikhil and Harchol-Balter, Mor},
+	volume={29},
+	number={1},
+	year={2001},
+	publisher={ACM}
+}
+
+@inproceedings{hyytia2012minimizing,
+	title={Minimizing slowdown in heterogeneous size-aware dispatching systems},
+	author={Hyyti{\"a}, Esa and Aalto, Samuli and Penttinen, Aleksi},
+	booktitle={ACM SIGMETRICS Performance Evaluation Review},
+	volume={40},
+	number={1},
+	pages={29--40},
+	year={2012},
+	organization={ACM}
+}
+
+@book{conway2012theory,
+	title={Theory of scheduling},
+	author={Conway, Richard W and Maxwell, William L and Miller, Louis W},
+	year={2012},
+	publisher={Courier Corporation}
+}
+
+@book{kleinrock1976queueing,
+	title={Queueing Systems Vol: II: Computer Applications},
+	author={Kleinrock, Leonard},
+	year={1976},
+	publisher={John Wiley \& Sons, Incorporated}
+}
+
+@article{aalto2007beyond,
+	title={Beyond processor sharing},
+	author={Aalto, Samuli and Ayesta, Urtzi and Borst, Sem and Misra, Vishal and N{\'u}{\~n}ez-Queija, Rudesindo},
+	journal={ACM SIGMETRICS Performance Evaluation Review},
+	volume={34},
+	number={4},
+	pages={36--43},
+	year={2007},
+	publisher={ACM}
+}
+
+@phdthesis{wierman2007scheduling,
+	title={Scheduling for today’s computer systems: Bridging theory and practice},
+	author={Wierman, Adam},
+	year={2007},
+	school={Carnegie Mellon University Pittsburgh, PA}
+}
+
+@book{nuijens2004foreground,
+	title={The foreground-background queue},
+	author={Nuijens, MFM and others},
+	year={2004}
+}
+
+@article{rai2003analysis,
+	title={Analysis of LAS scheduling for job size distributions with high variance},
+	author={Rai, Idris A and Urvoy-Keller, Guillaume and Biersack, Ernst W},
+	journal={ACM SIGMETRICS Performance Evaluation Review},
+	volume={31},
+	number={1},
+	pages={218--228},
+	year={2003},
+	publisher={ACM}
+}
+
+@inproceedings{harchol2000task,
+	title={Task assignment with unknown duration},
+	author={Harchol-Balter, Mor},
+	booktitle={Distributed Computing Systems, 2000. Proceedings. 20th International Conference on},
+	pages={214--224},
+	year={2000},
+	organization={IEEE}
+}

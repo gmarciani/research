@@ -1,0 +1,41 @@
+\section{Asymptotic Analysis for Closed Systems}
+\label{sec:Asymptotic-Analysis-Closed-Systems}
+
+\begin{theorem}[Asymptotic Bounds for Closed Systems]
+	\label{thm:Asymptotic-Bounds-Closed-Systems}
+	For any closed system with load $N$, we have that
+	
+	\begin{equation}
+	\label{eqn:Asymptotic-Bounds-Closed-Systems}
+	\begin{split}
+	X & \leq \min \Big\{ \frac{N}{D + \expected{Z}} , \frac{1}{D_{max}} \Big\} \\
+	\expected{R} & \geq \max\{D , N \cdot D_{max} - \expected{Z} \}
+	\end{split}
+	\end{equation}
+	
+	where the first term in each clause is an asymptote for small $N$, and the second one for large $N$.
+	
+	\begin{proof}
+		See \cite{harchol2013performance} for a formal demonstration.
+	\end{proof}
+\end{theorem}
+
+It is possible to get even tighter bounds by using the \textit{Balanced Bounds technique}, described in \cite{lazowska1984quantitative}.
+
+The lower and the upper bound intercept in 
+\begin{equation}
+\label{eqn:Asymptotic-Bounds-Closed-Systems-Interception}
+N^{*} = \frac{D + \expected{Z}}{D_{max}}
+\end{equation}
+That is the point beyond which there must be some queueing in the system, because $\expected{R} > D$.
+
+If $N > N^{*}$, performance can be improved ($X$ increased and $\expected{R}$ decreased) only decreasing $D_{max}$.
+
+If $N >> N^{*}$, decreasing some $D_{i} < D_{max}$ have no effect.
+If $N << N^{*}$, decreasing some $D_{i} < D_{max}$ have little effect.
+
+In a batch system ($Z=0$), $N^{*}$ decreases, meaning that the domination of $D_{max}$ occurs with smaller load.
+
+The bottleneck server is the server with demand $D_{max}$. It is the key limiting factor to performance improvement. Thus, the first step in improving performance is to identify the bottleneck server.
+
+The asymptotic bounds hold for open systems only if $\lambda . X \rightarrow \frac{1}{D_{max}}$.

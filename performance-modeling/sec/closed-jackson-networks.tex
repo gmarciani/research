@@ -1,0 +1,62 @@
+\section{Closed Jackson Networks}
+\label{sec:Closed-Jackson-Networks}
+
+We examine only the Batch Jackson Networks. 
+See \cite{harchol2013performance} to examine Interactive Jackson Networks.
+
+\begin{definition}[Batch Jackson Network]
+	\label{def:Batch-Jackson-Network}
+	A Batch Jackson Network is a closed network of queues such that:
+	
+	\begin{itemize}
+		\item there are $m$ $M/M/1$ queues;
+		\item the multiprogramming level is $N$;
+		\item the $i$-th server service is Exponentially distributed with rate $\mu_{i}$;
+		\item each server may receive only internal arrivals;
+		\item when the $i$-th server completes a job, it is routed to the $j$-th server (internal arrival) with probability $P_{i,j}$.
+	\end{itemize}
+\end{definition}
+
+%\begin{figure}[tp]
+%\label{fig:Batch-Jackson-Network}	
+%	\centering
+%	\includegraphics{fig/Batch-Jackson-Network}
+%	\caption{A Batch Jackson Network and its corresponding CTMC.}
+%\end{figure}
+
+The \textit{response time} is defined as the time from when the job arrives to the system until it leaves it, including possible multiple visitation to the same server.
+
+The \textit{total arrival rate} $\lambda_{i}$ to the $i$-th server is also the total departure rate from the same server.
+
+In such networks it not possible to determine a unique solution for all the $\lambda_{i}$'s, because we face with a $k-1$-order system of equations. So, we have to choose a $\lambda_{i}$ at random. Typically we fix $\lambda_{1}$ at random and then resolve the others \footnote{Since the $\lambda_{i}$'s rely on a made-up value, the $\varrho_{i}$'s do not represent real servers utilizations}.
+
+\begin{theorem}[Batch Jackson Network Product Form]
+\label{thm:Batch-Jackson-Network-Product-Form}	
+	A Closed Jackson Network with $m$ servers has the following product form
+	
+	\begin{equation}
+	\label{eqn:Batch-Jackson-Network-Product-Form}
+	\pi_{n_{1},...,n_{m}} = C \cdot \prod_{i=1}^{m} \varrho_{i}^{n_{i}} (1-\varrho_{i})
+	\end{equation}
+	
+	where $C$ is the \textit{Normalizing Constant} determined as the solution of 
+	
+	$
+	\sum_{(n_{1},...,n_{m}) \\ \in States} \pi_{n_{1},...,n_{m}} = 1
+	$
+	
+	\begin{proof}
+		The demonstration makes use of the \textit{Mean Value Analysis}.
+		For a formal demonstration, see \cite{harchol2013performance}.
+	\end{proof}
+\end{theorem}
+
+The complexity of determining state probabilities with \Cref{eqn:Batch-Jackson-Network-Product-Form} growths exponentially with $N$ and $m$
+\footnote{The total number of states in a Closed Jackson Network is equal to the number of ways of dividing $N$ jobs among $m$ servers, that is
+	\begin{equation*}
+	\label{eqn:Batch-Jackson-Networks-Number-States}
+	Number \! of \! States = \binom{N+m-1}{m-1}
+	\end{equation*}
+}.
+
+When $N$ and/or $m$ get high, it is better to apply the \textit{Mean Value Analysis}.

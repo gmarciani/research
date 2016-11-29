@@ -1,0 +1,177 @@
+\chapter{Algoritmi line search}
+\label{chp:line.search}
+Un algoritmo di line search esplora lo spazio delle soluzioni lungo specifica
+direzione e secondo uno specifico passo.
+
+Gli algoritmi di line search sono stati formalizzati in \cite{ortega1970iterative}
+e in \cite{bertsekas1999nonlinear}, con due impostazioni differenti. Le prime
+tecniche di line search inesatta si fanno risalire a \cite{goldstein1962cauchy}.
+
+L'algoritmo generale della line search è mostrato in \Cref{alg:linesearch}.
+
+\begin{algorithm}
+	\label{alg:linesearch}
+	\caption{Line Search}
+	$x_{0}\in\Re^{n}$, $k=0$ \\
+	\textbf{while} $x_{k}\notin\Omega$: \\
+	Determina una direzione $d_{k}$ \\
+	Determina un passo $\alpha_{k}$ \\
+	Calcola nuovo punto $x_{k+1}=x_{k}+\alpha_{k}d_{k}$ \\
+	$k=k+1$\\
+	\textbf{end while}
+\end{algorithm}
+
+Scelgo una direzione $d_{k}$ di discesa ed un passo $a_{k}$ tali da garantire un sufficiente decremento di $f$ ed un sufficiente spostamento di $x$.
+
+La direzione deve essere di discesa, e nulla solo in corrispondenza di un punto stazionario.
+
+Gli algoritmi di line search si classificano in base al metodo di calcolo del passo e alla loro monotonicità.
+Un algoritmo di \textit{line search esatta} calcola il passo analiticamente, in modo da minimizzare la funzione obiettivo.
+Un algoritmo di \textit{line search inesatta} calcola il passo iterativamente all'interno di un opportuno range di valori.
+Un algoritmo \textit{monotono} determina il passo che garantisce sempre il decremento della funzione. Un algoritmo \textit{non monotono} tollera temporanei incrementi locali.
+
+
+\subsection{Line search esatta}
+\label{sec:linesearch.exact}
+Il passo cacolato analiticamente, in modo da minimizzare la funzione obiettivo, e viene detto \textit{passo ottimo}.
+
+Si considera la funzione che caratterizza l'andamento di $f$ lungo la direzione data $d_{k}$ in termini del passo $\alpha_{k}$:
+
+\begin{equation*}
+	\label{eqn:fi-alfa}
+	\phi (\alpha)=f(x_{k} + \alpha d_{k})
+\end{equation*}
+
+Il passo ottimo $\alpha^{*}$ è dunque definito come
+
+\begin{equation}
+	\label{eqn:optimal-pace}
+	\alpha^{*}.\dot{\phi}(\alpha^{*})=0
+\end{equation}
+
+In generale, la line search esatta non è algoritmicamente praticabile, in quanto può generare sottoproblemi di minimizzazione. Ciò rende dispendioso il calcolo del passo e talvolta il sottoproblema può non avere soluzione.
+Non è una strada praticabile neanche nel caso di funzione convessa. Questo metodo ha senso solo nel caso di funzione quadratica strettamente convessa.
+
+\begin{equation}
+	\label{eqn:optimal-pace-quadratic-convex}
+	\alpha_{k}=-\frac{\nabla f(x_{k})^{T}d_{k}}{d_{k}^{T}Qd_{k}}
+\end{equation}
+
+
+\subsection{Line search inesatta}
+Il passo è calcolato iterativamente all'interno di un range di valori tali da garantire un sufficiente decremento della funzione obiettivo ed un sufficiente spostamento della posizione. In generale, maggiori sono questi spostamenti, maggiore è la rapidità di convergenza.
+
+
+\subsection{Condizioni di convergenza globale}
+
+I teoremi di convergenza globale stabiliscono condizioni su $d_{k}$ e $\alpha_{k}$ tali da garantire la convergenza globale dell'algoritmo.
+La convergenza è globale in quanto, come vedremo, le condizioni sono indipendenti dal punto iniziale $x_{0}$.
+
+La funzione di forzamento consente di non specificare dettagli che non risultano essenziali ai fini dell'analisi di convergenza.
+
+\begin{definition}[Funzione di forzamento]
+	\label{dfn:forcing-function}
+	Una funzione $\sigma:\Re^{+}\rightarrow\Re^{+}$ si dice funzione di forzamento se per ogni successione $\{t_{k}\}$ in $\Re^{+}$ si ha che
+	\begin{equation}
+		\label{eqn:forcing-function}
+		\lim_{k\rightarrow\infty}\sigma(t_{k})=0 \quad\Rightarrow\quad
+		\lim_{k\rightarrow\infty}t_{k}=0
+	\end{equation}
+\end{definition}
+
+Esempi di funzioni di forzamento sono: $\sigma(t)=ct^{q}$ con $c,q>0$ e $\sigma(t)=c>0$.
+
+\begin{theorem}
+	\label{thm:convergence-condition-1}
+	Sia $f:\Re^{n}\rightarrow\Re$ una funzione continuamente differenziabile su $\Re^{n}$. Si assuma che l'insieme di livello $\mathcal{L}_{0}$ sia compatto. Sia $\{x_{k}\}$ la successione prodotta dall'algoritmo e si supponga $\nabla f(x_{k})\neq 0\Rightarrow d_{k}\neq 0$.
+	Se
+	\begin{enumerate}
+		\item condizione di monotonicità:
+		per ogni $k$
+		\begin{equation}
+		f(x_{k+1})\leq f(x_{k})
+		\end{equation}
+
+		\item condizione di limitatezza:
+		per ogni $k$ tale che $\nabla f(x_{k})\neq 0$
+		\begin{equation}
+		\lim_{k\rightarrow\infty}\frac{\nabla f(x_{k})^{T}d_{k}}{\norm{d_{k}}}=0
+		\end{equation}
+
+		\item condizione d'angolo:
+		esiste una funzione di forzamento $\sigma$ tale che, per ogni $d_{k}\neq 0$
+		\begin{equation}
+		\frac{\abs{\nabla f(x_{k})^{T}d_{k}}}{\norm{d_{k}}}\geq\sigma(\norm{\nabla f(x_{k})})
+		\end{equation}
+	\end{enumerate}
+
+	Allora, o l'algoritmo converge finitamente, oppure produce una successione infinita $\{x_{k}\}$ tale che:
+
+	\begin{enumerate}
+		\item $x_{k}\in\mathcal{L}_{0}$ per ogni $k$ e $\{x_{k}\}$ ammette punti di accumulazione;
+
+		\item ogni punto di accumulazione di $\{x_{k}\}$ appartiene a $\mathcal{L}_{0}$;
+
+		\item la successione $\{f(x_{k})\}$ converge;
+
+		\item $\lim_{k\rightarrow\infty}\nabla f(x_{k})=0$;
+
+		\item ogni punto di accumulazione di $\{x_{k}\}$ è un punto stazionario.
+	\end{enumerate}
+
+	\begin{proof}
+		INSERT HERE THE THEOREM PROOF.
+	\end{proof}
+\end{theorem}
+
+Notiamo che l'antigradiente ($-\nabla f(x_{k})$) è una direzione che soddisfa tutte le ipotesi del teorema \Cref{thm:convergence-condition-1} (considerando la funzione di formamente $\sigma(t)=t$).
+
+In \cref{thm:convergence-condition-1} abbiamo assunto la compattezza dell'insieme di livello $\mathcal{L}_{0}$. Questa assunzione semlifica notevolemnte la dimostrazione della convergenza, in quanto implica l'esistenza di punti di accumulazione, la cui presenza non deve dunque essere dimostrata.
+In generale, questa condizione può non essere soddisfatta, o essere difficile da verificare. È dunque necessario riformulare il teorema, rilassando l'assunzione di compattezza \footnote{anche la monotonicità può essere rilassata.}. La difficoltà risiede nel fatto che se $\mathcal{L}_{0}$ non è compatto, la successione $\{x_{k}\}$ può non avere punti di accumulazione, sia per $\{f(x_{k})\}$ limitata inferiormente che (ovviamente) per $\{f(x_{k})\}$ illimitata inferiormente.
+
+\begin{theorem}
+	\label{thm:convergence-condition-2}
+	Sia $f:\Re^{n}\rightarrow\Re$ una funzione continuamente differenziabile su $\Re^{n}$. Sia $\{x_{k}\}$ la successione prodotta dall'algoritmo e si supponga $\nabla f(x_{k})\neq 0\Rightarrow d_{k}\neq 0$.
+	Se
+	\begin{enumerate}
+
+		\item condizione di monotonicità:
+		per ogni $k$
+		\begin{equation}
+		f(x_{k+1})\leq f(x_{k})
+		\end{equation}
+
+		\item condizione di limitatezza:
+		per ogni $k$ tale che $\nabla f(x_{k})\neq 0$
+		\begin{equation}
+		\lim_{k\rightarrow\infty}\frac{\nabla f(x_{k})^{T}d_{k}}{\norm{d_{k}}}=0
+		\end{equation}
+
+		\item condizione d'angolo:
+		esiste una funzione di forzamento $\sigma$ tale che, per ogni $d_{k}\neq 0$
+		\begin{equation}
+		\frac{\abs{\nabla f(x_{k})^{T}d_{k}}}{\norm{d_{k}}}\geq\sigma(\norm{\nabla f(x_{k})})
+		\end{equation}
+	\end{enumerate}
+
+	Allora, o l'algoritmo converge finitamente, oppure produce una successione infinita $\{x_{k}\}$ in $\mathcal{L}_{0}$ tale che valga una delle seguenti:
+
+	\begin{enumerate}
+		\item $\{x_{k}\}$ è illimitata inferiormente;
+
+		\item $\{x_{k}\}$ è limitata inferiormente e:
+		\begin{enumerate}
+			\item la successione $\{f(x_{k})\}$ converge;
+
+			\item $\lim_{k\rightarrow\infty}\nabla f(x_{k})=0$;
+
+			\item ogni (eventuale) punto di accumulazione di $\{x_{k}\}$ in $\mathcal{L}_{0}$ è un punto stazionario.
+		\end{enumerate}
+	\end{enumerate}
+
+	\begin{proof}
+		INSERT HERE THE THEOREM PROOF.
+	\end{proof}
+\end{theorem}
+
+In generale, una volta scelta la direzione che soddisfa la condizione d'angolo, si sceglie un passo che soddisfi le altre ipotesi.

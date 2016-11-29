@@ -1,0 +1,45 @@
+\section{Scheduling: Non-Preemptive, Non-Size-Based}
+\label{sec:Scheduling-Non-Preemptive-Non-Size-Based}
+
+The most common non-preemptive non-size-based scheduling policies are
+
+\begin{description}
+
+	\item [Random Order (RO)] the server chooses the job in queue at random.
+	
+	\item [First-Come First-Served (FCFS)] the server chooses the job at the head of the queue.
+	
+	\item [Last-Come First-Served (LCFS)] the server chooses the job at the tail of the queue.
+
+\end{description}
+
+\begin{theorem}
+\label{thm:Scheduling--Non-Preemptive-Non-Size-Based}
+All non-preemptive service orders that do not make use of job sizes have the same $\expected{N}$ and the same $\expected{T}$.
+\end{theorem}
+
+In particular, we have that
+
+\begin{equation}
+\expected{N^{\mathit{FCFS}}}=\expected{N^{\mathit{LCFS}}}=\expected{N^{\mathit{RO}}}
+\end{equation}
+
+\begin{equation}
+\expected{T^{\mathit{FCFS}}}=\expected{T^{\mathit{LCFS}}}=\expected{T^{\mathit{RO}}}
+\end{equation}
+
+\begin{equation}
+\variance{T^{\mathit{FCFS}}}<\variance{T^{\mathit{RO}}}=\variance{T^{\mathit{LCFS}}}
+\end{equation}
+
+The latter holds because LCFS can produce high response time, since the first come job has to wait for the queue to be empty.
+
+Thus, all non-preemptive non-size-based scheduling policies for $M/G/1$ have the same $\expected{T}$ as $M/M/1$, namely
+
+\begin{equation}
+\label{eqn:Non-Preemptive-Non-Size-Based-Time}
+\expected{T}=\expected{S}+\frac{\lambda\expected{S^{2}}}{2(1-\varrho)}
+\end{equation} 
+
+The problem is that under high-variability job sizes the mean response time gets very high.
+In particular, the mean slowdown is high for small sized jobs.

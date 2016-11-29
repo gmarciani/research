@@ -1,0 +1,84 @@
+\section{Burke's Theorem}
+\label{sec:Burke-Theorem}
+
+\begin{theorem}[Burke]
+\label{thm:Burke}
+	For any $M/M/m$ with arrival rate $\lambda$, we have that:
+	
+	\begin{enumerate}
+		\item The departure process is $Poisson(\lambda)$
+		\footnote{that is, inter-departure times are Exponentially distributed with rate $\lambda$.};
+		
+		\item The number of jobs in the system is independent of the sequence of previous departures
+		\footnote{that is, independent of times and patterns}.
+	\end{enumerate}
+	\begin{proof}
+		For a formal demonstration, see \cite{harchol2013performance}.
+	\end{proof}
+\end{theorem}
+
+The Burke's Theorem allows us to instantly analyze a large class of queueing networks.
+Let us start with its application on (i) tandem systems and (ii) acyclic networks with probabilistic routing.
+
+
+
+
+\subsection{Burke Applications: Tandem Systems}
+\label{sec:Burke-Application-Tandem-Systems}
+
+By the Burke's Theorem, for any tandem system made by m $M/M/1$ nodes arrival rate $\lambda$, we have that:
+
+\begin{itemize}
+	\item the arrival stream to each server is Poisson distributed with rate $\lambda$;
+	
+	\item the number of jobs in each server is independent of the number of jobs in every other server;
+	
+	\item the order of the sequence of servers are uninfluential for system performance;
+	
+	\item the state probability is
+	
+	\begin{equation}
+	\label{eqn:Burke-Application-Tandem-Systems-Probability-State}
+	\pi_{n_{1},...,n_{m}} = \prod_{i=1}^{m} \varrho_{i}^{n_{i}} (1 - \varrho_{i})
+	\end{equation}
+	
+	where $\varrho_{i}$ is the utilization of the $i$-th server.
+	
+	\item the probability to have $n_{i}$ jobs in the $i$-th server is
+	
+	\begin{equation}
+	\label{eqn:Burke-Application-Tandem-Systems-Probability-Jobs-Server}
+	\probability{N_{i}=n_{i}} = \varrho_{i}^{n_{i}} (1 - \varrho_{i})
+	\end{equation}
+	
+	where $\varrho_{i}=\frac{\lambda}{\mu_{i}}$ is the utilization of the $i$-th server.
+	
+	\item the mean number of jobs in the $i$-th server is
+	
+	\begin{equation}
+	\label{eqn:Burke-Application-Tandem-Systems-Expected-Jobs-Server}
+	\expected{N_{i}} = \frac{\varrho_{i}}{1-\varrho_{i}}
+	\end{equation}
+\end{itemize}
+
+%\begin{figure}[tp]
+%	\label{fig:tandem-systems}	
+%	\centering
+%	\includegraphics{fig/Tandem-System}
+%	\caption{A Tandem system}
+%\end{figure}
+
+
+
+
+\subsection{Burke Application: Acyclic Networks with Probabilistic Routing}
+\label{sec:Burke-Application-Acyclic-Networks-Probabilistic-Routing}
+
+By the Burke's Theorem, for any acyclic system with probabilistic routing made by $m$ $M/M/1$ nodes with arrival rate $\lambda$, everything stated in \Cref{sec:Burke-Application-Tandem-Systems} holds, but the arrival stream to each server is (splitted/merged) Poisson distributed with rate proportional to $\lambda$.
+
+%\begin{figure}[tp]
+%\label{fig:Acyclic-Networks-Probabilistic-Routing}	
+%	\centering
+%	\includegraphics{fig/Acyclic-Network-Probabilistic-Routing}
+%	\caption{An Acyclic Networks with Probabilistic Routing}
+%\end{figure}

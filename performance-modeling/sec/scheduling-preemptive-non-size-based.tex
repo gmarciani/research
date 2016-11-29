@@ -1,0 +1,98 @@
+\subsection{Scheduling: Preemptive, Non-Size-Based}
+\label{sec:Scheduling-Preemptive-Non-Size-Based}
+
+The most common preemptive non-size-based scheduling policies are
+
+\begin{description}
+	
+	\item [Processor-Sharing (PS)] the server is time-shared among all jobs.
+	
+	\item [Preemptive Last-Come First-Served (PLCFS)] a new arrival preempts the job in service; when the arrival is completed, the preempted job resumes.
+	
+	\item [Generalized Foreground-Background (FB)\footnote{also known as \textit{Least-Attained-Service (LAS)}.}] the job with the lowest age gets served; jobs with the same lowest age time-share service.
+	
+\end{description}
+
+
+
+
+\subsection{Scheduling: PS}
+\label{sec:Scheduling-PS}
+PS is insensitive to job size variability, because when a job arrives it immediately time-shares with all other jobs.
+$M/G/1/PS$ is better in expectation than $M/G/1/FCFS$ when the squared coefficient of job size variation gets high (namely, $C_{G}^{2}>1$).
+PS is effective in CPU scheduling: it lets short jobs get out quickly, has slowdown lower than FCFS, and has high throughput in a  multi-resources context.
+
+In $M/G/1/PS$, the following holds:
+
+\begin{equation}
+\label{eqn:PS-Mean-Response-Time}
+\expected{T(x)}^{\mathit{M/G/1/PS}}=\frac{x}{1-\varrho}
+\end{equation}
+
+Hence $M/G/1/PS$ is said to be fair, because every job has the same slowdown, namely:
+
+\begin{equation}
+\label{eqn:PS-Mean-Slowdown}
+\expected{Slowdown}^{\mathit{PS}}=\frac{1}{1-\varrho}
+\end{equation}
+
+We notice that $\variance{T}^{\mathit{PS}}$ cannot be expressed in closed form.
+
+Recall that $M/G/1/PS$ and $M/G/1/FCFS$ have the same mean system jobs
+
+\begin{equation*}
+\expected{N}=\frac{\varrho}{a-\varrho}
+\end{equation*}
+
+There are many variants of PS, see \cite{aalto2007beyond}.
+
+
+
+
+\subsection{Scheduling: PLCFS}
+\label{sec:Scheduling-PLCFS}
+
+In $M/G/1/PLCFS$, the following holds:
+
+\begin{equation}
+\label{eqn:PLCFS-Mean-Response-Time}
+\expected{T(x)}^{\mathit{M/G/1/PLCFS}}=\frac{x}{1-\varrho}
+\end{equation}
+
+Hence $M/G/1/PLCFS$ is said to be fair, because every job has the same slowdown, namely:
+
+\begin{equation}
+\label{eqn:PLCFS-Mean-Slowdown}
+\expected{Slowdown}^{\mathit{PLCFS}}=\frac{1}{1-\varrho}
+\end{equation}
+
+PLCFS has the same mean performances as PS, but with many fewer preemptions\footnote{only 2 preemptions per job.}.
+
+
+
+
+\subsection{Scheduling: FB}
+\label{sec:Scheduling-FB}
+
+Recall that if job size distribution has decreasing failure rate, then the greater the job age, the greater its expected remaining service time.
+FB gives priority to jobs with low age, this giving preference to the expected shortest jobs.
+
+The performance improvement of FB against PS depends on job size distribution: if the distribution is d.f.r. then it outperforms.
+
+If the job size distribution is DFR, then younger jobs have lower remaining service times, hence $\expected{T}^{\mathit{FB}}<\expected{T}^{\mathit{PS}}$.
+
+If the job size distribution is IFR, then younger jobs have higher remaining service times, hence $\expected{T}^{\mathit{FB}}>\expected{T}^{\mathit{PS}}$.
+
+If the job size distribution is CFR, then the remaining service times are independent of jobs ages, hence $\expected{T}^{\mathit{FB}}=\expected{T}^{\mathit{PS}}<$. 
+If the job size distribution is CFR, then $\expected{Slowdown}^{\mathit{FB}}<\expected{Slowdown}^{\mathit{PS}}<$, because, even if job ages and expected remaining service times are independent, they are not of original jobs size. Hence, FB gives slight preference to small sized jobs.
+
+FB needs the job size distribution to be DFR to perform well. Recall that higher DFR is coupled with higher variability. Thus, FB does not work well under low variability.
+
+\begin{equation}
+\label{eqn:Scheduling-FB-Response-Time}
+\expected{T(x)}^{\mathit{FB}}=
+\frac{x(1-\varrho_{\overline{x}})+\frac{1}{2}\lambda\expected{S_{\overline{x}}^{2}}}
+{\Big(1-\varrho_{\overline{x}}\Big)^{2}}
+\end{equation}
+
+where $\varrho_{\overline{x}}=\lambda\expected{S_{\overline{x}}}$ is the utilization under the transformed distribution.

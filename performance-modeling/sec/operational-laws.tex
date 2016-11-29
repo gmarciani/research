@@ -1,0 +1,239 @@
+\section{Operational Laws}
+\label{sec:Operational-Laws}
+
+Operational laws are laws that hold for any open/closed system \footnote{they often are most powerful when applied to closed ones.} or part of it.
+They are distribution independent and depends only on mean quantities.
+Operational laws can be put together to prove asymptotic bounds on closed networks behavior.
+These asymptotic bounds are useful to answer what-if questions.
+They are fundamental for the modification analysis.
+
+In the following sections, we present the following operational laws: 
+\textit{Little's Law},
+\textit{Utilization Law},
+\textit{Forced Flow Law}, and 
+\textit{Bottleneck Law}.
+
+
+
+
+\subsection{Little's Law}
+\label{sec:Little-Law}
+
+The Little's Law \cite{little1961proof} is the most important operational law. It relates mean number of system jobs to the mean response time.
+
+\begin{theorem}[Little's Law for open systems]
+\label{thm:Little-Law-Open-Systems}	
+	For any ergodic open system, we have that
+	
+	\begin{equation}
+	\label{eqn:Little-Law-Open-Systems}
+	\expected{N} = \lambda \cdot \expected{T}
+	\end{equation}
+	
+	where $\expected{N}$ is the expected number of jobs in the system, $\lambda$ is the average arrival rate into the system, and $\expected{T}$ is the mean time jobs spend in the system.
+\end{theorem}
+
+\begin{theorem}[Little's Law for closed systems]
+\label{thm:Little-Law-Closed-Systems}	
+	For any ergodic closed system, we have that
+	
+	\begin{equation}
+	\label{eqn:Little-Law-Closed-Systems}
+	N = X \cdot \expected{T}
+	\end{equation}
+	
+	where $N$ is the multiprogramming level, $X$ is the throughput, and $\expected{T}$ is the mean time jobs spend in the system.
+\end{theorem}
+
+It is important to note that Little's Law makes no assumption on arrival process, service process, network topology or anything else. It only requires the system to be in steady state with finite $\expected{N}$ and $\expected{T}$.
+
+The Little's Law holds for higher moments only under very restrictive conditions (e.g. it requires FCFS \cite{bertsimas1995distributional,brumelle1972generalization}).
+
+The Little's Law take into account the \textit{effective arrival rate}. Be aware to consider the three quantities in Little's Law on the same request flow.
+
+The following is an alternative expression of the Little's Law for closed systems.
+
+\begin{corollary}
+\label{cor:Response-Time-Law-Closed-Systems}
+	
+	For every ergodic closed system, we have that
+	
+	\begin{equation}
+	\label{eqn:Response-Time-Law-Closed-Systems}
+	\expected{R} = \frac{N}{X} - \expected{Z}
+	\end{equation}
+	
+	where 
+	$\expected{R}$ is the expected response time,
+	$N$ is the multiprogramming level,
+	$X$ is the system throughput, and
+	$\expected{Z}$ is the expected think time.
+	
+	\begin{proof}
+		The corollary directly follows from the Little's Law.
+		\begin{equation*}
+		\begin{split}
+		N & = X \cdot \expected{T} \\
+		& = X \cdot (\expected{R} + \expected{Z}) 
+		\end{split}
+		\end{equation*}
+		So we have
+		\begin{equation*}
+		\expected{R} = \frac{N}{X} - \expected{Z}
+		\end{equation*}
+	\end{proof}
+\end{corollary}
+
+
+
+
+\subsection{Utilization-Law}
+\label{sec:Utilization-Law}
+
+\begin{theorem}[Utilization Law]
+\label{thm:Utilization-Law-2}	
+	For every stable queue node we have that
+	
+	\begin{equation}
+	\varrho = \frac{\lambda}{\mu}
+	\end{equation}
+	
+	where $\varrho$ is the long-run fraction of time that the server is busy.
+	
+	\begin{proof}
+		Let us consider only the server of the queue node, without the associated queue. The number of jobs in the node is 1 with probability $\varrho$ and 0 with probability $(1-\varrho)$. Hence the the expected number of jobs in the node is $\varrho$.
+		So, applying Little's Law, we have
+		\begin{equation*}
+			\begin{split}
+			\varrho & = \expected{N} \\
+					& = \lambda \cdot \expected{T} \\
+					& = \lambda \cdot \expected{S} \\
+					& = \lambda \cdot \frac{1}{\mu}
+			\end{split}
+		\end{equation*}
+	\end{proof}
+\end{theorem}
+
+Notice that
+
+\begin{equation}
+\varrho_{i} = \probability{server \; i \; busy} = \expected{requests \; to \; server \; i}
+\end{equation}
+That is, the utilization is the probability to have the server busy and the expected number of requests being served.
+
+
+
+
+\subsection{Forced Flow Law}
+\label{sec:Forced-Flow-Law}
+
+\begin{theorem}[Forced Flow Law]
+\label{thm:Forced-Flow-Law}	
+	For every stable network of queues, we have that
+	
+	\begin{equation}
+	\label{eqn-Forced-Flow-Law}
+	X_{i} = \expected{V_{i}} \cdot X
+	\end{equation}
+	
+	where 
+	$X$ is the system throughput,
+	$X_{i}$ is the throughput at the \textit{i}-th server, and
+	$V_{i}$ is the visit ratio for the \textit{i}-th server, that is the number of visits per job to the \textit{i}-th server.
+	
+	\begin{proof}
+		Let us first consider a intuitive demonstration.
+		For every system completion, there are on average $\expected{V_{i}}$ completions at the \textit{i}-th server. Hence the rate of completions at the \textit{i}-th server is $\expected{V_{i}}$ times the rate of system completions.
+		
+		Let us now consider a more formal demonstration.
+		Let $C(t)$ denote the system completions during time $t$, $C_{i}(t)$ denote the completions at the \textit{i}-th server during time $t$, and $V_{i}^{(i)}$ denote the number of visits the the \textit{j}-th job makes to the \textit{i}-th server. Then,
+		\begin{equation*}
+			\begin{split}
+				C_{i}(t) & = \sum_{j \in C(t))}V_{i}^{(j)} \\
+				\frac{C_{i}(t)}{t} & = \frac{\sum_{j \in C(t))}V_{i}^{(j)} }{C(t)} \cdot \frac{C(t)}{t} \\
+				\lim_{t \to \infty} \frac{C_{i}(t)}{t} & = \lim_{t \to \infty} \frac{\sum_{j \in C(t))}V_{i}^{(j)} }{C(t)} \cdot \lim_{t \to \infty} \frac{C(t)}{t} \\
+				X_{i} & = \expected{V_{i}} \cdot X
+			\end{split}
+		\end{equation*}
+	\end{proof}
+\end{theorem}
+
+
+
+
+\subsection{Bottleneck Law}
+\label{sec:Bottleneck-Law}
+
+We define $D_{i}$ to be the total service demand on the \textit{i}-th server
+
+\begin{equation}
+D_{i} = \sum_{j=1}^{V_{i}}S_{i}^{(j)}
+\end{equation}
+
+Since $V_{i}$ and $S_{i}^{(j)}$ are independent, we have that
+
+\begin{equation}
+\label{eqn:Service-Demand}
+\expected{D_{i}} = \expected{V_{i}} \cdot \expected{S_{i}}
+\end{equation}
+
+In practice, we measure $\expected{D_{i}}$ as follows
+
+\begin{equation}
+\expected{D_{i}} = \frac{B_{i}}{C} 
+\end{equation}
+
+where
+$B_{i}$ is the busy time for the \textit{i}-th server, and
+$C$ is the system completions.
+
+Let $m$ be the number of servers in our system. Let
+
+\begin{equation}
+\label{eqn:Total-Demand}
+D = \sum_{i=1}^{m}\expected{D_{i}}
+\end{equation}
+
+and
+
+\begin{equation}
+\label{eqn:Maximum-Demand}
+D_{max} = \max\{\expected{D_{i}}\}
+\end{equation}
+
+Previous definitions will be useful when discussing \textit{Bottleneck Law}, \textit{asymptotic bounds} and \textit{modification analysis}.
+
+\begin{theorem}[Bottleneck Law]
+\label{thm:Bottleneck-Law}	
+	For every stable network of queues, we have that
+	
+	\begin{equation}
+	\label{eqn:Bottleneck-Law}
+	\varrho_{i} = X \cdot \expected{D_{i}}
+	\end{equation}
+	
+	where 
+	$\varrho_{i}$ is the utilization of the \textit{i}-th server, 
+	$X$ is the system throughput, and
+	$\expected{D_{i}}$ is the expected service demand on the \textit{i}-th server for all visits of a single job.
+	
+	\begin{proof}
+		Let us first consider an intuitive demonstration.
+		Let $X$ denote the job/sec arrival rate to the whole system and let each arrival contribute $\expected{D_{i}}$ seconds of work for the \textit{i}-th server. We have that the \textit{i}-th server is busy for $X \cdot \expected{D_{i}}$ seconds out of every second.
+		Thus $X \cdot \expected{D_{i}}$ represents the utilization of the \textit{i}-th server.
+		
+		Let us now consider a more formal demonstration.
+		Let us consider 
+		the Utilization Law ($\varrho = X \cdot \expected{S}$),
+		the Forced Flow Law ($X_{i} = \expected{V_{i}} \cdot X$), and
+		the demand definition ($D_{i} = \sum_{j=1}^{V_{i}}S_{i}^{(j)} \Rightarrow \expected{D_{i}} = \expected{V_{i}} \cdot \expected{S_{i}}$).
+		We have that
+		\begin{equation*}
+			\begin{split}
+				\varrho_{i} & = X_{i} \cdot \expected{S_{i}} \\
+							& = X \cdot \expected{V_{i}} \cdot \expected{S_{i}} \\
+							& = X \cdot \expected{D_{i}}
+			\end{split}
+		\end{equation*}
+	\end{proof}
+\end{theorem}

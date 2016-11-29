@@ -1,0 +1,134 @@
+\chapter{Convergenza degli algoritmi}
+\label{chp:convergence-algorithms}
+In questa sezione studiamo la struttura e la convergenza degli algoritmi di ottimizzazione non vincolata.
+Vogliamo risolvere il problema
+
+\begin{equation}
+	\min f(x), \qquad x\in\Re^{n}
+\end{equation}
+
+In generale, ad eccezione della forma quadratica, non posso avere una espressione analitica della soluzione.
+Un algoritmo genera una successione di punti, tali da convergere ad un punto stazionario.
+L'algoritmo parte da un punto iniziale $x_{0}\in\Re^{n}$, di solito la migliore stima della soluzione, e cerca la soluzione nell'insieme di livello $L(x_{0})$. Ciò permette di escludere i massimi locali. Ogni iterazione dell'algoritmo punta ad un sufficiente decremento di $f(x)$ in corrispondenza di un sufficiente spostamento di $x$.
+L'algoritmo cerca di far convergere la successione di punti generati all'insieme dei punti stazionari $\Omega=\{x\in\Re^{n}:\nabla f(x)=0\}$.
+
+In generale l'algoritmo è
+
+\begin{algorithm}[Schema iterativo]
+	\label{alg:iterative-schema}
+	$x_{0}\in\Re^{n}$, $k=0$ \\
+	\textbf{while} $x_{k}\notin\Omega$: \\
+	Determina lo spostamento $s_{k}$ \\
+	Calcola nuovo punto $x_{k+1}=x_{k}+s_{k}$ \\
+	$k=k+1$\\
+	\textbf{end while}
+\end{algorithm}
+
+In generale il criterio di arresto è $\norm{\nabla f(x)}\leq\epsilon$. Tale criterio deve tener conto della finitezza della precisione della macchina. Una precisione tipica è nell'ordine $[10^{-4},10^{-8}]$.
+
+\subsection{Convergenza}
+
+La scelta dello spostamento $d_{k}$ deve garantire la convergenza dell'algoritmo.
+La convergenza di un algoritmo dipende dal comportamento delle successioni $\{x_{k}\},\{f(x_{k})\},\{\nabla f(x_{K})\}$. In particolare:
+
+\begin{enumerate}
+
+	\item esistenza, unicità e natura dei punti di accumulazione di $\{x_{k}\}$;
+
+	\item andamento e convergenza di $\{f(x_{k})\}$;
+
+	\item appartenenza dei punti di accumulazione di $\{\nabla f(x_{K})\}$;
+
+	\item rapidità di convergenza di $\{x_{k}\}$.
+
+\end{enumerate}
+
+Mi domando se l'algoritmo converga ad un punto in un numero finito di passi.
+La convergenza di un algoritmo a punti stazionari può essere:
+
+\begin{enumerate}
+
+	\item convergenza finita: esiste un punto $x_{\nu}\in\Re^{n}.x_{\nu}\in\Omega$. L'algoritmo determina $x_{\nu}$ in un numero finito e noto di passi. Ad esempio la minimizzazione non vincolata si funzioni quadratiche convesse, in quanto ammette espressione analitica della soluzione. Il numero di passi in questo caso è dato dalla complessità dell'inversione della matrice.
+
+	\item convergenza della successione: vale il limite
+
+	\begin{equation}
+	\lim_{k\rightarrow\infty}x_{k} = \tilde{x}_{k}.\nabla f(\tilde{x}_{k})=0
+	\end{equation}
+
+	La successione $\{x_{k}\}$ converge ad un punto stazionario.
+
+	\item convergenza del gradiente: vale il limite
+
+	\begin{equation}
+	\lim_{k\rightarrow\infty}\nabla f(x_{k}) = 0
+	\end{equation}
+
+	La successione $\{\nabla f(x_{k})\}$ converge a zero, ovvero ogni punto di accumulazione di $\{x_{k}\}$ è un punto stazionario \footnote{Questo perchè la continuità del gradiente implica che $\lim_{k\rightarrow\infty}\nabla f(x_{k}) = \nabla\lim_{k\rightarrow\infty}f(x_{k})$.}.
+
+	\item accumulazione del gradiente: vale il limite
+
+	\begin{equation}
+	\lim_{k\rightarrow\infty}\inf\norm{\nabla f(x_{k})} = 0
+	\end{equation}
+
+	Non pretendo che tutta la successione $\{\nabla f(x_{k})\}$ converga a zero, ovvero che tutti i punti di accumlazione di $\{x_{k}\}$ siano punti stazionari, ma solo che esista una sua sottosuccessione convergente a zero, ovvero che esista un punto di accumulazione di $\{x_{k}\}$ che è punto stazionario.
+\end{enumerate}
+
+Le caratterizzazioni di convergenza suddette sono in ordine decrescente di forza, ma garantiscono tutte la convergenza dell'algoritmo.
+La direzione ed il passo devono essere scelti opportunamenteper garantire la convergenza. L'una deve tener conto dell'altro. Anche la scelta del punto iniziale può essere fondamentale.
+
+
+\subsection{Rapidità di convergenza}
+
+Si possono dare molte connotazioni alla rapidità di convergenza. Noi vediamo la \textit{Q-convergenza}.
+Lo studio della rapidità di convergenza consiste nello stimare velocità con cui la successione $\{x_{k}\}$ tende ad un punto limite $\tilde{x}\in\Re^{n}$, ovvero la velocità con cui l'errore alla $k$-esima iterazione $e_{k}:=\norm{x_{k}-x*}$ tende a zero.
+
+La rapidità di convergenza dipende da $x_{0}$. Tipicaente si fa riferimento al worst-case, rispetto alla scelta di $x_{0}$ in un intorno di $x*$.
+
+La \textit{Q-convergenza} studia il comportamento all'infinito del quoziente d'errore $\frac{e_{k+1}}{e_{k}}$.
+La \textit{R-convergenza} studia il comportamento all'infinito delle radici d'errore, ovvero confronta l'andamento dell'errore con un andamento assegnato \footnote{tipicamente, un andamento esponenziale}.
+
+\begin{definition}[Q-rapidità di convergenza]
+	\label{dfn:q-convergence-velocity}
+	Sia data una successione $\{x_{k}\}$ in $\Re^{n}$ convergente a $x*\in\Re^{n}$. Allora per $k$ abbastanza grande
+	\begin{enumerate}
+
+		\item $\{x_{k}\}$ converge (almeno) \textit{Q-linearmente} a $x*$, se esiste $\sigma\in[0,1)$ tale che
+		\begin{equation}
+		\norm{x_{k+1}-x*}\leq \sigma\norm{x_{k}-x*}
+		\end{equation}
+
+		\item $\{x_{k}\}$ converge \textit{Q-superlinearmente} a $x*$, se vale il limite
+		\begin{equation}
+		\lim_{k\rightarrow\infty}\frac{\norm{x_{k+1}-x*}}{\norm{x_{k}-x*}}=0
+		\end{equation}
+
+		\item $\{x_{k}\}$ converge \textit{Q-superlinearmente} a $x*$ con \textit{Q-velocità} (almeno) $p$, se esistono $C>0$ e $p>1$ tali che
+		\begin{equation}
+		\norm{x_{k+1}-x*}\leq C\norm{x_{k}-x*}^{p}
+		\end{equation}
+
+		\item $\{x_{k}\}$ converge \textit{Q-quadraticamente} a $x*$, se converge Q-superlinearmente con Q-velocità $p=2$.
+	\end{enumerate}
+\end{definition}
+
+Notiamo che l'errore è connotato come maggiorazione, pertanto la convergenza Q-quadratica implica la convergenza Q-superlineare e Q-lineare.
+
+
+\subsection{Classificazione algoritmi}
+
+Gli algoritmi sono classificati in base a:
+
+\begin{enumerate}
+	\item informazioni per il calcolo dello spostamento $s_{k}$:
+	alcuni algoritmi utilizzano $f,\nabla f, \nabla^{2}f$, altri solo $f,\nabla f$, ed altri ancora solo $f$. Maggiori sono le informazioni utilizzate, maggiore sarà la precisione e la rapidità di convergenza dell'algoritmo a costo di un maggior costo computazionale. Il calcolo differenziale ha un costo computazionale che non può essere trascurato. Gli algoritmi che non fanno uso del calcolo differenziale si basano sul campionamento della funzione obiettivo, alla ricerca di un miglioramento; qualora questo miglioramento non ci sia, si assume di essere in un punto stazionario.
+
+	\item dipendenza dal punto iniziale $x_{0}$:
+	un algoritmo è \textit{globalmente (localmente) convergente} se la sua convergenza è indipendente (dipendente) da $x_{0}$. In generale vogliamo algoritmi globalmente convergenti. Vi sono comunque algoritmi localmente convergenti molto efficienti (e.g. algoritmo di Newton).
+
+	\item  strategia di spostamento:
+	un algoritmo di \textit{line search} calcola il punto dell'iterazione come $x_{k+1}=x_{k}+\alpha_{k}d_{k}$, dove $\alpha_{k}$ è il passo lungo la direzione $d_{k}$. Data una direzione, la scelta del passo può globalizzare l'algoritmo.
+	Un algoritmo \textit{trust region} ricava un modello locale quadratico in un intorno sferico di $x_{k}$, e calcola $s_{k}$ minimizzando il sottoproblema vincolato nell'intorno considerato.  La scelta del raggio di confidenza e del metodo di risoluzione locale possono globalizzare l'algoritmo.
+	Un algoritmo di \textit{direct search} campiona la regione di interesse alla ricerca di un punto di minimo. Tale classe di algoritmi può essere inefficiente, e viene adottata in assenza di informazioni differenziali della funzione obiettivo.
+\end{enumerate}

@@ -1,0 +1,131 @@
+\subsection{Scheduling: Preemptive, Size-Based}
+\label{sec:Scheduling-Preemptive-Size-Based}
+
+The most common preemptive size-based scheduling policies are
+
+\begin{description}
+	
+	\item [Preemptive Shortest-Job-First (PSJF)] the server chooses the job with the smallest size, eventually preempting the current running job.
+	
+	\item [Shortest Remaining Process-Time (SRPT)] the server chooses the job with the shortest remaining process time; a new arrival preempts the current job if the new arrival has shorter remaining process time.
+	
+\end{description}
+
+Preemptive policies that make use of job sizes can reach high performance biasing towards small jobs.
+
+It is convenient to evaluate PSJF as \textit{preemptive priority queueing} where priority classes are job sizes and a job has higher priority if it has lower job size.
+
+It is not possible to evaluate SRPT with the same model, because the remaining process time changes in time, whereas the preemptive priority model does not allow jobs to change priority.
+
+
+
+
+\subsection{Preemptive Priority Queueing}
+\label{sec:P-Priority}
+
+In preemptive priority queueing (P-Priority), one can view the response time as divided into
+
+\begin{description}
+
+	\item [Waiting Time $Wait(x)$] the time until a job first starts serving.
+	
+	\item [Residence Time $Res(x)$] the time from when job first gets served until it leaves the system (including all interruptions due to preemption).
+
+\end{description}
+
+In such a model, we have that
+
+\begin{equation}
+\label{eqn:P-Priority-Mean-Time-Size}
+\expected{T(x)}^{\mathit{P-Priority}}=
+\expected{Res(x)}^{\mathit{P-Priority}} + \expected{Wait(x)}^{\mathit{P-Priority}}=
+\frac{\expected{S_{x}}}{1-\sum_{i=1}^{x-1}\varrho_{i}}+
+\frac{\sum_{i=1}^{x}\frac{\varrho_{i}\expected{S_{i}^{2}}}{2\expected{S_{i}}}}
+	 {\Big(1-\sum_{i=1}^{x-1}\varrho_{i}\Big)\Big(1-\sum_{i=1}^{x}\varrho_{i}\Big)}
+\end{equation}
+
+To determine $\expected{T}^{\mathit{P-Priority}}$ we need transform analysis.
+
+In $\mathit{P-Priority}$ model, a job of priority $x$ only sees the variability and the load created by the first $x$ classes. Hence, a high priority job (low $x$) wins, even under high-variability job sizes.
+
+We will use these results to analyze PSJF.
+
+
+
+
+\subsection{Scheduling: PSJF}
+\label{sec:Scheduling-PSJF}
+
+We model PSJF as P-Priority with infinite priority classes, where the smaller the job, the higher the priority.
+
+By applying \Cref{eqn:P-Priority-Mean-Time-Size}, we obtain:
+
+\begin{equation}
+\label{eqn:PSJF-Mean-Time-Size}
+\expected{T(x)}^{\mathit{PSJF}}=
+\expected{Res(x)}^{\mathit{PSJF}}+\expected{Wait(x)}^{\mathit{PSJF}}=
+\frac{x}{1-\varrho_{x}}+
+\frac{\frac{\lambda}{2}\int_{0}^{x}f(t)t^{2}\partial t}
+{\Big(1-\varrho_{x}\Big)^{2}}
+\end{equation}
+
+where $\varrho_{x}=\lambda\int_{t=0}^{x}tf(t)\partial t$ is the load made up by jobs of size less than $x$.
+
+To determine $\expected{T}^{\mathit{PSJF}}$ we need transform analysis.
+
+
+
+
+\subsection{Scheduling: SRPT}
+\label{sec:Scheduling-SRPT}
+
+SRPT achieves the lowest possible mean response time on every arrival sequence.
+
+We cannot model SRPT as P-Priority, because the remaining process time changes with time.
+
+We obtain that
+
+\begin{equation}
+\label{sec:SRPT-Mean-Time-Size}
+\expected{T(x)}^{\mathit{SRPT}}=
+\expected{Wait(x)}^{\mathit{SRPT}}+\expected{Res(x)}^{\mathit{SRPT}}=
+\frac{\lambda}{2}\frac{\int_{t=0}^{x}t^{2}f(t)\partial t + x^{2}(1-F(x))}{\Big(1-\varrho_{x}\Big)^{2}}+
+\int_{t=0}^{x}\frac{1}{1-\varrho_{t}}
+\end{equation}
+
+We notice that the response time
+(i) is only sensitive of variance of the job size distribution up to size $x$
+(ii) is only sensitive of load made up of jobs of size up to size $x$
+This is why small jobs win under SRPT.
+
+Let us compare SRPT with PSJF.
+The waiting time of SRPT is greater than that for PSJF, but the residence time is smaller because a job must only wait for job with shorter remaining process time whereas under PSJF must wait for all jobs smaller than its original size.
+The benefit of $\expected{T}^{\mathit{SRPT}}$ makes SRPT better than PSJF with respect to the mean response time.
+
+Let us compare SRPT with FB.
+SRPT and FB are complementary. In SRPT, a job gains priority as it receives more service. In, FB a job loses priority as times goes on.
+
+We have that, in $M/G/1$, for all $x$ and $\varrho$
+\begin{equation}
+\expected{T(x)}^{\mathit{SRPT}}\leq\expected{T(x)}^{\mathit{FB}}
+\end{equation}
+
+Let us compare SRPT with PS.
+Seems that large jobs should prefer PS over SRPT, because they have low priority in SRPT, while they are threated equally under PS. This is not true. Under SRPT large jobs start with low priority, but they gain more and more priority from the time they first get served, on.
+
+SRPT is more fair than PS. Even if it does not seem so, large jobs and small jobs have nearly the same Slowdown, because large jobs gain priority with time.
+
+\begin{theorem}[All-Can-Win]
+\label{thm:All-Can-Win}
+We have that, in $M/G/1$, for all $x$ and $\varrho<\frac{1}{2}$
+\begin{equation}
+\label{eqn:All-Can-Win}
+\expected{T(x)}^{\mathit{SRPT}}\leq\expected{T(x)}^{\mathit{PS}}
+\end{equation}
+\end{theorem}
+
+The \Cref{thm:All-Can-Win} holds for every job size distribution $G$. For many $G$, the restriction on $\varrho$ is much looser\footnote{If $G$ is a Bounded-Pareto with $\alpha=1.1$, we have that \Cref{thm:All-Can-Win} holds for $\varrho<0.96$.}.
+
+
+
+

@@ -1,0 +1,156 @@
+\chapter{Ottimalità per problemi non vincolati}
+\label{chp:optimality-unbounded-optimization-problems}
+
+Consideriamo il problema di programmazione matematica
+
+\begin{equation*}
+\min f(x), x\in S
+\end{equation*}
+
+Una condizione di ottimalità è una condizione (necessaria, sufficiente, necessaria e sufficiente) affinchè il punto $\overline{x}$ sia soluzione ottima (locale o globale) del problema.
+
+Una condizione necessaria permette di restringere l'insieme in cui cercare la soluzione. Una condizione sufficiente permette di verificare l'ottimalità di un punto calcolato analiticamente.
+
+
+\section{Direzioni di discesa}
+
+\begin{definition}[Direzione di discesa]
+	\label{dfn:direction-descent}
+	Sia $f:\Re^{n}\rightarrow\Re$ e $x\in\Re^{n}$. Si dice che un vettore $d\in\Re^{n}$,$d\neq 0$ è una direzione di discesa per $f$ in $x$ se esiste un $\overline{t}>0$ tale che
+	\begin{equation}
+	\label{eqn:direction-descent}
+	f(x+td)<f(x)\quad\forall t\in[0,\overline{t}]
+	\end{equation}
+\end{definition}
+
+Intuitivamente, $d$ è una direzione di discesa se la funzione diminuisce per tutti gli spostamenti abbastanza piccoli lungo $d$. Analogamente, si definisce direzione di salita laddove si ha un incremento della funzione.
+
+L'antigradiente ($-\nabla f(x)$) è una direzione di discesa notevole, in quanto la sua derivata direzionale del primo ordine si annulla solo nei punti stazionari.
+
+Notiamo che in un minimo locale non può esistere una direzione di discesa.
+
+\begin{definition}[Direzione a curvatura negativa]
+	\label{dfn:direction-curvature}
+	Sia $f:\Re^{n}\rightarrow\Re$ due volte continuamente differenziabile nell'intorno di $x\in\Re^{n}$. Si dice che un vettore $d\in\Re^{n}$,$d\neq 0$ è una direzione a curvatura negativa per $f$ in $x$ se vale
+	\begin{equation}
+	\label{eqn:direction-curvature}
+	d^{T}\nabla^{2} f(x) d < 0
+	\end{equation}
+\end{definition}
+
+Intuitivamente, $d$ è una direzione a curvatura negativa indica un intorno in cui la derivata direzionale del primo ordine diminuisce
+Analogamente, si definisce direzione a curvatura positiva laddove vi sia un intorno in cui la derivata direzionale del primo ordine diminuisce
+
+\begin{theorem}[Condizione di discesa, I ordine]
+	\label{thm:descent-condition-1}
+	Sia $f:\Re^{n}\rightarrow\Re$ continuamente differenziabile nell'intorno di $x\in\Re^{n}$, e sia $d\in\Re^{n}$ un vettore non nullo. Allora, se vale
+	\begin{equation}
+	\label{eqn:descent-condition-1}
+	\nabla f(x)^{T}d < 0
+	\end{equation}
+	$d$ è una direzione di discesa per $f$ in $x$.
+	\begin{proof}
+		content...
+	\end{proof}
+\end{theorem}
+
+Diciamo dunque che $d$ è una direzione di discesa se $\nabla f(x)^{T}d<0$, è una direzione di salita se $\nabla f(x)^{T}d<0$. Non possiamo conclude nulla su $d$ se $\nabla f(x)^{T}d=0$
+
+\begin{theorem}[Condizione di discesa, II ordine]
+	\label{thm:descent-condition-2}
+	Sia $f:\Re^{n}\rightarrow\Re$ due volte continuamente differenziabile nell'intorno di $x\in\Re^{n}$, e sia $d\in\Re^{n}$ un vettore non nullo. Allora, se $\nabla f(x)^{T}d=0$ e $d$ è una direzione a curvatura negativa, allora $d$ è una direzione di discesa.
+	\begin{proof}
+		content...
+	\end{proof}
+\end{theorem}
+
+\subsection{Condizioni di ottimalità}
+
+\begin{theorem}[Condizione necessaria I ordine]
+	\label{thm:optimality-condition-necessary-1}
+	\begin{equation}
+		\label{eqn:optimality-condition-necessary-1}
+		\overline{x}\;min\;locale\Rightarrow\nabla f(\overline{x})=0
+	\end{equation}
+	\begin{proof}
+		content...
+	\end{proof}
+\end{theorem}
+
+\begin{theorem}[Condizione necessaria II ordine]
+	\label{thm:optimality-condition-necessary-2}
+	\begin{equation}
+	\label{eqn:optimality-condition-necessary-2}
+	\overline{x}\;punto\;min\;locale
+	\Rightarrow
+	\nabla^{2} f(\overline{x}) \succeq 0
+	\end{equation}
+	\begin{proof}
+		content...
+	\end{proof}
+\end{theorem}
+
+Notiamo che:
+
+\begin{equation}
+	\overline{x}\;punto\;sella
+	\Rightarrow
+	\nabla^{2} f(\overline{x}) \succeq\preceq 0
+\end{equation}
+
+\begin{theorem}[Condizione sufficienti II ordine]
+	\label{thm:optimality-condition-sufficient-2}
+	\begin{equation}
+	\label{eqn:optimality-condition-sufficient-2}
+	\nabla f(\overline{x}) = 0 \wedge \nabla^{2} f(\overline{x}) \succeq (\succ) 0 \Rightarrow
+	\overline{x}\;punto\;min\;locale\;(isolato)
+	\end{equation}
+	\begin{proof}
+		content...
+	\end{proof}
+\end{theorem}
+
+Se $\overline{x}$ è un punto di minimo locale (isolato), allora $f$ è localmente convessa (strettamente).
+
+Nel caso convesso posso avere condizioni necessarie e sufficienti di ottimalità.
+
+\begin{theorem}[Condizione necessaria e sufficiente]
+	\label{thm:optimality-convex-ns}
+	Se $f$ è convessa, allora
+	\begin{equation}
+	\label{eqn:optimality-convex-ns}
+	\overline{x}\;punto\;min\;globale
+	\Leftrightarrow
+	\nabla f(\overline{x}) = 0
+	\end{equation}
+	Inoltre
+	\begin{equation}
+	\label{eqn:optimality-convex-ns-2}
+	\overline{x}\;punto\;min\;locale
+	\Leftrightarrow
+	\overline{x}\;punto\;min\;globale
+	\end{equation}
+	Se $f$ è strettamente convessa il minimo globale è unico.
+	\begin{proof}
+		content...
+	\end{proof}
+\end{theorem}
+
+Nel caso quadratico posso avere condizioni necessarie e sufficienti di ottimalità.
+
+\begin{theorem}[Condizione necessaria e sufficiente]
+	\label{thm:optimality-quadratic-ns}
+	\begin{equation}
+	\overline{x}\;punto\;min\;globale (unico)
+	\Rightarrow
+	Q \succeq (\succ) 0 \wedge Q\overline{x}+C=0
+	\end{equation}
+	Qualora $\overline{x}$ sia unico, si calcola analiticamente
+	\begin{equation}
+	\label{eqn:optimum-quadratic}
+	\overline{x}=-Q^{-1}C
+	\end{equation}
+	\begin{proof}
+		content...
+	\end{proof}
+\end{theorem}

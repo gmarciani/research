@@ -1,0 +1,224 @@
+\section{Queueing Theory}
+\label{sec:Queueing-Theory}
+
+The queueing theory is built on the stochastic modeling and analysis, which represents service demands and interarrivals as random variables.
+It is the theory behind what makes queues appear and how to make them go away.
+It is the study of queueing behavior in systems and networks.
+
+Queueing theory applies anywhere that queues come up. It is also at the heart of any computer system.
+
+Queueing theory has its origins in research by Agner Krarup Erlang when he created models to describe the Copenhagen telephone exchange.
+
+Queues results from variability in service time and/or interarrival time distribution.
+
+A major reason why computer scientists are so slow to adopt queueing theory is that standard assumptions often do not fit. In some cases they are very far from reality: for example, in the case of high variability and correlations. However there are often ways to work around these assumptions.
+
+The goals of a queueing theorist is \textit{predicting} the system performance and \textit{designing} it to improve performance.
+
+There are many questions in computer systems design that lend themselves to a queueing-theoretic solution (e.g., power management, priority scheduling, and so on).
+However, there are  lots of problems that we can at best only analyze approximately (e.g., mean response time for M/G/k queue). Typically, approximations are very poor when jobs size variability gets high \cite{gupta2010inapproximability}.
+
+
+
+
+\subsection{Queue Metrics}
+\label{sec:Queue-Metrics}
+
+A queue node is described by the following parameters and performance metrics:
+
+\begin{description}
+	\item [Service Order] The scheduling discipline.
+	
+	\item [Average Arrival Rate]  ($\lambda$) The rate at which jobs arrive to the node.
+	
+	\item [Interarrival Time] ($\tau$) The time between successive job arrivals.
+	
+	\item [Mean Interarrival Time] ($\expected{\tau}=\frac{1}{\lambda}$) The average time between successive job arrivals.
+	
+	\item [Service Requirement, Size] ($S$) The time taken by a job to run on server.
+	
+	\item [Average Service Rate] ($\mu$) The rate at which jobs are served by the server.
+	
+	\item [Mean Service Time] ($\expected{S}=\frac{1}{\mu}$) The average time required to serve a job.
+	
+	\item [Waiting Time, Delay] ($T_{Q}$) The time that the job spends in the queue.
+	
+	\item [Response Time, Turnaround Time] ($T$) The time during which the job is in the node. Thus $T=T_{departure}-T_{arrival}$. Note that $\expected{T}=\expected{T_{Q}}+\expected{S}$.
+	
+	\item [Number of System Jobs] ($N$) The number of jobs in the queue plus the ones being served.
+	
+	\item [Number of Queued Jobs] ($N_{Q}$) The number of jobs in the queue.
+	
+	\item [Utilization] ($\varrho$) The fraction of time the server is busy, the probability of the server to be busy, the mean number of jobs in that node.
+	
+	\item [Throughput] ($X$) The rate of completions at server.
+\end{description}
+
+
+
+
+\subsection{Kendall notation}
+A queue node il classified using the Kendall notation \cite{kendall1953stochastic}.
+
+\begin{equation}
+A/S/m/c/N/D
+\end{equation} 
+
+where 
+
+\begin{description}
+	\item [A] the arrival process, the value indicates the probability distribution of inter-arrival times.
+	
+	\item [S] the service process, the value indicates the probability distribution of service times.
+	
+	\item [A] the number of servers.
+	
+	\item [c] the capacity of the system (that is, the number of servers plus the buffer size).
+	
+	\item [N] the size of the population, that is the total number of jobs.
+	
+	\item [D] the scheduling discipline.
+\end{description}
+
+The arrival process \textit{A} and service process \textit{S} could be equal to 
+
+\begin{description}
+	\item [$M$] Exponential distribution.
+	
+	\item [$D$] Deterministic distribution.
+	
+	\item [$E_{n}$] Erlang distribution of order $n$.
+	
+	\item [$H_{n}$] Hyper-exponential distribution of order $n$.
+	
+	\item [$G$] Generic distribution of independent variables.
+\end{description}
+
+The scheduling discipline \textit{D} could be equal to 
+
+\begin{description}
+	\item [$FCFS (FIFO)$] first come, first served.
+	
+	\item [$LCFS (LIFO)$] last come, first served.
+	
+	\item [$RO$] random order.
+	
+	\item [$RR$] round robin.
+	
+	\item [$PS$] processor sharing.
+	
+	\item [$P$] custom priority.
+\end{description}
+
+When the final three parameters are not specified (e.g. M/M/1 queue), it is assumed $K=\infty$, $N=\infty$ and $D=FIFO$.
+
+
+
+
+\subsection{Classification of Queueing Networks}
+\label{sec:Classification-Queueing-Networks}
+
+Queueing networks can be classified into two categories:
+
+\begin{description}
+	\item [Open Networks] They have external arrivals and departures. In such systems, $X=\lambda$
+	
+	\item [Closed Networks] They have no external arrivals or departures. In such systems, $X=\mu$. The number of jobs in the system is fixed to $N$, and it is called \textit{load} or \textit{multiprogramming level (MPL)}. $\expected{T}=\expected{T_{R}}+\expected{Z}$. Closed networks can be classified in two categories:
+	
+	\begin{description}
+		\item [Interactive Networks] There are $N$ \textit{terminals} which submit jobs to a network of queues, called \textit{central subsystem}. After submission, a terminal waits for job completion, then sleeps for a think-time $Z$, then can submit again. Thus, a terminal oscillates between a submission-state and a think-state. The goal is to limit the rise of $\expected{T_{R}}$ with $N$.
+		
+		\item [Batch Networks] They are interactive networks with no think-time ($Z=0$). The goal is to obtain high throughput.
+	\end{description}		
+	
+\end{description}
+
+%\begin{figure}[tp]
+%\label{fig:Open-Network-Sample}
+%	\centering
+%	\includegraphics{fig/Open-Network-Sample}
+%	\caption{An Open network.}
+%\end{figure}
+
+%\begin{figure}[tp]
+%\label{fig:Interactive-Network-Sample}
+%	\centering
+%	\includegraphics{fig/Interactive-Network-Sample}
+%	\caption{An Interactive network.}
+%\end{figure}
+
+%\begin{figure}[tp]
+%\label{fig:Batch-Network-Sample}
+%	\centering
+%	\includegraphics{fig/Batch-Network-Sample}
+%		\caption{A Batch network.}
+%\end{figure}
+
+\cite{schroeder2006open} proposed the notion of \textit{partly-open networks}. Here terminals arrive from outside as in open networks, but make request as in closed ones.
+
+
+
+
+\subsection{Utilization}
+\label{sec:Utilization}
+
+The utilization of a queue node is the fraction of time the node is busy, the probability that it is busy, and the mean number of jobs in that node.
+
+\begin{theorem}[Utilization Law]
+\label{thm:Utilization-Law}
+
+	For every stable queue node, we have that:
+	
+	\begin{equation}
+	\label{eqn:Utilization-Law}
+	\varrho = \frac{\lambda}{\mu} = X \cdot \mathbf{E}[S]
+	\end{equation}
+	
+	\begin{proof}
+		Let us consider the definition of throughput ($X=\frac{C}{\tau}$) and utilization ($\varrho=\frac{B}{\tau}$). We have that
+		
+		\begin{equation*}
+			X = \frac{C}{\tau} = \frac{C}{B} \cdot \frac{B}{\tau} = \frac{C}{B} \cdot \varrho
+		\end{equation*}
+		
+		Since $\frac{B}{C}=\expected{S}$ and $\frac{C}{B}=\mu$, we have that
+		
+		\begin{equation*}
+			X = \mu \cdot \varrho \equiv \frac{\varrho}{\expected{S}} \Rightarrow \varrho = X \cdot \expected{S}
+		\end{equation*}
+	\end{proof}
+\end{theorem}
+
+
+
+
+\subsection{Stability}
+\label{sec:Stability}
+
+The stability condition guarantees that the queue cannot grow unbounded.
+
+\begin{theorem}
+\label{thm:Stability}
+	A queue node is stable if and only if \footnote{The condition is necessary, but there are more complex networks (not examined here) where it is not sufficient \cite{bramson2008stability}.} 
+	
+	\begin{equation}
+	\label{eqn:Stability}
+	\lambda < \mu
+	\end{equation}
+	
+	\begin{proof}
+		Let's prove that if $\lambda > \mu$ then the queue would grow to infinity over time.		
+		Given a time $t$, the number of system jobs $N(t)$, the number of arriving jobs $A(t)$ and the number of departing jobs $D(t)$, we have that
+		
+		\begin{equation*}
+		\expected{N(t)}=\expected{A(t)}-\expected{D(t)} \geq t(\lambda - \mu)
+		\end{equation*}
+		
+		where the inequality holds because the server is not always busy, then the departures at time $t$ are less than $\mu t$. 
+		At the end, we have that
+		
+		\begin{equation*}
+		\lambda > \mu \Rightarrow \lim_{t \to \infty} \expected{N(t)} = \infty
+		\end{equation*}
+	\end{proof}
+\end{theorem}

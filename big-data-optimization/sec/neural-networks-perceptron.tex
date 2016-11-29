@@ -1,0 +1,94 @@
+\chapter{Perceptron}
+\label{chp:perceptron}
+Il perceptron è una rete neurale feed-forward con un singolo strato nascosto. Il modello è stato definito da \cite{rosenblatt1958perceptron}. Ne esistono varie versioni: noi esaminiamo la versione di \cite{mcculloch1943logical}.
+
+Il perceptron realizza uscite neurali della forma $y=sgn(w^{T}x-\theta)$.
+Scegliendo i pesi e le soglie in modo appropriato, il perceptron realizza funzioni logiche AND, OR e NOT.
+
+Un pattern è \textit{linearmente separabile} se esiste un iperpiano che consente di classificare i dati.
+
+Qualora i pattern di ingresso siano \textit{linearmente separabili}, l'\textit{algoritmo del perceptron} completa l'addestramento della rete neurale in un numero finito di passi.
+
+
+\section{Addestramento del Perceptron}
+\label{sec:perceptron.learning}
+L'addestramento del Perceptron prevede un training-set
+$T:=\{(x^{p},y^{p}):x\in \Re^{n},y\in\{-1,1\},p\in[1,P]\}$
+e consiste nel determinare i pesi $w$ e le soglie di attivazione $\theta$ tali che
+
+\begin{equation}
+  \label{eqn:perceptron.learning}
+  \begin{cases}
+    w^{T}x^{p}-\theta>0\quad se\ y^{p}=1 \\
+    w^{T}x^{p}-\theta<0\quad se\ y^{p}=-1
+  \end{cases}
+\end{equation}
+
+Geometricamente, risolvere il sistema \Cref{eqn:perceptron.learning} equivale a determinare l'iperpiano $\mathcal{H}=\{x\in\Re^{n}:w^{T}x=\theta\}$ che separi gli insiemi $\mathcal{A}=\{x^{p}:(x^{p},y^{p})\in T, y^{p}=1\}$ e $\mathcal{B}=\{x^{p}:(x^{p},y^{p})\in T, y^{p}=-1\}$.
+Il Perceptron può dunque essere addestrato solo se $\mathcal{A}$ e $\mathcal{B}$ sono linearmente separabili.
+
+Il sistema \Cref{eqn:perceptron.learning} è equivalente al seguente sistema:
+
+\begin{equation}
+  \label{eqn:perceptron.learning.equivalent}
+  \begin{cases}
+    w^{T}x^{p}-\theta>0\quad x^{p}\in\mathcal{A} \\
+    w^{T}x^{p}-\theta<0\quad x^{p}\in\mathcal{B}
+  \end{cases}
+\end{equation}
+
+Il sistema \Cref{eqn:perceptron.learning.equivalent} si ridefinisce introducendo ponendo $x=(-1,x_{1},...,x_{n})^{T}$ e $w=(\theta,w_{1},...,w_{n})$, ottenendo:
+
+\begin{equation}
+  \label{eqn:perceptron.learning.refined}
+  \begin{cases}
+    w^{T}x^{p}>0 \quad x^{p}\in\mathcal{A} \\
+    w^{T}x^{p}<0 \quad x^{p}\in\mathcal{B}
+  \end{cases}
+\end{equation}
+
+Senza perdita di generalità, possiamo assumere $\norm{x^{p}}=1,p\in[1,P]$.
+
+Addestrare il Perceptron vuol dire dunque risolvere il sistema \Cref{eqn:perceptron.learning.refined}. Notiamo che, data la ridefinizione, determinare $w$ equivale a determinare sia i pesi che la soglia.
+
+
+\section{Algoritmo di addestraento del Perceptron}
+\label{sec:perceptron.learning.algorithm}
+L'algoritmo di addestramento del Perceptron è un algoritmo di addestramento incrementale. Ad ogni iterazione, i pesi $w$ vengono aggiornati in corrispondenza di un campione mal classificato aggiungendovi un termine correttivo.
+In pratica è l'applicazione di un metodo di rilassamento per la risoluzione iterativa di sistemi di disequazioni lineari.
+L'algoritmo è mostrato in \Cref{alg:perceptron}.
+
+\begin{algorithm}
+\label{alg:perceptron}
+\caption{Perceptron}
+  \KwData{
+    $(x^{p},y^{p})\in T \forall p\in [1,P].\norm{x^{p}}=1;
+    w(0)=0;
+    k=0;
+    nclass=0;$
+  }
+  \While{$nclass < P$} {
+    \For{$p\in[1,P]$} {
+      \If{$sgn(w^{T}x^{p})=y^{p}$} {
+        $nclass += 1$
+      }
+      \Else {
+        $w(k+1)=w(k)+y^{p}x^{p}$ \\
+        $k += 1$
+      }
+    }
+    \If {$nclass < P$} {
+      $nclass=0$
+    }
+  }
+\end{algorithm}
+
+L'algoritmo del Perceptron converge se i due insiemi $A$ e $B$ sono linearmente separabili.
+
+
+\section{Limiti del perceptron}
+\label{sec:perceptron.limits}
+Il limite fondamentale del Perceptron è stato evidenziato nel lavoro di  \cite{minsky1969perceptrons}, e consiste nel poter classificare solo campioni linearmente separabili \footnote{Un esempio eclatante è non riuscire a realizzare la funzione XOR.}.
+Questo limite poteva essere superato collegando opportunamente più strati neurali \footnote{Tali strati neurali aggiuntivi servivano a realizzare una trasformazione degli ingressi riconducendo i campioni ad insiemi linearmente separabili nello spazio trasfromato.}, ma all'epoca non esisteva una tecnica di addestramento per una rete neurale siffatta. Fu così che decadde l'interesse della comunità scientifica per le reti neurali.
+
+L'interesse rinacque grazie al lavoro di \cite{rumelhart1988learning}, nel quale si proponeva la \textit{back-propagation} come metodo di addestramento di reti neurali multistrato, il quale è basato sul metodo del gradiente per problemi di ottimizzazione non vincolata.

@@ -1,0 +1,133 @@
+\section{Formulary of Probability}
+\label{sec:Formulary-Probability}
+
+
+
+
+\subsection{Foundations}
+
+\begin{description}
+	
+	\item [Failure Rate]
+		\begin{equation}
+		r(x) = \frac{f(x)}{\overline{F}(x)}
+		\end{equation}
+	
+	\item [Coefficient of Variation]
+		\begin{equation}
+		C_{X}^{2} = \frac{\variance{X}}{\expected{X^{2}}}
+		\end{equation}
+	
+\end{description}
+
+
+
+
+\subsection{Exponential Distribution}
+
+\begin{description}
+	
+	\item [Exponential p.d.f]	
+		\begin{equation}
+		f(x) = \left\{\begin{matrix}
+		\lambda e^{-\lambda x} & x \geq 0\\ 
+		0 & x \leq 0
+		\end{matrix}\right.
+		\end{equation}
+	
+	\item [Exponential c.d.f]	
+		\begin{equation}
+		\begin{aligned}
+		F(x) =  
+		\left\{\begin{matrix}
+		1 - e^{-\lambda x} & x \geq 0\\ 
+		0 & x \leq 0
+		\end{matrix}\right.
+		\end{aligned}
+		\end{equation}
+	
+	\item [Exponential Mean]	
+		\begin{equation}
+		\expected{X} = \frac{1}{\lambda}
+		\end{equation}	
+	
+	\item [Exponential Variance]	
+		\begin{equation}
+		\variance{X} = \frac{1}{\lambda^{2}}
+		\end{equation}	
+	
+	\item [Exponential Precedency]	
+		\begin{equation}
+		\probability{X_{1} < X_{2}} = \frac{\lambda_{1}}{\lambda_{1} + \lambda_{2}}
+		\end{equation}
+	
+	\item [Exponential Minimum]	
+		\begin{equation}
+		\min(X_{1},X_{2}) \sim Exp(\lambda_{1} + \lambda_{2})
+		\end{equation}
+
+\end{description}
+
+
+
+
+\subsection{Poisson Distribution}
+
+\begin{description}
+	
+	\item [Poisson p.m.f]	
+		\begin{equation}
+		f(k,t) = \frac{(\lambda t)^{k} e^{-\lambda t}}{k!}
+		\end{equation}
+	
+	\item [Poisson c.d.f]	
+		\begin{equation}
+		F(k,t) = \sum_{x=0}^{t} f(k,x)
+		\end{equation}
+	
+	\item [Poisson Mean]	
+		\begin{equation}
+		\expected{N(t)} = \lambda t
+		\end{equation}
+	
+	\item [Poisson Variance]	
+		\begin{equation}
+		\variance{N(t)} = \lambda t
+		\end{equation}
+	
+	\item [Poisson Inter-arrivals]	
+		\begin{equation}
+		\probability{N(s+t)-N(s) = n} \sim Poisson(\lambda t)
+		\end{equation}	
+	
+	\item [Poisson Merging]
+		Given two independent Poisson process with rate $\lambda_{1}$ and $\lambda_{2}$, the merged process is a Poisson process with rate $(\lambda_{1} + \lambda_{2})$.
+	
+	\item [Poisson Splitting]
+		Given a Poisson process with rate $\lambda$, whose events are partitioned in class-A with probability $p$ and class-B with probability $(1-p)$, the class-A process is a Poisson process with rate $p \lambda$ and the class-B process is a Poisson process with rate $(1-p) \lambda$, and these processes are independent.
+	
+	\item [Poisson Uniformity]
+		If $k$ events of a Poisson process occur by time $t$, then the $k$ events are distributed independently and uniformly in $[0,t]$. 
+		
+\end{description}
+
+
+
+
+\subsection{Pareto Distribution}
+
+\begin{description}
+	
+	\item [Pareto distribution]
+		$X$ is Pareto distributed with order $\alpha$ (that is, $X \sim Pareto(\alpha)$) if
+		\begin{equation}
+		\overline{F}(x) = \probability{X > x} = x^{-\alpha} \quad \forall x \geq 1, 0 < \alpha < 2
+		\end{equation}
+	
+	\item [Bounded Pareto distribution]
+		$X$ is Bounded Pareto distributed with order $\alpha$ and bounds $k,p$ (that is, $X \sim BP(k,p,\alpha)$) if
+		\begin{equation}
+		f(x) = \probability{X \leq x} = \alpha x^{-\alpha -1} \cdot \frac{k^{\alpha}}{1-\Big(\frac{k}{p})^{\alpha}} \quad \forall k \leq x \geq p, 0 < \alpha < 2
+		\end{equation}
+	
+\end{description}

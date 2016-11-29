@@ -1,6 +1,6 @@
 # RESEARCH
 
-*Research papers, courseworks and theses.*
+*My research papers, theses, courseworks and lecture notes on Computer Science*
 
 
 Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
@@ -32,6 +32,14 @@ Giacomo Marciani. 2017. *A performance modeling showcase for multi-tiered web se
 Giacomo Marciani and Gabriele Santi. 2017. *A HPC showcase*. Courseworks in Multi-Core Many-Core Programming. University of Rome Tor Vergata, Italy [Read here](https://gmarciani.com)
 
 Giacomo Marciani and Gabriele Santi. 2017. *A web algorithms showcase*. Courseworks in Web Algorithms. University of Rome Tor Vergata, Italy [Read here](https://gmarciani.com)
+
+Giacomo Marciani. 2017. *Artificial Intelligence*. Lecture notes in Artificial Intelligence. University of Rome Tor Vergata, Italy [Read here](https://gmarciani.com)
+
+Giacomo Marciani. 2017. *Big Data Optimization*. Lecture notes in Optimization Methods for Big Data. University of Rome Tor Vergata, Italy [Read here](https://gmarciani.com)
+
+Giacomo Marciani. 2017. *Computer Security*. Lecture notes in Computer Security. University of Rome Tor Vergata, Italy [Read here](https://gmarciani.com)
+
+Giacomo Marciani. 2017. *Performance Modeling*. Lecture notes in Performance Modeling of Computer Systems and Networks. University of Rome Tor Vergata, Italy [Read here](https://gmarciani.com)
 
 
 ## Authors

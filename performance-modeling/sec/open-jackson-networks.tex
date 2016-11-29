@@ -1,0 +1,83 @@
+\section{Open Jackson Network}
+\label{sec:Open-Jackson-Networks}
+
+\begin{definition}[Open Jackson Network]
+\label{def:Open-Jackson-Network}
+	An Open Jackson Network is a network of queues such that:
+	
+	\begin{itemize}
+		\item there are $m$ $M/M/1$ queues;
+		\item the $i$-th server service is Exponentially distributed with rate $\mu_{i}$;
+		\item each server may receive arrivals from outside (external arrivals) and outside (internal arrivals) the network; the total arrival rate to the $i$-th server is $\lambda_{i}$;
+		\item external arrivals to the $i$-th server are Poisson distributed with rate $r_{i}$;
+		\item when the $i$-th server completes a job, it may be 
+		(i) routed to the $j$-th server (internal arrival) with probability $P_{i,j}$, or 
+		(ii) brought out of the system with probability $P_{i,out}=1-\sum_{j}P_{i,j}$.
+	\end{itemize}
+\end{definition}
+
+%\begin{figure}[tp]
+%\label{fig:Open-Jackson-Network}	
+%	\centering
+%	\includegraphics{fig/Open-Jackson-Network}
+%	\caption{An Open Jackson Network and its corresponding CTMC.}
+%\end{figure}
+
+The \textit{response time} is defined as the time from when the job arrives to the system until it leaves it, including possible multiple visitation to the same server.
+
+The \textit{total arrival rate} $\lambda_{i}$ to the $i$-th server is also the total departure rate from the same server.
+
+The \textit{utilization} $\varrho_{i} = \frac{\lambda_{i}}{\mu_{i}}$ of the $i$-th server makes use of the total arrival rate.
+
+Notice that, since Jackson Network could be cyclic, the arrival process is not Poisson distributed for every server, thus we cannot leverage Burke's Theorem as we did for acyclic networks of queues, that is we cannot view the system as a collection of independent $M/M/1$ queues.
+If it would have been possible, we would have determined state probabilities as in \Cref{sec:Burke-Application-Tandem-Systems}.
+
+\begin{equation}
+\label{eqn:Open-Jackson-Network-Total-Arrival-Rate}
+\lambda_{i} = r_{i} + \sum_{j} \lambda_{j} P_{j,i}
+\end{equation}
+
+\begin{theorem}[Open Jackson Network Product Form]
+\label{thm:Open-Jackson-Network-Product-Form}
+	An Open Jackson Network with $k$ servers has the following product form
+	
+	\begin{equation}
+	\label{eqn:Open-Jackson-Network-Product-Form}
+	\pi_{n_{1},...,n_{m}} = \prod_{i=1}^{m} \varrho_{i}^{n_{i}} (1-\varrho_{i})
+	\end{equation}
+	
+	\begin{proof}
+		The demonstration makes use of the \textit{Local Balance Approach}.
+		For a formal demonstration, see \cite{harchol2013performance}.
+	\end{proof}
+\end{theorem}
+
+\begin{corollary}
+\label{cor:Open-Jackson-Network-Probability-Jobs-Server}
+	For any Open Jackson Network with $k$ servers, we have that
+	
+	\begin{equation}
+	\label{eqn:Open-Jackson-Network-Probability-Jobs-Server}
+	\probability{n_{i} jobs at server i} = \varrho_{i}^{n_{i}} (1-\varrho_{i})
+	\end{equation}
+	
+	where $\varrho_{i}$ is the total utilization of the $i$-th server.
+\end{corollary}
+
+\begin{corollary}
+\label{cor:Open-Jackson-Network-Mean-Server-Jobs}	
+	For any Open Jackson Network with $k$ servers, we have that
+	
+	\begin{equation}
+	\label{eqn:Open-Jackson-Network-Mean-Server-Jobs}
+	\expected{N_{i}} = \frac{\varrho_{i}}{1 - \varrho_{i}}
+	\end{equation}
+	
+	where $\varrho_{i}$ is the total utilization of the $i$-th server.
+\end{corollary}
+
+
+
+
+
+

@@ -1,0 +1,596 @@
+\section{Formulary: Queueing Theory}
+\label{sec:Formulary-Queueing-Theory}
+
+\subsection{Foundations}
+
+\begin{description}
+	
+	\item [Inter-arrival time]	
+		\begin{equation}
+		\expected{\tau} = \frac{1}{\lambda}
+		\end{equation}
+	
+	\item [Service time]	
+		\begin{equation}
+		\expected{S} = \frac{1}{\mu}
+		\end{equation}
+	
+	\item [Response time]	
+		\begin{equation}
+		\expected{T} = \expected{T_{Q}} + \expected{S}
+		\end{equation}
+	
+	\item [Jobs]	
+		\begin{equation}
+		\expected{N} = \expected{N_{Q}} + \expected{N_{S}}
+		\end{equation}
+	
+	\item [Server demand]
+		\begin{equation}
+		\expected{D_{i}} = \expected{V_{i}} \cdot \expected{S_{i}}
+		\end{equation}
+	
+		\begin{equation}
+		\expected{D_{i}} = \frac{B_{i}}{C} 
+		\end{equation}
+	
+	\item [Total demands]	
+		\begin{equation}
+		D = \sum_{i=1}^{m}\expected{D_{i}}
+		\end{equation}
+	
+	\item [Maximum demand]	
+		\begin{equation}
+		D_{max} = \max\{\expected{D_{i}}\}
+		\end{equation}
+		
+\end{description}
+
+
+
+
+\subsection{Operational Laws}
+
+\begin{description}
+	
+	\item [Stability Law]	
+		\begin{equation}
+		\lambda < \mu
+		\end{equation}
+	
+	\item [Little's Law for open systems]	
+		\begin{equation}
+		\expected{N} = \lambda \cdot \expected{T}
+		\end{equation}
+	
+	\item [Little's Law for batch systems]	
+		\begin{equation}
+		N = X \cdot \expected{T}
+		\end{equation}
+	
+	\item [Little's Law for interactive systems]	
+		\begin{equation}
+		\expected{T_{R}} = \frac{N}{X} - \expected{Z}
+		\end{equation}
+	
+	\item [Utilization Law]	
+		\begin{equation}
+		\varrho_{i} = \frac{\lambda_{i}}{\mu_{i}}
+		\end{equation}
+	
+		\begin{equation}
+		\varrho_{i} = X \cdot \expected{D_{i}}
+		\end{equation}
+	
+		\begin{equation}
+		\varrho_{i} = \probability{server \; i \; busy} = \expected{requests \; to \; server \; i} = \expected{N_{S,i}}
+		\end{equation}
+	
+	\item [Forced Flow Law]		
+		\begin{equation}
+		X_{i} = \expected{V_{i}} \cdot X
+		\end{equation}
+	
+	\item [Bottleneck Law]	
+		\begin{equation}
+		\expected{D_{i}} = \expected{V_{i}} \cdot \expected{S_{i}}
+		\end{equation}
+	
+\end{description}
+
+
+
+
+\subsection{Asymptotic Analysis for closed systems}
+
+\begin{description}
+	
+	\item [Throughput Asymptotes]	
+		\begin{equation}
+		X \leq \min \Big\{ \frac{N}{D + \expected{Z}} , \frac{1}{D_{max}} \Big\}
+		\end{equation}
+	
+	\item [Response Time Asymptotes]	
+		\begin{equation}
+		\expected{R} \geq \max\{D , N \cdot D_{max} - \expected{Z} \}
+		\end{equation}
+	
+	\item [Queue Point]	
+		\begin{equation}
+		N^{*} = \frac{D + \expected{Z}}{D_{max}}
+		\end{equation}
+	
+\end{description}
+
+
+
+
+\subsection{M/M/1}
+
+\begin{description}
+	
+	\item [Utilization]	
+		\begin{equation}
+		\varrho = \frac{\lambda}{\mu}
+		\end{equation}
+
+	\item [State Probability]	
+		\begin{equation}
+		\pi_{i} = \varrho^{i}(1-\varrho)
+		\end{equation}
+	
+	\item [Mean System Jobs]	
+		\begin{equation}
+		\expected{N} = \frac{\varrho}{(1-\varrho)}
+		\end{equation}
+	
+	\item [Mean Response Time]	
+		\begin{equation}
+		\expected{T} = \frac{1}{\mu-\lambda}
+		\end{equation}	
+	
+\end{description}
+
+
+
+
+\subsection{M/M/m}
+
+\begin{description}
+	
+	\item [Utilization]
+	Both system and each server
+		\begin{equation}
+		\varrho = \frac{\lambda}{m\mu}
+		\end{equation}
+		
+	\item [Resource Requirement]	
+		\begin{equation}	
+		R = \expected{N_{S}} = \frac{\lambda}{\mu}
+		\end{equation}
+	
+	\item [State Probability]
+		\begin{equation}
+		\pi_{i} = \left\{\begin{matrix}
+		\Big(\frac{\lambda}{\mu}\Big)^{i}\frac{1}{i!}\pi_{0} & i \leq m\\ 
+		\Big(\frac{\lambda}{\mu}\Big)^{i}\frac{1}{m!}\Big(\frac{1}{m}\Big)^{i-m}\pi_{0} & i > m
+		\end{matrix}\right.
+		\end{equation}
+		
+		or equivalently
+	
+		\begin{equation}
+		\pi_{i} = \frac{m^{q} \varrho^{i}}{q!} \cdot \pi_{0} \qquad with \quad q=\min\{i,m\}
+		\end{equation}
+		
+		with
+		
+		\begin{equation}	
+		\pi_{0} = \Big[ \sum_{i=0}^{m-1} \frac{(m \varrho)^{i}}{i!} + \frac{(m \varrho)^{m}}{m! (1- \varrho)} \Big]^{-1}
+		\end{equation}
+		
+		where $q$ is the number of busy servers.	
+	
+	\item [Queue Probability]
+		\begin{equation}
+		P_{Q} = \frac{(m \varrho)^{m}}{m!(1-\varrho)} \cdot \pi_{0}
+		\end{equation}
+		
+	\item [Mean Queue Jobs]
+		\begin{equation}
+		\expected{N_{Q}} = \frac{\varrho}{(1-\varrho)} \cdot P_{Q}
+		\end{equation}
+	
+\end{description}
+
+
+
+
+\subsection{M/M/m/m}
+
+\begin{description}
+	
+	\item [Utilization]
+	Both system and each server
+		\begin{equation}
+		\varrho = \frac{\lambda}{m\mu}
+		\end{equation}
+	
+	\item [State Probability]
+		\begin{equation}
+		\pi_{i} = \Big( \frac{\lambda}{\mu} \Big)^{i} \frac{1}{i!} \pi_{0} 
+		\end{equation}
+		
+		with
+		
+		\begin{equation}
+		\pi_{0} = \Big[ \sum_{i=0}^{m} \Big( \frac{\lambda}{\mu} \Big)^{i} \frac{1}{i!} \Big]^{-1}
+		\end{equation}	
+	
+	\item [Block Probability]	
+		\begin{equation}
+		P_{block} = \pi_{m} = \frac{\Big(\frac{\lambda}{\mu}\Big)^{m} \frac{1}{m!}}{\sum_{i=0}^{m} \Big( \frac{\lambda}{\mu} \Big)^{i} \frac{1}{i!}}
+		\end{equation}
+		
+		or equivalently
+		
+		\begin{equation}
+		\begin{split}
+		P_{block} & = \pi_{m} \cdot \frac{e^{-\frac{\lambda}{\mu}}}{e^{-\frac{\lambda}{\mu}}} \\ 
+		& = \frac{e^{-\frac{\lambda}{\mu}} \cdot \Big(\frac{\lambda}{\mu}\Big)^{m} \frac{1}{m!}}{\sum_{i=0}^{m} e^{-\frac{\lambda}{\mu}} \cdot \Big( \frac{\lambda}{\mu} \Big)^{i} \frac{1}{i!}} \\
+		& = \frac{\probability{X = m}}{\probability{X \leq m}}
+		\end{split}
+		\end{equation}
+		
+		where $X \sim Poisson(\frac{\lambda}{\mu})$.
+	
+\end{description}
+
+	
+
+
+\subsection{M/M/\texorpdfstring{$\infty$}{Infinity}}
+
+\begin{description}
+
+	\item [Utilization]
+		\begin{equation}
+		\varrho = \frac{\lambda}{\mu}
+		\end{equation}
+	
+	\item [State Probability]
+		\begin{equation}
+		\pi_{i} = \Big(\frac{\lambda}{\mu})^{i} \frac{1}{i!} \pi_{0}
+		\end{equation}
+		
+		with
+		
+		\begin{equation}
+		\pi_{0} = e^{-\frac{\lambda}{\mu}}
+		\end{equation}
+		
+		That is $N^{M/M/\infty} \sim Poisson(\frac{\lambda}{\mu})$.
+		
+	\item [Mean System Jobs]
+		\begin{equation}
+		\expected{N} = \frac{\lambda}{\mu}
+		\end{equation}	
+	
+	\item [Mean Queue Jobs]
+		\begin{equation}
+			\expected{N_{Q}} = 0
+		\end{equation}
+		
+	\item [Response Time]
+		\begin{equation}
+			\expected{T} = \expected{T_{S}} = \frac{1}{\mu}
+		\end{equation}
+		
+	\item [Delay]
+		\begin{equation}
+		\expected{T_{Q}} = 0
+		\end{equation}
+	
+\end{description}
+
+
+
+
+\subsection{M/G/1}
+
+\begin{description}
+	
+	\item [Mean Queue/Excess Time]
+		\begin{equation}
+		\expected{T_{Q}}=\frac{\varrho}{1-\varrho}\expected{S_{e}}
+		\end{equation}
+	
+	\item [Pollaczek-Khinchin Formula]
+		\begin{equation}
+		\expected{T_{Q}}=\frac{\varrho}{1-\varrho}\cdot\frac{\expected{S^{2}}}{2\expected{S}}
+		\end{equation}
+		
+		\begin{equation}
+		\expected{T_{Q}}=\frac{\varrho}{1-\varrho}\cdot\frac{\expected{S}}{2}\cdot(C_{S}^{2}+1)
+		\end{equation}
+		
+		\begin{equation}
+		\expected{T_{Q}}=\frac{\lambda\expected{S^{2}}}{2(1-\varrho)}
+		\end{equation}
+	
+\end{description}
+
+
+
+
+\subsection{Relations between queues}
+
+\begin{description}
+	
+	\item [Block M/M/m/m vs. Queueing M/M/1]
+		\begin{equation}
+		P_{block} = \frac{(1-\varrho)P_{Q}}{1-\varrho P_{Q}}
+		\end{equation}
+	
+	
+\end{description}
+
+
+
+
+\subsection{Capacity Provisioning}
+
+\begin{description}
+	
+	\item [Square-Root Staffing Rule]
+	For any $M/M/m$ with high resource requirement $R$, the minimum number of servers $m_{\alpha}^{*}$ to ensure $P_{Q} < \alpha$ is
+	
+	\begin{equation}
+	m_{\alpha}^{*} \approx R + c \sqrt{R}
+	\end{equation}
+	
+	with $c$ solution of the equation
+	
+	\begin{equation}
+	\frac{c \Phi(c)}{\phi(c)} = \frac{1 - \alpha}{\alpha}
+	\end{equation}	
+	
+	where
+	$\Phi(\cdot)$ is the c.d.f. of the Standard Normal, and
+	$\phi(\cdot)$ is its p.d.f.
+\end{description}
+
+
+
+
+\subsection{Open Jackson Networks}
+
+\begin{description}
+	
+	\item [State Probability]
+		\begin{equation}
+		\pi_{n_{1},...,n_{m}} = \prod_{i=1}^{m} \varrho_{i}^{n_{i}} (1-\varrho_{i})
+		\end{equation}
+		
+	\item [Probability Jobs at Server]
+		\begin{equation}
+		\probability{n_{i} jobs at server i} = \varrho_{i}^{n_{i}} (1-\varrho_{i})
+		\end{equation}
+	
+	\item [Mean Server Jobs]
+		\begin{equation}
+		\expected{N_{i}} = \frac{\varrho_{i}}{1 - \varrho_{i}}
+		\end{equation}
+	
+\end{description}
+
+
+
+
+\subsection{Closed Jackson Networks}
+
+\begin{description}
+
+	\item [State Probability]
+		\begin{equation}
+		\pi_{n_{1},...,n_{m}} = C \cdot \prod_{i=1}^{m} \varrho_{i}^{n_{i}}
+		\end{equation}
+		
+		where $C$ is the \textit{Normalizing Constant} determined as the solution of 
+		
+		$
+		\sum_{(n_{1},...,n_{m}) \\ \in States} \pi_{n_{1},...,n_{m}} = 1
+		$
+		
+\end{description}
+
+
+
+
+\subsection{Mean Value Analysis}
+
+\begin{description}
+
+	\item [MVA Response Time]
+		\begin{equation}
+		\expected{T_{j}^{M}} = 
+		\frac{1}{\mu_{j}} + 
+		\frac{p_{j} \lambda^{(M-1)} \expected{T_{j}^{(M-1)}}}{\mu_{j}}
+		\end{equation}
+	
+	\item [MVA Fraction of Arrivals]
+		\begin{equation}
+		p_{j} = \frac{\lambda_{j}^{M}}{\lambda^{M}} = \frac{V_{j}}{\sum_{j=1}^{m} V_{j}}
+		\end{equation}
+	
+	\item [MVA Total Arrival Rate]
+		\begin{equation}
+		\lambda^{(M-1)} = \frac{M-1}{\sum_{j=1}^{m} p_{j} \expected{T_{j}^{(M-1)}}}
+		\end{equation}	
+
+\end{description}
+
+
+
+
+\subsection{Network of PS Servers}
+
+\begin{description}
+
+	\item [BCMP Theorem]
+		\begin{equation}
+		\pi_{n_{1},...,n_{m}} = \prod_{i=1}^{m} \varrho_{i}^{n_{i}} (1-\varrho_{i})
+		\end{equation}		
+		where $\varrho_{i}=\lambda_{i}\expected{S_{i}}$
+		
+	\item [Probability Jobs at Server]
+		\begin{equation}
+		\probability{n_{i} jobs at server i} = \varrho_{i}^{n_{i}} (1-\varrho_{i})
+		\end{equation}
+		where $\varrho_{i}=\lambda_{i}\expected{S_{i}}$
+	
+\end{description}
+
+
+
+
+\subsection{Renewal-Reward Theory}
+
+\begin{description}
+	
+	\item [Renewal-Reward Theorem]
+		\begin{equation}
+		\lim_{t \to \infty}\frac{R(t)}{t}=\frac{\expected{R}}{\expected{X}} \quad \forall 0\leq\expected{R}<\infty,0<\expected{X}<\infty
+		\end{equation}
+		where $X$ is the inter-arrival time, $R is the number of rewards earned$, and $R(t)$ is the total rewards by time $t$.
+	
+\end{description}
+
+
+
+
+\subsection{Task Assignment for Server Farms}
+
+\begin{description}
+	
+	\item [Spare Server]
+		\begin{equation}
+		\sharp SpareServers=m-\lceil R\rceil
+		\end{equation}
+	
+	\item [Mean Queue Time for M/G/m]
+		\begin{equation}
+		\expected{T_{Q}^{M/G/m}}\approx\Big(\frac{C^{2}+1}{2}\Big)\expected{T_{Q}^{M/M/m}}
+		\end{equation}
+		
+	\item [Worst-Case Competitive Ratio]
+		\begin{equation}
+		CR_{\mathcal{P}}=\max_{\mathcal{A}}r_{\mathcal{P}}(\mathcal{A})
+		\end{equation}
+		
+		with
+		
+		\begin{equation}
+		r_{\mathcal{P}}(\mathcal{A})=\frac{\expected{T(\mathcal{A})}^{\mathcal{P}}}{\expected{T(\mathcal{A})}^{\mathcal{OPT}}}
+		\end{equation}
+		
+\end{description}
+
+
+
+
+\subsection{Scheduling}
+
+\begin{description}
+
+	\item [Slowdown]
+		\begin{equation}
+		Slowdown=\frac{T}{S}
+		\end{equation}
+		
+		\begin{equation}
+		\expected{Slowdown(x)}=\frac{\expected{T(x)}}{x}
+		\end{equation}
+		
+		\begin{equation}
+		\expected{Slowdown}=\int_{x}\frac{\expected{T(x)}}{x}f_{S}(x)\partial x
+		\end{equation}
+		
+	\item [Fairness]
+		\begin{equation}
+		\expected{Slowdown^{\mathit{P}}(x)}<\expected{Slowdown^{\mathit{PS}}(x)}\quad\forall x
+		\end{equation}
+		
+	\item [Fairness]
+		\begin{equation}
+		\expected{Slowdown^{\mathit{P}}(x)}>\expected{Slowdown^{\mathit{PS}}(x)}\quad\exists x
+		\end{equation}
+		
+	\item [Starvation]
+		\begin{equation}
+		\exists x.\expected{Slowdown^{\mathit{P}}(x)}>\expected{Slowdown^{\mathit{PS}}(x)}
+		\end{equation}
+		
+	\item [Response Time for M/G/1/FCFS]
+		\begin{equation}
+		\expected{T}=\expected{S}+\frac{\lambda\expected{S^{2}}}{2(1-\varrho)}
+		\end{equation} 
+		
+	\item [Response Time for M/G/1/PS]
+		\begin{equation}
+		\expected{T(x)}^{\mathit{M/G/1/PS}}=\frac{x}{1-\varrho}
+		\end{equation}
+		
+	\item [Response Time for M/G/1/PLCFS]
+		\begin{equation}
+		\expected{T(x)}^{\mathit{M/G/1/PLCFS}}=\frac{x}{1-\varrho}
+		\end{equation}
+		
+	\item [Queue Time for M/G/1/FB]
+		\begin{equation}
+		\expected{T(x)}^{\mathit{FB}}=
+		\frac{x(1-\varrho_{\overline{x}})+\frac{1}{2}\lambda\expected{S_{\overline{x}}^{2}}}
+			{\Big(1-\varrho_{\overline{x}}\Big)^{2}}
+		\end{equation}
+		
+	\item [Queue Time for M/G/1/SJF]
+		\begin{equation}
+		\expected{T_{Q}(x)}^{\mathit{SJF}}=
+		\frac{\varrho\expected{S^{2}}}{2\expected{S}}\cdot\frac{1}{\Big(1-\varrho_{x}\Big)^{2}}
+		\end{equation}
+		
+		where $\varrho_{x}=\lambda F(x)\cdot\int_{t=0}^{x}t\frac{f(t)}{F(t)}\partial t$ is the arrival rate of jobs of size no more than $x$, namely $\lambda F(x)$, multiplied by the expected size of jobs of size no more than $x$, namely $\int_{t=0}^{x}t\frac{f(t)}{F(t)}\partial t$.
+		
+	\item [Response Time for M/G/1/PSJF]
+		\begin{equation}
+		\expected{T(x)}^{\mathit{PSJF}}=
+		\expected{Res(x)}^{\mathit{PSJF}}+\expected{Wait(x)}^{\mathit{PSJF}}=
+		\frac{x}{1-\varrho_{x}}+
+		\frac{\frac{\lambda}{2}\int_{0}^{x}f(t)t^{2}\partial t}
+		{\Big(1-\varrho_{x}\Big)^{2}}
+		\end{equation}
+		where $\varrho_{x}=\lambda\int_{t=0}^{x}tf(t)\partial t$ is the load made up by jobs of size less than $x$.
+	
+	\item [Response Time for M/G/1/SRPT]
+		\begin{equation}
+		\expected{T(x)}^{\mathit{SRPT}}=
+		\expected{Wait(x)}^{\mathit{SRPT}}+\expected{Res(x)}^{\mathit{SRPT}}=
+		\frac{\lambda}{2}\frac{\int_{t=0}^{x}t^{2}f(t)\partial t + x^{2}(1-F(x))}{\Big(1-\varrho_{x}\Big)^{2}}+
+		\int_{t=0}^{x}\frac{1}{1-\varrho_{t}}
+		\end{equation}
+		
+	\item [Relation between scheduling policies]
+	
+	\begin{equation}
+	\expected{T(x)}^{\mathit{SRPT}}\leq\expected{T(x)}^{\mathit{PS}}\quad \forall x,\forall\varrho<\frac{1}{2}
+	\end{equation}
+	
+	\begin{equation}
+	\expected{T(x)}^{\mathit{SRPT}}\leq\expected{T(x)}^{\mathit{FB}}
+	\end{equation}
+	
+	\begin{equation}
+	\expected{T^{\mathit{FCFS}}}=\expected{T^{\mathit{LCFS}}}=\expected{T^{\mathit{RO}}}
+	\end{equation}
+
+\end{description}

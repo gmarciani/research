@@ -1,0 +1,238 @@
+\chapter{Metodi di decomposizione}
+\label{chp:methods.decomposition}
+I metodi di decomposizione scompongono un problema in sottoproblemi di dimensioni minori. Tali metodi sono vantaggiosi quando
+(i) la dimensione del problema è eccessiva rispetto alla memoria disponibile;
+(ii) i sottoproblemi sono più semplici da risolvere del problema originario;
+(iii) i sottoproblemi sono \textit{seprabili}, dunque la loro risoluzione è parallelizzabile; Due problemi sono separabili se sono indipendenti l'uno dall'altro;
+(iv) i sottoproblemi sono \textit{strutturati}, ovvero possono essere risolti all'ottimo globale.
+
+In sintesi, si fa decomposizione se si è obbligati per motivi di memoria, o se i sottoproblemi si possono risolvere più efficientemente del problema originario.
+
+Gli svantaggi principali di questi metodi sono il maggior numero di iterazioni e il fatto che non garantiscono la convergenza.
+
+I metodi di decomposizione sono spesso utilizzati nel data mining. Gli algoritmi visti finora muovono contemporaneamente tutte le componenti di $x$. In questo caso scomponiamo $x$ in $m$ blocchi e ottimizziamo i blocchi.
+
+Vi sono problemi scomponibili in sottoproblemi cha ammettono soluzione in forma chiusa.
+
+La minimizzazione lungo gli assi coordinati può aiutare ad evitare minimi locali non globali.
+
+La convenienza dei metodi di decomposizione va valutata caso per caso.
+
+I metodi di decomposizione si dividono in:
+
+\begin{itemize}
+  \item \textit{decomposizione sequenziale}: i blocchi vengono aggiornati sequenzialmente, uno dopo l'altro. Il blocco $i+1$-esimo viene aggiornato tenendo conto dell'aggiornamento del blocco $i$-esimo. Il nuovo punto è costituito dall'aggiornamento di tutti i blocchi.
+
+  \item \textit{decomposizione parallela}: i blocchi vengono aggiornati parallelamente ed indipendentemente l'uno dall'altro. Il nuovo punto viene costruito a partire dagli aggiornamenti dei singoli blocchi (ad esempio indentificando l'aggiornamento che induce il maggior miglioramento).
+\end{itemize}
+
+Per quanto riguarda i metodi di decomposizione sequenziale, analizzeremo il \textit{metodo di Gauss-Seidel}, il \textit{metodo di Gauss-Southwell} e il \textit{metodo di discesa a blocchi}.
+
+Per quanto riguarda gli metodi di decomposizione parallela, analizzeremo il  \textit{metodo di Jacobi}.
+
+Introduciamo la notazione $\nabla_{i}f$ ad indicare il gradiente della funzione rispetto al blocco $i$.
+
+La prima cosa da fare prima di applicare la decomposizione è chiedersi se la funzione è coerciva: se lo è sono certo che tutti i metodi di decomposizione convrgano.
+
+
+\section{Metodo di Gauss-Seidel}
+\label{sec:methods.decomposition.gauss-seidel}
+Il metodo di Gauss-Seidel è un metodo di decomposizione sequenziale che esegue una sequenza di minimizzazioni globali rispetto ai singoli blocchi.
+
+L'algoritmo converge se $f$ è continuamente differenziabile, $\mathcal{L}_{0}$ è compatto e:
+se $f$ è convessa, ogni punto di accumulazione è un minimo globale;
+se ho $m=2$ blocchi, ogni punto di accumulazione è un punto stazionario;
+se ho $m>2$ blocchi ed $f$ è strettamente convessa su $m-2$ blocchi, ogni punto di accumulazione è un punto stazionario;
+
+La generica iterazione calcola il punto intermedio:
+
+\begin{equation}
+    z(k,i)=Arg\min_{x_{i}}f(x_{1}^{(k+1)},\ldots,x_{i-1}^{(k+1)},x_{i},x_{i+1}^{(k)},\ldots,x_{m}^{(k)})
+\end{equation}
+
+\begin{algorithm}
+  \label{alg:methods.decomposition.gauss-seidel}
+  \caption{Gauss-Seidel}
+
+  \KwData{punto iniziale $x^{(0)}=(x_{1}^{(0)},\ldots,x_{m}^{(0)})\in\Re^{n}$}
+  \For{$k=0,1,\ldots$} {
+    \For{$i=1,\ldots,m$} {
+      $x_{i}^{(k+1)}\in Arg \min_{x_{i}} f(x_{1}^{(k+1)},\ldots,x_{i},\ldots,x_{m}^{(k)})$
+    }
+    Poni $x^{(k+1)}=(x_{1}^{(k+1)},\ldots,x_{m}^{(k+1)})$
+  }
+\end{algorithm}
+
+Le condizioni di convergenza del metodo di Gauss-Seidel sono molto stringenti. Per questo ne sono state elaborate delle varianti.
+
+\subsection{Gauss-Seidel rilassato}
+\label{sec:methods.decomposition.gauss-seidel.relaxed}
+L'algoritmo di Gauss-Seidel rilassato minimizza globalmente il primo blocco, richiedendo per il secondo blocco di determinare un punto stazionario che non peggiori la funzione. Nella determinazione del secondo blocco possiamo applicare un qualunque metodo globalmente convergente.
+
+\begin{algorithm}
+  \label{alg:methods.decomposition.gauss-seidel.relaxed}
+  \caption{Gauss-Seidel (2 blocchi rilassato)}
+
+  \KwData{punto iniziale $x^{(0)}=(x_{1}^{(0)},x_{2}^{(0)})\in\Re^{n}$}
+  \For{$k=0,1,\ldots$} {
+    $x_{1}^{(k+1)}\in Arg \min_{x_{1}} f(x_{1}^{(k)},x_{2}^{(k)})$
+    Calcola $x_{2}^{(k+1)}$ tale che
+    $f(x_{1}^{(k+1)},x_{2}^{(k+1)}) \leq f(x_{1}^{(k+1)},x_{2}^{(k+1)})$
+    $\norm{\nabla_{2}f(x_{1}^{(k+1)},x_{2}^{(k+1)})}=0$
+  }
+  Poni $x^{(k+1)}=(x_{1}^{(k+1)},x_{2}^{(k+1)})$
+\end{algorithm}
+
+
+\subsection{Gauss-Seidel con Proximal-Point}
+\label{sec:methods.decomposition.gauss-seidel.proximal-point}
+L'algoritmo di Gauss-Seidel con termine correttivo di proximal-point converge anche quando i blocchi sono più di due e non si hanno condizioni di convessità sulla funzione. Si modifica il problema aggiungendo un termine correttivo che penalizzi la grandezza degli scostamenti tra stime consecutive di uno stesso blocco.
+
+L'algoritmo converge se $f$ è continuamente differenziabile e $\mathcal{L}_{0}$ è compatto: ogni punto di accumulazione è un punto stazionario.
+
+\begin{algorithm}
+  \label{alg:methods.decomposition.gauss-seidel.proximal-point}
+  \caption{Gauss-Seidel (proximal-point)}
+
+  \KwData{punto iniziale $x^{(0)}=(x_{1}^{(0)},\ldots,x_{m}^{(0)})\in\Re^{n}$ e proximal-point $\tau_{i},i=1,\ldots,m$}
+  \For{$k=0,1,\ldots$} {
+    \For{$i=1,\ldots,m$} {
+      $x_{i}^{(k+1)}\in Arg \min_{x_{i}} f(x_{1}^{(k+1)},\ldots,x_{i},\ldots,x_{m}^{(k)}) + \frac{1}{2}\tau_{i}\norm{x_{i}-x_{i}^{(k)}}^2$
+    }
+    Poni $x^{(k+1)}=(x_{1}^{(k+1)},\ldots,x_{m}^{(k+1)})$
+  }
+\end{algorithm}
+
+
+\section{Metodo di Gauss-Southwell}
+\label{sec:methods.decomposition.gauss-southwell}
+Il metodo di Gauss-Southwell è un metodo di decomposizione sequenziale in cui ogni iterazione aggiorna il blocco di variabili che viola maggiormente le condizioni di ottimalità.
+
+All'iterazione $k$ scelgo il blocco $i(k)$ che soddisfa il seguente \textit{criterio di selezione}:
+
+\begin{equation}
+  \label{eqn:methods.decomposition.gauss-southwell.condition}
+  \norm{\nabla_{i(k)}f(x^{(k)})}\geq\norm{\nabla_{j}f(x^{(k)})}\quad\forall j\in[1,m]
+\end{equation}
+
+I metodi visti finora eseguono la minimizzazione esatta dei sottoproblemi. Questo potrebbe essere proibitivo senza condizioni di convessità.
+
+\begin{algorithm}
+  \label{alg:methods.decomposition.gauss-southwell}
+  \caption{Gauss-Southwell}
+
+  \KwData{punto iniziale $x^{(0)}=(x_{1}^{(0)},\ldots,x_{m}^{(0)})\in\Re^{n}$}
+  \For{$k=0,1,\ldots$} {
+    Calcola indice $i(k)$ che soddisfa il \textit{criterio di selezione}
+    Calcola
+      $x_{i(k)}^{(k+1)}\in Arg \min_{x_{i(k)}} f(x_{1}^{(k)},\ldots,x_{i(k)},\ldots,x_{m}^{(k)}) + \frac{1}{2}\tau_{i}\norm{x_{i}-x_{i}^{(k)}}^2$
+    Poni $x^{(k+1)}=(x_{1}^{(k)},\ldots,x_{i(k)}^{(k+1)},\ldots,x_{m}^{(k+1)})$
+  }
+\end{algorithm}
+
+L'algoritmo di Gauss-Southwell converge se $f$ è continuamente differenziabile, $\mathcal{L}_{0}$ è compatto: ogni punto di accumulazione è un punto stazionario.
+
+Metodi di questa tipologia, ossia basati sulla massima violazione dell'ottimalità, sono molto utilizzati nell'addestramento delle Support Vector Machines.
+
+
+\section{Metodo di Jacobi}
+\label{sec:methods.decomposition.jacobi}
+Il metodo di Jacobi è un metodo di decomposizione parallela in cui i blocchi vengono minimizzati separatamente e parallelamente
+
+La generica iterazione produce il nuovo punto:
+
+\begin{equation}
+  x^{(k+1)}=Arg\min\{\min_{i\in[1,m]}\{f(x_{1}^{(k)},\ldots,u_{i}^{(k)},\ldots,x_{m}^{(k)})\},f(u_{1},\ldots,u_{m})\}
+\end{equation}
+
+In pratica il nuovo punto è dato: o da uno specifico blocco, o da tutti i blocchi nel loro complesso, in base all'entità del decremento della funzione.-
+
+\begin{algorithm}
+  \label{alg:methods.decomposition.jacobi}
+  \caption{Jacobi}
+
+  \KwData{punto iniziale $x^{(0)}=(x_{1}^{(0)},\ldots,x_{m}^{(0)})\in\Re^{n}$}
+  \For{$k=0,1,\ldots$} {
+    \For{$i=1,\ldots,m$} {
+      Calcola
+      $u_{i}\in Arg \min_{x_{i}} f(x_{1}^{(k)},\ldots,x_{i},\ldots,x_{m}^{(k)})$
+      Poni
+      $w(k,i)=(x_{1}^{(k)},\ldots,u_{i},\ldots,x_{m}^{(k)})$
+    }
+    Determina $i^{*}$ tale da soddisfare il \textit{criterio di miglioramento}
+    Poni $z=(u_{1},\ldots,u_{m})$
+    Poni $x^{(k+1)}=z$ se $f(z)\leq f(w(k,i^{*}))$
+    Poni $x^{(k+1)}=w(k,i^{*})$ se altrimenti
+  }
+\end{algorithm}
+
+L'algoritmo di Jacobi converge se $f$ è continuamente differenziabile e $\mathcal{L}_{0}$ è compatto: ogni unto di accumulazione è un punto stazionario.
+
+
+\section{Metodo di discesa a blocchi}
+\label{sec:methods.decomposition.descent-blocks}
+I metodi di discesa a blocchi sono metodi di decomposizione che applicano ricerche lineari inesatte lungo opportune direzioni di discesa relative ai singoli blocchi.
+
+Applico Armijo lungo l'antigradiente di ogni blocco
+
+\begin{algorithm}
+  \label{alg:methods.decomposition.descent-blocks}
+  \caption{Discesa a blocchi}
+
+  \KwData{punto iniziale $x^{(0)}=(x_{1}^{(0)},\ldots,x_{m}^{(0)})\in\Re^{n}$ e funzioni di forzamento $\sigma_{i}:\Re^{+}\rightarrow\Re^{+},i=1,\ldots,m$}
+  \For{$k=0,1,\ldots$} {
+    Poni $z(k,1)=x^{(k)}$
+    \For{$i=1,\ldots,m$}{
+      Poni la direzione $d_{i}^{(k)}=-\nabla_{i}f(z(k,i))$
+      Poni il passo $\alpha_{i}^{(k)}=0$ se $\nabla_{i}f(z(k,i))=0$ oppure calcola il passo $\alpha_{i}^{(k)}$ con il metodo di Armijo.
+      Scegli $x_{i}^{(k+1)}$ in modo da soddisfare le condizioni di Armijo
+      Poni $z(k,i+1)=(x_{1}^{(k+1)},\ldots,x_{i}^{(k+1)},\ldots,x_{m}^{(k)})$
+    }
+    Poni $x^{(k+1)}=(x_{1}^{(k+1)},\ldots,x_{m}^{(k+1)})$
+  }
+\end{algorithm}
+
+L'algoritmo converge se $f$ è continuamente differenziabile e $\mathcal{L}_{0}$ è compatto: ogni punto di accumulazione è un punto stazionario.
+
+
+\section{Metodo con sovrapposizione dei blocchi}
+\label{sec:methods.decomposition.overlap-blocks}
+Tutti i metodi visti finora hanno i blocchi definiti all'inizio ed ogni variabile appartiene ad un solo blocco.
+I metodi con sovrapposizione dei blocchi prevedono di poter variare i blocchi da un'iterazione all'altra, e di conseguenza che le variabili possano appartenere a blocchi diversi.
+
+Ad ogni iterazione il vettore $x^{(k)}$ è partizionato in $(x_{W^{(k)}}^{(k)},x_{\overline{W}^{(k)}}^{(k)})$ dove $W^{(k)}$, detto \textit{working-set}, è l'insieme delle componenti che saranno aggiornate durante l'iterazione.
+
+La generica iterazione calcola il punto seguente
+
+\begin{equation}
+  x^{(k+1)}=(x_{W^{(k)}}^{(k+1)},x_{\overline{W}^{(k)}}^{(k)})
+\end{equation}
+
+dove
+
+\begin{equation}
+  x_{W^{(k)}}^{(k+1)}=Arg\min_{x_{W^{(k)}}}f(x_{W^{(k)}},x_{\overline{W}^{(k)}}^{(k)})
+\end{equation}
+
+\begin{algorithm}
+  \label{alg:methods.decomposition.overlap-blocks}
+  \caption{Sovrapposizione dei blocchi}
+
+  \KwData{punto iniziale $x^{(0)}\in\Re^{n}$ e $k=0$}
+  \While{criterio di arresto non soddisfatto} {
+    Seleziona il working-set $W^{(k)}$
+    Calcola $x_{W^{(k)}}^{*}=\min_{x_{W^{(k)}}} f(x_{W^{(k)}},x_{\overline{W}^{(k)}}^{(k)})$
+    Poni
+    $x_{i}^{(k+1)}=x_{i}^{*}$ se $i\in W^{(k)}$
+    $x_{i}^{(k+1)}=x_{i}^{k}$ altrimenti
+    Poni $k=k+1$
+  }
+\end{algorithm}
+
+In base alla definizione del working-set cambiano le proprietà di convergenza dell'algoritmo. Le regole di selezione del working-set possono essere le seguenti:
+(i) entro un numero massimo di iterazioni successivo ogni componente è entrata nel working-set;
+(ii) il working-set deve contenere la componente che viola maggiormente l'ottimalità.
+
+L'algoritmo converge se $f$ è continuamente differenziabile, $\mathcal{L}_{0}$ è compatto, $f$ è strettamente convessa per ogni sottoinsieme di componenti e si adotta il criterio di selezione del working-set (i): ogni punto di accumulazione è un punto stazionario.
+
+L'algoritmo converge se $f$ è continuamente differenziabile, $\mathcal{L}_{0}$ è compatto e si adotta il criterio di selezione del working-set (ii): ogni punto di accumulazione è un punto stazionario.

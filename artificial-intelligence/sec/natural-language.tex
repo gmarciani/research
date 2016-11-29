@@ -1,0 +1,219 @@
+\chapter{Linguaggio naturale}
+\label{chp:natural-language}
+
+Un linguaggio formale è generato da una grammatica formale. 
+
+Il linguaggio naturale si attiene alle regole grammticali, ma non è un linguaggio formale a causa dell'ambiguità semantica.
+
+Il linguaggio naturale è flessibile, ambiguo e dinamico.
+
+Il linguaggio formale è ripetitivo: ad uno stesso input, stesso output.
+
+Il linguaggio naturale non è ripetitivo: ad uno stesso input, può corrispondere un output diverso.
+
+Esistono linguaggi di conoscenza e linguaggi di ragionamento.
+
+La comprensione del linguaggio naturale richiede la rappresentazione del significato oltre ai collegamenti alla conoscenza esplicita posseduta dal sistema.
+
+Una macchina sarà considerata veramente intelligente solo quando sarà in grado di elaborare il linguaggio naturale come fa un umano. (test di Turing).
+
+L'ingegneria del linguaggio naturale si occupa delle tecniche e applicazioni della modellazione del linguaggio naturale. 
+Si occupa dello sviluppo di algoritmi per il parsing, la generazione, e la acquisizione di conoscenza linguistica.
+
+Sono necessarie varie tipologie di conoscenza linguistica per elaborare un testo nella sua completezza oltre a conoscenza eventuale sul contesto (applicativo) (e.g.: l'interpretazione frasale presuppone l'indentificazione delle parole).
+
+Il processamento del linguaggio naturale prevede le seguenti conoscenze linguistiche:
+
+\begin{enumerate}
+
+	\item morfologia: fornisce informazioni sulla composizione, flessione e coniugazione delle parole.
+	
+	\item sintassi: definisce le relazioni strutturali tra le parole, ovvero la correttezza di una sequenza di parole.
+	
+	\item semantica: definisce le regole di attribuzione del significato delle espressioni
+	
+	\begin{enumerate}
+		
+		\item semantica lessicale: significato di una singola parola;
+		
+		\item semantica composizionale: significato in funzione della combinazione di parole;
+		
+	\end{enumerate}
+	
+	\item pragmatica: definisce usi e convenzioni linguistiche al fine di valutare lo stile delle espressioni (e.g.: distinguere una espressione di cortesia, da una espressione di ostilità). Permette dunque di studiare come il linguaggio è usato per raggiungere un obiettivo.
+	
+	\item analisi del discorso: definisce le relazioni strutturali di entità linguistiche più ampie di una frase. Definisce la forma del discorso necessaria per poter valutare e formulare correttamente risposte a domande (e.g.: una domanda riguardo X prevede una risposta riguardo X, non una risposta riguardo Y).
+	
+\end{enumerate}
+
+\subsection{Ambiguità}
+L'elaborazione del linguaggio naturale prevede la presenza di tecniche di risoluzione di ambiguità interpretative. Un testo è ambiguo quando ad una stessa frase possono essere assegnati significati diversi. L’ambiguità è il motivo per cui le macchine non riescono ad elaborare completamente il linguaggio naturale.
+
+Il significato di una frase non è dato solo dal significato delle parole. È necessario conoscere come il significato sia determinato dalla combinazione delle parole all'interno di una stessa frase, e dalle relazioni di queste parole con le frasi esterne.
+
+L'ambiguità genera un'esplosione combinatoriale di pattern semantici, aumentando così la complessità computazionale dell'elaborazione.
+
+L'ambiguità può essere:
+
+\begin{enumerate}
+	
+	\item ambiguità lessicale: si risolve con l'analisi del contesto.
+	
+	\item ambiguità di anafora: si risolve conoscenza del dominio e senso comune.
+	
+	\item ambiguità categoriale: una parola può appartenere a più categorie. Questa ambiguità viene risolta mediante analisi sintattica.
+	
+	\item ambiguità strutturale: ambigua nell'analisi logica della frase.
+	
+	\item ambiguità referenziale: ambiguità dovuta ad anafore. Si risolve conoscenza del dominio e senso comune.
+	
+	\item ambiguità per ellissi: dovuta a mancanza di riferimenti nella frase. (e.g.: Giovanni aveva studiato molto e superò l’esame. Anche
+	Mario).
+	
+	\item ambiguità proposizionale: in assenza di punteggiatura nella frase.
+	
+	\item ambiguità locale: una parte di una frase può avere più di una interpretazione. Questa ambiguità può essere risolta mediante analisi sintattica (e.g.: the old trains {the young|leave the station})
+	
+	\item ambiguità globale: una intera frase può avere più di una interpretazione. Questa ambiguità può essere risolta mediante analisi semantica e pragmatica. (e.g.: I saw the Gran Canyon flying to New York)
+\end{enumerate}
+
+
+\subsection{Conoscenza}
+Gran parte del significato non risiede all’interno delle parole, per cui il sistema di NLP deve avere la conoscenza del senso comune, o un modello del mondo usato da chi ha scritto il testo.
+Non è necessario capire tutto, ma capire ciò che serve per il dominio applicativo.
+
+
+\subsection{Sintassi}
+La sintassi definisce il ruolo delle parole all'interno di una frase, mediante classificazione Part-Of-Speech e relazioni interne ed esterne alla frase.
+
+Vi sono almeno le seguenti classi POS: nome, verbo, avverbio, pronome, articolo, preposizione, congiunzione, participio.
+Il tagging in classi POS permette di associare un significato alle parole, permettendo di riconoscere il ruolo delle parole vicine.
+
+Una classe POS può essere (i) open class, se è un insieme in continua evoluzione, o (ii) closed class, se è un insieme fisso di parole.
+
+La sintassi è definita da una grammatica formale, il cui insieme di produzioni viene rappresentato da una lista. Il processamento di una lista ha un costo computazionale minore di quello di un albero.
+
+Nella grammatica formale di una sintassi vanno bene produzioni differenti per una frase, ma non va bene se esistono più simboli terminali per una stessa parola. Ciò creerebbe ambiguità.
+
+Un testo processato secondo una sintassi, genera un albero sintattico. Questo albero è generato eseguendo una strategia di ricerca sul testo che può essere: 
+
+(i) depth first, se attivazione della produzione una per volta, e torna indietro se fallisce,
+
+(ii) breadth first: se attivazione delle produzioni in parallelo
+
+
+\subsection{Parsing}
+Il parser è un algoritmo che una testa la correttzza di un testo rispetto ad una specifica grammatica.
+
+Il lessico mostra a quale simbolo non terminale appartiene una parola del linguaggio.
+
+
+\subsection{Information Extraction}
+An information extraction system is a cascade of transducers or modules that, at each step, add structure and often lose information, hopefully irrelevant, by applying rules that are acquired manually and/or automatically.
+
+L'information retrieval ricerca testi e li presenta all'utente.
+
+L'information extraction analizza testi e fornisce all'utente solo le informazioni richieste.
+
+I sistemi IE sono più costosi computazionalmente,  richiedono conoscenza (sono knowledge intensive) e sono specifici di un dominio applicativo. I sistemi IR no.
+
+I task dell'IE sono:
+
+\begin{enumerate}
+	
+	\item named entity recognition (NE): individuazione di entità (nomi propri, comuni, date, quantità);
+	
+	\item coreference resolution (CO): individuazione di relazioni di identità tra entità (identità NE e referenze anaforiche);
+	
+	\item template element construction (TE): aggiunge informazioni descrittive a NE e CO; 
+	
+	\item template relation construction (TR): individua relazioni tra entità TE; l'insieme dei TE costituisce una prima base di conoscenza applicabile al testo.
+	
+	\item scenario template production:
+	
+\end{enumerate}
+
+La complessità del task IE dipende da (i) tipo di testo, (ii) dominio (argomento del testo) e (iii) scenario (evento di interesse)
+
+Una architettura IE è costituita dai seguenti moduli:
+
+\begin{enumerate}
+
+	\item Text Zoner: il testo è diviso in frammenti;
+	
+	\item Pre-processor: identificazione frasi e POS;
+	
+	\item Filter: eliminazione di frasi irrilevanti per l'applicazione;
+	
+	\item Pre-parser: identificazione di strutture frasali minime;
+	
+	\item Parser: produce albero sintattico di ogni frase;
+	
+	\item Fragment Combiner: si combinano gli alberi sintattici di frasi diverse;
+	
+	\item Semantic Interpreter: produzione di un albero semantico;
+	
+	\item Lexical Disambiguation: risoluzione delle ambiguità lessicali;
+	
+	\item Coreference Resolution: risoluzione delle ambiguità referenziali;
+	
+	\item Template Generator: produzione dello scenario  template a partire dagi alberi semantici.
+	
+\end{enumerate}
+
+
+\subsection{Sistemi Q/A}
+Un sistema di Question Answering (Q/A) risponde a domande utilizzando la conoscenza ed il ragionamento nel processamento del linguaggio naturale.
+
+Risponde alle domande del tipo 5W (who, which, where, when, why).
+
+Un task di Q/A prevede le seguenti fasi:
+
+\begin{enumerate}
+
+	\item question analysis
+	
+	\item information retrieval
+	
+	\item answer extraction
+	
+	\item answer merging
+	
+\end{enumerate}
+
+
+\subsection{Text Summarization}
+Un sistema di Text Summarization seleziona le informazioni più importanti da sorgenti di linguaggio naturale, producendo una visione sintetica di queste informazioni per uno specifico task.
+
+Questo sistema prende un testo, produce un estratto (frammento rilevante del testo originario), e da questo un abstract (risultato della summarization).
+
+Questi sistemi possono essere 
+
+\begin{enumerate}
+	
+	\item indicativi: selezionano i documenti rilevanti.
+	
+	\item informativi: selezionano le informazioni rilevanti da uno stesso documento.
+	
+	\item valutativi: valutano la qualità della sorgente.
+\end{enumerate}
+
+
+\subsection{Textual Entailment}
+Il textual entailment è la relazione tra un testo $T$ ed una ipotesi $H$. Si dice che sussiste un textual entailment tra $T$ ed $H$ se il significato di $H$ può essere inferito dal significato di $T$.
+
+Ad esempio, sussiste un textual entailment tra il testo "A acquired B" e l'ipotesi "A owns B".
+
+Una funzione di entailment $e:(T,H)\rightarrow [0,1]$ è una funzione probabilistica che esprime la confidenza con cui può essere affermato uno specifico textual entailment.
+
+Il textual entailment può essere:
+
+\begin{enumerate}
+
+	\item paraphrase entailment: la frase esprime lo stesso fatto dell'ipotesi (a meno di sinonimi).
+	Ad esempio: "A acquired B" e "A bought B".
+	
+	\item strict entailment: la frase contiene più fatti, dai quali può essere inferita l'ipotesi.
+	Ad esempio: "A acquired B, now A owns B"
+	
+\end{enumerate}

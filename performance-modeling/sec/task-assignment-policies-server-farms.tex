@@ -1,0 +1,109 @@
+\section{Task Assignment Policies for Server Farms}
+\label{sec:task-assignment-policies-server-farms}
+
+The server farm architecture is ubiquitous in computer systems, because of its cost-efficiency and flexibility.
+We analyze server farm in the context of high-variability workloads.
+
+The task assignment policy is the rule implemented by the dispatcher\footnote{also known as front-end router, or load-balancer.} to assign incoming jobs to servers.
+Under high-variability workloads, the task assignment policy hugely influences the mean response time.
+
+In our discussion, we assume Poisson arrival process and Bounded-Pareto service times.
+
+% insert here Figure 24.1 Server farm model
+
+Task assignment policies are categorized according to (i) a priori job size knowledge (size-based/non-size-based), (ii) adaptation to the system state (dynamic/static), and (iii) job preemption (preemptive/non-preemptive).
+
+The most common policies are:
+
+\begin{description}
+	
+	\item [Random Order (RO)]
+	
+	\item [Round-Robin (RR)]
+	
+	\item [Join-Shortest-Queue (JSQ)]
+	
+	\item [Least-Work-Left (LWL)]
+	
+	\item [Size-Interval Task Assignment (SITA)]
+	
+	\item [Shortest-Remaining Process-Time (SRPT)]
+\end{description}
+
+
+
+
+\subsection{Task Assignment in FCFS Server Farms}
+\label{sec:task-assignment-fcfs-server-farms}
+The FCFS server farm model is common in manufacturing systems and supercomputing, where jobs are hardly preemptible.
+
+Under high-variability workloads, we have that
+
+\begin{equation}
+\expected{T^{\mathcal{SITA}}} < 
+\expected{T^{\mathcal{M/G/m}}} \approx 
+\expected{T^{\mathcal{LWL}}} < 
+\expected{T^{\mathcal{JSQ}}} < 
+\expected{T^{\mathcal{RR}}} < 
+\expected{T^{\mathcal{RO}}}
+\end{equation}
+
+% insert here explanation.
+
+\subsection{Task Assignment in PS Server Farms}
+\label{sec:task-assignment-ps-server-farms}
+The PS server farm model is common in web servers and data centers, where jobs are natively preemptible and resources are totally shared among jobs.
+
+The job size distribution for website is known to be high variable and heavy-tailed \cite{crovella1997self}. It is not unrealistic to assume Poisson arrivals. It is not realistic to assume the independence of job sizes and inter-arrival times \cite{ghosh2004analysis,squillante1999internet}.
+
+PS scheduling is invariant to job size variability, hence the benefits of SITA in reducing it are superfluous.
+
+JSQ in surprisingly nearly insensitive to job size variability in PS server farms \cite{gupta2007analysis}.
+
+Both under high and low variability workloads, we have that
+
+\begin{equation}
+\expected{N^{\mathit{JSQ}}} < 
+\expected{N^{\mathit{LWL}}} < 
+\expected{N^{\mathit{RR}}} < 
+\expected{N^{\mathit{SITA}}} \approx 
+\expected{T^{\mathit{RO}}}
+\end{equation}
+
+% insert here explanation.
+
+
+
+
+\subsection{Optimal Server Farm Design}
+\label{sec:optimal-server-farm-design}
+
+The optimal server farm design is mainly based on the selection of the best task-assignment and scheduling policies\footnote{typically, the scheduling policy is dictated by operating systems and applications on servers.}.
+
+In the \textit{Worst-Case Analysis}, the policy $\mathcal{P}$ is evaluated on each possible arrival sequence $\mathcal{A}$ and is compared with the optimal policy $\mathcal{OPT}$ for that arrival sequence.
+The analysis evaluates policies looking for that one that minimizes the \textit{competitive ratio} $CR_{\mathcal{P}}$, defined as follow:
+
+ \begin{equation}
+ CR_{\mathcal{P}}=\max_{\mathcal{A}}r_{\mathcal{P}}(\mathcal{A})
+ \end{equation}
+ 
+ with
+ 
+ \begin{equation}
+ r_{\mathcal{P}}(\mathcal{A})=\frac{\expected{T(\mathcal{A})}^{\mathcal{P}}}{\expected{T(\mathcal{A})}^{\mathcal{OPT}}}
+ \end{equation}
+ 
+ The drawback of this kind of analysis is that a policy $\mathcal{P}$ can be viewed as poor, even if it performs badly only on an improbable arrival sequence.
+ 
+ The \textit{Shortest-Remaining-Process-Time (SRPT)} policy preemptively assign jobs with the shortest remaining process time. This policy is effective at getting short jobs out.
+ SRPT is optimal for single queue server farms with $m$ $M/G/1/1$ hosts under any \footnote{there is an arrival sequence where causing starvation. See \cite{harchol2013performance} on page 425.} arrival sequence \cite{schrage1968letter}.
+ At every time, the $m$ jobs with the shortest remaining process time are those in service. Such a server farm behaves like a $M/M/1$ node with a server $m$ time faster.
+ Thanks to this notable result, we refer to such an asset with the name \textit{Central-Queue-SRPT}.
+ 
+ \cite{leonardi1997approximating} proved that Central-Queue-SRPT is the best possible online algorithm\footnote{from a worst-case analysis point of view, and unless of a constant multiplicative factor.}, with $CR\propto\log\Big(\frac{b}{a}\Big)$, where $b$ and $a$ are respectively the biggest and the smallest job size.
+
+A related open problem is the optimal task assignments under immediate dispatching, meaning that jobs cannot be held in a central queue, but immediately sent to hosts.
+This restriction has practical importance because of its wide applicability\footnote{e.g. web server must immediately establish connections with clients.}.
+
+The IMD algorithm presented by \cite{avrahami2003minimizing} divides jobs in size-based classes, and then assigns each incoming job to the server with the smallest number of jobs of that class. The balanced distribution of classes maximizes the effectiveness of the SRPT scheduling policy implemented by each server. It has been proven that, from a worst-case point of view, IMD under immediate dispatching restriction is equal to SRPT without restriction.
+ 

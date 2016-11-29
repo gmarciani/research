@@ -1,0 +1,67 @@
+\chapter{Machine Learning}
+\label{chp:machine-learning}
+Il machine learning si occupa di definire tecniche di apprendimento automatico.
+Un task di machine learning è classificato in base al processo di apprendimento e al modello prodotto.
+
+Il processo di apprendimento può essere
+\begin{itemize}
+  \item supervisionato: in tal caso parliamo di machine learning supervisionato. La classificazione è guidata da un dataset classificato. Sono noti a priori pattern rappresentativi della classifiazione, Le tecniche più rilevanti sono: Support Vector Machine, Neural Netorks, Decision Trees con boosting o bagging e Bayesian Classifier.
+
+  \item non supervisionato: in tal caso parliamo di machine learning non supervisionato. La classificazione avviene senza avere a disposizione un dataset classificato. Non sono noti a priori pattern rappresentativi della classificazione. Le tecniche più rilevanti sono: Gerarchic Clustering, Markov Hidden Chains, Self-Organized Maps e Neural Networks.
+\end{itemize}
+
+Il modello prodotto può essere:
+\begin{itemize}
+  \item modello predittivo: predizione dell'evoluzione di un fenomeno identificato dai dati analizzati.
+  \item modello descrittivo: caratterizzazione generale dei dati analizzati.
+\end{itemize}
+
+I più importanti task di machine learning sono: \textit{classificazione}, \textit{regressione} e \textit{clustering}.
+
+Nei capitoli successivi applicheremo le reti neurali e le support vector machines in questi task.
+
+
+\section{Classificazione}
+\label{sec:machine-learning.classification}
+La classificazione è un task di machine learning predittivo con output categorico. Lo scopo è individuare l'appartenza di un pattern ad una specifica classe. Il pattern è un insieme di coppie $(attributi,classe)$ rappresentativi delle diverse classi, sulla base dei quali si costruisce un modello matematico che, dato un generico elemento appartenente allo spazio delle caratteristiche, definisce la corrispondente classe di appartenenza.
+
+Per valutare la bontà di un modello di apprendimento bisogno tenere separati dati di apprendimento da dati di test.
+Il 70\% delle istanze viene utilizzato come training ed il 30\% come test.
+
+Un problema di classificazione può essere:
+
+\begin{itemize}
+  \item classificazione binaria: il target può appartenere o non appartenere ad una certa classe.
+  \item classificazione multiclasse: il target può appartenere a più classi secondo valori specifici.
+\end{itemize}
+
+L'input di un problema di classificazione è il \textit{training set}:
+
+\begin{equation}
+  \label{eqn:machine-learning.training-set}
+  T:={(x^p,y^p): x\in\Re^{n},y^{p}\in S\subset N, p=1,...,P}
+\end{equation}
+
+dove $P$ è il numero di osservazioni (o pattern) ognuna delle quali è descritta da $n$ attributi.
+
+Per ogni osservazione $p\in[1,P]$ si ha un vettore di osservazione $x^{p}=(x_{i}^{p})$ di dimensione $n$ in cui la generica componente $x_{i}^{p}$ è l'attributo $i$-esimo dell'osservazione $p$-esima, con $i\in[1,n]$.
+
+Per ogni osservazione $p\in[1,P]$ su ha un vettore di classificazione $y^{p}$ che indica la classe di appartenenza dell'osservazione.
+
+L'output di un problema di classificazione è il \textit{classification model}:
+
+\begin{equation}
+  \label{eqn:machine-learning.classification-model}
+  f:\Re^{n}\rightarrow S\subset N
+\end{equation}
+
+è una funzione in grado di approssimare la relazione $x^{i}\rightarrow y^{i}$, e quindi, dato un nuovo elemento $x$, di predire la corrispondente cassificazione $y$.
+
+\section{Regressione}
+\label{Sec:machine-learning.regression}
+La regressione è un task di machine learning supervisionato predittivo con output continuo. Lo scopo è determinare il legame funzionale tra coppie di valori \footnote{L'obiettivo non è interpolare i dati ma approssimare la funzione che li ha generati.}.
+Il pattern è costituito da coppie di valori rappresentativi di una funzione incognita a valori reali, sulla base dei quali si costruisce l'approssimazione della funzione reale.
+
+\section{Clustering}
+\label{sec:machine-learning.clustering}
+Il clustering è un task di machine learning non supervisionato descrittivo con output categorico. Lo scopo è determinare le categorie (cluster) in cui classificare il dataset ed il modello matematico per stabilirne l'appartenenza. I cluster devono essere più distinti possibile, e le osservazioni ad essi appartenenti devono essere più simili possibile.

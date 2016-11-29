@@ -1,0 +1,86 @@
+\chapter{Reti Neurali}
+\label{chp:neural-networks}
+Il cervello degi organismi evoluti è un processore non lineare in grado di svolgere task che neanche i computer più moderni riescono ad implementare.
+
+L'idea alla base delle reti neurali è la definizione di un modello di simulazione del cervello umano.
+
+Una rete neurale è un processore distribuito ispirato al sistema nervoso umano.
+Da un punto di vista topologico, una rete neurale è un grafo orientato pesato etichettato di unità computazionali elementari, dette \textit{neuroni}.
+Una rete neurale è organizzata in \textit{strati}: abbiamo lo \textit{strato di ingresso}, lo \textit{strato di uscita} ed uno o più \textit{strati neurali}, anche detti \textit{strati nascosti}.
+
+L'addestramento di una rete neurale è il processo di acquisizione della conoscenza dall'ambiente. La conoscenza acquisita è codificata nei parametri della rete neurale (in particolare, nei pesi degli archi che connettono i neuroni).
+
+Implementare una rete neurale vuol dire determinarne:
+
+\begin{itemize}
+  \item \textit{natura neurale}: funzione di attivazione dei neuroni.
+  \item \textit{architettura neurale}: numero di strati nascosti, numero di neuroni per ogni strato, orientamento delle connessioni neurali. Notiamo che, per definizione, lo strato nascosto adiacente allo strato di ingresso deve avere un numero di neuroni pari al numero degli ingressi.
+  \item \textit{addestramento}: tipologia di apprendimento, ovvero modalità di determinazione del peso delle connessioni neurali e delle soglie di attivazione.
+\end{itemize}
+
+L'implementazione di una rete neurale può essere modellata come un problema di ottimizzazione non vincolata.
+
+Una rete neurale è un classificatore universale, ovvero permette di determinare una funzione che approssimi una qualunque la relazione funzionale tra ingressi ed uscite.
+
+Data una funzione $G:X\rightarrow Y$ nota attraverso l'insieme $\{(x^{p},G(x^{p}):x^{p}\in X, p=1,...,P)\}$, una rete neurale determina un modello di approssimazione di $G$, ovvero $F(\cdot,w):X\rightarrow Y$ non linearmente dipendente dal vettore $w$.
+
+La funzione approssimante può essere affetta da
+\begin{itemize}
+  \item \textit{under-fitting}: la funzione approssimamnte è così semplice da non riuscire a descrivere con accuratezza il fenomeno osservato;
+  \item \textit{over-fitting}: la funzione approssimante è così complessa da non riuscire a generalizzare il risultato.
+\end{itemize}
+
+Per \textit{complessità} di una rete neurale si intende il numero dei suoi parametri liberi. La complessità e la cardinalità del training set devono essere opportunamente calibrati al fine di evitare i fenomeni suddetti.
+
+Da un punto di vista funzionale, una rete neurale può essere:
+\begin{itemize}
+  \item statica: la funzione di attivazione è indipendente dalle computazioni precedenti.
+  \item dinamica: la funzione di attivazione dipende dalle computazioni precedenti.
+\end{itemize}
+
+Da un punto di vista architetturale, una rete neurale può essere:
+\begin{itemize}
+  \item feedforward: la rete è aciclica con connessioni neurali in avanti;
+  \item recursive: la rete contiene cicli cotroreattivi.
+\end{itemize}
+
+L'architettura è caratterizzata anche dal numero di strati nascosti.
+I modelli architetturali più usati per reti neurali feed-forward sono \textit{perceptron}, \textit{multilayer perceptron} e \textit{rete funzionale a base radiale}.
+Il modello architetturale più usato per reti neurali ricorsive è la \textit{rete funzionale ricorsiva}.
+
+
+\subsection{Densità}
+\label{sec:neural-networks.density}
+Lo studio della densità di una rete neurale consiste nel valutare l'\textit{universalità dell'approssimazione}, ovvero la classe di funzioni approssimabili, ed il \textit{grado di approssimazione}, ovvero l'andamento dell'errore di approssimazione in funzione della dimensione dell'input e dell'architettura della rete.
+
+
+\section{Neurone}
+\label{sec:neural-networks.neuron}
+Un \textit{neurone formale} (o \textit{neurone}) è l'unità computazionale elementare di una rete neurale, ed è ispirato al neurone biologico. Un neurone implementa una trasformazione (tipicamente, non lineare) $h$ degli ingressi pesati $w^
+{T}x$, detta \textit{funzione di attivazione}, decrementati di una certa \textit{soglia}. L'uscita di un neurone è dunque $y=h(w^{T}x-\theta)$. L'uscita di un neurone viene inviata in ingresso ai neuroni dello strato successivo o all'uscita della rete neurale.
+
+Un neurone opportunamente addestrato può realizzare le operazioni logiche \textit{and}, \textit{or} e \textit{not}.
+
+Un neurone è un classificatore lineare che attribuisce ad un ingresso $x$ (le cui componenti scalari sono gli attributi dell'oggetto da classificare) il valore $y(x)=1$ o $y(x)=-1$ in base al segno della sua funzione di attivazione $sgn(w^{T}x-\theta)$. Il valore dei pesi $w$ e della soglia di attivazione $\theta$ sono determinati mediante l'addestramento del neurone su un training set
+
+\begin{equation}
+  \label{eqn:neural-networks.neuron.training-set}
+  T:={(x^p,y^p): x\in\Re^{n},y^{p}\in S\subset N, p=1,...,P}
+\end{equation}
+
+costituito da coppie in cui all'ingresso $x^{p}$ è associata l'uscita corretta $y^{p}$.
+Il neurone addestrato può classificare oggetti non appartenenti al training-set.
+
+
+\section{Addestramento}
+\label{sec:learning}
+L'addestramento di una rete neurale è il processo di determinazione dei parametri della rete, ovvero dei pesi delle connesioni neurali e delle soglie delle funzioni di attivazione.
+Lo scopo dell'addestramento non è l'interpolazione dei dati del training-set, bensì la costruzione del modello che li ha generati puntando alla maggior capacità di generalizzazione.
+La \textit{capacità di generalizzazione} di una rete neurale addestrata è la capacità di classificare correttamente ingressi mai visti prima.
+
+L'apprendimento può essere:
+
+\begin{itemize}
+  \item \textit{supervisionato}: i parametri della rete sono determinati minimizzando una funzione di errore rispetto ad un training-set.
+  \item \textit{non supervisionato}: i parametri della rete sono determinati senza bisogno di un training-set. Si dice in questo caso, che la rete neurale ha capacità di auto-organizzazione.
+\end{itemize}

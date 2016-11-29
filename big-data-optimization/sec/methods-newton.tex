@@ -1,0 +1,46 @@
+\chapter{Metodo di Newton}
+\label{chp:methods.newton}
+Il metodo di Newton è un metodo di risoluzione di un sistema di equazioni non lineari
+
+$$F(x)=0$$
+
+dove $F:\Re^{n}\rightarrow\Re^{n}$ è continuamente differenziabile, con componenti $F_{i}:\Re^{n}\rightarrow\Re$.
+Il metodo risolve iterativamente il sistema lineare che approssima $F$ nel punto corrente.
+
+La soluzione del sistema $F(x)=0$ è
+
+\begin{equation}
+  \label{eqn:methods.newton.solution}
+  x_{k+1}=x_{k}-[J(x_{k})]^{-1}F(x_{k})
+\end{equation}
+
+dove $J(x)$ è la matrice Jacobiana di $F(x)$.
+
+In un problema di ottimizzazione non vincolata, il metodo di Newton si può applicare per risolvere il sistema $\nabla f(x)=0$, ottenendo la soluzione
+
+\begin{equation}
+  \label{eqn:methods.newton.solution2}
+  x_{k+1}=x_{k}-[\nabla^{2}f(x_{k})]^{-1}\nabla f(x_{k})
+\end{equation}
+
+
+\section{Convergenza}
+\label{sec:methods.newton.convergence}
+Il \textit{teorema di Newton-Kantorovich} stabilisce condizioni sufficienti di esistenza delle soluzioni per il sistema $F(x)=0$ e fornisce una stima della regione di convergenza.
+
+Noi ci limitiamo a studiare la convergenza locale del metodo di Newton, assumendo l'esistenza delle soluzioni.
+
+\begin{theorem}
+  \label{thm:methods.newton.convergence}
+  Sia $F:\Re^{n}\rightarrow\Re^{n}$ continuamente differenziabile su un insieme aperto $D\subseteq\Re^{n}$.
+  Se valgono le seguenti
+  \begin{enumerate}
+    \item $\exists x^{*}\in D.F(x^{*})=0$
+    \item $J(x)$ è non singolare
+  \end{enumerate}
+  Allora esiste una sfera aperta $B(x^{*};\epsilon)\subseteq D$ tale che, se $x_{0}\in B(x^{*};\epsilon)$ allora la successione $\{x_{k}\}$ prodotta dal metodo di Newton rimane in $B(x^{*};\epsilon)$ e converge a $x^{*}$ con rapidità di convergenza $Q$-superlineare.
+
+  Se $J$ è Lipschitz-continua in $D$, allora la rapidità di convergenza è almeno $Q$-quadratica.
+\end{theorem}
+
+Questo risultato di convergenza si traduce nel caso del metodo di Newton applicato all'ottimizzazione come ricerca di punti stazionari. È sufficiente tradurre $F(x)$ e $J(x)$ rispettivamente in $\nabla f(x)$ e $\nabla^{2}f(x)$.

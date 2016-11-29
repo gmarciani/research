@@ -1,0 +1,175 @@
+%*******************************************************************************
+% Title: Performance Modeling of Computer Systems and Networks
+%
+% Conference: Computer Science Lectures 2017
+%
+% Authors: Giacomo Marciani <gmarciani@ieee.org>
+%
+% Institution: Department of Civil Engineering and Computer Science Engineering,
+% 			   University of Rome Tor Vergata, Italy
+%
+% Style: ACM Large VERSION 1.7
+%*******************************************************************************
+
+\documentclass[prodmode,gmlecture]{acmlarge}
+
+%*******************************************************************************
+% Packages
+%*******************************************************************************
+\usepackage[utf8]{inputenc}
+\usepackage{amsmath}
+\usepackage{lipsum}
+\usepackage{xr}
+\usepackage{hyperref}
+\usepackage{cleveref}
+
+%*******************************************************************************
+% Details
+%*******************************************************************************
+\acmVolume{2}
+\acmNumber{1}
+\acmArticle{1}
+\articleSeq{1}
+\acmMonth{9}
+\acmYear{2016}
+
+\issn{1234-56789}
+\doi{0000001.0000001}
+
+%*******************************************************************************
+% Copyright
+%*******************************************************************************
+\setcopyright{rightsretained}
+
+%*******************************************************************************
+% Algorithm
+%*******************************************************************************
+\usepackage[ruled]{algorithm2e}
+\SetAlFnt{\algofont}
+\SetAlCapFnt{\algofont}
+\SetAlCapNameFnt{\algofont}
+\SetAlCapHSkip{0pt}
+\IncMargin{-\parindent}
+\renewcommand{\algorithmcfname}{ALGORITHM}
+
+%*******************************************************************************
+% Notations
+%*******************************************************************************
+\newcommand{\probability}[1]{
+	\mathbf{P}[#1]
+}
+\newcommand{\expected}[1]{
+	\mathbf{E}[#1]
+}
+\newcommand{\variance}[1]{
+	\mathbf{Var}[#1]
+}
+
+%*******************************************************************************
+% Numbering
+%*******************************************************************************
+\numberwithin{equation}{section}
+
+%*******************************************************************************
+% References
+%*******************************************************************************
+\crefname{lem}{lemma}{lemmata}
+\Crefname{cor}{Corollary}{Corollaries}
+\externaldocument{sec/queueing-theory}
+\externaldocument{sec/operational-laws}
+\externaldocument{sec/asymptotic-analysis}
+\externaldocument{sec/modification-analysis}
+\externaldocument{sec/exponential-distribution}
+\externaldocument{sec/poisson-processes}
+\externaldocument{sec/markov-chains}
+\externaldocument{sec/server-farms}
+\externaldocument{sec/m-m-1-queues}
+\externaldocument{sec/m-m-m-m-queues}
+\externaldocument{sec/m-m-m-queues}
+\externaldocument{sec/m-m-inf-queues}
+\externaldocument{sec/m-g-1-queues}
+\externaldocument{sec/m-m-1-ps-queues}
+\externaldocument{sec/capacity-provisioning}
+\externaldocument{sec/burke-theorem}
+\externaldocument{sec/networks-of-queues}
+\externaldocument{sec/open-jackson-networks}
+\externaldocument{sec/closed-jackson-networks}
+\externaldocument{sec/mean-value-analysis}
+\externaldocument{sec/task-assignment-policies-server-farms}
+\externaldocument{sec/scheduling-m-g-1}
+\externaldocument{sec/scheduling-non-preemptive-non-size-based}
+\externaldocument{sec/scheduling-preemptive-non-size-based}
+\externaldocument{sec/scheduling-non-preemptive-size-based}
+\externaldocument{sec/scheduling-preemptive-size-based}
+\externaldocument{sec/random-variables-simulation}
+\externaldocument{sec/formulary-probability}
+\externaldocument{sec/formulary-queueing-theory}
+\externaldocument{sec/tips-tricks}
+\externaldocument{sec/related-readings}
+
+%*******************************************************************************
+% Title and Authors
+%*******************************************************************************
+\markboth{G. Marciani}{Performance Modeling of Computer Systems and Networks}
+\title{Performance Modeling of Computer Systems and Networks}
+\author{GIACOMO MARCIANI \affil{University of Rome Tor Vergata}}
+
+%*******************************************************************************
+% Content
+%*******************************************************************************
+
+\input{sec/abstract}
+\input{sec/ccs-keywords}
+
+\acmformat{Giacomo Marciani. 2016. Performance Modeling of Computer Systems and Networks.}
+
+\begin{document}
+
+\begin{bottomstuff}
+	This work is supported by the Department of Civil Engineering and Computer Science
+	Engineering, University of Rome Tor Vergata, Italy.\\
+	Author's address: G. Marciani, Via del Politecnico 1, Rome, RM 00133, Italy;
+	email: gmarciani@ieee.org.
+\end{bottomstuff}
+
+\maketitle
+
+\input{sec/queueing-theory}
+\input{sec/operational-laws}
+\input{sec/asymptotic-analysis}
+\input{sec/modification-analysis}
+\input{sec/exponential-distribution}
+\input{sec/poisson-processes}
+\input{sec/markov-chains}
+\input{sec/server-farms}
+\input{sec/m-m-1-queues}
+\input{sec/m-m-m-m-queues}
+\input{sec/m-m-m-queues}
+\input{sec/m-m-inf-queues}
+\input{sec/m-g-1-queues}
+\input{sec/m-m-1-ps-queues}
+\input{sec/capacity-provisioning}
+\input{sec/burke-theorem}
+\input{sec/networks-of-queues}
+\input{sec/open-jackson-networks}
+\input{sec/closed-jackson-networks}
+\input{sec/mean-value-analysis}
+\input{sec/task-assignment-policies-server-farms}
+\input{sec/scheduling-m-g-1}
+\input{sec/scheduling-non-preemptive-non-size-based}
+\input{sec/scheduling-preemptive-non-size-based}
+\input{sec/scheduling-non-preemptive-size-based}
+\input{sec/scheduling-preemptive-size-based}
+\input{sec/random-variables-simulation}
+\input{sec/formulary-probability}
+\input{sec/formulary-queueing-theory}
+\input{sec/tips-tricks}
+\input{sec/related-readings}
+
+%*******************************************************************************
+% Bibliography
+%*******************************************************************************
+\bibliographystyle{acmreferences}
+\bibliography{ref/biblio}
+
+\end{document}

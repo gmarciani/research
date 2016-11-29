@@ -1,0 +1,51 @@
+\section{Mean Value Analysis}
+\label{sec:Mean-Value-Analysis}
+
+The Mean Value Analysis (MVA) is an alternative method to analyze Closed Jackson Networks.
+It is efficient and intuitive, but it only provides mean metrics.
+
+Given a Closed Jackson Network with $M$ jobs, we denote with $\expected{N_{j}^{(M)}}$ the mean number of jobs at the $j$-th server when there are $M$ jobs in the system.
+
+The MVA relies on the following theorem.
+
+\begin{theorem}[Arrival Theorem]
+\label{thm:Arrival-Theorem}
+	In a Closed Jackson Network with $M>1$ jobs, an arrival to server $j$ sees a distribution of the number of jobs at each server equal to the steady-state distribution of the number of jobs at each server in the same network with $M-1$ jobs.
+\end{theorem}
+
+The Arrival Theorem is counterpart to PASTA for closed networks of queues.
+
+Thanks to the \Cref{thm:Arrival-Theorem}, the MVA recursively relates $\expected{N_{j}^{(M)}}$ to $\expected{N_{j}^{(M-1)}}$, until we arrive to $\expected{N_{j}^{(1)}}$, which is very easy to reason about.
+
+\begin{theorem}[MVA-Response Time]
+\label{thm:MVA-Response-Time}
+
+	\begin{equation}
+	\label{eqn:MVA-Response-Time}
+	\expected{T_{j}^{M}} = 
+	\frac{1}{\mu_{j}} + 
+	\frac{p_{j} \lambda^{(M-1)} \expected{T_{j}^{(M-1)}}}{\mu_{j}}
+	\end{equation}
+	
+	where $p_{j}$ is the fraction of arrivals that arrive to server $j$, namely
+	
+	\begin{equation}
+	\label{eqn:MVA-Response-Time-Fraction-Arrivals}
+	p_{j} = \frac{\lambda_{j}^{M}}{\lambda^{M}} = \frac{V_{j}}{\sum_{j=1}^{m} V_{j}}
+	\end{equation}
+	
+	and $\lambda^{(M)}$ is the total arrival rate into all the $m$ servers, namely
+	
+	\begin{equation}
+	\label{eqn:MVA-Response-Time-Total-Arrival-Rate}
+	\lambda^{(M-1)} = \frac{M-1}{\sum_{j=1}^{m} p_{j} \expected{T_{j}^{(M-1)}}}
+	\end{equation}	
+	
+	\begin{proof}
+		For a formal demonstration, see \cite{harchol2013performance} at page 337-341.
+	\end{proof}
+\end{theorem}
+
+Once determined $\expected{T_{j}^{M}}$, we can obtain other mean metrics by using the Little's Law.
+
+For instance, $\expected{N_{i}^{M}} = \lambda_{i}^{M} \cdot \expected{T_{i}^{M}}$

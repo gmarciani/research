@@ -1,0 +1,37 @@
+\section{Foundations of Probability}
+\label{sec:probability-foundations}
+
+The memoryless property states that the probability to be in some state is independent of all the previous states.
+
+\begin{definition}[Memoryless Property]
+	\label{def:memoryless-property}
+	A random variable $X$ is memoryless if
+	\begin{equation}
+	\label{eqn:memoryless-property}
+		\probability{X > s+t | X > s} = \probability{X > t} \quad \forall s,t \geq 0
+	\end{equation}
+\end{definition}
+
+Distributions for which $\probability{X > s+t | X > s}$ increases with $s$ are said to have \textit{increasing failure rate}, whereas if it decreases they are said to have \textit{decreasing failure rate}.
+
+\begin{definition}[Independent Increment]
+	A sequence of events has independent increments if the number of events that occur in disjoint time intervals are independent.
+\end{definition}
+
+\begin{definition}[Stationary Increment]
+	A sequence of events has stationary increments if the number of events during a time interval depends only on the length of the interval, and not on its starting point.
+\end{definition}
+
+
+\subsection{TO BE ADDED}
+
+Una variabile aleatoria discreta X è un’entità che può assumere un numero discreto (finito o
+infinito) di valori xi. Ogni valore xi ha probabilità di occorrenza P(X=xi)=pi, dove Σ i pi = 1.
+Una variabile aleatoria continua Y è un’entità che può assumere valori y in un sottoinsieme S della
+retta reale composto da uno o più intervalli. Ogni intervallo infinitesimo di ampiezza dy ha
+probabilità P(y<Y≤y+dy)=p(y)dy che Y assuma un valore all'interno di esso. La funzione p(y) è
+detta funzione di densità ed è tale che ∫ p(y)dy = 1 .
+S
+Un processo stocastico è una variabile aleatoria i cui valori e le relative probabilità sono funzioni
+del tempo. L'evoluzione temporale di un processo stocastico può avvenire in modo continuo o
+discreto.

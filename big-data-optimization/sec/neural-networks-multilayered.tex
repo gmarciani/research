@@ -1,0 +1,93 @@
+\chapter{Reti neurali multistrato}
+\label{chp:neural-networks-multilayered}
+Una rete neurale multistrato è una rete neurale feed-forward con almeno due strati nascosti connessi in cascata. Le reti neurali multistrato sono state introdotte per superare i limiti del Perceptron. Una rete neurale multistrato a due strati con funzione di attivazione continua non polinomiale è un approssimatore universale di funzioni continue con dominio compatto in $\Re^{n}$. In particolare, permette dunque la classificazione di pattern non linearmente separabili. Tale rete neurale realizza la regressione e la classificazione di insiemi eventualmente non linearmente separabili.
+Una rete multistrato è più complessa del Perceptron in quanto dobbiamo definirne l'architettura e l'addestramento è più complesso.
+
+La rete è composta da
+\begin{itemize}
+  \item un insieme di $n$ nodi di ingresso privi di capacità di elaborazione, ognuno dei quali è associato agli ingressi $x_{i}\in\Re,i\in[1,n]$;
+  \item un insieme di neuroni organizzati in $L\geq2$ strati, di cui $L-1$ strati nascosti ed uno strato di uscita con $K\geq1$ neuroni, ognuno dei quali è associato alle uscite $y_{i}\in\Re,i\in[1,K]$.
+  \item un insieme di archi pesati ed orientati da un neurone di uno strato ad ogni neurone dello strato successivo.
+\end{itemize}
+
+Indichiamo con $w_{j,i}^{l}$ il peso della connessione neurale entrante nel neurone $j$ dello strato $l$ ed uscente dal neurone $i$ dello strato $l-1$. Indichiamo con $N^{l}$ il numero di neuroni dello strato $l$.
+Il neurone $j$ dello strato $l$ realizza la funzione $g_{j}^{l}:\Re\rightarrow\Re$ con soglia di attivazione $w_{j,0}^{(l)}$.
+L'uscita del neurone $j$ dello strato $l$ è $z_{j}^{(l)}$, risultante dall'applicazione della funzione di attivazione $g_{j}^{(l)}$ sugli ingressi $a_{j}^{(l)}$ pesati e filtrati dalla soglia di attivazione. La generica uscita è dunque
+
+\begin{equation}
+\label{eqn:neural-network.multilayered.exit}
+z_{j}^{(l)}=g_{j}^{(l)}(a_{j}^{(l)}) \qquad a_{j}^{(l)}=\sum_{i=1}^{N^{(l-1)}}w_{j,i}z_{i}^{(l-1)}-w_{j,0}^{(l)}
+\end{equation}
+
+Nel seguito ci riferiamo a reti neurali multistrato con 2 strati. Questo perchè ogni rete multistrato può essere ricondotta ad una rete siffatta. Le notazioni si semplificano notevolmente. Indichiamo con
+\begin{itemize}
+  \item $w_{j,i}$: peso della connessione entrante nel neurone $j$ dal nodo di ingresso $i$;
+  \item $\theta_{j}$: soglia del neurone $j$;
+  \item $v_{j}$: peso della connessione uscente dal neurone $j$ ed entrante nell'unico neurone di uscita;
+  \item $g$: funzione di attivazione dei neuroni dello strato nascosto. Le funzioni di attivazione sono differenziabili e sigmoidali. Esempi tipici sono la funzione logistica  $g(t)=\frac{1}{1+e^{-ct}},c>0$ e la funzione tangente iperbolica $g(t)=\frac{1-e^{-t}}{1+e^{-t}}$.
+\end{itemize}
+
+Con una simile notazione, l'uscita diventa:
+
+\begin{equation}
+\label{eqn:neural-network.multilayered.exit.2}
+  y=\sum_{j=1}^{n}v_{j}g(\sum_{i=1}^{n}w_{j,i}x_{i}-\theta_{j})=\sum_{j=1}^{n}v_{j}g(w_{j}^{T}x-\theta_{j})
+\end{equation}
+
+dove
+
+\begin{equation}
+  w_{j}=(w_{j,1},\ldots,w_{j,n})^{T}
+\end{equation}
+
+
+\section{Addestramento}
+\label{sec:neural-networks.multilayered.learning}
+L'addestramento di una rete neurale multistrato può essere modellato come un problema di ottmizzazione non lineare in cui si voglia minimizzare lo scarto quadratico medio delle approssimazioni rispetto al training set.
+
+Considerando il training-set
+
+\begin{equation}
+\label{eqn:neural-networks.multilayered.trainig-set}
+T=\{(x^{p},y^{p}):x^{p}\in\Re^{n},y^{p}\in\Re^{K},p\in[1,P]\}
+\end{equation}
+
+si vuole risolvere il seguente problema:
+
+\begin{equation}
+  \label{eqn:neural-networks.multilayered.learning.problem}
+  \min_{w\in\Re^{m}} E(w)=
+  \sum_{p=1}^{P}E_{p}(w)=
+  \sum_{p=1}^{P}\frac{1}{2}\norm{y(x^{p},w)-y^{p}}^2
+\end{equation}
+
+dove $E_{p}$ è l'errore dell'uscita prodotta $y(x^{p},w)$ rispetto all'uscita desiderata $y^{p}$.
+
+È possibile definire funzioni di errore diversa da quella indicata. Supponiamo comunque che siano funzioni continuamente differenziabili.
+
+
+\section{Architettura}
+\label{neural-networks.multilayered.architecture}
+L'architettura di una rete neurale multistrato e la dimensione del training set sono determinati euristicamente.
+Anzitutto si dividono i dati in \textit{training-set}, \textit{validation-set} e \textit{test-set}. Tipicamente il dataset viene ripartito nel seguente modo: 70\% training-set e 30\% test-set. L'addestramento di una rete neurale viene eseguito sul training-set. La scelta dell'architettura viene valutata sul validation-set. Le prestazioni di una rete addestrata vengono valutate sul test-set.
+
+Le tecniche euristiche più note sono:
+
+\begin{itemize}
+  \item \textit{stabilizzazione strutturale}: si addestra sul training-set una sequenza di reti neurali con diverso numero di neuroni; si applica la \textit{cross-validation} su ogni rete addestrata valutandone l'errore sul validation-set. La rete selezionata è quella che minimizza l'errore sul validation-set.
+
+  \item \textit{regolarizzazione}: le architettura sono valutate minimizzando l'errore con un fattore correttivo tale da restringere lo spazio di ricerca dei parametri. L'addestramento della rete considera l'errore $E(w)=\sum_{p=1}^{P}E_{p}(w)+\gamma\norm{w}^{2},\gamma>0$. Il valore di $\gamma$ è determinato mediante cross-validation.
+
+  \item \textit{early stopping}: durante l'addestramento, si valuta periodicamente l'errore sul validation-set. L'addestramento termina quando l'errore sul validation-set comincia ad aumentare, in quanto ciò è un tipico sintomo di over-fitting.
+\end{itemize}
+
+L'efficienza degli algoritmi di ottimizzazione è essenziale per lo sviluppo delle reti neurali. La minimizzazione dell'errore di training è un difficile problema di ottimizzazione non lineare. L'addestramento di una rete multistrato prevede molteplici minimizzazioni della funzione di errore. La minimizzazione deve tener conto di
+
+\begin{itemize}
+  \item non linearità di $E(w)$
+  \item elevate dimensioni di $w$
+  \item elevate numero di pattern $P$
+  \item possibile mal condizionamento della matrice hessiana di $E(w)$
+  \item presenza di minimi locali non globali
+  \item insiemi di livello non compatti, da cui non è possibile garantire la convergenza globale degli algoritmi.
+\end{itemize}

@@ -1,0 +1,129 @@
+\chapter{Richiami sulla Convessità}
+\label{sec:foundations-convexity}
+
+In questa sezione definiamo la convessità di insiemi e funzioni.
+
+Diamo anzitutto le definizioni preliminari di retta, semiretta e segmento.
+
+\begin{definition}[Retta]
+	\label{dfn:line}
+	Una retta passante per i punti $x_{1},x{2}\in\Re^{n}$ è l'insieme
+	\begin{equation}
+		\label{eqn:line}
+		L:=\{x\in\Re^{n}:x=(1-\lambda)x_{1}+\lambda x_{2},\lambda\in\Re\}
+	\end{equation}
+\end{definition}
+
+\begin{definition}[Semiretta]
+	\label{dfn:semiline}
+	Una semiretta passante per il punto $x_{0}\in\Re^{n}$ con direzione $d\in\Re^{n},d\neq0$ è l'insieme
+	\begin{equation}
+		\label{eqn:semiline}
+		L:=\{x\in\Re^{n}:x=x_{0}+\lambda d,\lambda\in\Re^{+}\}
+	\end{equation}
+\end{definition}
+
+\begin{definition}[Segmento]
+	\label{dfn:segment}
+	Un segmento congiungente i punt $x_{1},x_{2}\in\Re^{n}$ è l'insieme
+	\begin{equation}
+		\label{eqn:segment}
+		L:=\{x\in\Re^{n}:x=(1-\lambda)x_{1}+\lambda x_{2},\lambda\in\Re,\lambda\in [0,1] \}
+	\end{equation}
+\end{definition}
+
+\begin{definition}[Insieme convesso]
+	\label{dfn:convex-set}
+	Un insieme $C\subseteq\Re^{n}$ è convesso se
+	\begin{equation}
+		\label{eqn:convex-set}
+		(1-\lambda)x_{1}+\lambda x_{2} \in C \qquad \forall x_{1},x_{2}\in C,\lambda\in\Re,\lambda\in [0,1]
+	\end{equation}
+\end{definition}
+
+Ovvero, un insieme è convesso se il segmento congiungente due qualunque punti in $C$ è esso stesso interamente contenuto in $C$.
+
+La convessità di un insieme si conserva nella moltiplicazione degli insiemi per una costante e nella somma di insiemi, nella intersezione.
+
+Un iperpiano ed un semispazio sono insiemi convessi.
+
+\begin{definition}[Poliedro convesso]
+	\label{dfn:convex-polyhedron}
+	Un poliedro convesso è l'intersezione finita di semispazi chiusi. $C\subseteq\Re^{n}$ è convesso se
+	\begin{equation}
+		\label{eqn:convex-polyhedron}
+		(1-\lambda)x_{1}+\lambda x_{2} \in C \qquad \forall x_{1},x_{2}\in C,\lambda\in\Re,\lambda\in [0,1]
+	\end{equation}
+\end{definition}
+
+\begin{definition}[Cono convesso]
+	\label{dfn:convex-cono}
+	Un cono convesso è un insieme $K\subseteq\Re^{n}$ tale che
+	\begin{equation}
+		\label{eqn:convex-cono}
+		\alpha x + \beta y \in K \qquad \forall x,y\in K,\alpha,\beta\in\Re^{+}
+	\end{equation}
+\end{definition}
+
+Un insieme vincolato da equazioni e disequazioni lineari forma un poliedro convesso
+\footnote{Tale insieme può infatti essere definito come intersezione di iperpiani (equazioni lineari) e semispazi chiusi (disequazioni lineari lasche), dunque come intersezione di semispazi chiusi.}.
+
+Un insieme vincolato da equazioni e disequazioni omogenee è un cono convesso.
+
+\begin{definition}[Combinazione convessa]
+	\label{dfn:convex-combination}
+	Una combinazione convessa di $x_{1},...,x_{m} \in\Re^{n}$ è una combinazione lineare di $x_{1},...,x_{m}$ con coefficienti positivi a somma unitaria, ovvero
+	\begin{equation}
+		\label{eqn:convex-combination}
+		x=\sum_{i=1}^{m}\alpha_{i}x_{i} \qquad con \quad \alpha_{i}\in\Re^{+} \quad \sum_{i=1}^{m}\alpha_{i}=1
+	\end{equation}
+\end{definition}
+
+Intuitivamente, $x$ è una combinazione convessa di $x_{1},x_{2}$ se e solo se $x$ appartiene al segmento $[x_{1},x_{2}]$.
+
+\begin{definition}[Involucro convesso]
+	\label{dfn:convex-involucro}
+	Una combinazione convessa di $x_{1},...,x_{m} \in\Re^{n}$ è una combinazione lineare di $x_{1},...,x_{m}$ con coefficienti positivi a somma unitaria, ovvero
+	\begin{equation}
+		\label{eqn:convex-involucro}
+		x=\sum_{i=1}^{m}\alpha_{i}x_{i} \qquad con \quad \alpha_{i}\in\Re^{+} \quad \sum_{i=1}^{m}\alpha_{i}=1
+	\end{equation}
+\end{definition}
+
+\begin{theorem}[Condizione di convessità]
+	\label{thm:convexity-set-condition}
+	Un insieme $C\subseteq\Re^{n}$ è convesso se e solo se ogni combinazione convessa di elementi di $C$ appartiene a $C$.
+\end{theorem}
+
+La combinazione non negativa conserva la convessità. La massimizzazione conserva la convessità. La composizione di funzione non conserva la convessità.
+
+\begin{theorem}[Combinazione non negativa di funzioni convesse]
+	\label{thm:nonnegative-combination-convex-functions}
+	Sia $C\subseteq\Re^{n}$ un insieme convesso e siano $f_{i}:C\rightarrow\Re$ funzioni convesse su $C$. Allora la loro combinazione non negativa
+	\begin{equation}
+	\label{eqn:nonegative-combination-convex-functions}
+		f(x)=\sum_{i=1}^{m}\alpha_{i}f_{i}(x)\qquad\alpha_{i}\geq 0
+	\end{equation}
+	è una funzione convessa su $C$.
+	Inoltre, se esiste un $i$ tale che $\alpha_{i}\neq 0$ e $f_{i}$ è strettamente convessa su $C$, allora $f(x)$ è strettamente convessa su $C$.
+\end{theorem}
+
+\begin{theorem}[Massimo di funzioni convesse]
+	\label{thm:maximum-convex-functions}
+	Sia $C\subseteq\Re^{n}$ un insieme convesso e siano $f_{i}:C\rightarrow\Re$ funzioni (strettamente) convesse su $C$. Allora la massimizzazione
+	\begin{equation}
+	\label{eqn:maximum-convex-functions}
+		f(x)=\max_{1\leq i\leq m}\{f_{i}(x)\}
+	\end{equation}
+	è una funzione (strettamente) convessa su $C$.
+\end{theorem}
+
+\begin{theorem}[Composizione di funzioni convesse]
+	\label{thm:composition-convex-functions}
+	Sia $C\subseteq\Re^{n}$ un insieme convesso, sia $g:C\rightarrow\Re$ funzione (strettamente) convessa e $\psi:Conv(g(C))\rightarrow\Re$ una funzione (strettamente) convessa (strettamente) crescente. Allora la composizione
+	\begin{equation}
+	\label{eqn:composition-convex-functions}
+	f(x)=\psi(g(x))
+	\end{equation}
+	è una funzione (strettamente) convessa su $C$.
+\end{theorem}

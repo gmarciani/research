@@ -1,0 +1,168 @@
+\chapter{Metodo di Armijo}
+\label{chp:methods.armijo}
+Il metodo di Armijo è un metodo di line search inesatta che calcola il passo
+$\alpha_{k}$ mediante \textit{backtracking} \cite{armijo1966minimization}.
+Supposta l'esistenza di una direzione di discesa $d_{k}$ per ogni punto non
+stazionario e dato un passo iniziale $\Delta_{k}>0$, il passo $\alpha_{k}$ viene
+ridotto di un fattore $\delta\in(0,1)$, detto \textit{fattore di backtracking},
+fino a soddisfare la \textit{condizione di Armijo}, espressa da:
+
+\begin{equation}
+\label{eqn:methods.armijo.condition}
+f(x_{k}+\alpha_{k}d_{k})\leq f(x_{k})+\gamma\alpha_{k}\nabla f(x_{k})^{T}d_{k}
+\end{equation}
+
+dove $\gamma\in(0,1)$ è il \textit{fattore di riduzione} della funzione.
+
+La \textit{sufficiente riduzione} della funzione è garantita dalla condizione di
+Armijo. Il \textit{sufficiente spostamento} è garantito scegliendo il passo
+iniziale abbastanza grande.
+
+Esiste una versione dell'algoritmo in cui viene rilassata la monotonicità della
+condizione di Armijo. Tale versione prende il nome di \textit{metodo di Armijo
+non monotono} ed è stata proposta in \cite{grippo1986nonmonotone}.
+
+L'algoritmo generale per il calcolo del passo $\alpha_{k}$ con il metodo di Armijo
+è mostrato in \Cref{alg:methods.armijo}.
+
+\begin{algorithm}
+	\label{alg:methods.armijo}
+	\caption{Armijo}
+	$\Delta_{k}>0, \gamma\in(0,1),\delta\in(0,1)$ \\
+	$\alpha=\Delta,j=0$ \\
+	\textbf{while} \\
+	$f(x_{k}+\alpha d_{k}) > f(x_{k})+\gamma\alpha\nabla f(x_{k})^{T}d_{k}$: \\
+	$\alpha=\delta\alpha$ \\
+	$j=j+1$ \\
+	\textbf{end while} \\
+	$\alpha_{k}=\alpha$
+\end{algorithm}
+
+
+\subsection{Terminazione e convergenza}
+\label{sec:methods.armijo.termination.convergence}
+Dimostriamo ora la terminazione e la convergenza dell'algoritmo di Armijo.
+
+\begin{theorem}[Terminazione di Armijo]
+	\label{thm:methods.armijo.termination}
+	Sia $f:\Re^{n}\rightarrow\Re$ una funzione continuamente differenziabile su
+	$\Re^{n}$. Sia $x_{k}\in\Re^{n}$ un punto tale che $\nabla f(x_{k})^{T}d_{k}<0$.
+	Il metodo di Armijo determina, in un numero finito di passi, un valore
+	$\alpha_k>0$ che soddisfa la condizione di Armijo e una delle seguenti:
+
+	\begin{enumerate}
+		\item $\alpha_{k}=\Delta_{k}$;
+
+		\item $\alpha_{k}\leq\delta\Delta_{k}$ e tale che
+		$f(x_{k}+\frac{\alpha_{k}}{\delta}d_{k})
+		>
+		f(x_{k})+\gamma\frac{\alpha_{k}}{\delta}\nabla f(x_{k})^{T}d_{k}$;
+	\end{enumerate}
+
+	\begin{proof}
+		INSERT HERE THE THEOREM PROOF.
+	\end{proof}
+\end{theorem}
+
+La convergenza è assicurata scegliendo il passo iniziale abbastanza grande.
+
+\begin{theorem}[Convergenza di Armijo]
+	\label{thm:methods.armijo.convergence}
+	Sia $f:\Re^{n}\rightarrow\Re$ una funzione continuamente differenziabile su
+	$\Re^{n}$. Sia l'insieme di livello $\mathcal{L}_{0}$ compatto. 	Sia $\nabla f(x_{k})d_{k}<0$ per ogni punto $x_{k}$ non stazionario. Se il passo iniziale $\Delta_{k}$ soddisfa la seguente:
+
+	\begin{equation}
+	\label{eqn:methods.armijo.convergence}
+	\Delta_{k}
+	\geq
+	\frac{1}{\norm{d_{k}}}\sigma\Bigg(\frac{\abs{\nabla f(x_{k})^{T}d_{k}}}{\norm{d_{k}}}\Bigg)
+\end{equation}
+
+dove $\sigma$ è una funzione di forzamento, allora l'algoritmo di Armijo
+determina in un numero finito di passi un valore $\alpha_{k}>0$ tale che la
+successione dei punti $\{x_{k}:x_{k+1}=x_{k}+\alpha_{k}d_{k}\}$ soddisfa le
+seguenti:
+
+\begin{enumerate}
+	\item $f(x_{k+1})<f(x_{k})$;
+
+	\item $\lim_{k\rightarrow\infty}\frac{\nabla f(x_{k})^{T}d_{k}}{\norm{d_{k}}}=0$.
+\end{enumerate}
+
+\begin{proof}
+	INSERT HERE THE THEOREM PROOF.
+\end{proof}
+\end{theorem}
+
+La dimostrazione del \Cref{thm:methods.armijo.convergence} è molto importante perchè
+la maggior parte delle dimostrazioni di convergenza degli algoritmi vi
+assomiglia.
+
+
+\subsection{I parametri di Armijo}
+\label{sec:methods.armijo.parameters}
+Nell'algoritmo di Armijo intervengono i seguenti parametri:
+
+\begin{enumerate}
+	\item passo iniziale $\Delta_{k}$: è il primo passo da considerare.
+	Deve essere sufficientemente grande per garantire la convergenza.
+	Teoricamente $\Delta_{k}>0$, ma alcuni algoritmi richiedono $\Delta_{k}=1$
+	per garantire una sufficiente rapidità di convergenza.
+
+	\item fattore di riduzione $\gamma$: è la pendenza della retta che definisce
+	la condizione di sufficiente riduzione della funzione obiettivo.
+	Teoricamente $\gamma\in(0,1)$; praticamente $\gamma\in(0,0.5)$ così da
+	rendere l'algoritmo applicabile al caso quadratico e garantire una
+	sufficiente rapidità di convergenza per alcuni algoritmi; tipicamente
+	$\gamma\in(10^{-3},10^{-4})$.
+
+	\item fattore di backtracking $\delta$: è il fattore di riduzione del passo.
+	Teoricamente $\delta\in(0,1)$; tipicamente $\delta=0.5$.
+	Può essere anche scelto in un opportuno range $[\delta_{-},\delta_{+}]$
+	(vedi \Cref{sec:methods.armijo.backtracking.bounded}).
+\end{enumerate}
+
+
+\subsubsection{Backtracking vincolato}
+\label{sec:methods.armijo.backtracking.bounded}
+Il fattore di backtracking $\delta$ può essere scelto in un opportuno range
+$[\delta_{-},\delta_{+}]$. Applicando interpolazione sull'approssimazione
+quadratica o cubica della funzione obiettivo si può ridurre sensibilmente il
+numero di iterazioni del'algoritmo.
+
+Una formulazione alterativa dell'algoritmo di Armijo, che tenga conto del
+nacktracking vincolato è la seguente:
+
+\begin{algorithm}
+	\label{alg:methods.armijo.backtracking.bounded}
+	\caption{Armijo (backtracking vincolato)}
+	$\Delta_{k}>0, \gamma\in(0,0.5),0<\delta_{-}<\delta_{+}<1$ \\
+	$\alpha=\Delta_{k}, j=0$ \\
+	\textbf{while} \\
+	$f(x_{k}+\alpha d_{k}) > f(x_{k})+\gamma\alpha\nabla f(x_{k})^{T}d_{k}$: \\
+	scelgo $\delta\in[\delta_{-},\delta_{+}]$ \\
+	$\alpha=\delta\alpha$ \\
+	$j=j+1$ \\
+	\textbf{end while} \\
+	$\alpha_{k}=\alpha$
+\end{algorithm}
+
+
+\subsubsection{Armijo nel caso quadratico}
+\label{sec:methods.armijo.quadratic}
+
+\begin{theorem}[Armijo, caso quadratico]
+	\label{thm:methods.armijo.quadratic}
+	Sia $f(x)=\frac{1}{2}x^{T}Qx+c^{T}x$ con $Q$ simmetrica definita positiva.
+	Siano $x_{k}$ e $d_{k}$ tali che $d_{k}$ è una direzione di discesa in $x_{k}$.
+	Sia $\alpha_{k}^{*}$ il passo ottimo lungo $d_{k}$, calcolato come segue:
+	\begin{equation}
+	\alpha_{k}^{*}=-\frac{\nabla f(x_{k})^{T}d_{k}}{d_{k}^{T}Qd_{k}}
+	\end{equation}
+	Allora $\alpha_{k}^{*}$ soddisfa la condizione di Armijo se e solo se
+	$\gamma\in(0,0.5]$.
+
+	\begin{proof}
+		INSERT HERE THE THEOREM PROOF.
+	\end{proof}
+\end{theorem}

@@ -1,0 +1,43 @@
+\section{M/G/1 Queues}
+\label{sec:M-G-1-queues}
+
+A $M/G/1$ is a queue where 
+(i) the arrival process is Poissonian with rate $\lambda$,
+(ii) the service process is generically distributed,
+(iii) there is one servers,
+(iv) the buffer has infinite capacity,
+(v) the scheduling policy is FCFS.
+
+%\begin{figure}[tp]
+%\label{fig:M-G-1-queue}	
+%	\centering
+%	\includegraphics{fig/M-G-1-Queue}
+%	\caption{M/G/1 queue}
+%\end{figure}
+
+In general, we have that
+
+\begin{equation}
+\label{sec:M-G-1-Mean-Queue-Excess-Time}
+\expected{T_{Q}}=\frac{\varrho}{1-\varrho}\expected{S_{e}}
+\end{equation}
+
+where $\expected{T_{e}}$ is the \textit{excess of service time}, that is the remaining service time of the job in service, given that there is some job in service.
+
+
+
+\subsection{P-K Formula}
+\label{sec:PK-Formula}
+The Pollaczek-Khinchin (P-K Formula) \cite{pollaczek1930aufgabe,khinchin1967mathematical} is written in several equivalent forms:
+
+\begin{equation}
+\expected{T_{Q}}=\frac{\varrho}{1-\varrho}\cdot\frac{\expected{S^{2}}}{2\expected{S}}
+\end{equation}
+
+\begin{equation}
+\expected{T_{Q}}=\frac{\varrho}{1-\varrho}\cdot\frac{\expected{S}}{2}\cdot(C_{S}^{2}+1)
+\end{equation}
+
+\begin{equation}
+\expected{T_{Q}}=\frac{\lambda\expected{S^{2}}}{2(1-\varrho)}
+\end{equation}

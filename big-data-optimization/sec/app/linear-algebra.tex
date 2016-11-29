@@ -1,0 +1,327 @@
+\chapter{Richiami di Algebra Lineare}
+\label{chp:foundations-linear-algebra}
+Nei problemi di ottimizzazione considerati le variabili di decisione sono vettori dello spazio $\Re^{n}$.
+
+\begin{definition}[Combinazione lineare]
+	\label{dfn:linear-combination}
+	Una combinazione lineare di un numero finito di vettori $x_{1},...,x_{m} \in\Re^{n}$ è un vettore $x\in\Re^{n}$ definito come
+	\begin{equation}
+	\label{eqn:linear-combination}
+	x:=\sum_{i=1}^{m}\alpha_{i}x_{i} \qquad \alpha_{i}\in\Re
+	\end{equation}
+\end{definition}
+
+\begin{definition}[Sottospazio vettoriale]
+	\label{dfn:vectorial-subspace}
+	L'insieme $W\subseteq\Re^{n}$ è un sottospazio vettoriale di $\Re^{n}$ se ogni combinazione lineare di vettori in $W$ appartiene a $W$.
+\end{definition}
+
+\begin{definition}[Iperpiano]
+	\label{dfn:hyperplan}
+	Un iperpiano è un insieme vincolato da equazioni lineari, ovvero
+	\begin{equation}
+	\label{eqn:hyperplan}
+	H:=\{x\in\Re^{n}:a^{T}x=b,a\in\Re^{n}-\{0\}^{n},b\in\Re\}
+	\end{equation}
+\end{definition}
+
+\begin{definition}[Semispazio]
+	\label{dfn:semispace}
+	Un semispazio è un insieme vincolato da disequazioni lineari, ovvero
+	\begin{equation}
+	\label{eqn:semispace}
+	H:=\{x\in\Re^{n}:a^{T}x\geq b,a\in\Re^{n}-\{0\}^{n},b\in\Re\}
+	\end{equation}
+	Un semispazio è aperto (chiuso) se vincolato da disequazioni strette (lasche).
+\end{definition}
+
+Un iperpiano $\{x\in\Re^{n}:a^{T}x=b\}$ individua due semispazi chiusi $\{x\in\Re^{n}:a^{T}x\leq b\}$ e $\{x\in\Re^{n}:a^{T}x\geq b\}$, e può essere espresso come loro intersezione.
+
+\begin{definition}[Involucro lineare]
+	\label{dfn:linear-involucro}
+	Sia dato un insieme $A\subseteq\Re^{n}$. L'involucro lineare di $A$, indicato con $lin(A)$, è il sottospazio vettoriale generato da $A$ di tutte e sole le combinazioni lineari di $A$.
+\end{definition}
+
+In particolare, $lin(A)$ contiene $A$ ed è il sottospazio vettoriale generato dalla intersezione di tutti i sottospazi vettoriali contenenti $A$.
+
+\begin{definition}[Dipendenza e indipendenza lineare]
+	\label{dfn:linear-dependence}
+	Siano dati i vettori $x_{1},...,x_{m}\in\Re^{n}$. Tali vettori sono linearmente \textit{dipendenti} se e solo se esistono coefficienti non tutti nulli $\alpha_{1},...,\alpha_{m}\in\Re$ tali che
+	\begin{equation}
+	\label{eqn:linear-dependence}
+	\sum_{i=1}^{m}\alpha_{i}x_{i}=0
+	\end{equation}
+	Altrimenti, tali vettori sono linearmente \textit{indipendenti}.
+	\\
+	Un insieme $S\subseteq\Re^{n}$ è linearmente \textit{dipendente} se esiste un sottoinsieme finito $\tilde{S}\subseteq S$ i cui elementi sono linearmente dipendenti. Altrimenti, l'insieme è linearmente \textit{indipendente}.
+\end{definition}
+
+In altre parole, i vettori $x_{1},...,x_{m}\in\Re^{n}$ sono sono linearmente \textit{dipendenti} se e solo se almeno uno di loro è combinazione lineare degli altri.
+
+\begin{definition}[Rango di un insieme]
+	\label{dfn:range-set}
+	Sia dato un insieme $S\subseteq\Re^{n}$. Il rango di $S$, indicato con $rng(S)$, è il massimo numero di elementi linearmente indipendenti di $S$.
+\end{definition}
+
+\begin{definition}[Base di un insieme]
+	\label{dfn:base}
+	Sia dato un insieme $S\subseteq\Re^{n}$. Una base $B$ di $S$ è un insieme $B\subseteq S$ linearmente indipendente tale che $S=lin(B)$; o, equivalentemente, tale che $|B|=rng(S)$.
+\end{definition}
+
+Dalla definizione di base, segue che la dimensione di uno spazio vettoriale è la cardinalità della sua base.
+
+\begin{definition}[Rango di una matrice]
+	\label{dfn:range-matrix}
+	Sia data una matrice $A$ $m\times n$. Il rango di $A$, indicato con $rng(A)$, è il massimo numero di colonne linearmente indipendenti di $A$.
+\end{definition}
+
+In particolare, il numero di colonne linearmente indipendenti di $A$ è uguale al numero di righe linearmente indipendenti di $A$.
+
+\begin{theorem}
+	\label{thm:existance-solution-linear-system}
+	Il sistema $Ax=b$, con $A$ matrice $m\times n$ ammette soluzione se e solo se $rng(A)=rng([A,b])$.
+	In particolare, la soluzione è unica se e solo se $rng(A)=n$.
+\end{theorem}
+
+\begin{definition}[Norma]
+	\label{dfn:norm}
+	La norma è una funzione $\parallel\cdot\parallel :\Re^{n}\rightarrow\Re$ che soddisfa le seguenti proprietà:
+	\begin{enumerate}
+		\item $\norm{x} \geq 0 \quad \forall x\in\Re^{n}$
+		\item $\norm{x}=0 \leftrightarrow x=0$
+		\item $\norm{x+y}\leq\norm{x}+\norm{y} \quad \forall x,y \in\Re^{n}$
+		\item $\norm{\alpha x}=\abs{\alpha}\norm{x} \quad \forall \alpha\in\Re,x\in\Re^{n}$
+	\end{enumerate}
+\end{definition}
+
+Dalla definizione di norma segue che
+
+\begin{equation}
+\norm{x-y}\geq\abs{\norm{x}-\norm{y}}
+\end{equation}
+
+\begin{definition}[Norma di Holder]
+	\label{dfn:norm-holder}
+	La norma di Holder è una norma definita come
+	\begin{equation}
+		\label{eqn:norm-holder}
+		\norm{x}_{p}:=\Big(\sum_{i=1}^{n}\abs{x_{i}}^{p}\Big)^{\frac{1}{p}}, \qquad p\in[1,\infty))
+	\end{equation}
+\end{definition}
+
+La norma di Holder con $p=2$ è la \textit{norma euclidea}
+\begin{equation}
+\label{eqn:norm-euclide}
+	\norm{x}=\sqrt{\sum_{i=1}^{n}x_{i}^{2}}
+\end{equation}
+
+La norma di Holder con $p=\infty$ è la \textit{norma di Chebichev}
+\begin{equation}
+\label{eqn:norm-chebichev}
+	\norm{x}_{\infty}=\max_{i\in[1,n]}\abs{x_{i}}
+\end{equation}
+
+Con la norma possiamo definire una \textit{topologia}.
+
+\begin{definition}[Sfera chiusa]
+	\label{dfn:sphere-closed}
+	Una sfera chiusa di centro $x_{0}\in\Re^{n}$ e raggio $\varrho>0$ è un insieme
+	\begin{equation}
+	\label{eqn:sphere-closed}
+	B(x_{0},\varrho):=\{x\in\Re^{n}:\norm{x-x_{0}}\leq\varrho\}
+	\end{equation}
+\end{definition}
+
+\begin{definition}[Sfera aperta]
+	\label{dfn:sphere-open}
+	Una sfera aperta di centro $x_{0}\in\Re^{n}$ e raggio $\varrho>0$  è un insieme
+	\begin{equation}
+	\label{eqn:sphere-open}
+	B(x_{0},\varrho):=\{x\in\Re^{n}:\norm{x-x_{0}}<\varrho\}
+	\end{equation}
+\end{definition}
+
+\begin{definition}[Insieme aperto]
+	\label{dfn:set-open}
+	Un insieme $S\subseteq\Re^{n}$ è aperto se per ogni $x\in S$ esiste una sfera paerta di centro $x$ interamente contenuta in $S$.
+\end{definition}
+
+\begin{definition}[Insieme chiuso]
+	\label{dfn:set-closed}
+	Un insieme $S\subseteq\Re^{n}$ è chiuso se il suo complemento è aperto.
+\end{definition}
+
+\begin{definition}[Insieme limitato]
+	\label{dfn:set-limited}
+	Un insieme $S\subseteq\Re^{n}$ è limitato se esiste finito $M\in\Re^{+}$ tale che
+	\begin{equation}
+	\label{eqn:set-limited}
+	\norm{x}\leq M \qquad x\in S
+	\end{equation}
+\end{definition}
+
+\begin{definition}[Insieme compatto]
+	\label{dfn:set-compact}
+	Un insieme $S\subseteq\Re^{n}$ è compatto se è chiuso e limitato.
+\end{definition}
+
+\begin{definition}[Interno di un insieme]
+	\label{dfn:set-inner}
+	Sia dato un insieme $S\subseteq\Re^{n}$. Il punto $x\in S$ è un \textit{punto interno} di $S$ se in esso si può centrare una sfera in esso centrata interamente contenuta in $S$.
+
+	L'interno di $S$ è l'insieme di tutti i punti interni di $S$.
+\end{definition}
+
+\begin{definition}[Chiusura di un insieme]
+	\label{dfn:set-closing}
+	Sia dato un insieme $S\subseteq\Re^{n}$. Il punto $x\in S$ è un \textit{punto di chiusura} di $S$ se ogni sfera centrata in $x$ interseca $S$.
+
+	La chiusura di $S$ è l'insieme di tutti i punti di chiusura di $S$.
+\end{definition}
+
+\begin{definition}[Frontiera di un insieme]
+	\label{dfn:set-frontier}
+	Sia dato un insieme $S\subseteq\Re^{n}$. Il punto $x\in S$ è un \textit{punto di frontiera} di $S$ se ogni sfera centrata in $x$ interseca sia $S$ che il suo complemento $\Re^{n} \setminus S$
+
+	La frontiera di $S$ è l'insieme di tutti i punti di frontiera di $S$.
+\end{definition}
+
+\begin{definition}[Angolo tra vettori]
+	\label{dfn:vector-angle}
+	Siano dati $x,y\in\Re^{n}$ non nulli. L'angolo tra i vettori $x,y$ è quell'angolo $\theta\in [0,\pi]$ tale che
+	\begin{equation}
+		\label{eqn:vector-angle}
+		\cos\theta=\frac{x\cdot y}{\norm{x}\norm{y}}
+	\end{equation}
+\end{definition}
+
+\begin{definition}[Vettori ortogonali]
+	Due vettori $x,y\in\Re^{n}$ sono ortogonali se e solo se $x\cdot y=0$.
+\end{definition}
+
+\begin{theorem}[Disuguaglianza di Cauchy-Schwarz]
+	\label{thm:disequality-cauchy-schwarz}
+	Siano dati $x,y\in\Re^{n}$.
+	\begin{equation}
+		\label{eqn:disequality-cauchy-schwarz}
+		\abs{x\cdot y}\leq\norm{x}\norm{y}
+	\end{equation}
+	In particolare l'uguaglianza vale se e solo se $\exists\alpha\in\Re.x=\alpha y$.
+\end{theorem}
+
+\begin{definition}[Matrice diagonale dominante]
+	\label{dfn:diagonal-dominant-matrix}
+	Una matrice $Q$ $n\times n$ è diagonale dominante se e solo se
+	\begin{equation}
+		\label{eqn:diagonal-dominant-matrix}
+		q_{i,i}-\sum_{j=1,j\neq i}^{n}\abs{q_{i,j}}\geq 0 \qquad \forall i\in[1,n]
+	\end{equation}
+	Se la disuguaglianza è stretta, la matrice è \textit{strettamente diagonale dominante}.
+\end{definition}
+
+\begin{definition}[Sottomatrice]
+	\label{dfn:submatrix}
+	Data una matrice $A$, una sua sottomatrice è una matrice ottenuta cancellando righe e colonne di $A$.
+	Una sottomatrice principale è una sottomatrice ottenuta cancellando righe e colonne con stesso indice.
+\end{definition}
+
+\begin{definition}[Minore]
+	\label{dfn:minor}
+	Data una matrice $A$, un suo minore è il determinante di una sottomatrice quadrata di $A$.
+	Un minore principale è il determinante di una sottomatrice principale  di $A$.
+\end{definition}
+
+\begin{definition}[Traccia]
+	\label{dfn:trace}
+	Data una matrice $A$, la sua traccia, indicata con $tr(A)$, è la somma dei suoi elementi diagonali, ovvero
+	\begin{equation}
+		\label{eqn:trace}
+		tr(A):=\sum_{i=1}^{n}a_{i,i}
+	\end{equation}
+\end{definition}
+
+Il determinante di una matrice $A$ reale $n\times n$ gode delle seguenti proprietà
+
+\begin{eqnarray}
+	\label{eqn:determinant-matrix-properties}
+	det(AB)=det(A)det(B) \\
+	det(\alpha A)=\alpha^{n}det(A) \\
+	det(A^{T})=det(A) \\
+	det(A^{-1})=(det(A))^{-1}
+\end{eqnarray}
+
+La traccia di una matrice $A$ reale $n\times n$ gode delle seguenti proprietà
+
+\begin{eqnarray}
+	\label{eqn:trace-matrix-properties}
+	tr(A+B)=tr(A)+tr(B) \\
+	tr(\alpha A)=\alpha tr(A) \\
+	tr(A^{T})=tr(A)
+\end{eqnarray}
+
+\begin{definition}[Forma quadratica]
+	\label{dfn:quadratic-form}
+	Una forma quadratica è una funzione $q:\Re^{n}\rightarrow\Re$ definita come
+	\begin{equation}
+		\label{eqn:quadratic-form-algebric}
+		q(x)=\sum_{i=1}^{n}\sum_{j=1}^{n}q_{i,j}x_{i}x_{j}
+	\end{equation}
+	dove $q_{i,j}$ sono coefficienti reali.
+	Una forma quadratica può essere espressa in forma matriciale come
+	\begin{equation}
+		\label{eqn:quadratic-form-matrix}
+		q(x)=x^{T}Qx
+	\end{equation}
+	dove $x\in\Re^{n}$ e $Q$ matrice quadrata $n\times n$.
+\end{definition}
+
+\begin{definition}[Positività e negatività di una matrice]
+	\label{dfn:positivity-negativity-matrix}
+	Una matrice $Q$ simmetrica $n\times n$ è
+	\begin{align}
+	definita\; positiva\; (Q>0)               && se && x^{T}Qx>0     && \forall x\in\Re^{n}\setminus \{0\}^{n} \\
+	semidefinita\; positiva\; (Q\geq 0)       && se && x^{T}Qx\geq 0 && \forall x\in\Re^{n} \\
+	definita\; negativa\; (Q<0)               && se && x^{T}Qx<0     && \forall x\in\Re^{n}\setminus \{0\}^{n} \\
+	semidefinita\; negativa\; (Q\leq 0)       && se && x^{T}Qx\leq 0 && \forall x\in\Re^{n}
+	\end{align}
+\end{definition}
+
+Sia data una matrice $Q$ simmetrica $n\times n$, allora:
+
+\begin{enumerate}
+	\item $Q>0\leftrightarrow \Lambda(Q)>0$ e $Q>0\rightarrow Diag(Q)>0$;
+	\item $Q\geq0\leftrightarrow \Lambda(Q)\geq0 \wedge Minor(Q)\geq0$ e $Q>0\rightarrow Diag(Q)\geq0$;
+	\item $Q<0\leftrightarrow \Lambda(Q)<0$ e $Q>0\rightarrow Diag(Q)<0$;
+	\item $Q\leq0\leftrightarrow \Lambda(Q)\leq0$ e $Q>0\rightarrow Diag(Q)\leq0$;
+\end{enumerate}
+
+dove $\Lambda(Q)$ è l'insieme di autovalori, $Minor(Q)$ è l'insieme dei minori principali e $Diag(Q)$ sono gli elementi diagonali.
+
+Valgono i seguenti criteri per la determinazione della positività di una matrice.
+
+\begin{theorem}[Criterio di Sylvester]
+	\label{thm:sylvester-criterion}
+	Sia $Q$ una matrice simmetrica $n\times n$ e siano $\Delta_{i}$ per $i\in[1,n]$ i suoi minori principali. Allora:
+	\begin{align}
+		\label{eqn:sylvester-criterion}
+		Q>0 && \leftrightarrow && \Delta_{i}>0         && \forall i\in[1,n] \\
+		Q<0 && \leftrightarrow && (-1)^{i}\Delta_{i}>0 &&\forall i\in[1,n]
+	\end{align}
+\end{theorem}
+
+\begin{theorem}[Criterio di dominanza]
+	\label{thm:dominance-criterion}
+	Sia $Q$ una matrice simmetrica $n\times n$. Se $Q$ è una \textit{matrice strettamente diagonale dominante}, allora $Q>0$.
+\end{theorem}
+
+\begin{definition}[Tasso di condizionamento]
+  \label{dfn:matrix.conditioning.rate}
+  Sia $A$ una matrice quadrata. Sia $\Lambda(A)$ l'insieme dei suoi autovalori. Il tasso di condizionamento di $A$ è definito come:
+  \begin{equation}
+    \label{eqn:matrix.conditioning.rate}
+    r:=\frac{\lambda_{M}}{\lambda_{m}}
+  \end{equation}
+  dove $\lambda_{M}=\max\Lambda(A)$ e $\lambda_{m}=\min\Lambda(A)$.
+\end{definition}
+
+Se $r=1$, la matrice è \textit{perfettamente condizionata}. Se $r>>1$, la matrice è \textit{malcondizionata}.

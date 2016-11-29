@@ -1,0 +1,69 @@
+\section{M/M/\texorpdfstring{$\infty$}{Infinity} Queues}
+\label{sec:M-M-inf-Queues}
+
+A $M/M/\infty$ is a queue where
+(i) the arrival process is Poissonian with rate $\lambda$,
+(ii) the service process is Exponential with rate $\mu$,
+(iii) there are infinite servers,
+(iv) the buffer has infinite capacity,
+(v) the scheduling policy is FCFS.
+
+%\begin{figure}[tp]
+%\label{fig:M-M-inf-Queue}	
+%	\centering
+%	\includegraphics{fig/M-M-inf-Queue}
+%	\caption{An M/M/k queue and its corresponding CTMC.}
+%\end{figure}
+
+The key question in these types of systems is determining the \textit{Queue Probability} $P_{Q}$, that is the probability that an arriving job is enqueued.
+
+\begin{theorem}[Utilization]
+	\label{thm:M-M-inf-Utilization}
+	For any $M/M/\infty$, the utilization is
+	
+	\begin{equation}
+	\label{eqn:M-M-inf-Utilization}
+	\varrho = \frac{\lambda}{\mu}
+	\end{equation}
+\end{theorem}
+
+\begin{theorem}[State Probability]
+\label{thm:M-M-inf-Probability-State}
+	For any $M/M/\infty$, the state probability is
+	
+	\begin{equation}
+	\label{eqn:M-M-inf-Probability-State}
+	\pi_{i} = \Big(\frac{\lambda}{\mu})^{i} \frac{1}{i!} \pi_{0}
+	\end{equation}
+	
+	with
+	
+	\begin{equation}
+	\label{eqn:M-M-inf-Probability-State-Zero}
+	\pi_{0} = e^{-\frac{\lambda}{\mu}}
+	\end{equation}
+	
+	That is $N^{M/M/\infty} \sim Poisson(\frac{\lambda}{\mu})$.
+\end{theorem}
+
+Since, $N^{M/M/\infty} \sim Poisson(\frac{\lambda}{\mu})$, then
+
+\begin{equation}
+\label{eqn:M-M-inf-Mean-System-Jobs}
+\expected{N} = \frac{\lambda}{\mu}
+\end{equation}
+
+The remaining metrics ($\expected{N_{Q}},\expected{T},\expected{T_{Q}}$) could be determined by applying the Little's Law, the basic definitions 
+$\expected{N}=\expected{N_{Q}}+\expected{N_{S}}$, 
+$\expected{N_{S}}=\varrho$, 
+$\expected{T}=\expected{T_{Q}}+\expected{T_{S}}$,
+$\expected{T_{S}}=\frac{1}{\mu}$,
+considering that $\expected{N_{Q}}=0$ and $\expected{T_{Q}}=0$, because every arrival il always served immediately.
+
+In particular we obtain
+
+\begin{equation}
+\label{eqn:M-M-inf-Mean-Response-Time}
+\expected{T} = \frac{1}{\mu}
+\end{equation}
+

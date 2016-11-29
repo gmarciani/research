@@ -1,0 +1,71 @@
+\section{M/M/m/m Queues}
+\label{sec:M-M-m-m-Queues}
+
+A $M/M/m/m$ is a queue where \footnote{also called $m$-server loss system}
+(i) the arrival process is Poissonian with rate $\lambda$,
+(ii) the service process is Exponential with rate $\mu$,
+(iii) there are $m$ servers,
+(iv) there is no buffer,
+(v) the scheduling policy is FCFS.
+
+%\begin{figure}[tp]
+%\label{fig:M-M-m-m-Queue}
+%	\centering
+%	\includegraphics{fig/M-M-m-m-Queue}
+%	\caption{An M/M/m/m queue and its corresponding CTMC.}
+%\end{figure}
+  
+The key question in these types of systems is determining the \textit{Blocking Probability} $P_{block}$, that is the probability that a job is dropped.
+
+\begin{theorem}[State Probability]
+\label{thm:M-M-m-m-Probability-State}
+
+	For any $M/M/m/m$, the state probability is
+
+	\begin{equation}
+	\label{eqn:M-M-m-m-Probability-State}
+	\pi_{i} = \Big( \frac{\lambda}{\mu} \Big)^{i} \frac{1}{i!} \pi_{0} 
+	\end{equation}
+	
+	with
+	
+	\begin{equation}
+	\label{eqn:M-M-m-m-Queue-Probability-State-Zero}
+	\pi_{0} = \Big[ \sum_{i=0}^{m} \Big( \frac{\lambda}{\mu} \Big)^{i} \frac{1}{i!} \Big]^{-1}
+	\end{equation}
+	
+	\begin{proof}
+		For a formal demonstration, see \cite{harchol2013performance} on page 256-257.
+	\end{proof}
+\end{theorem}
+
+\begin{theorem}[Blocking Probability]
+\label{thm:M-M-m-m-Probability-Block}	
+	For any $M/M/m/m$, the blocking probability is
+	
+	\begin{equation}
+	\label{eqn:M-M-m-m-Probability-Block}
+		P_{block} = \pi_{m} = \frac{\Big(\frac{\lambda}{\mu}\Big)^{m} \frac{1}{m!}}{\sum_{i=0}^{m} \Big( \frac{\lambda}{\mu} \Big)^{i} \frac{1}{i!}}
+	\end{equation}
+	
+	\begin{proof}
+		Follows from the fact that $P_{block} = \pi_{m}$. 
+	\end{proof}
+\end{theorem}
+
+\Cref{thm:M-M-m-m-Probability-Block} is called \textit{Erlang-B Formula}.
+
+This formula exposes the \textit{Insensitivity Property}, that is it is independent of arrivals and service distribution and depends only on the mean quantities of distributions. 
+Insensitivity often occurs where there is no queue.
+
+An easy way to remember \Cref{eqn:M-M-m-m-Probability-Block} is as follows.
+
+\begin{equation*}
+\begin{split}
+	P_{block} & = \pi_{m} \cdot \frac{e^{-\frac{\lambda}{\mu}}}{e^{-\frac{\lambda}{\mu}}} \\ 
+			  & = \frac{e^{-\frac{\lambda}{\mu}} \cdot \Big(\frac{\lambda}{\mu}\Big)^{m} \frac{1}{m!}}{\sum_{i=0}^{m} e^{-\frac{\lambda}{\mu}} \cdot \Big( \frac{\lambda}{\mu} \Big)^{i} \frac{1}{i!}} \\
+			  & = \frac{\probability{X = m}}{\probability{X \leq m}}
+\end{split}
+\end{equation*}
+
+where $X \sim Poisson(\frac{\lambda}{\mu})$.

@@ -1,0 +1,55 @@
+\chapter{Algoritmi di addestramento}
+\label{sec:neural-networks.learning.algorithms}
+Il metodo di backpropagation è un algoritmo iterativo di addestramento di reti neurali multistrato. Può essere visto come una versione euristica del metodo del gradiente. Fu proprio questo metodo a far rinascere l'interesse della comunità scientifica per le reti neurali.
+
+L'apprendimento può inoltre essere:
+
+\begin{itemize}
+  \item \textit{batch}: il training set è acquisito interamente. Ogni iterazione di apprendimento aggiorna i parametri della rete esaminando tutto il training set. Tali algoritmi sono riconducibili a tecniche di ottimizzazione non vincolata convergenti ed utilizzano tipicamente solo le derivate prime.
+
+  \item \textit{online}: il training set è acquisito incrementalmente. Ogni iterazione di apprendimento aggiorna i parametri della rete esaminando un campione del training set.
+\end{itemize}
+
+Gli algoritmi batch sono molto dispendiosi, in quanto operano su un training set completo. Per questo si preferisce adottare una soluzione ibrida: una prima fase online che diminuisce la dimensione del training-set ed una seconda fase batch.
+
+Il problema dell'addestramento di una rete neurale può essere modellato come problema di ottimizzazione non lineare in cui si voglia minimizzare la seguente funzione di errore dell'uscita prodotta rispetto all'uscita desiderata.
+
+I metodi di ottimizzazione più appropriati per gli algoritmi di addestramento sono queli che fanno uso delle sole derivate prime, potendo dunque essere applicati anche a spazi di grandi dimensioni. I metodi notevoli sono: \textit{metodo del gradiente}, \textit{metodi delle direzioni coniugate}, \textit{metodi Quasi-Newton a memoria limitata}, \textit{metodi di Gauss-Newton}.
+Per problemi di dimensione ridotta sono stati anche adottati i \textit{metodi tipo-Newton troncati} basati sull'uso delle derivate seconde.
+Spesso si preferiscono metodi non monotnoni, in quanto il frequente malcondizionamento della matrice hessiana dell'errore può indurre incrementi locali.
+La versione non monotona del metodo del gradiente è stata applicata con successo nell'addestramento delle reti neurali.
+
+L'adestramento di una rete neurale è di buona qualità se supera il 85\% di accuratezza sul test-set.
+
+
+\section{Backpropagation}
+\label{sec:neural-networks.learning.backpropagation}
+Il metodo di backpropagation è quello più utilizzato per l'addestramento delle reti neurali. È stato realizzato in versione batch e online. Si basa sul metodo del gradiente per l'ottimizzazione non vincolata. La direzione di ricerca è l'antigradiente con passo costante, detto \textit{learning rate}. Nella versione online si adotta come direzione l'antigradiente dell'errore all'utlimo campione.
+
+Il metodo è in genere inefficiente e la sua convergenza dipendende da una scleta appropriata del learning rate.
+
+Una modifica che rende il metodo di backpropagation più efficiente è la \textit{momentum updating rule}.
+
+La generica iterazione del metodo di \textit{backpropagation batch} è:
+\begin{equation}
+  \label{eqn:neural-networks.learning.bp.batch}
+  w^{(k+1)}=w^{(k)}-\eta\nabla E(w^{(k)})
+\end{equation}
+
+La generica iterazione del metodo di \textit{backpropagation online} è:
+\begin{equation}
+  \label{eqn:neural-networks.learning.bp.online}
+  w^{(k+1)}=w^{(k)}-\eta\nabla E_{p(k)}(w^{(k)})
+\end{equation}
+
+La generica iterazione del metodo \textit{momentum updating rule batch} è:
+\begin{equation}
+  \label{eqn:neural-networks.learning.mur.batch}
+  w^{(k+1)}=w^{(k)}-\eta\nabla E(w^{(k)})+\beta(w^{(k)}-w^{(k-1)})
+\end{equation}
+
+La generica iterazione del metodo \textit{momentum updating rule online} è:
+\begin{equation}
+  \label{eqn:neural-networks.learning.mur.online}
+  w^{(k+1)}=w^{(k)}-\eta\nabla E_{p(k)}(w^{(k)})+\beta(w^{(k)}-w^{(k-1)})
+\end{equation}

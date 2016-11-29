@@ -1,0 +1,150 @@
+\section{Markov Chains}
+\label{sec:markov-chains}
+
+\begin{definition}[Markovian Property]
+\label{def:markovian-property}
+	The Markovian property states that the conditional distribution of any future state $X_{n+1}$, given past states $X_{0},X_{1},...,X_{n-1}$, and given the present state $X_{n}$, is independent of past states and depends only on the present state.
+\end{definition}
+
+\begin{definition}[Discrete-Time Markov Chain]
+\label{def:discrete-time-markov-chain}
+
+	A Discrete-Time Markov Chain (DTMC) is a stochastic process $\{X_{n \in \natural}\}$, where $X_{n}$ denotes the state at time $n$ and such that
+	
+	\begin{equation}
+	\label{eqn:discrete-time-markov-chain}
+		\begin{split}	
+			\probability{X_{n+1} = j | X_{n} = i,X_{n-1} = i_{n}-1,...,X_{0} = i_{0}}
+			& = \probability{X_{n+1} = j | X_{n} = i} \\
+			& = P_{i,j} \\
+			& \forall n \geq 0, \forall i,j, \forall i_{0},...,i_{n-1}
+		\end{split}		
+	\end{equation}
+	
+	where $P_{i,j}$ is independent of time and past history.
+\end{definition}
+
+\begin{definition}[Continuous-Time Markov Chain]
+\label{def:continuous-time-markov-chain}
+	
+	A Continuous-Time Markov Chain (CTMC) is a stochastic process $\{X(t),t \in \Re^{+}\}$, where $X_{n}$ denotes the state at time $n$ and such that
+	
+	\begin{equation}
+	\label{eqn:continuous-time-markov-chain}
+		\begin{split}	
+			\probability{X(s+t) = j | X(s) = i,X(u) = x(u)} 
+			& = \probability{X(s+t) = j | X(s) = i} \\
+			& = \probability{X(t) = j | X(0) = i} \\
+			& = P_{i,j}(t) \\
+			& \forall s,t \geq 0, \forall i,j,x(u) 
+		\end{split}		
+	\end{equation}
+	
+	where $P_{i,j}$ is independent of time and past history.
+\end{definition}
+
+Alternatively
+
+\begin{definition}[Continuous-Time Markov Chain 2]
+	\label{def:continuous-time-markov-chain-2}
+	
+	A Continuous-Time Markov Chain (CTMC) is a stochastic process with the property that every time it enters state $i$, the following hold:
+	
+	\begin{enumerate}
+		\item The amount of time the process spends in state $i$ is a r.v. $X \sim Exp(\lambda)$.
+		
+		\item The probability $p_{i,j}$ to transit from state $i$ to state $j$ is independent of the time spent in state $i$.
+	\end{enumerate}
+\end{definition}
+
+\begin{definition}[Transition Probability Matrix]
+\label{def:transition-probability-matrix}
+	
+	The transition probability matrix associated with any Markov chain is a matrix, whose $(i,j)$-th entry $P_{i,j}$ is the probability of moving in the next transition from state $i$ to state $j$.
+\end{definition}
+
+By definition, we have that 
+
+\begin{equation*}
+\sum_{j} P_{i,j} = 1 \quad \forall i
+\end{equation*}
+
+A queue network that exposes the Markovian property can be modeled by a Markov chain.
+
+Non Markovian workloads can be approximated by mixtures of Exponential distributions, hence lending themselves to Markov chain analysis.
+
+\begin{theorem}[Balance equations for CTMC]
+\label{thm:balance-equations-continuous-time-markov-chains}
+
+	Given an irreducible CTMC, we have that
+	
+	\begin{equation}
+		\pi_{j} \sum_{i} q_{j,i} = \sum_{i} \pi_{i} q_{i,j} 
+	\end{equation}
+	
+	and
+	
+	\begin{equation}
+		\sum_{i} \pi_{i} = 1
+	\end{equation}
+	
+	where $\pi_{i}$ is the limiting probability for the CTMC to be in state $i$.
+\end{theorem}
+
+\begin{definition}[Time Reversibility]
+\label{def:time-reversibility}
+
+	A CTMC is time-reversible if, for all states $i$ and $j$, the rate of transitions from state $i$ to state $j$ equals the rate of transitions from state $j$ to state $i$. That is
+	
+	\begin{equation}
+		\pi_{i} q_{i,j} = \pi_{j} q_{j,i} \quad \forall i,j
+	\end{equation}
+\end{definition}
+
+All birth-death processes are time-reversible.
+For a time-reversible process, the time-reversibility equations are always solvable.
+
+\begin{theorem}
+\label{thm:statistical-description-time-reversible}
+
+	If a CTMC is time-reversible, then its reverse chain is statistically identical to the forwards chain, that is
+		
+	\begin{equation}
+	\label{eqn:statistical-description-time-reversible}
+	P_{i,j} = P_{i,j}^{*}
+	\end{equation}
+\end{theorem}
+
+\Cref{thm:statistical-description-time-reversible} means that the reverse chain can be described by the same CTMC as the forwards chain
+
+
+
+
+\subsection{PASTA}
+\label{sec:pasta}
+
+In many stochastic models, particularly in queueing theory, Poisson arrivals both observe a stochastic process and interact with it. In some cases it has been shown that the fraction of arrivals that see the process in some state is equal to the fraction of time the process is in that state.
+
+This property il called PASTA, standing for \textit{Poisson Arrivals See Time Averages}.
+
+The PASTA property is the adaptation of the Arrival Theorem for Poisson processes \cite{asmussen2003queueing,el2012sample} \footnote{also referred to as the Random Observer Property (ROP) \cite{el2012sample}.}. 
+The property states that the probability of the state as seen by an outside random observer is the same as the probability of the state seen by an arriving customer \cite{wolff1982poisson}. 
+The property also holds for the case of a doubly stochastic Poisson process where the rate parameter is allowed to vary depending on the state \cite{van1988conditional}.
+
+\begin{theorem}[PASTA Property]
+\label{thm:pasta}
+
+	For any system with Poisson arrival process, we have that
+
+	\begin{equation}
+		a_{n} = d_{n} = p_{n}
+	\end{equation}	
+	
+	where 
+	$a_{n}$ is the probability that an arrival sees $n$ jobs in the system,
+	$d_{n}$ is the probability that a departure leaves $n$ jobs in the system, and
+	$p_{n}$ is the probability that there are $n$ jobs in the system.
+	
+\end{theorem}
+
+PASTA is useful in system simulation. When simulating a Poisson arrival process, it suffices to average over what arrivals see at the moment they enter the system to know averages of the whole system. It is not the case when arrivals do not follow a Poisson process.

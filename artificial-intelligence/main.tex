@@ -1,0 +1,91 @@
+%*******************************************************************************
+% Title: Artificial Intelligence
+%
+% Conference: Computer Science Lectures 2017
+%
+% Authors: Giacomo Marciani <gmarciani@acm.org>
+%
+% Institution: Department of Civil Engineering and Computer Science Engineering,
+% 			   University of Rome Tor Vergata, Italy
+%*******************************************************************************
+
+\documentclass{amsbook}
+
+%*******************************************************************************
+% Packages
+%*******************************************************************************
+\usepackage[utf8]{inputenc}
+\usepackage{amsmath}
+\usepackage{lipsum}
+\usepackage{xr}
+\usepackage[hidelinks=true]{hyperref}
+\usepackage{cleveref}
+
+%*******************************************************************************
+% Details
+%*******************************************************************************
+
+%*******************************************************************************
+% Copyright
+%*******************************************************************************
+
+%*******************************************************************************
+% Notations
+%*******************************************************************************
+\newcommand{\probability}[1]{
+	\mathbf{P}[#1]
+}
+
+%*******************************************************************************
+% Numbering
+%*******************************************************************************
+\numberwithin{equation}{section}
+
+%*******************************************************************************
+% References
+%*******************************************************************************
+\crefname{lem}{lemma}{lemmata}
+\Crefname{lem}{Lemma}{Lemmata}
+\crefname{cor}{corollary}{corollaries}
+\Crefname{cor}{Corollary}{Corollaries}
+\crefname{alg}{algorithm}{algorithms}
+\Crefname{alg}{Algorithm}{Algorithms}
+\externaldocument{sec/introduction}
+\externaldocument{sec/ontology}
+\externaldocument{sec/semantic-web}
+\externaldocument{sec/natural-language}
+\externaldocument{sec/app/questions}
+
+\begin{document}
+	
+\newtheorem{definition}{Definition}
+
+\title{Intelligenza Artificiale}
+
+\author{Giacomo Marciani}
+
+\address{University of Rome Tor Vergata}
+
+\tableofcontents
+
+%*******************************************************************************
+% Core Content
+%*******************************************************************************
+\input{sec/introduction}
+\input{sec/ontology}
+\input{sec/semantic-web}
+\input{sec/natural-language}
+
+%*******************************************************************************
+% Bibliography
+%*******************************************************************************
+%\bibliographystyle{acmreferences}
+\bibliography{./ref/biblio}
+
+%*******************************************************************************
+% Online Appendix
+%*******************************************************************************
+%\elecappendix
+%\input{sec/app/questions}
+
+\end{document}

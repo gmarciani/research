@@ -1,0 +1,48 @@
+La Teoria delle Code (o file d'attesa) si propone di sviluppare modelli per lo studio dei fenomeni
+d’attesa che si possono manifestare in presenza di una domanda di un servizio. Quando la domanda
+stessa e/o la capacità di erogazione del servizio sono soggetti ad aleatorietà, si possono infatti
+verificare situazioni temporanee in cui chi fornisce il servizio non ha la possibilità di soddisfare
+immediatamente le richieste.
+In particolare i concetti fondamentali della Teoria delle Code venivano formalizzati nel 1917 da
+Erlang proprio per applicarli nel settore telefonico.
+
+Dal punto di vista fisico un sistema coda è un sistema composto da un insieme non vuoto di
+servitori, capaci di fornire un servizio imprecisato, e da un insieme non vuoto di aree di attesa
+(buffer) capaci di accogliere i clienti che non possono essere serviti immediatamente.
+I clienti che non trovano un servitore libero al loro arrivo si dispongono in modo ordinato, cioè in
+coda, e vengono serviti in accordo a determinate discipline di servizio.
+Dal punto di vista dinamico una coda è costituita essenzialmente da due processi stocastici: il
+processo d'arrivo dei clienti e il processo di servizio. Il processo d’arrivo, che descrive il modo secondo cui i clienti si presentano, è in generale un processo stocastico. Esso è definito in termini della distribuzione dell'intertempo d'arrivo. Il processo dei servizi descrive il modo secondo cui ciascun servitore eroga il servizio, in
+particolare definisce la durata dello stesso ed è di solito un processo stocastico. Esso è definito in
+termini delle distribuzioni dei tempi di servizio dei diversi servitori. Il processo dei servizi è
+alimentato dal processo d'arrivo. Conseguentemente il processo d'arrivo è indipendente e
+condiziona il processo dei servizi. Un cliente, infatti, può essere servito solo se è già arrivato.
+Quando non c’è nessuno, il servitore è inattivo e quindi non può avvantaggiarsi in vista d'impegni
+futuri. In altre parole un servitore non può servire in anticipo clienti non ancora arrivati. Non può
+esistere una coda negativa.
+
+La popolazione è l’insieme dei potenziali clienti, ovvero l’insieme da cui arrivano i clienti e a cui
+tornano dopo essere stati serviti. I clienti di una stessa popolazione sono tra loro indistinguibili. Di conseguenza si suppone essi
+provengano da popolazioni differenti ogniqualvolta in cui debbano essere distinti, ad esempio per
+livello di priorità o tipo di servizio richiesto.
+
+Lo stato di un sistema dinamico in un dato istante temporale rappresenta l'insieme informativo
+minimo che permette di conoscere l'evoluzione futura del sistema stesso, una volta note le
+realizzazioni dei fenomeni stocastici cui è soggetto.
+Lo stato di una coda è dato dal numero di clienti presenti nel sistema, dal tempo trascorso
+dall'ultimo arrivo dell'ultimo cliente, infine, per ogni servitore, da un valore binario indicante se sta
+correntemente fornendo un servizio ed in questo ultimo caso anche dal tempo trascorso dall'inizio
+del servizio.
+
+I valori che sono assunti dagli indici sopraenunciati dipendono parametricamente dalla struttura
+della coda e dal tasso di arrivo dei clienti.
+
+Per la difficoltà dei calcoli coinvolti però la Teoria delle Code in generale fornisce solo modelli
+descrittivi, ovvero modelli che permettono di valutare le prestazioni del sistema a fronte d'ipotesi
+sulla sua struttura, ma che non risolvono direttamente problemi di progetto come invece fanno
+invece i modelli normativi. Di conseguenza il progetto di una coda di solito è un processo iterativo.
+
+Si possono facilmente determinare le prestazioni del sistema quando gli istanti d’arrivo dei clienti
+ed i tempi di espletamento dei servizi richiesti sono noti a priori senza incertezza. Il caso totalmente deterministico è però difficile che occorra nella realtà. In genere gli arrivi dei
+clienti e la durata dei servizi sono affetti da incertezza, quindi sono modellati come processi
+stocastici, come sarà descritto nei capitoli successivi.

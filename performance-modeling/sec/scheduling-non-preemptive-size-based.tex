@@ -1,0 +1,80 @@
+\subsection{Scheduling: Non-Preemptive, Size-Based}
+\label{sec:Scheduling-Non-Preemptive-Size-Based}
+
+The most common non-preemptive size-based scheduling policies are
+
+\begin{description}
+	
+	\item [Shortest-Job-First (SJF)] the server chooses the job with the smallest size.
+	
+\end{description}
+
+It is convenient to evaluate size-based policies as \textit{non-preemptive priority queueing}, where priority classes are job sizes and a job has higher priority if it has lower job size.
+
+
+
+
+\subsection{Non-Preemptive Priority Queueing}
+\label{sec:NP-Priority}
+
+For non-preemptive priority queueing (NP-Priority), we have that
+
+\begin{equation}
+\label{eqn:NP-Priority-Queue-Time-Size}
+\expected{T_{Q}(x)}^{\mathit{NP-Priority}}=
+\frac{\varrho\expected{S^{2}}}{2\expected{S}}
+\frac{1}{\Big(1-\sum_{i=1}^{x}\varrho_{i}\Big)\cdot\Big(1-\sum_{i=1}^{x-1}\varrho_{i}\Big)}
+\end{equation}
+
+The first factor of the denominator can be seen as the contribution due to waiting for jobs in queue with higher or equal priority.
+The second factor of the denominator can be seen as the contribution due to those jobs arriving later with strictly higher priority.
+
+Recall that $\expected{T_{Q}}^{\mathit{FCFS}}=\frac{\varrho\frac{\expected{S^{2}}}{\expected{S}}}{1-\varrho}$.
+
+If $k$ is low, $\expected{T_{Q}(x)}^{\mathit{NP-Priority}}<\expected{T_{Q}^{\mathit{FCFS}}}$.
+If $k$ is high and job size distribution is heavy-tailed, $\expected{T_{Q}(x)}^{\mathit{NP-Priority}}<\expected{T_{Q}}^{\mathit{FCFS}}$.
+
+The above results hold because $\sum_{i=1}^{k}\varrho_{i}<<\varrho$.
+
+We determine the mean queue time as follow
+
+\begin{equation}
+\label{eqn:NP-Priority-Queue-Time}
+\expected{T_{Q}}^{\mathit{NP-Priority}}=\sum_{i=1}^{n}\expected{T_{Q}(i)}\cdot p_{i}=\sum_{i=1}^{n}\expected{T_{Q}(i)}\cdot\frac{\lambda_{i}}{\lambda}
+\end{equation}
+
+where $p_{i}$ is the fraction of jobs belonging to class $i$.
+
+We will use these results to analyze SJF.
+
+
+
+
+\subsection{Scheduling: SJF}
+\label{sec:Scheduling-SJF}
+
+We model SJF as NP-Priority with infinite priority classes, where the smaller the job, the higher the priority.
+
+By applying \Cref{eqn:NP-Priority-Queue-Time-Size,eqn:NP-Priority-Queue-Time}, we obtain:
+
+\begin{equation}
+\label{eqn:SJF-Queue-Time-Size}
+\expected{T_{Q}(x)}^{\mathit{SJF}}=
+\frac{\varrho\expected{S^{2}}}{2\expected{S}}\cdot\frac{1}{\Big(1-\varrho_{x}\Big)^{2}}
+\end{equation}
+
+where $\varrho_{x}=\lambda F(x)\cdot\int_{t=0}^{x}t\frac{f(t)}{F(t)}\partial t$ is the arrival rate of jobs of size no more than $x$, namely $\lambda F(x)$, multiplied by the expected size of jobs of size no more than $x$, namely $\int_{t=0}^{x}t\frac{f(t)}{F(t)}\partial t$.
+
+We also obtain:
+
+\begin{equation}
+\label{eqn:SJF-Queue-Time}
+\expected{T_{Q}}^{\mathit{SJF}}=
+\frac{\varrho\expected{S^{2}}}{2\expected{S}}\cdot\int_{x=0}^{x_{n}}\frac{f(x)\partial x}{\Big(1-\lambda\int_{t=0}^{x}tf(t)\partial t\Big)^{2}}
+\end{equation}
+
+By comparing $\expected{T_{Q}}^{\mathit{SJF}}$ with $\expected{T_{Q}}^{\mathit{FCFS}}$, we have that SJF is a poor choice for (i) very large jobs (see term $\varrho_{x}$) and (ii) high-variable job sizes \footnote{Since real workload are heavy-tailed, most jobs are small, hence we may think not to worry about very large jobs. This is a wrong idea. Heavy-tailed distribution have also high variability.} (see term $\expected{S^{2}}$).
+
+When using SJF under high-variable job size, it is more efficient to kill long-running jobs, given that there are some other jobs in queue. In fact, if there are many jobs in queue, they are likely to include many short jobs, thus mean response time would improve. This is the idea behind TAGS policy in \cite{harchol2000task}. 
+
+The only way to get good performance out of SJF under real workload is to provide preemption.

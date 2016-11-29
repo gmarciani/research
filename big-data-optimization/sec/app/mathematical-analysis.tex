@@ -1,0 +1,83 @@
+\chapter{Richiami di analisi matematica}
+\label{chp:foundations-mathematical-analysis}
+In questa sezione richiamiamo alcuni concetti di analisi matematica.
+
+
+\section{Limite ed accumulazione di successione}
+
+\begin{definition}[Limite di successione]
+	\label{dfn:succession-limit}
+	Sia data una successione $\{x_{k}\}$ ad elementi in $\Re^{n}$. La successione $\{x_{k}\}$ converge ad $x\in\Re^{n}$ se
+	\begin{equation}
+	\label{eqn:succession-limit}
+	\lim_{k\rightarrow\infty}\norm{x_{k}-x}=0
+	\end{equation}
+	ovvero se per ogni $\epsilon>0$ esiste un $k_{\epsilon}$ tale che $\norm{x_{k}-x}<\epsilon$ per ogni $k\geq k_{\epsilon}$.
+\end{definition}
+
+\begin{definition}[Punto di accumulazione per successione]
+	\label{dfn:succession-accumulation}
+	Sia data una successione $\{x_{k}\}_{N}$ ad elementi in $\Re^{n}$. Il punto $\tilde{x}\in\Re^{n}$ è un punto di accumulazione per $\{x_{k}\}_{N}$ se esiste un insieme inifito $K\subseteq N$ di indici, tale che la sottosuccessione $\{x_{k}\}_{K}$ converge a $\tilde{x}$
+\end{definition}
+
+Un punto di accumulazione può essere definito anche in modo alternativo.
+Dato l'insieme $A\subset\Re$, $\tilde{x}\in\Re$ è un punto di accumulazione se
+
+\begin{equation}
+	\label{eqn:accumulation-point}
+	\forall\varrho>0\exists x\in A\cap B(\tilde{x},\varrho).x\neq\tilde{x}
+\end{equation}
+
+Intuitivamente questo vuol dire che zoommando a qualsiasi livello nell'intorno di $\tilde{x}$ è sempre possibile vedere punti di $A$ diversi da $\tilde{x}$.
+
+La differenza tra punto limite e punto di accumulazione è che al punto limite converge tutta la successione, mentre per una stessa successione posso individuare punti di accumulazione (eventualmente diversi) a cui convergono sottosuccessioni distinte della stessa successione. Una successione ammette al più un punto limite, mentre può ammettere zero, uno, molti o infiniti punti di accumulazione, eventualmente distinti.
+
+Una successione in un insieme compatto, ammette punti di accumulazione nell'insieme.
+
+
+\section{Norma di matrice}
+La norma di una matrice soddisfa le seguenti proprietà
+
+\begin{eqnarray}
+\label{eqn:matrix-norm-properties}
+\begin{split}
+\norm{AB}       & \leq \norm{A}\norm{B} \\
+\norm{A}        & \geq 0 \\
+\norm{A}        & =    0 \Leftrightarrow A=0 \\
+\norm{A+B}      & \leq \norm{A}+\norm{B} \\
+\norm{\alpha A} & =    \abs{\alpha}\norm{A}
+\norm{A}        & \leq \lambda_{max}(A)
+\end{split}
+\end{eqnarray}
+
+
+\section{Coercività}
+Il concetto di cercività è molto utile a determinare la compattezza degli insiemi di livello e l'esistenza di soluzioni locali.
+
+\begin{definition}[Funzione coerciva]
+	\label{dfn:coercive-function}
+	Una funzione $f:\Re^{n}\rightarrow\Re$ è coerciva se esiste una successione $\{x_{k}\}$ tale che
+	\begin{equation}
+	\label{eqn:coercive-function}
+	\lim_{k\rightarrow\infty}\norm{x_{k}}=\infty
+	\Rightarrow
+	\lim_{k\rightarrow\infty}f(x_{k})=\infty
+	\end{equation}
+\end{definition}
+
+Se dunque l'insieme del problema è compatto, applico Weierstrass; se non lo è (e.g. $\Re^{n}$) verifico la coercività della funzione.
+
+Il quadrato conserva la coercività.
+
+Una forma quadratica tale che $\nabla f(x)\succ0$ è coerciva.
+
+\begin{definition}[Lipschitz continuità]
+	\label{dfn:continuity-lipschitz}
+	Una funzione $f$ è Lipschitz continua se e solo se esiste un $L>0$ tale che
+	\begin{equation}
+		\label{eqn:lipschitz.continuity}
+		\norm{f(x_{2})-f(x_{1})}\leq L\norm{x_{2}-x{1}}
+	\end{equation}
+	dove $L$ è detta \textit{costante di Lipschitz}.
+	La Lipschitz continuità implica la continuità.
+\end{definition}
