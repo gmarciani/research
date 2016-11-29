@@ -1,6 +1,7 @@
 # RESEARCH
 
-*My research papers, courseworks and theses.*
+*Research papers, courseworks and theses.*
+
 
 Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
 Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
@@ -43,6 +44,10 @@ Debora Partigianoni, [dpartigianoni@acm.org](mailto:dpartigianoni@acm.org)
 Michele Porretta, [mporretta@acm.org](mailto:mporretta@acm.org)
 
 Gabriele Santi, [gsanti@acm.org](mailto:gsanti@acm.org)
+
+
+## Contributing
+If you find any error, please feel free to [contact me](mailto:gmarciani@acm.org).
 
 
 ## License
