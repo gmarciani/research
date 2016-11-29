@@ -1,0 +1,124 @@
+%*******************************************************************************
+% Title: A web algorithms showcase
+%
+% Series: Courseworks in Web Algorithms
+%
+% Author: Giacomo Marciani <gmarciani@acm.org>
+% Author: Michele Porretta <mporretta@acm.org>
+%
+% Institution: Department of Civil Engineering and Computer Science Engineering,
+% University of Rome Tor Vergata, Italy
+%
+% Style: ACM-UTV Large (based on ACM Large v1.7)
+%*******************************************************************************
+
+\documentclass[acmutv-cw-wa]{acmlarge}
+
+%*******************************************************************************
+% Packages
+%*******************************************************************************
+\usepackage{amsmath}
+\usepackage{lipsum}
+\usepackage{xr}
+\usepackage{hyperref}
+\usepackage{cleveref}
+
+%*******************************************************************************
+% Details
+%*******************************************************************************
+\acmVolume{1}
+\acmNumber{1}
+\acmArticle{1}
+\articleSeq{1}
+\acmMonth{7}
+\acmYear{2017}
+
+\issn{1234-56789}
+\doi{0000001.0000001}
+
+%*******************************************************************************
+% Copyright
+%*******************************************************************************
+\setcopyright{rightsretained}
+
+%*******************************************************************************
+% Algorithm
+%*******************************************************************************
+\usepackage[ruled]{algorithm2e}
+\SetAlFnt{\algofont}
+\SetAlCapFnt{\algofont}
+\SetAlCapNameFnt{\algofont}
+\SetAlCapHSkip{0pt}
+\IncMargin{-\parindent}
+\renewcommand{\algorithmcfname}{ALGORITHM}
+
+%*******************************************************************************
+% Numbering
+%*******************************************************************************
+\numberwithin{equation}{section}
+
+%*******************************************************************************
+% References
+%*******************************************************************************
+\crefname{lem}{lemma}{lemmata}
+\Crefname{lem}{Lemma}{Lemmata}
+\crefname{cor}{corollary}{corollaries}
+\Crefname{cor}{Corollary}{Corollaries}
+\crefname{alg}{algorithm}{algorithms}
+\Crefname{alg}{Algorithm}{Algorithms}
+\externaldocument{sec/introduction}
+\externaldocument{sec/main-section}
+\externaldocument{sec/conclusions}
+\externaldocument{sec/app/latex-formats}
+
+%*******************************************************************************
+% Title and Authors
+%*******************************************************************************
+\markboth{G. Marciani, M. Porretta}{A web algorithm showcase}
+\title{A web algorithm showcase}
+\author{GIACOMO MARCIANI and MICHELE PORRETTA \affil{University of Rome Tor Vergata}}
+
+%*******************************************************************************
+% Front Content
+%*******************************************************************************
+\input{sec/abstract}
+\input{sec/ccs-keywords}
+\acmformat{Giacomo Marciani and Michele Porretta. 2017. A web algorithm showcase}
+
+\begin{document}
+
+%*******************************************************************************
+% Bottom Content
+%*******************************************************************************
+\begin{bottomstuff}
+	This work is supported by the Department of Civil Engineering and Computer Science
+	Engineering, University of Rome Tor Vergata, Italy.\\
+	Author's address:
+	G. Marciani, Via del Politecnico 1, Rome, RM 00133, Italy;
+	email: gmarciani@acm.org;
+	M. Porretta, Via del Politecnico 1, Rome, RM 00133, Italy;
+	email: mporretta@acm.org;
+\end{bottomstuff}
+
+\maketitle
+
+%*******************************************************************************
+% Core Content
+%*******************************************************************************
+\input{sec/introduction}
+\input{sec/main-section}
+\input{sec/conclusions}
+
+%*******************************************************************************
+% Bibliography
+%*******************************************************************************
+\bibliographystyle{acmreferences}
+\bibliography{./ref/biblio}
+
+%*******************************************************************************
+% Online Appendix
+%*******************************************************************************
+\elecappendix
+\input{sec/app/latex-formats}
+
+\end{document}

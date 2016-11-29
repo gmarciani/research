@@ -1,0 +1,127 @@
+%*******************************************************************************
+% Title: Ontoqa, Q&A with ontology-based natural language processing
+%
+% Series: Courseworks in Artificial Intelligence
+%
+% Author: Antonella Botte <abotte@acm.org>
+% Author: Giacomo Marciani <gmarciani@acm.org>
+% Author: Debora Partigianoni <dpartigianoni@acm.org>
+%
+% Institution: Department of Civil Engineering and Computer Science Engineering,
+% University of Rome Tor Vergata, Italy
+%
+% Style: ACM-UTV Large (based on ACM Large v1.7)
+%*******************************************************************************
+
+\documentclass[acmutv-cw-ai]{acmlarge}
+
+%*******************************************************************************
+% Packages
+%*******************************************************************************
+\usepackage{amsmath}
+\usepackage{lipsum}
+\usepackage{xr}
+\usepackage{hyperref}
+\usepackage{cleveref}
+
+%*******************************************************************************
+% Details
+%*******************************************************************************
+\acmVolume{1}
+\acmNumber{1}
+\acmArticle{1}
+\articleSeq{1}
+\acmMonth{2}
+\acmYear{2017}
+
+\issn{1234-56789}
+\doi{0000001.0000001}
+
+%*******************************************************************************
+% Copyright
+%*******************************************************************************
+\setcopyright{rightsretained}
+
+%*******************************************************************************
+% Algorithm
+%*******************************************************************************
+\usepackage[ruled]{algorithm2e}
+\SetAlFnt{\algofont}
+\SetAlCapFnt{\algofont}
+\SetAlCapNameFnt{\algofont}
+\SetAlCapHSkip{0pt}
+\IncMargin{-\parindent}
+\renewcommand{\algorithmcfname}{ALGORITHM}
+
+%*******************************************************************************
+% Numbering
+%*******************************************************************************
+\numberwithin{equation}{section}
+
+%*******************************************************************************
+% References
+%*******************************************************************************
+\crefname{lem}{lemma}{lemmata}
+\Crefname{lem}{Lemma}{Lemmata}
+\crefname{cor}{corollary}{corollaries}
+\Crefname{cor}{Corollary}{Corollaries}
+\crefname{alg}{algorithm}{algorithms}
+\Crefname{alg}{Algorithm}{Algorithms}
+\externaldocument{sec/introduction}
+\externaldocument{sec/main-section}
+\externaldocument{sec/conclusions}
+\externaldocument{sec/app/latex-formats}
+
+%*******************************************************************************
+% Title and Authors
+%*******************************************************************************
+\markboth{A. Botte, G. Marciani, D. Partigianoni}{Ontoqa, Q\&A with ontology-based natural language processing}
+\title{Ontoqa, Q\&A with ontology-based natural language processing}
+\author{ANTONELLA BOTTE, GIACOMO MARCIANI and DEBORA PARTIGIANONI \affil{University of Rome Tor Vergata}}
+
+%*******************************************************************************
+% Front Content
+%*******************************************************************************
+\input{sec/abstract}
+\input{sec/ccs-keywords}
+\acmformat{Antonella Botte, Giacomo Marciani and Debora Partigianoni. 2017. Ontoqa, Q\&A with ontology-based natural language processing}
+
+\begin{document}
+
+%*******************************************************************************
+% Bottom Content
+%*******************************************************************************
+\begin{bottomstuff}
+	This work is supported by the Department of Civil Engineering and Computer Science
+	Engineering, University of Rome Tor Vergata, Italy.\\
+	Author's address:
+	A. Botte, Via del Politecnico 1, Rome, RM 00133, Italy;
+	email: abotte@acm.org;
+	G. Marciani, Via del Politecnico 1, Rome, RM 00133, Italy;
+	email: gmarciani@acm.org;
+	D. Partigianoni, Via del Politecnico 1, Rome, RM 00133, Italy;
+	email: dpartigianoni@acm.org;
+\end{bottomstuff}
+
+\maketitle
+
+%*******************************************************************************
+% Core Content
+%*******************************************************************************
+\input{sec/introduction}
+\input{sec/main-section}
+\input{sec/conclusions}
+
+%*******************************************************************************
+% Bibliography
+%*******************************************************************************
+\bibliographystyle{acmreferences}
+\bibliography{./ref/biblio}
+
+%*******************************************************************************
+% Online Appendix
+%*******************************************************************************
+\elecappendix
+\input{sec/app/latex-formats}
+
+\end{document}

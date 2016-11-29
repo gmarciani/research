@@ -1,0 +1,121 @@
+%*******************************************************************************
+% Title: A AMPL showcase
+%
+% Series: Courseworks in Optimization Methods for Big Data
+%
+% Author: Giacomo Marciani <gmarciani@acm.org>
+%
+% Institution: Department of Civil Engineering and Computer Science Engineering,
+% University of Rome Tor Vergata, Italy
+%
+% Style: ACM-UTV Large (based on ACM Large v1.7)
+%*******************************************************************************
+
+\documentclass[acmutv-cw-ombd]{acmlarge}
+
+%*******************************************************************************
+% Packages
+%*******************************************************************************
+\usepackage{amsmath}
+\usepackage{lipsum}
+\usepackage{xr}
+\usepackage{hyperref}
+\usepackage{cleveref}
+
+%*******************************************************************************
+% Details
+%*******************************************************************************
+\acmVolume{1}
+\acmNumber{1}
+\acmArticle{1}
+\articleSeq{1}
+\acmMonth{2}
+\acmYear{2017}
+
+\issn{1234-56789}
+\doi{0000001.0000001}
+
+%*******************************************************************************
+% Copyright
+%*******************************************************************************
+\setcopyright{rightsretained}
+
+%*******************************************************************************
+% Algorithm
+%*******************************************************************************
+\usepackage[ruled]{algorithm2e}
+\SetAlFnt{\algofont}
+\SetAlCapFnt{\algofont}
+\SetAlCapNameFnt{\algofont}
+\SetAlCapHSkip{0pt}
+\IncMargin{-\parindent}
+\renewcommand{\algorithmcfname}{ALGORITHM}
+
+%*******************************************************************************
+% Numbering
+%*******************************************************************************
+\numberwithin{equation}{section}
+
+%*******************************************************************************
+% References
+%*******************************************************************************
+\crefname{lem}{lemma}{lemmata}
+\Crefname{lem}{Lemma}{Lemmata}
+\crefname{cor}{corollary}{corollaries}
+\Crefname{cor}{Corollary}{Corollaries}
+\crefname{alg}{algorithm}{algorithms}
+\Crefname{alg}{Algorithm}{Algorithms}
+\externaldocument{sec/introduction}
+\externaldocument{sec/main-section}
+\externaldocument{sec/conclusions}
+\externaldocument{sec/app/latex-formats}
+
+%*******************************************************************************
+% Title and Authors
+%*******************************************************************************
+\markboth{G. Marciani}{A AMPL showcase}
+\title{A AMPL showcase}
+\author{GIACOMO MARCIANI \affil{University of Rome Tor Vergata}}
+
+%*******************************************************************************
+% Front Content
+%*******************************************************************************
+\input{sec/abstract}
+\input{sec/ccs-keywords}
+\acmformat{Giacomo Marciani. 2017. A AMPL showcase}
+
+\begin{document}
+
+%*******************************************************************************
+% Bottom Content
+%*******************************************************************************
+\begin{bottomstuff}
+	This work is supported by the Department of Civil Engineering and Computer Science
+	Engineering, University of Rome Tor Vergata, Italy.\\
+	Author's address:
+	G. Marciani, Via del Politecnico 1, Rome, RM 00133, Italy;
+	email: gmarciani@acm.org;
+\end{bottomstuff}
+
+\maketitle
+
+%*******************************************************************************
+% Core Content
+%*******************************************************************************
+\input{sec/introduction}
+\input{sec/main-section}
+\input{sec/conclusions}
+
+%*******************************************************************************
+% Bibliography
+%*******************************************************************************
+\bibliographystyle{acmreferences}
+\bibliography{./ref/biblio}
+
+%*******************************************************************************
+% Online Appendix
+%*******************************************************************************
+\elecappendix
+\input{sec/app/latex-formats}
+
+\end{document}
