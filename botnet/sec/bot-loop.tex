@@ -1,0 +1,28 @@
+\section{Bot loop}
+\label{sec:bot-loop}
+
+\lipsum[1]
+
+\medskip
+\begin{algorithm}[H]
+  \SetAlgoNoLine
+  $variable \leftarrow$ value \\
+  $variable$ is inside circle \\
+  \While{$variable$ is inside circle,}{
+    $neighborhood \leftarrow$ all grid hexes within two hexes from $current\_position$ \\
+    \For{ each $hex$ in $neighborhood$, }{
+      \For{each $neuron$ in $hex$}{
+        convert $neuron\_orientation$ to $vector$ \\
+        scale $vector$ by $neuron\_excitation$ \\
+        $vector\_sum \leftarrow vector\_sum + vector$
+        }
+      }
+      normalize $vector\_sum$ \\
+      return $current\_position$ \\
+  }
+  \caption{The bot main loop}
+  \label[alg]{alg:bot-main-loop}
+\end{algorithm}
+\medskip
+
+\lipsum[1]

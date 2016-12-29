@@ -1,0 +1,86 @@
+\section{Bot commands}
+\label{sec:bot-commands}
+
+\lipsum[1]
+
+\begin{description}
+  \setlength\itemsep{1em}
+
+  \item[ATTACK-HTTP] \lipsum[1]
+  \begin{verbatim}
+    {
+      "command": "ATTACK_HTTP",
+      "method": "GET",
+      "targets": [
+        {
+          "url": "http://www.google.com",
+          "period": "1:SECONDS",
+          "maxAttempts": 10,
+          "proxy": "none"
+        },
+        {
+          "url": "http://www.twitter.com",
+          "period": "3-5:SECONDS",
+          "maxAttempts": 10,
+          "proxy": "192.168.0.1:80"
+        }
+      ]
+    }
+  \end{verbatim}
+
+  \item[RESTART] \lipsum[1]
+  \begin{verbatim}
+    {
+      "command": "RESTART",
+      "resource": "${PWD}/cc/botinit.json"
+    }
+  \end{verbatim}
+
+  \item[PERSIST-CONFIG] \lipsum[1]
+  \begin{verbatim}
+    {
+      "command":"PERSIST-CONFIG"
+    }
+  \end{verbatim}
+
+  \item[SLEEP] \lipsum[1]
+  \begin{verbatim}
+    {
+      "command": "SLEEP",
+      "timeout": "3:MINUTES"
+    }
+  \end{verbatim}
+
+  \item[CALMDOWN] \lipsum[1]
+  \begin{verbatim}
+    {
+      "command":"CALMDOWN"
+      "timeout": "3:MINUTES"
+    }
+  \end{verbatim}
+
+  \item[SHUTDOWN] \lipsum[1]
+  \begin{verbatim}
+    {
+      "command": "SHUTDOWN",
+      "timeout": "3:MINUTES"
+    }
+  \end{verbatim}
+
+  \item[KILL] \lipsum[1]
+  \begin{verbatim}
+    {
+      "command": "KILL"
+    }
+  \end{verbatim}
+
+  \item[NONE] \lipsum[1]
+  \begin{verbatim}
+    {
+      "command":"NONE"
+    }
+  \end{verbatim}
+
+\end{description}
+
+\lipsum[1]

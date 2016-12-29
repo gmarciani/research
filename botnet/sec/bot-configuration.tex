@@ -1,0 +1,46 @@
+\section{Bot configuration}
+\label{sec:bot-configuration}
+
+\lipsum[1]
+
+\begin{description}
+  \setlength\itemsep{1em}
+  \item[SYS-INFO] \lipsum[1]
+  \item[NET-INFO] \lipsum[1]
+  \item[SYS-STAT] \lipsum[1]
+  \item[NET-STAT] \lipsum[1]
+  \item[SAMPLING] \lipsum[1]
+  \item[CONTROLLERS] \lipsum[1]
+  \item[POLLING] \lipsum[1]
+  \item[RECONNECTIONS] \lipsum[1]
+  \item[RECONNECTION-WAIT] \lipsum[1]
+  \item[PROXY] \lipsum[1]
+\end{description}
+
+\lipsum[1]
+
+\subsection{Sample configuration}
+\label{sec:sample-configuration}
+
+\lipsum[1]
+
+\begin{verbatim}
+sysInfo: True
+netInfo: True
+sysStat: True
+netStat: True
+sampling: 1:MINUTES
+controllers:
+  - init: ${PWD}/cc/botinit-notvalid.json
+    command: ${PWD}/cc/botcmd-notvalid.json
+    log: ${PWD}/cc/botlog-notvalid.json
+  - init: ${PWD}/cc/botinit.json
+    command: ${PWD}/cc/botcmd.json
+    log: ${PWD}/cc/botlog.json
+polling: 10-15:SECONDS
+reconnections: 3
+reconnectionWait: 10-15:SECONDS
+proxy: none
+\end{verbatim}
+
+\lipsum[1]
