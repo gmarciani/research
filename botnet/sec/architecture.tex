@@ -1,15 +1,41 @@
 \section{Architecture}
 \label{sec:architecture}
 
-\lipsum[1]
+A \textit{botnet} is malicious network that aims to remotely control infected hosts.
+
+A \textit{bot} is a malicious software that makes the host device remotely controllable by a server - namely a \textit{controller} -  instructed by an attacker. A bot is plugged into the infected host via an \textit{infecting vector} - e.g. a trojan horse - and executed at system startup.
+
+Once started, the bot contacts the controller to join the \textit{botnet} and polls it for commands to execute. Typically, every time the bot executes a command, it sends back to the controller specific information on the host system and networks. Since the bot is a malicious software, it needs to act as covertly as possible.
+
+A \textit{controller} - also known as \textit{command\&control server} - is a server that provides commands for bots to poll through interfaces - e.g. REST interfaces - hidden by a legitimate appearance - e.g. a showcase website.
+
+Botnets are widely adopted to implement distributed DDOS attacks, severe spam campaigns, analysis of networks of infected systems and much more. From this brief description it is possible to guess the economic implications of such a tool. \Cref{fig:botnet-showcase} depicts a simple but common botnet-based application.
 
 \begin{figure}[tp]
-	\centering
-	\includegraphics{./fig/acmlarge-mouse}
-	\caption{The botnet architecture.}
-		\label{fig:botnet-architecture}
+  \centering
+  \includegraphics{./fig/acmlarge-mouse}
+  \caption{\textcolor{green}{A botnet showcase.}}
+    \label{fig:botnet-showcase}
 \end{figure}
 
-\lipsum[1]
+Since the development of a real botnet goes beyond the scope of this work, we adhere to an architecture that allows us to focus on the development of a bot, thought for testing and educational showcase, but actually ready for a real scenario. \Cref{fig:botnet-architecture} shows our botnet reference architecture.
 
-\lipsum[1]
+\begin{figure}[tp]
+  \centering
+  \includegraphics{./fig/acmlarge-mouse}
+  \caption{\textcolor{green}{The botnet architecture.}}
+    \label{fig:botnet-architecture}
+\end{figure}
+
+\textcolor{blue}{\lipsum[1]}
+\begin{description}
+  \setlength\itemsep{1em}
+  \item[INIT INTERFACE] \textcolor{blue}{\lipsum[1]}
+
+  \item[COMMAND INTERFACE] \textcolor{blue}{\lipsum[1]}
+
+  \item[LOG INTERFACE] \textcolor{blue}{\lipsum[1]}
+
+\end{description}
+
+The bot we developed can be configured by a convenient Web User Interface (WUI) described in \Cref{sec:configuration-wui}. It can polls for commands both a real controller and local files acting as controller responses in JSON format. Such responses can be conveniently produced by a WUI described in \Cref{sec:commands-wui}.
