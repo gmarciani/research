@@ -1,13 +1,68 @@
 \section{Bot Implementation}
 \label{sec:bot-implementation}
 
-\lipsum[1]
+The bot is implemented as a Java desktop application.
 
 \begin{figure}[tp]
-	\centering
-	\includegraphics{./fig/acmlarge-mouse}
-	\caption{The bot implementation.}
-		\label{fig:bot-implementation}
+  \centering
+  \includegraphics{./fig/acmlarge-mouse}
+  \caption{The bot implementation.}
+    \label{fig:bot-implementation}
 \end{figure}
 
-\lipsum[1]
+\subsection{Logs}
+\label{sec:logs}
+
+Our bot logs both on console and file adopting a logging discipline that depends on the chosen execution mode.
+Console logging prints events on the standard output\footnote{standard error is never used, neither in case of warnings nor errors.}.
+File logging deals with two types of events: it appends received commands in \texttt{data/logs/commands.log} and attacks in \texttt{data/logs/attacks.log}. These two files are emptied every time the bot is started.
+
+A general console log message has the following pattern
+
+\begin{verbatim}
+  [timestamp] [tread-name] [log-level] [class] [method] - [message]
+\end{verbatim}
+
+A file log message about commands has the following pattern
+
+\begin{verbatim}
+  [timestamp] INFO - Received command [COMMAND] with params [PARAMS] from CC at [CC-RESOURCE]
+\end{verbatim}
+
+A file log message about attacks has the following pattern
+
+\begin{verbatim}
+  [timestamp] INFO - Launching HTTP attack: [HTTP-METHOD] {TARGET} ({EXECUTION}/{TOTAL-EXECUTIONS}) with proxy [ADDRESS:PORT] and request properties [HTTP-REQUEST-PROPERTIES]
+\end{verbatim}
+
+
+The \texttt{default} mode prints in console the strictly relevant output and produces log files. The \texttt{trace} mode prints in console a detailed tracing output and produces log files. The \texttt{silent} mode does neither print anything in console nor produce any log file.
+To run the program in one of these modes, specify the corresponding option, as indicated in \Cref{sec:helper}.
+
+
+\subsection{Technologies}
+\label{sec:technologies}
+
+Our bot leverages some of well known technologies. Here we present them, giving an idea about of they have been used in our implementation. The reader may refer to the open source code of the project to get into implementation details.
+
+\begin{description}
+  \setlength\itemsep{1em}
+  \item[QUARTZ] job scheduling framework developed by the Terracotta Inc.
+  It is a widely adopted solution to support process workflow and system management in enterprise applications.
+  In our application it is used for the scheduling of attacks and the sleep mode.
+
+  \item[LOG4J2] logging framework developed by the Apache Software Foundation.
+  Together with its main competitor, Logback, it is a de facto standard for logging in Java. Tipically it is used as a bunding of SLF4J, that is a widely adopted logging facade.
+  In our application, it is used both for console and file logging.
+
+  \item[COMMONS CLI] command line parsing framework developed by the Apache Software Foundation as a part of the bigger Jakarta project.
+  It is a well known solution for argument parsing in CLI based Java applications.
+
+  \item[JACKSON] serialization framework developed by the Fasterxml team.
+  It supports most of the widespread serialization format, such as JSON, XML, YAML and so on.
+  In our application it is used to serialize/deserialize configuration (in YAML) and commands (in JSON).
+
+  \item[PROGUARD] utility for Java code optimization and obfuscation developed by the GuardSquare Inc.
+  In our application it is invoked by the relative Maven plugin to execute code minimization and obfuscation as a goal in Maven's packaging lifecycle.
+
+\end{description}

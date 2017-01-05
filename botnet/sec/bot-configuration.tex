@@ -1,46 +1,83 @@
 \section{Bot configuration}
 \label{sec:bot-configuration}
 
-\lipsum[1]
+The bot behaviour is ruled by a fully customizable configuration. With no custom configuration specified, the bot looks up for a YAML file named \texttt{config.yaml} in the present working directory. If not there, the bot loads the default one, which is hardly wired in code. For details about how to submit a custom configuration, please refer to \Cref{sec:usage}.
+
+We now show the configuration components (i.e. what can be configured) and the YAML configuration schema to express them (i.e. how can be configured).
 
 \begin{description}
   \setlength\itemsep{1em}
-  \item[SYS-INFO] \lipsum[1]
-  \item[NET-INFO] \lipsum[1]
-  \item[SYS-STAT] \lipsum[1]
-  \item[NET-STAT] \lipsum[1]
-  \item[SAMPLING] \lipsum[1]
-  \item[CONTROLLERS] \lipsum[1]
-  \item[POLLING] \lipsum[1]
-  \item[RECONNECTIONS] \lipsum[1]
-  \item[RECONNECTION-WAIT] \lipsum[1]
-  \item[PROXY] \lipsum[1]
+
+  \item[cnfInfo] if true, the bot report includes the current bot configuration.
+
+  \item[tgtInfo] if true, the bot report includes details about the targets to attack.
+
+  \item[sysInfo] if true, the bot report includes details about the localhost system.
+
+  \item[netInfo] if true, the bot report includes details about the network the localhost is attached to.
+
+  \item[polling] period between pollings to controller for the next command to execute. The polling period is a random amount of time within a certain time interval. The period randomness guarantees a greater variance in bots behaviour.
+
+  \item[reconnections] number of times the bot tries to connect to an unreacheable controller.
+
+  \item[reconnectionWait] period between reconnections. The reconnection period is a random amount of time within a certain time interval. The period randomness guarantees a greater variance in bots behaviour.
+
+  \item[proxy] HTTP proxy through which the bot contacts remote controllers and targets. The default configuration has no proxy.
+
+  \item[sleep] calendar for the sleeping mode. The default configuration has no sleep calendar.
+
+  \item[controllers] list of controllers to contact. The default configuration has an empty list of controller and a code wired fallback controller \texttt{data/samples/controllers/1/bot{init,cmd,log}.json}.
 \end{description}
 
-\lipsum[1]
-
-\subsection{Sample configuration}
-\label{sec:sample-configuration}
-
-\lipsum[1]
+The configuration is given in YAML format. The schema shows some non primitive data types that deserves further attention.
 
 \begin{verbatim}
-sysInfo: True
-netInfo: True
-sysStat: True
-netStat: True
-sampling: 1:MINUTES
-controllers:
-  - init: ${PWD}/cc/botinit-notvalid.json
-    command: ${PWD}/cc/botcmd-notvalid.json
-    log: ${PWD}/cc/botlog-notvalid.json
-  - init: ${PWD}/cc/botinit.json
-    command: ${PWD}/cc/botcmd.json
-    log: ${PWD}/cc/botlog.json
-polling: 10-15:SECONDS
-reconnections: 3
-reconnectionWait: 10-15:SECONDS
-proxy: none
+  cnfInfo: True|False
+  tgtInfo: True|False
+  sysInfo: True|False
+  netInfo: True|False
+  polling: time-expression
+  reconnections: integer in [0,65535]
+  reconnectionWait: time-expression
+  proxy: proxy-expression
+  sleep: cron-expression
+  controllers:
+    - controller-object
 \end{verbatim}
 
-\lipsum[1]
+A \texttt{time-expression} represents a temporal interval (e.g. a value in seconds between 3 and 5 seconds). This expression is a string in the form \textit{min-max:unit}, where \textit{min} is a positive long, \textit{max} is a positive long greater than or equal to \textit{min}, and \textit{unit} is the string representation of a standard Java TimeUnit\footnote{i.e. NANOSECONDS, MICROSECONDS, MILLISECONDS, SECONDS, MINUTES, HOURS, DAYS.}. If \textit{min} and \textit{max} are both equal to a positive long \textit{amount}, the time interval could be representaed both by the redundant expression \textit{amount-amount:unit} and by the more compact expression \textit{amount:unit}.
+
+A \texttt{proxy-expression} represents a HTTP proxy (e.g. the proxy 123.123.123.123 with port 3000). This expression is a string in the form \textit{address:port}, where \textit{addres} is an IPv4 address and \textit{port} is a port number. The expression can also be a string \textit{none}, meaning that no proxy should be used, and \textit{null}, meaning that any eventual default proxy should be used.
+
+A \texttt{cron-expression} represents a calendar (e.g. every Wednesday between 10 PM and 11PM). This expression is a standard Unix CRON expression. For details about the standard, please refer to \cite{cron-expression}.
+
+A \texttt{controller-object} represents a bot controller (e.g. a controller with init interface X command interface Y and log interface Z). A controller is expressed in the following form:
+
+\begin{verbatim}
+  init: resource expression
+  cmd:  resource expression
+  log:  resource expression
+\end{verbatim}
+
+where a \texttt{resource expression} represents a readable local or remote resource (e.g. the file my-folder/data.json, the web resource http://www.mysite.com/data.json), that is a standard file pathname or a remote Web URL.
+
+Here we show a sample configuration for reader's convenience. Other sample configurations can be found in \texttt{data/samples/configurations}.
+
+\begin{verbatim}
+  cnfInfo: True
+  tgtInfo: False
+  sysInfo: True
+  netInfo: False
+  polling: 10-15:SECONDS
+  reconnections: 3
+  reconnectionWait: 3-5:SECONDS
+  proxy: 123.123.123.123:3000
+  sleep: * * * SAT-SUN * ?
+  controllers:
+    - init: data/samples/controllers/1/botinit.json
+      command: data/samples/controllers/1/botcmd.json
+      log: data/samples/controllers/1/botlog.json
+    - init: data/samples/controllers/2/botinit.json
+      command: data/samples/controllers/2/botcmd.json
+      log: data/samples/controllers/2/botlog.json
+\end{verbatim}
