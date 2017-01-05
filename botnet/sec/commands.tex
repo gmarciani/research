@@ -1,10 +1,10 @@
-\section{Bot commands}
-\label{sec:bot-commands}
+\section{Commands}
+\label{sec:commands}
 
 In the following we list all commands with the corresponding JSON schema.
 For sake of synthesis, we indicate in a pretty custom way both the optional fields and the non primitive data types.
 
-For example, in the following JSON: \texttt{f1} is a mandatory field with value \texttt{v1}, \texttt{f2} is a mandatory field with domain in ad-hoc data type \texttt{type}, \texttt{f3} is an optional field with domain in ad-hoc data type \texttt{type} and default value \texttt{default}, \texttt{f4} and \texttt{f5} are optional fields going together with domain in ad-hoc data type \texttt{type} and default value \texttt{default}.
+For example, in the following JSON: \texttt{f1} is a mandatory field with value \texttt{v1}; \texttt{f2} is a mandatory field with domain in ad-hoc data type \texttt{type}; \texttt{f3} is an optional field with domain in ad-hoc data type \texttt{type} and default value \texttt{default}; \texttt{f4} and \texttt{f5} are optional fields going together with domain in ad-hoc data type \texttt{type} and default value \texttt{default}.
 
 \begin{verbatim}
   {
@@ -18,12 +18,12 @@ For example, in the following JSON: \texttt{f1} is a mandatory field with value 
   }
 \end{verbatim}
 
-In the command listed below there are the following non primitive data types:
+In the command listed below there are non primitive data types. Some of them have been already mentioned in \Cref{sec:bot-configuration}. We report here them too, for reader's convenience.
 
 \begin{description}
   \setlength\itemsep{1em}
 
-  \item[\texttt{time-expression}] represents a temporal interval (e.g. a value in seconds between 3 and 5 seconds). This expression is a string in the form \textit{min-max:unit}, where \textit{min} is a positive long, \textit{max} is a positive long greater than or equal to \textit{min}, and \textit{unit} is the string representation of a standard Java TimeUnit\footnote{i.e. NANOSECONDS, MICROSECONDS, MILLISECONDS, SECONDS, MINUTES, HOURS, DAYS.}. If \textit{min} and \textit{max} are both equal to a positive long \textit{amount}, the time interval could be representaed both by the redundant expression \textit{amount-amount:unit} and by the more compact expression \textit{amount:unit}.
+  \item[time-expression] represents a temporal interval (e.g. a value in seconds between 3 and 5 seconds). This expression is a string in the form \texttt{min-max:unit}, where \texttt{min} is a positive long, \texttt{max} is a positive long greater than or equal to \texttt{min}, and \texttt{unit} is the string representation of a standard Java TimeUnit\footnote{i.e. NANOSECONDS, MICROSECONDS, MILLISECONDS, SECONDS, MINUTES, HOURS, DAYS.}. If \texttt{min} and \texttt{max} are both equal to a positive long \texttt{amount}, the time interval could be representaed both by the redundant expression \texttt{amount-amount:unit} and by the more compact expression \texttt{amount:unit}.
   For example, the following are valid expressions:
 
   \begin{verbatim}
@@ -36,7 +36,7 @@ In the command listed below there are the following non primitive data types:
     10:SECONDS
   \end{verbatim}
 
-  \item[\texttt{proxy-expression}] represents a HTTP proxy (e.g. the proxy 123.123.123.123 with port 3000). This expression is a string in the form \textit{address:port}, where \textit{addres} is an IPv4 address and \textit{port} is a port number. The expression can also be a string \textit{none}, meaning that no proxy should be used, and \textit{null}, meaning that any eventual default proxy should be used.
+  \item[proxy-expression] represents a HTTP proxy (e.g. the proxy 123.123.123.123 with port 3000). This expression is a string in the form \textit{address:port}, where \textit{addres} is an IPv4 address and \textit{port} is a port number. The expression can also be a string \textit{none}, meaning that no proxy should be used, and \textit{null}, meaning that any eventual default proxy should be used.
 
   For example, the following are valid expressions:
 
@@ -50,13 +50,42 @@ In the command listed below there are the following non primitive data types:
     none
   \end{verbatim}
 
-  \item[\texttt{attack-object}] represents a target of a HTTP attack (e.g. )
+  \item[web-expression] represents a Web URL (e.g. http://www.google.com). Pay attention that it is necessary to specify the HTTP protocol.
+
+  For example, the following is valid expressions:
+
+  \begin{verbatim}
+    http://www.google.com
+  \end{verbatim}
+
+  whereas the following is not
+
+  \begin{verbatim}
+    www.google.com
+  \end{verbatim}
+
+  \item[dict-expression] represents a dictionary between strings and strings (e.g. "prop1" set to "val1").
+
+  For example, the following is valid expressions:
+
+  \begin{verbatim}
+    {
+      "prop1": "val1",
+      "prop2": "val2"
+    }
+  \end{verbatim}
+
+  \item[attack-object] represents a target of a HTTP attack (e.g. a GET attack to http://www.google.com).
+  If specified, \texttt{proxy} is the HTTP proxy to attack through. If set to \texttt{null}, it is the default proxy (see \Cref{Sec:bot-configuration}).
+  If specified, \texttt{properties} are the HTTP request parameters to attack with.
+  If specified, \texttt{executions} indicates how many attack executions need to be scheduled interleaved by the secified \texttt{period}.
+
   \begin{verbatim}
   {
     "method": value in [GET,POST],
-    "target": url-expression,
+    "target": web-expression,
     ("proxy": proxy-expression (null)),
-    ("properties": map-expression ({})),
+    ("properties": dict-expression ({})),
     (
       "executions": integer in [1,65535] (1),
       "period": time-expression (null)
@@ -90,22 +119,24 @@ In the command listed below there are the following non primitive data types:
 
 \end{description}
 
+Every command starts with a field pointing out the command scope, and give the expected parameters.
+Every command\footnote{with the exception of command \texttt{NONE}.} has an optional \texttt{delay}. If specified, the command will be executed after a random amount of time within the given interval; if not, the command will be executed immediately. This optional field has been added to command schema because in some real scenarios could be useful to specify a variance component.
+
 \begin{description}
   \setlength\itemsep{1em}
 
-  \item[ATTACK-HTTP] \lipsum[1]
+  \item[ATTACK-HTTP] schedules all the specified HTTP \texttt{attacks}.
+
   \begin{verbatim}
   {
     "command": "ATTACK_HTTP",
-    "attacks": [ attack-object ]
-    ],
+    "attacks": [ attack-object ],
     ("delay": time-expr (null))
   }
   \end{verbatim}
 
   \item[CALMDOWN] all attacks are unscheduled.
   If \texttt{wait} is true, it waits for for termination of currently executing attacks; if false, it kills them immediately.
-  If a \texttt{delay} is specified, the commands is executed after a random amount of time within the specified interval.
 
   \begin{verbatim}
   {
@@ -117,7 +148,6 @@ In the command listed below there are the following non primitive data types:
 
   \item[KILL] the bot is killed, that is alla attacks are unscheduled and it transit to state \texttt{DEAD} for resource releasing.
   If \texttt{wait} is true, it waits for for termination of currently executing attacks; if false, it kills them immediately.
-  If a \texttt{delay} is specified, the commands is executed after a random amount of time within the specified interval.
 
   \begin{verbatim}
   {
@@ -136,7 +166,6 @@ In the command listed below there are the following non primitive data types:
   \end{verbatim}
 
   \item[REPORT] the bot sends the report to the controller.
-  If a \texttt{delay} is specified, the commands is executed after a random amount of time within the specified interval.
 
   \begin{verbatim}
   {
@@ -147,7 +176,6 @@ In the command listed below there are the following non primitive data types:
 
   \item[RESTART] all attacks are unscheduled, the bot transits to state \texttt{INIT} trying to contact the controller with \texttt{resource} as its init-interface.
   If \texttt{wait} is true, it waits for for termination of currently executing attacks; if false, it kills them immediately.
-  If \texttt{delay} is specified, the commands is executed after a random amount of time within the specified interval.
 
   \begin{verbatim}
   {
@@ -159,7 +187,6 @@ In the command listed below there are the following non primitive data types:
   \end{verbatim}
 
   \item[SAVE-CONFIG] the currently loaded bot configuration is locally saved as default configuration.
-  If a \texttt{delay} is specified, the commands is executed after a random amount of time within the specified interval.
 
   \begin{verbatim}
   {
@@ -169,7 +196,6 @@ In the command listed below there are the following non primitive data types:
   \end{verbatim}
 
   \item[SLEEP] all attacks are suspended and the bot transits to state \texttt{SLEEP}. If a \texttt{timeout} si specified the command \texttt{WAKEUP} is internally invoked after a random amount of time within the specified interval.
-  If a \texttt{delay} is specified, the commands is executed after a random amount of time within the specified interval.
 
   \begin{verbatim}
   {
@@ -180,7 +206,6 @@ In the command listed below there are the following non primitive data types:
   \end{verbatim}
 
   \item[UPDATE] the bot configuration is updated with the properties specified in \texttt{settings}. This command is tipically used to update the property \texttt{sleep} that sets the sleep mode.
-  If a \texttt{delay} is specified, the commands is executed after a random amount of time within the specified interval.
 
   \begin{verbatim}
   {
@@ -191,7 +216,6 @@ In the command listed below there are the following non primitive data types:
   \end{verbatim}
 
   \item[WAKEUP] if the bot is in state \texttt{SLEEP}, it lets scheduled attacks be able to fire again and transits to state \texttt{EXECUTION}.
-  If a \texttt{delay} is specified, the commands is executed after a random amount of time within the specified interval.
 
   \begin{verbatim}
   {
