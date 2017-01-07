@@ -1,0 +1,51 @@
+\section{Botnets}
+\label{sec:botnets}
+
+A \textit{botnet} is malicious network that aims to remotely control infected hosts.
+
+A \textit{bot} is a malicious software that makes the host device remotely controllable by a server - namely a \textit{controller} -  instructed by an attacker. A bot is plugged into the infected host via an \textit{infecting vector} - e.g. a trojan horse - and executed at system startup.
+
+Once started, the bot contacts the controller to join the \textit{botnet} and polls it for commands to execute. Typically, every time the bot executes a command, it sends back to the controller specific information on the host system and networks. Since the bot is a malicious software, it needs to act as covertly as possible.
+
+\textcolor{blue}{\lipsum[1]}
+
+A \textit{controller} - also known as \textit{command\&control server} - is a server that provides commands for bots to poll through interfaces - e.g. REST interfaces - hidden by a legitimate appearance - e.g. a showcase website.
+
+Botnets are widely adopted to implement distributed DDOS attacks, severe spam campaigns, analysis of networks of infected systems and much more. From this brief description it is possible to guess the economic implications of such a tool. \Cref{fig:botnet-showcase} depicts a simple but common botnet-based application.
+
+\begin{figure}[tp]
+  \centering
+  \includegraphics{./fig/acmlarge-mouse}
+  \caption{\textcolor{green}{A botnet showcase.}}
+    \label{fig:botnet-showcase}
+\end{figure}
+
+Botnets are networks made up of remote-controlled computers, or “bots.” These computers have been infected with malware that allows them to be remotely controlled. Some botnets consist of hundreds of thousands — or even millions — of computers.
+
+“Bot” is just a short word for “robot.” Like robots, software bots can be either good or evil. The word “bot” doesn’t always mean a bad piece of software, but most people refer to the type of malware when they use this word.
+
+If your computer is part of a botnet, it’s infected with a type of malware. The bot contacts a remote server — or just gets into contact with other nearby bots — and waits for instructions from whoever is controlling the botnet. This allows an attacker to control a large number of computers for malicious purposes.
+
+Computers in a botnet may also be infected with other types of malware, like keyloggers that record your financial information and send it to a remote server. What makes a computer part of a botnet is that it’s being controlled remotely along with many other computers. The botnet’s creators can decide what to do with the botnet later, direct the bots to download additional types of malware, and even have the bots act together.
+
+You might become infected with a bot in the same way you’d become infected with any other piece of malware — for example, by running out-of-date software, using the extremely insecure Java browser plug-in, or downloading and running pirated software.
+
+Malicious people who build botnets may not want to use them for any purpose of their own. Instead, they may want to infect as many computers as possible and then rent access to the botnet to other people. These days, most malware is made for profit.
+
+Botnets can be used for many different purposes. Because they allow hundreds of thousands of different computers to act in unison, a botnet could be used to perform a distributed denial-of-service (DDoS) attack on a web server.  Hundreds of thousands of computers would bombard a website with traffic at the same time, overloading it and causing it to perform poorly — or become unreachable — for people who actually need to use it.
+
+A botnet could also be used to send spam emails. Sending emails doesn’t take much processing power, but it does require some processing power. Spammers don’t have to pay for legitimate computing resources if they use a botnet. Botnets could also be used for “click fraud” — loading websites in the background and clicking on advertising links to the website owner could make money from the fraudulent, fake clicks. A botnet could also be used to mine Bitcoins, which can then be sold for cash. Sure, most computers can’t mine Bitcoin profitably because it will cost more in electricity than will be generated in Bitcoins — but the botnet owner doesn’t care. Their victims will be stuck paying the electrical bills and they’ll sell the Bitcoins for profit.
+
+Botnets can also just be used to distribute other malware — the bot software essentially functions as a Trojan, downloading other nasty stuff onto your computer after it gets in. The people in charge of a botnet might direct the computers on the botnet to download additional malware, such as keyloggers, adware, and even nasty ransomware like CryptoLocker. These are all different ways the botnet’s creators — or people they rent access to the botnet to — can make money. It’s easy to understand why malware creators do what they do when we see them for what they are — criminals trying to make a buck.
+
+Symantec’s study of the ZeroAccess botnet shows us an example. ZeroAccess is made up if 1.9 million computers that generate money for the botnet’s owners through Bitcoin mining and click fraud.
+
+Botnets can be controlled in several different ways. Some are basic and easier to foil, while others are trickier and harder to take down.
+
+The most basic way for a botnet to be controlled is for each bot to connect to a remote server. For example, each bot might download a file from http://example.com/bot every few hours, and the file would tell them what to do. Such a server is generally known as a command-and-control server. Alternately, the bots might connect to an Internet relay chat (IRC) channel hosted on a server somewhere and wait for instructions. Botnets using these methods are easy to stop — monitor what web servers a bot is connecting to, then go and take down those web servers. The bots will be unable to communicate with their creators.
+
+Some botnets may communicate in a distributed, peer-to-peer way. Bots will talk to other nearby bots, which talk to other nearby bots, which talk to other nearby bots, and so on. There’s no one, identifiable, single point where the bots get their instructions from. This works similarly to other distributed networking systems, like the DHT network used by BitTorrent and other peer-to-peer networking protocols. It may be possible to combat a peer-to-peer network by issuing fake commands or by isolating the bots from each other.
+
+Recently, some botnets have started communicating via the Tor network. Tor is an encrypted network designed to be as anonymous as possible, so a bot that connected to a hidden service inside the Tor network would be hard to foil. It’s theoretically impossible to figure out where a hidden service is actually located, although it seems intelligence networks like the NSA have some tricks up their sleeves. You may have heard of Silk Road, an an online shopping site known for illegal drugs. It was hosted as a Tor hidden service as well, which is why it was so hard to take the site down. In the end, it looks like old-fashioned detective work led the police to the man running the site — he slipped up, in other words. Without those slip-ups, the cops wouldn’t have had a way to track down the server and take it down.
+
+\cite{zeroaccess-symantec-blog,zeroaccess-symantec-definition}The ZeroAccess botnet is one of the largest known botnets in existence today with a population upwards of 1.9 million computers, on any given day, as observed by Symantec in August 2013. A key feature of the ZeroAccess botnet is its use of a peer-to-peer (P2P) command-and-control (C\&C) communications architecture, which gives the botnet a high degree of availability and redundancy. Since no central C\&C server exists, you cannot simply disable a set of attacker servers to neuter the botnet. Whenever a computer becomes infected with ZeroAccess, it first reaches out to a number of its peers to exchange details about other peers in its known P2P network. This way, bots become aware of other peers and can propagate instructions and files throughout the network quickly and efficiently. In the ZeroAccess botnet, there is constant communication between peers. Each peer continuously connects with other peers to exchange peer lists and check for updated files, making it highly resistant to any take-down attempts. 
