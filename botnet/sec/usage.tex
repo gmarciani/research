@@ -30,9 +30,9 @@ The compilation produces a jar file \texttt{botnet-1.0-optimized.jar} in the \te
 
 The program provides the user with three execution mode: \texttt{default}, \texttt{trace} and \texttt{silent}, which are distinguished by the adopted logging discipline. The \texttt{default} mode prints in console the strictly relevant output and produces log files. The \texttt{trace} mode prints in console a detailed tracing output and produces log files. The \texttt{silent} mode does neither print anything in console nor produce any log file.
 To run the program in one of these modes, specify the corresponding option, as indicated in \Cref{sec:helper}.
-For more details about logging, please refer to \Cref{sec:bot-implementation}.
+For more details about logging, please refer to \Cref{sec:implementation}.
 
-The program behaviour can be customized providing a custom YAML configuration file. If no configuration is specified, the program runs with default configuration. To run the program with custom configuration, specify the corresponding configuration, as indicated in \Cref{sec:helper}. For more details about configuration, please refer to \Cref{sec:bot-configuration}.
+The program behaviour can be customized providing a custom YAML configuration file. If no configuration is specified, the program runs with default configuration. To run the program with custom configuration, specify the corresponding configuration, as indicated in \Cref{sec:helper}. For more details about configuration, please refer to \Cref{sec:configuration}.
 
 To run the program with default configuration and default execution mode, run the command:
 
@@ -77,14 +77,3 @@ The reader may refer to the program CLI helper for the options usage. We show he
    -t,--trace                Activate trace mode.
    -v,--version              Show app version.
 \end{verbatim}
-
-\subsection{Sample executions}
-\label{sec:sample-executions}
-
-\textcolor{blue}{\lipsum[1]}
-
-\begin{verbatim}
-$> java -jar botnet -config config-custom.yaml -trace
-\end{verbatim}
-
-\textcolor{blue}{\lipsum[1]}

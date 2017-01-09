@@ -1,47 +1,23 @@
 \section{Implementation}
 \label{sec:implementation}
 
-The bot is implemented as a Java desktop application.
+The bot is implemented as a Maven-based Java desktop application.
+Basically, it implements the finite state automaton (\Cref{sec:bot}) and the functionalities required for configuration parsing (\Cref{sec:configuration}), commands execution (\Cref{sec:commands}) and logging.
 
-\textcolor{blue}{\lipsum[1]}
+The bot FSA is
+The configuration of the bot is given in YAML format.
+The interaction between bot and controller is realized using the Java NIO Standard Library and the JSON format.
 
-\subsection{Logs}
-\label{sec:logs}
-
-Our bot logs both on console and file adopting a logging discipline that depends on the chosen execution mode.
-Console logging prints events on the standard output\footnote{standard error is never used, neither in case of warnings nor errors.}.
-File logging deals with two types of events: it appends received commands in \texttt{data/logs/commands.log} and attacks in \texttt{data/logs/attacks.log}. These two files are emptied every time the bot is started.
-
-A general console log message has the following pattern
-
-\begin{verbatim}
-  [timestamp] [tread-name] [log-level] [class] [method] - [message]
-\end{verbatim}
-
-A file log message about commands has the following pattern
-
-\begin{verbatim}
-  [timestamp] INFO - Received command [COMMAND] with params [PARAMS] from CC at [CC-RESOURCE]
-\end{verbatim}
-
-A file log message about attacks has the following pattern
-
-\begin{verbatim}
-  [timestamp] INFO - Launching HTTP attack: [HTTP-METHOD] {TARGET} ({EXECUTION}/{TOTAL-EXECUTIONS}) with proxy [ADDRESS:PORT] and request properties [HTTP-REQUEST-PROPERTIES]
-\end{verbatim}
-
-
-The \texttt{default} mode prints in console the strictly relevant output and produces log files. The \texttt{trace} mode prints in console a detailed tracing output and produces log files. The \texttt{silent} mode does neither print anything in console nor produce any log file.
-To run the program in one of these modes, specify the corresponding option, as indicated in \Cref{sec:helper}.
-
+\textcolor{green}{WEB INTERFACE IMPLEMENTATION \lipsum[1]}
 
 \subsection{Technologies}
 \label{sec:technologies}
 
-Our bot leverages some of well known technologies. Here we present them, giving an idea about of they have been used in our implementation. The reader may refer to the open source code of the project to get into implementation details.
+Our bot and web user interfaces leverage some of well known technologies. Here we present them, giving an idea about how their usage in our implementation. The reader may refer to the open source code of the project to get into implementation details.
 
 \begin{description}
   \setlength\itemsep{1em}
+
   \item[QUARTZ] job scheduling framework developed by the Terracotta Inc \cite{quartz-scheduler}.
   It is a widely adopted solution to support process workflow and system management in enterprise applications.
   In our application it is used for the scheduling of attacks and the sleep mode.
@@ -56,6 +32,13 @@ Our bot leverages some of well known technologies. Here we present them, giving 
   \item[JACKSON] serialization framework developed by the Fasterxml team \cite{jackson,fasterxml}.
   It supports most of the widespread serialization format, such as JSON, XML, YAML and so on.
   In our application it is used to serialize/deserialize configuration (in YAML) and commands (in JSON).
+
+  \item[LOMBOK] framework of annotations encapsulating boilerplates and simple patterns \cite{lombok}.
+  In our application it is used to generate constructors getters/setters toString/hashCode methods. As such a generation is evaluated at compile time, the code of entity classes is considerably reduced.
+
+  \item[BOOTSTRAP] \textcolor{green}{\lipsum[1]}
+
+  \item[JQUERY] \textcolor{green}{\lipsum[1]}
 
 \end{description}
 
@@ -72,3 +55,34 @@ Code obfuscation allows the bot to evade traditional health checks based on code
 All of these aspects concerning the bot concealment have been implemented leveraging \textit{Proguard}, an utility for Java bytecode shrinking, optimization and obfuscation developed by the GuardSquare Inc. \cite{proguard}. ProGuard is the most popular optimizer for Java bytecode. It can make Java applications up to 90\% smaller, up to 20\% faster and protected against reverse engineering\cite{guardsquare}. Such great results makes it a widespread solution in the
 
 In our application, Proguard has been embedded into the Maven packaging life-cycle via an ad-hoc plugin \cite{proguard-maven-plugin}. The adopted configuration of Proguard behaviour can be found in \texttt{config.pro}. From the configuration you may notice a conservative approach. The widespread use of reflection, serialization and annotations in the framework the bot code depends on, makes it necessary to limit both the shrinking and the obfuscation of these frameworks. A deeper code inspection on these frameworks would allow a more aggressive approach, thus obtaining a more minimized and obfuscated code. \footnote{Code obfuscation is subjected to a crucial tradeoff, because the excessive or naive code obfuscation may have collateral side effects. The obfuscation of the whole legitimate code may arouse suspicion of a meticolous checks, because only a legitimate program of high industrial value has no dependency on legitimate clear code. On the other hand, legitimate code letting guess actions of malicious program should never left clear.}.
+
+
+\subsection{Logging}
+\label{sec:logging}
+
+Our bot logs both on console and file adopting a logging discipline that depends on the chosen execution mode.
+Console logging prints events on the standard output\footnote{standard error is never used, neither in case of warnings nor errors.}.
+File logging deals with two types of events: it appends received commands in \texttt{data/logs/commands.log} and attacks in \texttt{data/logs/attacks.log}. These two files are emptied every time the bot is started.
+
+A general console log message has the following pattern
+
+\begin{verbatim}
+  [timestamp] [tread-name] [log-level] [class] [method] - [message]
+\end{verbatim}
+
+A file log message about commands has the following pattern
+
+\begin{verbatim}
+  [timestamp] Received [COMMAND] with [PARAMS] from CC at [CC-RESOURCE]
+\end{verbatim}
+
+A file log message about attacks has the following pattern
+
+\begin{verbatim}
+  [timestamp] Launching HTTP attack: [HTTP-METHOD] {TARGET} ([ITER]/[ITERS])
+              with proxy [ADDR:PORT] and [HTTP-REQUEST-PROPS]
+\end{verbatim}
+
+
+The \texttt{default} mode prints in console the strictly relevant output and produces log files. The \texttt{trace} mode prints in console a detailed tracing output and produces log files. The \texttt{silent} mode does neither print anything in console nor produce any log file.
+To run the program in one of these modes, specify the corresponding option, as indicated in \Cref{sec:helper}.

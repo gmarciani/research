@@ -27,6 +27,8 @@ We now show the configuration components (i.e. what can be configured) and the Y
   \item[sleep] calendar for the sleeping mode. The default configuration has no sleep calendar.
 
   \item[controllers] list of controllers to contact. The default configuration has an empty list of controller and a code wired fallback controller \texttt{data/samples/controllers/1/bot{init,cmd,log}.json}.
+
+  \item[userAgent] the default User-Agent to use in HTTP interactions both with the command\&control layer and targets.
 \end{description}
 
 The configuration is given in YAML format. The schema shows some non primitive data types that deserves further attention.
@@ -41,6 +43,7 @@ The configuration is given in YAML format. The schema shows some non primitive d
   reconnectionWait: time-expression
   proxy: proxy-expression
   sleep: cron-expression
+  userAgent: string
   controllers:
     - controller-object
 \end{verbatim}
@@ -73,6 +76,7 @@ Here we show a sample configuration for reader's convenience. Other sample confi
   reconnectionWait: 3-5:SECONDS
   proxy: 123.123.123.123:3000
   sleep: * * * SAT-SUN * ?
+  userAgent: BOTAgent
   controllers:
     - init: data/samples/controllers/1/botinit.json
       command: data/samples/controllers/1/botcmd.json
