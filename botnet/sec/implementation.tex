@@ -1,17 +1,11 @@
 \section{Implementation}
 \label{sec:implementation}
 
-The bot is implemented as a Maven-based Java desktop application.
-Basically, it implements the finite state automaton (\Cref{sec:bot}) and the functionalities required for configuration parsing (\Cref{sec:configuration}), commands execution (\Cref{sec:commands}) and logging.
+The bot has been realized as a Maven-based Java desktop application, packaged into a self-contained Jar with shrunk and obfuscated code (\Cref{sec:concealment}).
 
-The bot FSA is
-The configuration of the bot is given in YAML format.
-The interaction between bot and controller is realized using the Java NIO Standard Library and the JSON format.
+Basically, the bot implements the finite state automaton (\Cref{sec:bot}) and the functionalities required for configuration parsing (\Cref{sec:configuration}), commands execution (\Cref{sec:commands}) and logging (\Cref{sec:logging}).
 
 \textcolor{green}{WEB INTERFACE IMPLEMENTATION \lipsum[1]}
-
-\subsection{Technologies}
-\label{sec:technologies}
 
 Our bot and web user interfaces leverage some of well known technologies. Here we present them, giving an idea about how their usage in our implementation. The reader may refer to the open source code of the project to get into implementation details.
 
