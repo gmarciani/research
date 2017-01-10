@@ -2,9 +2,9 @@
 \label{sec:commands}
 
 In the following we list all commands with the corresponding JSON schema.
-For sake of synthesis, we indicate in a pretty custom way both the optional fields and the non primitive data types.
+For sake of synthesis, we indicate in a pretty custom way (pseudo-JSON) both the optional fields and the non primitive data types.
 
-For example, in the following JSON: \texttt{f1} is a mandatory field with value \texttt{v1}; \texttt{f2} is a mandatory field with domain in ad-hoc data type \texttt{type}; \texttt{f3} is an optional field with domain in ad-hoc data type \texttt{type} and default value \texttt{default}; \texttt{f4} and \texttt{f5} are optional fields going together with domain in ad-hoc data type \texttt{type} and default value \texttt{default}.
+For example, in the following pseudo-JSON: \texttt{f1} is a mandatory field with value \texttt{v1}; \texttt{f2} is a mandatory field with domain in ad-hoc data type \texttt{type}; \texttt{f3} is an optional field with domain in ad-hoc data type \texttt{type} and default value \texttt{default}; \texttt{f4} and \texttt{f5} are optional fields going together with domain in ad-hoc data type \texttt{type} and default value \texttt{default}.
 
 \begin{verbatim}
   {
@@ -119,8 +119,12 @@ In the command listed below there are non primitive data types. Some of them hav
 
 \end{description}
 
-Every command starts with a field pointing out the command scope, and give the expected parameters.
-Every command\footnote{with the exception of command \texttt{NONE}.} has an optional \texttt{delay}. If specified, the command will be executed after a random amount of time within the given interval; if not, the command will be executed immediately. This optional field has been added to command schema because in some real scenarios could be useful to specify a variance component.
+Every command starts with a field pointing out the command scope, and terminates with the expected parameters.
+Every command\footnote{with the exception of command \texttt{NONE} having no fields, and command \texttt{REPORT} having no optional field \texttt{report}.}  has a optional fields \texttt{delay} and \texttt{report}.
+
+If \texttt{delay} is specified, the command will be executed after a random amount of time within the given interval; if not, the command will be executed immediately. This optional field has been added to command schema because in some real scenarios could be useful to specify a variance component.
+
+If \texttt{report} is specified and set to \texttt{true}, the bot will send the report back to the controller, once the command has been executed. If set to \texttt{false}, no report will be sent back to the controller. This optional field has been added to the command schema as a shortcut for whichever command followed by the \texttt{REPORT} command. Sometimes, as stated in \cite{build-your-own-botnet}, the reporting procedure is embedded in every bot-controller interaction, as a bot response to command requests. We avoided such an approach because (i) it does not scale with botnet dimension\footnote{it would sound somehow as a DDoS suicide.} and (ii) the local host analysis is an action in itself, not strictly related to the curretn executing command\footnote{for example, keylogging is not a bot response to controller's requests, but an additional, though frequent, function.}.
 
 \begin{description}
   \setlength\itemsep{1em}

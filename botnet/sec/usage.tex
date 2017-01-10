@@ -77,3 +77,82 @@ The reader may refer to the program CLI helper for the options usage. We show he
    -t,--trace                Activate trace mode.
    -v,--version              Show app version.
 \end{verbatim}
+
+
+\section{Sample execution}
+\label{sec:sample-execution}
+
+We show here a sample execution to give the reader an idea about how everything works. We suggest the reader to refer to \cite{video-tutorial} to better undesrtand how configuration and commands could be conveniently generated.
+
+In thi example, the bot is run in default mode with the following configuration:
+
+\begin{verbatim}
+  cnfInfo: True
+  tgtInfo: True
+  sysInfo: True
+  netInfo: True
+  controllers:
+    - init: data/samples/controllers/notvalid/botinit.json
+      command: data/samples/controllers/notvalid/botcmd.json
+      log: data/samples/controllers/notvalid/botlog.json
+    - init: data/samples/controllers/1/botinit.json
+      command: data/samples/controllers/1/botcmd.json
+      log: data/samples/controllers/1/botlog.json
+  polling: 5-10:SECONDS
+  reconnections: 3
+  reconnectionWait: 2-5:SECONDS
+  proxy: none
+  userAgent: Bot by Marciani and Porretta
+\end{verbatim}
+
+Notice that the first specified controller is an invalid controller - e.g. unrecheable or compromised contoller.
+The controller will give the bot the following commands:
+
+\begin{verbatim}
+  {
+    "command": "ATTACK_HTTP",
+    "attacks": [
+      {
+        "method": "GET",
+        "target": "http://www.twitter.com"
+      },
+      {
+        "method": "GET",
+        "target": "http://www.google.com",
+        "proxy": "192.168.0.1:8080",
+        "properties": {
+          "User-Agent": "MyAwesomeBot"
+        },
+        "executions": 3,
+        "period": "10-15:SECONDS"
+      }
+    ]
+  }
+\end{verbatim}
+
+followed by:
+
+\begin{verbatim}
+  {
+    "command": "KILL",
+    "wait": false
+  }
+\end{verbatim}
+
+The following is the console output:
+
+\begin{verbatim}
+
+\end{verbatim}
+
+The following is the commands-related log:
+
+\begin{verbatim}
+
+\end{verbatim}
+
+The following is the attacks-related log:
+
+\begin{verbatim}
+
+\end{verbatim}

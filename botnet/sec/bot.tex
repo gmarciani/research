@@ -3,6 +3,13 @@
 
 The bot life cycle is modeled as a Finite State Automaton (FSA) with the state space defined as follows and depicted in \Cref{fig:bot-fsa}.
 
+\begin{figure}[tp]
+  \centering
+  \includegraphics{./fig/acmlarge-mouse}
+  \caption{The bot's finite state automaton (FSA).}
+    \label{fig:bot-fsa}
+\end{figure}
+
 \begin{description}
   \setlength\itemsep{1em}
 
@@ -19,12 +26,7 @@ The bot life cycle is modeled as a Finite State Automaton (FSA) with the state s
 
 \end{description}
 
-\begin{figure}[tp]
-  \centering
-  \includegraphics{./fig/acmlarge-mouse}
-  \caption{The bot's finite state automaton (FSA).}
-    \label{fig:bot-fsa}
-\end{figure}
+\bigskip
 
 \begin{algorithm}[H]
   \SetAlgoNoLine
@@ -57,9 +59,9 @@ The bot life cycle is modeled as a Finite State Automaton (FSA) with the state s
   \caption{Pseudocode for state \texttt{INIT}}
   \label[alg]{alg:state-init-pseudocode}
 \end{algorithm}
-\bigskip
 
 \bigskip
+
 \begin{algorithm}[H]
   \SetAlgoNoLine
   $controller \leftarrow$ getBotConfig(CONTROLLER) \\
@@ -81,9 +83,9 @@ The bot life cycle is modeled as a Finite State Automaton (FSA) with the state s
   \caption{Pseudocode for state \texttt{EXECUTION}}
   \label[alg]{alg:state-execution-pseudocode}
 \end{algorithm}
-\bigskip
 
 \bigskip
+
 \begin{algorithm}[H]
   \SetAlgoNoLine
   $controller \leftarrow$ getBotConfig(CONTROLLER) \\
@@ -103,9 +105,9 @@ The bot life cycle is modeled as a Finite State Automaton (FSA) with the state s
   \caption{Pseudocode for state \texttt{SLEEP}}
   \label[alg]{alg:state-sleep-pseudocode}
 \end{algorithm}
-\bigskip
 
 \bigskip
+
 \begin{algorithm}[H]
   \SetAlgoNoLine
   $waitJobs \leftarrow$ getBotConfig(WAIT-JOBS) \\
@@ -118,4 +120,3 @@ The bot life cycle is modeled as a Finite State Automaton (FSA) with the state s
   \caption{Pseudocode for state \texttt{DEAD}}
   \label[alg]{alg:state-dead-pseudocode}
 \end{algorithm}
-\bigskip

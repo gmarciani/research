@@ -1,13 +1,13 @@
 \section{Implementation}
 \label{sec:implementation}
 
-The bot has been realized as a Maven-based Java desktop application, packaged into a self-contained Jar with shrunk and obfuscated code (\Cref{sec:concealment}).
+The bot has been realized as a Maven-based\footnote{it follows the structure of the basic quickstart archetype.} Java\footnote{Oracle Java 1.8} desktop application, packaged into a self-contained\footnote{fat jar encapsulating all external dependencies.} jar with shrunk and obfuscated code (\Cref{sec:concealment}).
 
-Basically, the bot implements the finite state automaton (\Cref{sec:bot}) and the functionalities required for configuration parsing (\Cref{sec:configuration}), commands execution (\Cref{sec:commands}) and logging (\Cref{sec:logging}).
+Basically, the bot implements the finite state automaton (\Cref{sec:bot}) and the functionalities required for configuration parsing (\Cref{sec:configuration}), commands execution (\Cref{sec:commands}) and logging (\Cref{sec:logging}). All functionalities has been tested carefully against 123 total JUnit tests.
 
 \textcolor{green}{WEB INTERFACE IMPLEMENTATION \lipsum[1]}
 
-Our bot and web user interfaces leverage some of well known technologies. Here we present them, giving an idea about how their usage in our implementation. The reader may refer to the open source code of the project to get into implementation details.
+Our bot and web user interfaces leverage some of well known technologies. Here we present them, giving an idea about how they have been used in our implementation. The reader may refer to the open source code of the project and the corresponding Javadocs to get into implementation details.
 
 \begin{description}
   \setlength\itemsep{1em}
