@@ -3,7 +3,7 @@
 
 The bot has been realized as a Java\footnote{Oracle Java SE 8} desktop application, packaged with Maven into a self-contained\footnote{fat jar encapsulating all external dependencies.} jar with shrunk and obfuscated code.
 
-Basically, the bot implements the finite state automaton (\Cref{sec:bot}) and the functionalities required for configuration parsing (\Cref{sec:configuration}), commands execution (\Cref{sec:commands}) and logging. All functionalities has been tested carefully against 123 total JUnit tests.
+Basically, the bot implements the finite state automaton (\ref{sec:bot}) and the functionalities required for configuration parsing (\ref{sec:configuration}), commands execution (\ref{sec:commands}) and logging. All functionalities has been tested carefully against 123 total JUnit tests.
 
 \textcolor{green}{WEB INTERFACE IMPLEMENTATION \lipsum[1]}
 
@@ -55,7 +55,7 @@ In our application, ProGuard has been embedded into the Maven packaging life-cyc
 \label{sec:logging}
 
 Our bot records events both on console and file adopting a logging discipline that depends on the chosen execution mode. The \texttt{default} mode prints in console the strictly relevant output and produces log files. The \texttt{trace} mode prints in console a detailed tracing output and produces log files. The \texttt{silent} mode does neither print anything in console nor produce any log file.
-To run the program in one of these modes, specify the corresponding option, as indicated in \Cref{sec:usage}.
+To run the program in one of these modes, specify the corresponding option, as indicated in \ref{sec:usage}.
 
 Console logging prints events on the standard output\footnote{standard error is never used, neither in case of warnings nor errors.}.
 File logging deals with three types of events: it appends commands-related events on \texttt{data/log/commands.log}, attacks-related ones on \texttt{data/log/attacks.log} and report-related ones on \texttt{data/log/reports.log}. These two files are emptied every time the bot is started.

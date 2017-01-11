@@ -9,39 +9,34 @@
 % Institution: Department of Civil Engineering and Computer Science Engineering,
 % University of Rome Tor Vergata, Italy
 %
-% Style: ACM-UTV Large (based on ACM Large v1.7)
+% Style: ACM-UTV Large VERSION 2017
 %*******************************************************************************
 
-\documentclass[prodmode,acmutv-cw-cs]{acmlarge}
+\documentclass[acmlarge]{acmart}
 
 %*******************************************************************************
 % Packages
 %*******************************************************************************
 \usepackage[utf8]{inputenc}
-\usepackage{graphicx}
-\usepackage{epstopdf}
-\usepackage{subfig}
-\usepackage{bm}
-\usepackage{url}
 \usepackage{amsmath}
+\usepackage{booktabs}
 \usepackage{lipsum}
 \usepackage{xr}
-\usepackage[hidelinks]{hyperref}
-\usepackage{cleveref}
 \usepackage{color}
 
 %*******************************************************************************
-% Details
+% Meta
 %*******************************************************************************
+\acmJournal{ACMROME-CP}
 \acmVolume{1}
 \acmNumber{1}
 \acmArticle{1}
-\articleSeq{1}
-\acmMonth{2}
 \acmYear{2017}
-
-\issn{1234-56789}
-\doi{0000001.0000001}
+\acmMonth{2}
+\acmArticleSeq{11}
+\acmDOI{0000001.0000001}
+\acmPrice{0.00}
+\received[accepted]{February 2017}
 
 %*******************************************************************************
 % Copyright
@@ -52,12 +47,12 @@
 % Algorithm
 %*******************************************************************************
 \usepackage[ruled]{algorithm2e}
-\SetAlFnt{\algofont}
-\SetAlCapFnt{\algofont}
-\SetAlCapNameFnt{\algofont}
+\renewcommand{\algorithmcfname}{ALGORITHM}
+\SetAlFnt{\small}
+\SetAlCapFnt{\small}
+\SetAlCapNameFnt{\small}
 \SetAlCapHSkip{0pt}
 \IncMargin{-\parindent}
-\renewcommand{\algorithmcfname}{ALGORITHM}
 
 %*******************************************************************************
 % Numbering
@@ -67,12 +62,6 @@
 %*******************************************************************************
 % References
 %*******************************************************************************
-\crefname{lem}{lemma}{lemmata}
-\Crefname{lem}{Lemma}{Lemmata}
-\crefname{cor}{corollary}{corollaries}
-\Crefname{cor}{Corollary}{Corollaries}
-\crefname{alg}{algorithm}{algorithms}
-\Crefname{alg}{Algorithm}{Algorithms}
 \externaldocument{sec/introduction}
 \externaldocument{sec/botnets}
 \externaldocument{sec/architecture}
@@ -86,36 +75,39 @@
 \externaldocument{sec/further-improvements}
 \externaldocument{sec/conclusions}
 
+\begin{document}
 %*******************************************************************************
 % Title and Authors
 %*******************************************************************************
-\markboth{G. Marciani, M. Porretta}{A botnet showcase}
 \title{A bot showcase}
-\author{GIACOMO MARCIANI and MICHELE PORRETTA \affil{University of Rome Tor Vergata}}
+\author{Giacomo Marciani}
+\orcid{0000-0002-3675-8804}
+\affiliation{%
+  \institution{University of Rome Tor Vergata}
+  \streetaddress{Via del Politecnico 1}
+  \city{Rome}
+  \state{RM}
+  \postcode{00133}
+  \country{IT}}
+\author{Michele Porretta}
+\orcid{0000-0000-0000-0000}
+\affiliation{%
+  \institution{University of Rome Tor Vergata}
+  \streetaddress{Via del Politecnico 1}
+  \city{Rome}
+  \state{RM}
+  \postcode{00133}
+  \country{IT}}
 
 %*******************************************************************************
-% Front Content
+% Front
 %*******************************************************************************
 \input{sec/abstract}
 \input{sec/ccs-keywords}
-\acmformat{Giacomo Marciani and Michele Porretta. 2017. A bot showcase}
-
-\begin{document}
-
-%*******************************************************************************
-% Bottom Content
-%*******************************************************************************
-\begin{bottomstuff}
-	This work is supported by the Department of Civil Engineering and Computer Science
-	Engineering, University of Rome Tor Vergata, Italy.\\
-	Author's address:
-	G. Marciani, Via del Politecnico 1, Rome, RM 00133, Italy;
-	email: gmarciani@acm.org;
-	M. Porretta, Via del Politecnico 1, Rome, RM 00133, Italy;
-	email: mporretta@acm.org;
-\end{bottomstuff}
 
 \maketitle
+
+\renewcommand{\shortauthors}{G. Marciani and M. Porretta}
 
 %*******************************************************************************
 % Core Content
@@ -137,6 +129,6 @@
 % Bibliography
 %*******************************************************************************
 \bibliographystyle{acmreferences}
-\bibliography{./ref/biblio}
+\bibliography{ref/biblio}
 
 \end{document}

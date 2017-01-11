@@ -1,47 +1,42 @@
 %*******************************************************************************
 % Title: Ontoqa, Q&A with ontology-based natural language processing
 %
-% Series: Courseworks in Artificial Intelligence
+% Conference: Courseworks in Artificial Intelligence
 %
 % Author: Antonella Botte <abotte@acm.org>
 % Author: Giacomo Marciani <gmarciani@acm.org>
 % Author: Debora Partigianoni <dpartigianoni@acm.org>
 %
 % Institution: Department of Civil Engineering and Computer Science Engineering,
-% University of Rome Tor Vergata, Italy
+% 			   University of Rome Tor Vergata, Italy
 %
-% Style: ACM-UTV Large (based on ACM Large v1.7)
+% Style: ACM Large VERSION 2017
 %*******************************************************************************
 
-\documentclass[prodmode,acmutv-cw-ai]{acmlarge}
+\documentclass[acmlarge]{acmart}
 
 %*******************************************************************************
 % Packages
 %*******************************************************************************
 \usepackage[utf8]{inputenc}
-\usepackage{graphicx}
-\usepackage{epstopdf}
-\usepackage{subfig}
-\usepackage{bm}
-\usepackage{url}
 \usepackage{amsmath}
+\usepackage{booktabs}
 \usepackage{lipsum}
 \usepackage{xr}
-\usepackage[hidelinks]{hyperref}
-\usepackage{cleveref}
 
 %*******************************************************************************
-% Details
+% Meta
 %*******************************************************************************
+\acmJournal{ACMROME-CP}
 \acmVolume{1}
 \acmNumber{1}
 \acmArticle{1}
-\articleSeq{1}
-\acmMonth{2}
 \acmYear{2017}
-
-\issn{1234-56789}
-\doi{0000001.0000001}
+\acmMonth{2}
+\acmArticleSeq{11}
+\acmDOI{0000001.0000001}
+\acmPrice{0.00}
+\received[accepted]{February 2017}
 
 %*******************************************************************************
 % Copyright
@@ -52,12 +47,16 @@
 % Algorithm
 %*******************************************************************************
 \usepackage[ruled]{algorithm2e}
-\SetAlFnt{\algofont}
-\SetAlCapFnt{\algofont}
-\SetAlCapNameFnt{\algofont}
+\renewcommand{\algorithmcfname}{ALGORITHM}
+\SetAlFnt{\small}
+\SetAlCapFnt{\small}
+\SetAlCapNameFnt{\small}
 \SetAlCapHSkip{0pt}
 \IncMargin{-\parindent}
-\renewcommand{\algorithmcfname}{ALGORITHM}
+
+%*******************************************************************************
+% Custom Commands
+%*******************************************************************************
 
 %*******************************************************************************
 % Numbering
@@ -67,49 +66,68 @@
 %*******************************************************************************
 % References
 %*******************************************************************************
-\crefname{lem}{lemma}{lemmata}
-\Crefname{lem}{Lemma}{Lemmata}
-\crefname{cor}{corollary}{corollaries}
-\Crefname{cor}{Corollary}{Corollaries}
-\crefname{alg}{algorithm}{algorithms}
-\Crefname{alg}{Algorithm}{Algorithms}
 \externaldocument{sec/introduction}
 \externaldocument{sec/main-section}
 \externaldocument{sec/conclusions}
 \externaldocument{sec/app/latex-formats}
 
+\begin{document}
 %*******************************************************************************
 % Title and Authors
 %*******************************************************************************
-\markboth{A. Botte, G. Marciani, D. Partigianoni}{Ontoqa, Q\&A with ontology-based natural language processing}
 \title{Ontoqa, Q\&A with ontology-based natural language processing}
-\author{ANTONELLA BOTTE, GIACOMO MARCIANI and DEBORA PARTIGIANONI \affil{University of Rome Tor Vergata}}
+\author{Antonella Botte}
+\orcid{0000-0000-0000-0000}
+\affiliation{%
+  \institution{University of Rome Tor Vergata}
+  \streetaddress{Via del Politecnico 1}
+  \city{Rome}
+  \state{RM}
+  \postcode{00133}
+  \country{IT}}
+\author{Giacomo Marciani}
+\orcid{0000-0002-3675-8804}
+\affiliation{%
+  \institution{University of Rome Tor Vergata}
+  \streetaddress{Via del Politecnico 1}
+  \city{Rome}
+  \state{RM}
+  \postcode{00133}
+  \country{IT}}
+\author{Debora Partigianoni}
+\orcid{0000-0000-0000-0000}
+\affiliation{%
+  \institution{University of Rome Tor Vergata}
+  \streetaddress{Via del Politecnico 1}
+  \city{Rome}
+  \state{RM}
+  \postcode{00133}
+  \country{IT}}
 
 %*******************************************************************************
-% Front Content
+% Front
 %*******************************************************************************
 \input{sec/abstract}
 \input{sec/ccs-keywords}
-\acmformat{Antonella Botte, Giacomo Marciani and Debora Partigianoni. 2017. Ontoqa, Q\&A with ontology-based natural language processing}
-
-\begin{document}
 
 %*******************************************************************************
-% Bottom Content
+% Thanks
 %*******************************************************************************
-\begin{bottomstuff}
-	This work is supported by the Department of Civil Engineering and Computer Science
-	Engineering, University of Rome Tor Vergata, Italy.\\
-	Author's address:
-	A. Botte, Via del Politecnico 1, Rome, RM 00133, Italy;
-	email: abotte@acm.org;
-	G. Marciani, Via del Politecnico 1, Rome, RM 00133, Italy;
-	email: gmarciani@acm.org;
-	D. Partigianoni, Via del Politecnico 1, Rome, RM 00133, Italy;
-	email: dpartigianoni@acm.org;
-\end{bottomstuff}
+\thanks{
+  This work is supported by the Department of Civil Engineering and Computer Science
+  Engineering, University of Rome Tor Vergata, Italy.\\
+  Author's address:
+  A. Botte, Via del Politecnico 1, Rome, RM 00133, Italy;
+  email: abotte@acm.org;
+  G. Marciani, Via del Politecnico 1, Rome, RM 00133, Italy;
+  email: gmarciani@acm.org;
+  D. Partigianoni, Via del Politecnico 1, Rome, RM 00133, Italy;
+  email: dpartigianoni@acm.org;
+}
 
 \maketitle
+
+\renewcommand{\shortauthors}{A. Botte, G. Marciani and D. Partigianoni}
 
 %*******************************************************************************
 % Core Content
@@ -122,12 +140,6 @@
 % Bibliography
 %*******************************************************************************
 \bibliographystyle{acmreferences}
-\bibliography{./ref/biblio}
-
-%*******************************************************************************
-% Online Appendix
-%*******************************************************************************
-\elecappendix
-\input{sec/app/latex-formats}
+\bibliography{ref/biblio}
 
 \end{document}
