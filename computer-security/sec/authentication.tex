@@ -1,0 +1,217 @@
+\chapter{Autenticazione}
+\label{chp:authentication}
+
+L'autenticazione deve \textit{identificare unilateralmente/bilateralmente} un'entità A con un'entità B in modo che questa identificazione sia \textit{non trasferibile} (B non può reciclare l'identificazione di A per identificarsi come A con C) e \textit{non impersonificabile} (Z(A) non può utilizzare l'identificazione di A con B per identificarsi come A con B).
+
+Un protocollo di autenticazione è basato sul fornire in real-time \textit{qualcosa che si conosce}, \textit{qualcosa che si ha}, \textit{qualcosa che si è} o \textit{dove si è}. Un protocollo di autenticazione forte prevede la combinazione di due o più di questi meccanismi.
+
+I protocolli di autenticazione venogno confrontati in base a \textit{reciprocità dell'autenticazione}, \textit{efficienza computazionale}, \textit{efficienza di comunicazione}, \textit{costo di implementazione}, \textit{coinvolgimento TTP}, \textit{garanzie di sicurezza} e \textit{gestione delle chiavi}.
+
+
+\section{Passwords}
+Le password fisse sono vulnerabili a: \textit{attacchi replay, brute-force e dictionary}.
+Per aumentare la sicurezza delle password fisse sono necessarie: \textit{alta entropia della password}, \textit{salting}, \textit{cifratura dei file password con funzioni hash non lineari} e \textit{rallentamento della verifica}.
+
+Un \textit{Personal Number Identificator (PIN)} è una breve sequenza numerica che permette di autenticarsi con una master-key ad alta entropia fornita da un qualcosa che si ha. Tipicamente, la procedura di verifica limita il numero di tentativi possibili.
+
+Una \textit{passphrase} è una password realizzata da una frase di senso compiuto. Una \textit{passkey} è una passphrase mappata in una chiave pseudo-random.
+
+Una \textit{graphical password} è una password definita da una sequenza ordinata di click su supporti grafici.
+
+Una \textit{one-time password} è una password che permette l'autenticazione una sola volta all'interno di una finestra temporale di riferimento. Può essere implementata (i) condividendo la successione $\{p_{n}\}_{n}$ di password tra le entità che si devono autenticare, oppure (ii) condividendo la prima password $p_{0}$ e la funzione one-way $H$ per ricavare la seguente $p_{i+1}=H(p_{i})$.
+
+
+\section{Challenge-Response}
+Un protocollo \textit{Challenge-Response (CR)} è un protocollo di autenticazione in cui il claimer si identifica rispondendo correttamente (response) ad un quesito (challenge) posto dal prover.
+
+La sicurezza è garantita da un legame crittografico (chiave simmetrica/asimmetrica) e tempo-variante (timestamp, sequenze numeriche pseudo-random) tra la challenge e la response.
+
+Questi protocolli realizzano l'autenticazione nei seguenti scenari:
+
+\begin{description}
+  \item[auntenticazione a chiave simmetrica] A si autentica con B dimostrando di saper rispondere correttamente ad una challenge che può essere basata su numeri casuali e/o timestamp. L'invio della challenge e del response sono cifrati secondo uno schema crittografico a chiave simmetrica.
+
+  \item[autenticazione a chiave asimmetrica] A si autentica con B dimostrando di possedere la propria chiave privata. A decifra una challenge cifrata con la propria chiave pubblica, e fornisce una risposta firmata digitalmente.
+  La coppia di chiavi utilizzata per l'autenticazione non dovrebbe essere utilizzata per altri scopi.
+
+  \item[autenticazione X.509] autenticazione mutua con chiave asimettrica mediante scambio di di messaggi contenenti numeri randim, timestamp e certificati digitali.
+\end{description}
+
+\bigskip
+\begin{algorithm}[H]
+  \caption{Challenge-Response a chiave simmetrica (unilaterale)}
+  \label{alg:authentication-challenge-response-unilateral-symmetric}
+  \SetAlgoNoLine
+  B $\rightarrow$ A: $E(k:r_{B})$;\\
+  A $\rightarrow$ B: $E(k:r_{A},r_{B})$;\\
+\end{algorithm}
+
+\bigskip
+\begin{algorithm}[H]
+  \caption{Challenge-Response a chiave simmetrica (bilaterale)}
+  \label{alg:authentication-challenge-response-bilateral-symmetric}
+  \SetAlgoNoLine
+  B $\rightarrow$ A: $E(k:r_{B})$;\\
+  A $\rightarrow$ B: $E(k:r_{A},r_{B})$;\\
+  B $\rightarrow$ A: $E(k:r_{A},r_{B})$;\\
+\end{algorithm}
+
+\bigskip
+\begin{algorithm}[H]
+  \caption{Challenge-Response a chiave asimmetrica (unilaterale)}
+  \label{alg:authentication-challenge-response-unilateral-asymmetric}
+  \SetAlgoNoLine
+  B $\rightarrow$ A: $E(k_{A}:r_{B},B)$;\\
+  A $\rightarrow$ B: $E(k_{A}:r_{B})$;\\
+\end{algorithm}
+\bigskip
+
+Questi protocolli sono vulnerabili ad \textit{attacchi replay}, \textit{parallel-session}, \textit{man-in-the-middle}, \textit{reflection} e \textit{known-text}.
+
+
+\section{Zero-Knowledge}
+Un protocollo \textit{Zero-Knowledge (ZK)} è un protocollo di dimostrazione interattivo che gode della proprietà di zero knowledge, ovvero in cui non si rivela null'altro che la veridicità della dimostrazione \footnote{vedi noto esempio di \textit{Peggy nela caverna}.}.
+
+Il protocollo gode delle seguenti proprietà\footnote{correttezza e completezza sono proprietà dei protocolli di dimostrazione interrativi; mentre la zero-knowledge è specifica dei protocolli zero-knowledge.}:
+\begin{description}
+  \item[completezza] se l'affermazione è vera, un claimer onesto può dimostrarla vera ad un verifier.
+  \item[correttezza] se l'affermazione è falsa, un claimer disonesto non può dimostrarla vera al verifier\footnote{la probabilità che ci riesca può essere resa bassa a piacere.}.
+  \item[zero-knowledge] se l'affermazione è vera, un verificatore disonesto\footnote{anche detto \textit{simulatore}.} non potrà sapere altro che la sua veridicità.
+\end{description}
+
+La struttura generale di un protocollo ZK prevede $N$ round costituiti dalle seguenti fasi: \textit{commitment} il claimer fornisce al prover una prova di conoscenza; \textit{challenge} il verifier fornisce al claimer una dimostrazione da verificare; \textit{response} il claimer dimostra al verifier la veridicità della dimostrazione; \textit{verification} il verifier verifica la veridicità fornita dal claimer.
+
+I vantaggi principali dei protocolli ZK sono: \textit{resistenza ad attacchi chosen-text}, \textit{non degrado della sicurezza nel tempo}. Inoltre, rispetto a protocolli a chiave asimmetrica, sono più efficienti computazionalmente.
+Tuttavia non lo sono a livello di comunicazione, e sono basati su intrattabilità computazionali non dimostrate matematicamente.
+
+
+\subsection{ZK con RSA}
+Il seguente è un esempio di protocollo ZK basato su RSA. In questo esempio A dimostra a B di conoscere la propria chiave privata $d$, senza però comunicarla. Quindi basta dimostrare di saper decifrare un messaggio $c=m^{e} \mod n$, dove $(n,e)$ è la chiave pubblica di A.
+
+\bigskip
+\begin{algorithm}[H]
+  \caption{ZK basato su RSA}
+  \label{alg:authentication-zero-knowledge-rsa}
+  \SetAlgoNoLine
+  A sceglie un intero random $r \mod n$;\\
+  A $\rightarrow$ B: $y=r^{e}$;\\
+  A $\rightarrow$ B: $z=rm$;\\
+  B verifica che $z^{e}=yc$;
+\end{algorithm}
+
+Questo protocollo è vulnerabile alla \textit{impersonificazione}: a Z(A) basterebbe inviare a C $y=r^{e}/c$ e $z=r$ per autenticarsi come A.
+
+
+\subsection{Cut\&Choose}
+Il protocollo \textit{Cut\&Choose} è un protocollo di autenticazione zero-knowledge che risolve la vulnerabilità alla impersonificazione eseguendo round variabili di verifica.
+
+L'Algoritmo\ref{alg:authentication-zero-knowledge-cut-and-choose} mostra l'esecuzione del generico round. Le proprietà di correttezza è soddisfatta con probabilità direttamente proporzionale al numero di round.
+
+\bigskip
+\begin{algorithm}[H]
+  \caption{C\&C basato su RSA}
+  \label{alg:authentication-zero-knowledge-cut-and-choose}
+  \SetAlgoNoLine
+  A sceglie un intero random $r \mod n$;\\
+  A $\rightarrow$ B: $y=r^{e}$;\\
+  B $\rightarrow$ A: $b \in {0,1}$;\\
+  A $\rightarrow$ B: $z=rm^{b}$;\\
+  B verifica che $z^{e}=yc^{b}$;
+\end{algorithm}
+
+L'intuizione del protocollo consiste nel fornire due challenge: una per dimostrare la conoscenza ed una per dimostrare l'onestà. Un claimer onesto risponde correttamente ad entrambe. Un claimer disonesto risponde correttamente con probabilità $\frac{1}{2}^{N}$, dove $N$ è il numero di round.
+
+
+\subsection{Isomorfismo tra grafi}
+Un noto esempio di protocollo Cut\&Choose basa la sua sicurezza sull'intrattabilità computazionale del \textit{problema dell'isomorfismo tra grafi}. In questo esempio il segreto è l'isomorfismo $H$ tra $G_{1}$ e $G_{2}$, la cui conoscenza è provata fornendo una permutazione $G_{3}$ di $G_{1}$, e provandone l'isomorfismo con $G_{1}$ o $G_{2}$. Il protocollo è sicuro in quanto un claimer disonesto non può provare contemporaneamente l'isomorfismo di $G_{3}$ sia con $G_{1}$ che con $G_{2}$.
+
+
+\subsection{Feige-Fiat-Shamir}
+Il \textit{Feige-Fiat-Shamir (FFS)} è un protocollo di autenticazione zero-knowledge, la cui sicurezza si basa sull'intrattabilità computazionale del \textit{problema della radice quadrata in modulo di un intero a fattorizzazione incognita}.
+
+\bigskip
+\begin{algorithm}[H]
+  \caption{Feige-Fiat-Shamir}
+  \label{alg:authentication-zero-knowledge-feige-fiat-shamir}
+  \SetAlgoNoLine
+  S rende noto $n=pq$ (1024 bit), dove $p,q$ sono primi random.
+  A $\rightarrow$ S: $v=s^{2} \mod n$;\\
+  S rende noto $v$;\\
+  A sceglie un intero random $r \in [0,n)$;\\
+  A $\rightarrow$ B: $x=r^{2} \mod n$;\\
+  B $\rightarrow$ A: $b \in \{0,1\}$;\\
+  A $\rightarrow$ B: $y=rs^{b} \mod n$;\\
+  B accetta A se $y^{2}=xv^{b} \mod n$;\\
+\end{algorithm}
+
+
+\section{Autenticazione biometrica}
+L'autenticazione biometrica è basata su pattern recognition di aspetti fisiologici o comportamentali dell'individuo.
+Permette di verificare l'identità di un individuo (\textit{autenticazione ono-to-one}), o la determinazione dell'identità di un individuo (\textit{autenticazione many-to-one}).
+
+Gli schemi di autenticazione biometrica sono in continua evoluzione, ma al momento soffrono di problemi legati alla privacy, alla salute, ai falsi negativi.
+
+
+\section{CAPTCHA}
+Un CAPTCHA (Completely Automated Public Turing test to tell Computers and Humans Apart) è una classe di metodi per distinguere un accesso umano da un accesso computerizzato.
+Tipicamente un CAPTCHA chiede di riconoscere sequenze alfanumeriche e disegni durante la sottomissione di form onde evitare password-guessing e attacchi DOS.
+
+
+\section{Secret Sharing}
+Un protocollo di secret sharing partiziona una dato segreto $D$ in $n$ componenti $D_{1},...,D_{n}$, ognuna delle quali è destinata ad un'entità.
+Ogni componente $D_{i}$ è necessaria alla determinazione di $D$.
+Questi protocolli eliminano la presenza di single point of failure ed impediscono ad un singolo partecipante di accedere ad una risorsa senza il consenso degli altri.
+
+Uno \textit{schema threshold $(k,n)$} è uno schema di secrete sharing in cui il dato segreto è partizionato in $n$ componenti e sono necessarie almeno $k\leq n$ di esse per ricostruirlo.
+
+Lo \textit{Shamir Secret Sharing} è uno schema threshold $(k,n)$ con $k<n$ in cui, dato un segreto $S$, viene definita una funzione $f(x)=S+\sum_{i=1}^{k-1}a_{i}x^{i}$ e ad ogni partecipante viene consegnato un punto $(i,f(i))$.
+Ogni sottoinsieme di $k$ partecipanti può determinare $S$ mediante interpolazione lineare (polinomio di Lagrange) dei $k$ punti.
+
+
+\section{Kerberos}
+Kerberos è un protocollo di mutua autenticazione client/server con crittografia a chiave simmetrica (DES).
+Permette di contrastare attacchi attivi di impersonificazione, contraffazione dell'identità e replay.
+
+Il protocollo prevede: un \textit{client (C)} che richiede i servizi di un \textit{service server (SS)}, un \textit{Ticket-Granting Server (TGS)} che autentica C con SS, ed un \textit{Authentication Server (AS)} che autentica C con TGS.
+L'algoritmo~\ref{alg:kerberos} mostra i passi del protocollo.
+
+\bigskip
+\begin{algorithm}[H]
+  \caption{Kerberos}
+  \label{alg:kerberos}
+  \SetAlgoNoLine
+  C $\rightarrow$ AS: $(username_{C})$;\\
+  AS ottiene dal proprio DB la password di C $pwd$;\\
+  AS ottiene la chiave $k_{C/TGS}$ per cifrare la comunicazione C/TGS;\\
+  AS ottiene la chiave $k_{AS/TGS}$ per cifrare la comunicazione AS/TGS;\\
+  AS produce un ticket $T_{TGS}$ di autenticazione per C con TGS;\\
+  AS $\rightarrow$ C: $E_{pwd}(k_{C/TGS})$;\\
+  AS $\rightarrow$ C: $c_{1}=E_{k_{A/TGS}}(T_{TGS})$;\\
+  C $\rightarrow$ TGS: $(c_{1},id_{service})$;\\
+  C $\rightarrow$ TGS: $E_{k_{C/TGS}}(id_{client},timestamp_{C})$;\\
+  TGS ottiene la chiave $k_{C/SS}$ per cifrare la comunicazione C/SS;\\
+  TGS ottiene la chiave $k_{TGS/SS}$ per cifrare la comunicazione TGS/SS;\\
+  TGS produce un ticket $T_{SS}$ di autenticazione per C con SS;\\
+  TGS $\rightarrow$ C: $E_{k_{C/TGS}}(k_{C/SS})$;\\
+  TGS $\rightarrow$ C: $c_{2}=E_{k_{TGS/SS}}(T_{SS})$;;\\
+  C $\rightarrow$ SS: $c_{2}$;\\
+  C $\rightarrow$ SS: $E_{k_{C/SS}}(id_{client},timestamp_{C})$;\\
+  SS si fida di C;\\
+  SS $\rightarrow$ C: $E_{k_{C/SS}}(timestamp_{SS})$;\\
+  Se $(timestamp_{C},timestamp_{SS})$ sono validi, allora $C$ si fida di $SS$;\\
+  C può richiedere i servizi di SS, ed SS può erogarli;
+\end{algorithm}
+
+Le vulnerabilità di Kerberos sono:
+(i) AS è un single point of failure;
+(ii) attacchi a DES;
+(iii) modifica del clock di TGS per reciclare i ticket;
+(iv) server malevoli simulanti AS e/o TGS;
+
+
+\section{Autenticazione dei messaggi}
+L'autenticazione di un messaggio può essere realizzata mediante \textit{cifratura simmetrica/asimmetrica del emssaggio} o mediante il rilascio di un \textit{Message Authentication Code (MAC)} $F(m,k)$.
+Un MAC è dunque un message digest prodotto da una funzione one-way con alta resistenza alle collisioni. Un MAC può essere cifrato con un qualsivoglia crittoalgoritmo (NIST suggerisce DES).
+Un \textit{Hash-MAC (HMAC)} è un MAC cifrato con una funzione hash crittografica (e.g. SHA1, MD5).
+Un MAC realizza autenticazione del messaggio, autenticazione della sorgente, non repudiation. Se al messaggio è allegato un timestamp, il MAC certifica anche l'ordine di sequenza del messaggio.
+Questa autenticazione protegge da impersonificazione, alternazione del messaggio, attacco replay e DOS.

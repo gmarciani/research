@@ -1,0 +1,135 @@
+\chapter{Cifrari a blocchi}
+\label{chp:block-ciphers}
+
+Un cifrario a blocchi è un crittalgoritmo a chiave privata operante su unità di simboli di dimensione fissa.
+
+Un cifrario a blocchi può essere: a sostituzione, a trasposizione a prodotto.
+Un cifrario a sostituzione sostituisce unità di simboli in altre unità di simboli.
+Un cifrario a trasposizione permuta i simboli di un blocco. È debole contro attacchi statistici (non cambia la distribuzione statistica dei simboli), basati su anagrammi. Inoltre una chiave vicina a quella corretta può rivelare sezioni di testo.
+
+Un cifrario a prodotto esegue una sostituzione ed una permutazione.
+
+\section{Tipi di sostituzione}
+La sostituzione può aderire alle seguenti discipline:
+
+\begin{description}
+  \item[monoalfabetica] sostituisce un simbolo in chiaro con un solo simbolo cifrato appartenente allo stesso alfabeto.
+
+  \item[polialfabetica] sostituisce un simbolo in chiaro con uno simbolo appartenente ad alfabeti differenti (e.g. stesso alfabeto ordinato diversamente).
+  La resistenza alla crittanalisi statistica dipende dal numero di alfabeti adottati. Nella forma più semplice, l'alfabeto adottato dipende dalla posizione del simbolo da cifrare.
+
+  \item[poligrammica] sostituisce gruppi r-dimensionali con gruppi r-dimensionali.
+
+  \item[omofonica] sostituisce un simbolo plain con un simbolo random preso da un insieme di simboli di cardinalità proprozionale alla sua frequenza.In questo modo la distribuzione delle frequenze viene appiattita, rendendo crittanalisi statistica più difficoltosa. Comporta espansione dei dati.In caso di testi molto lunghi è suscettibile ad attacchi statistici in quanto per la legge dei grandi numeri l'appiattimento viene perso.
+\end{description}
+
+Un cifrario auto-key utilizza come chiave lo stesso plaintext.
+Un cifrario running-key utilizza una chiave di lunghezza pari al plaintext.
+
+\section{Shift Cipher}
+Un cifrario di shift è un cifrario a sostituzione in cui la permutazione dei simboli consiste in uno shift costante secondo un alfabeto ordinato. Può essere visto anche come un caso particolare di cifrario affine (con $a=0$).
+
+\section{Simple Cipher}
+$$
+\begin{cases}
+  E_{k}(m)=km \mod n
+  D_{k}(c)=k^{-1}c \mod n
+\end{cases}
+$$
+
+\section{Affine Cipher}
+$$
+\begin{cases}
+  E_{k}(m)=k_{1}m+k_{2} \mod n
+  D_{k}(c)=k_{1}^{-1}(c-k_{2}) \mod n
+\end{cases}
+$$
+
+\section{Vigenere}
+Il cifrario di Vigenere è un cifrario a blocchi con sostituzione polialfabetica.
+Dato un alfabeto con $N$ simboli, una chiave $k=k_{1}...k_{t}$ (dove $t$ è detto periodo), un messaggio in chiaro $m=m_{1}m_{2}m_{3}...$, il messaggio cifrato $c=c_{1}c_{2}c_{3}...$ è definito come:
+
+$$c_{i}=m_{i}+k_{i \mod t}(\mod N)$$
+
+In generale, l'indice $i$ individua l'alfabeto $A_{i}$ da utilizzare nella sostituzione monoalfabetica.
+
+Nella sua versione classica, l'indice $i$ individua la permutazione $e_{i}$ dell'alfabeto $A$ da utilizzare.
+
+Notiamo che un cifrario di shift è un caso particolare di cifrario di Vigenere con periodo $t=1$.
+
+Del cifrario di Vigenere esistono le seguenti varianti:
+\begin{description}
+  \item[Beaufort-Vigenere] la trasformazione è $c_{i}=m_{i}-k_{i \mod t}(\mod N)$;
+
+  \item[Vigenere composto] ottenuto componendo cifrari di Vigenere con periodi diversi, ovvero con chiavi $k^{(i)}=k_{1}^{(i)}...k_{t^{(r)}}^{(i)}$, in cui
+  $c_{i}=m_{i}+\sum_{j=1}^{r} k_{i \mod t_{j}}^{(j)}(\mod N)$; questo cifrario è equivalente ad un cifrario di Vigenere di periodo $t=lmc(t^{1},...,t^{(r)})$;
+
+  \item[running-key Vigenere] versione running-key del Vigenere classico. Se il keystream è random, questo cifrario è quivalente ad un cifrario di Vernam
+\end{description}
+
+Il cifrario di Vigenere può essere rotto individuando dapprima la lunghezza della chiave come fattore della distanza tra sequenze ripetute, ed individuare la chiave stessa mediante analisi statistica.
+
+\begin{description}
+  \item[Metodo Charles-Babbage] determinare la lunghezza della chiave come fattore della distanza delle sequenze ripetute; determinare le lettere della chiave identificando lo shift delle lettere.
+  \item[Kasiki Test] determina la lunghezza L della chiave come massimo comune divisore delle distanze tra le ripetizioni di una stessa sequenza ciphertext; una volta individuata la lunghezza L della chiave, il ciphertext si crittoanalizza come L cifrari di Cesare intercalati.
+  \item[Kappa Test] intuisci la lunghezza L della chiave; disponi il ciphertext in una matrice ad L colonne; calcola indice di coincidenza medio delle colonne; L è corretta se l'indice di coincidenza medio è prossimo a quello di un linguaggio naturale.
+\end{description}
+
+
+\section{German ADFGVX}
+Il \textit{German ADFGVX} è un cifrario blocchi basato su prodotto (sostituzione e trasposizione) sviluppato dai tedeschi nel 1918, riconosciuto come uno dei più sofisticati cifrari classici.
+
+Il cifrario realizza la cifratura mediante:
+\begin{description}
+  \item[sostituzione monoalfabetica] ogni lettera è sostituita dalle componenti $(i,j)$ della \textit{matrice ADFGVX} $M_{1}$, la quale è una matrice quadrata $(ADFGVX) \times (ADFGVX)$ riempita casualmente dalle lettere dell'alfabeto; ovvero $s \rightarrow (i,j).M_{1}[i,j]=s$.
+  \item[trasposizione] il testo cifrato viene inserito per righe in una matrice $M_{2}:\mathcal{N} \times k$, dove $k$ è la chiave segreta; e colonne di $M_{2}$ vengono trasposte secondo l'ordine alfabetico di $k$; il ciphertext è il contenuto di $M_{2}$ letto per colonne.
+\end{description}
+
+
+\section{Block modes}
+Un \textit{block mode (o modalità di esecuzione)} definisce una composizione di cifrari a blocchi in modo da realizzare un cifrario in grado di cifrare un messaggio più lungo di un blocco.
+
+Un block mode è valutato in termini di \textit{condizioni di identità dei messaggi}, \textit{dipendenza dei blocchi}, \textit{propagazione degli errori} ed \textit{efficienza}.
+
+\begin{description}
+  \item[Electronic Codebook (ECB)] ogni blocco è cifrato indipendente dagli altri; non nasconde i data patterns; l'errore non si propaga; necessita padding; vulnerabile ad attachi replay e known-plaintext; cifratura/decifratura parallelizzabile; utilizzato per cifrare piccole quantità di dati.
+  $$
+  \begin{cases}
+    c_{i}=E_{k}(p_{i})\\
+    p_{i}=D_{k}(c_{i})
+  \end{cases}
+  $$
+
+  \item[Cipher Block Chaining (CBC)] ogni blocco è cifrato dipendentemente dalla chiave e dal blocco ciphertext precedente; inizializzato con IV; un errore nel plaintext compromette quel blocco, un errore nel ciphertext compromette quel blocco e quello successivo, la perdita di un bit ciphertext compromette tutta la decifratura; necessita padding; necessita messa in sicurezza del IV; decifratura parallelizzabile; utilizzato per grandi quantità di dati.
+  $$
+  \begin{cases}
+    c_{i}=E_{k}(p_{i} \oplus c_{i-1}) & c_{0}=IV\\
+    p_{i}=D_{k}(c_{i}) \oplus c_{i-1} & c_{0}=IV
+  \end{cases}
+  $$
+
+  \item[Cipher Feedback (CFB)] ogni blocco è cifrato con uno shift-register che scorre con gli $r$ bit del blocco ciphertext precedente; shitf-register inizializzato con IV; l'errore è propagato per tutta la dimensione dello shuft-register (self-synchonization); cifratura/decifratura con la stessa funzione; non necessita padding; decifratura parallelizzabile; utilizzato come cifratore a flusso.
+  $$
+  \begin{cases}
+    c_{i}=p_{i} \oplus SelectLeft_{r}(E_{k}(ShiftLeft_{r}(S_{i-1})c_{i-1})) & S_{0}=IV\\
+    p_{i}=c_{i} \oplus SelectLeft_{r}(E_{k}(ShiftLeft_{r}(S_{i-1})c_{i-1})) & S_{0}=IV
+  \end{cases}
+  $$
+
+  \item[Output Feedback (OFB)] ogni blocco è cifrato con uno shift-register che scorre con gli $r$ bit dello shift-register precdente; gli shift-register possono essere precaricati, in quanto non dipendono dai blocchi ciphertext prodotti precedentemente; cifratura/decifratura non parallelizzabili; non necessita di padding; la chiave non deve esere riutilizzata; utilizzato come cifratore a flusso in canali rumorosi.
+  $$
+  \begin{cases}
+    c_{i}=p_{i} \oplus SelectLeft_{r}(E_{k}(ShiftLeft_{r}(S_{i-1}))) & S_{0}=IV\\
+    p_{i}=c_{i} \oplus SelectLeft_{r}(E_{k}(ShiftLeft_{r}(S_{i-1}))) & S_{0}=IV
+  \end{cases}
+  $$
+
+  \item[Counter (CTR)] ogni blocco è cifrato indipendentemente l'uno dall'altro secondo il contenuto del contatore; contatore inizializzato a IV; cifratura/decifratura parallelizzabili; necessita di padding; la chiave non deve essere riutilizzata; usato come cifrature a flusso in comunicazioni ad alta efficienza.
+  $$
+  \begin{cases}
+    c_{i}=p_{i} \oplus (E_{k}(S_{i})) & S_{i}=IV+i\\
+    p_{i}=c_{i} \oplus (D_{k}(S_{i})) & S_{i}=IV+i
+  \end{cases}
+  $$
+
+\end{description}

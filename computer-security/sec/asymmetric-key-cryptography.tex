@@ -1,0 +1,129 @@
+\chapter{Crittografia a chiave pubblica}
+\label{chp:public-key-cryptography}
+
+Un \textit{crittosistema a chiave asimmetrica}\footnote{anche detto \textit{crittosistema a chiave pubblica}.} realizza servizi crittografici in cui ogni entità dispone di una chiave \textit{chiave pubblica} $e$, che realizza la trasformazione di cifratura $E_{e}$, ed una corrispondente \textit{chiave privata} $d$, che realizza la trasformazione di decifratura $D_{d}$.
+
+Un crittosistema a chiave asimmetrica è (computazionalmente) sicuro se è (computazionalmente) impossibile determinare $d$ a partire da $e$. La sicurezza di questi crittosistemi è garantita dall'intrattabilità di problemi matematici alla base della generazione della coppia di chiavi.
+
+Un crittosistema a chiave pubblica è \textit{(parzialmente) rotto} se un attaccante ha decifrato uno specifico ciphertext.
+Un crittosistema a chiave pubblica è \textit{completamente rotto} se un attaccante ha ricavato la chiave privata della vittima, in quanto questo gli permetterà di decifrare ogni ciphertext inviato alla vittima.
+
+In generale, un crittosistema a chiave asimmetrica realizza la confidenzialità dei dati, senza garantire autenticità ed integrità,  Inoltre, esso è più lento di un crittosistema a chiave simmetrica.
+
+Tipicamente, questi crittosistemi vengono impiegati per distribuire chiavi privati di protocolli crittografici a chiave simmetrica, o per cifrare piccole quantità di dati.
+
+I crittosistemi a chiave asimmetrica sono vulnerabili ad \textit{attacchi chosen ciphertext}, in quanto la chiave di decifratura è pubblica.
+
+I requisiti generali di un crittosistema a chiave asimmetrica sono:
+(i) efficienza nella generazione della coppia di chiavi;
+(ii) efficienza di cifratura con chiave pubblica;
+(iii) efficienza di decifratura con chiave privata;
+(iv) ogni chiave può decifrare un messagio cifrato con l'altra;
+(v) computazionalmente impossibile calcolare la chiave privata a partire da quella pubblica;
+(vi) computazionalmente impossibile determinare il plaintext a partire dalla chiave pubblica e dal ciphertext;
+(vii) computazionalmente impossibile decifrare un ciphertext cifrato conla stessa chiave usata per cifrarlo.
+
+
+\section{Protocollo Diffie-Hellman}
+Il Diffie-Hellman è un protocollo di key agreement per crittosistemi a chiave pubblica, la cui sicurezza è basata sull'intrattabilità del problema del logaritmo discreto.
+Il protocollo fornisce una soluzione pratica al problema della distribuzione della chiave su canale aperto.
+Non garantendo l'autenticazione, può garantire segretezza contro attacchi passivi, ma no contro attacchi attivi.
+
+La versione più semplice del protocollo è mostrata nell'Algoritmo~\ref{alg:diffie-hellman}, ed è la base di molti protocolli di key establishment, alcuni dei quali garantiscono anche l'autenticazione.
+
+\bigskip
+\begin{algorithm}[H]
+  \caption{Diffie-Hellman (basic)}
+  \label{alg:diffie-hellman}
+  \SetAlgoNoLine
+  A e B scelgono pubblicamente un numero primo $p$ ed un generatore $\alpha\in\mathcal{Z}_{p}*$ tali che $\alpha\in[2,p-2]$;
+  A sceglie un numero casuale $x\in[1,p-2]$ e invia $X=\alpha^{x}\mod p$ a B;
+  B sceglie un numero casuale $y\in[1,p-2]$ e invia $Y=\alpha^{y}\mod p$ ad A;
+  A calcola la chiave condivisa $k=Y^{x} \mod p$;
+  B calcola la chiave condivisa $k=X^{y} \mod p$;
+  La chiave condivisa da A e B è $K$.
+\end{algorithm}
+
+
+\section{RSA}
+RSA (Rivest-Shamir-Adleman) è uno schema di cifratura a chiave pubblica la cui sicurezza è basata sull'intrattabilità del problema di fattorizzazione degli interi.
+
+Ogni entità genera una coppia di chiavi: una chiave pubblica $(n,e)$ ed una chiave privata $d$, dove $n$ è detto modulo, $e$ è detto esponente di crittazione e $d$ è detto esponente di decrittazione.
+
+L'Algoritmo~\ref{alg:rsa-key-generation} mostra la generazione delle chiavi, mentre l'Algoritmo~\ref{alg:rsa-protocol} mostra il protocollo di comunicazione.
+
+\bigskip
+\begin{algorithm}[H]
+  \caption{Generazione chiave RSA}
+  \label{alg:rsa-key-generation}
+  \SetAlgoNoLine
+  Genera $p$ e $q$ grandi interi coprimi distinti.\\
+  Calcola $n=pq$ e $\phi=(p-1)(q-1)$.\\
+  Seleziona un intero random $e \in (1,\phi)$ tale che $gdc(e,\phi)=1$\\
+  Calcola l'intero $d \in (1,\phi)$ tale che $ed\equiv 1 (\mod \phi)$.\\
+  La chiave pubblica è $(n,e)$ e la chiave privata è $d$.\\
+\end{algorithm}
+
+\bigskip
+\begin{algorithm}[H]
+  \SetAlgoNoLine
+  \caption{Protocollo comunicazione RSA}
+  \label{alg:rsa-protocol}
+  B ottiene la chiave pubblica $(n.e)$ di A. \\
+  B rappresenta il messagio $m$ come un intero in $[0,n-1]$. \\
+  B calcola il ciphertext $c=m^{e}(\mod n)$. \\
+  B invia $c$ ad A. \\
+  A riceve $c$ da B. \\
+  A calcola il plaintext $m=c^{d}(\mod n)$.
+\end{algorithm}
+
+RSA funziona perchè:
+
+$c^{d} =^{(1)} m^{ed} \equiv^{(2)} m \mod n =^{(3)} m$
+
+\begin{description}
+  \item[1] verificato per definizione $c=m^{e}$;
+
+  \item[2] verificato in quanto:
+    per definizione $ed\equiv 1 \mod \phi$, da cui $\exists k \in \mathcal{Z^{+}}.ed=1+k\phi$;
+    per il teorema di Fermat sappiamo che $m^{(p-1)} \equiv 1 \mod p$, da cui $m^{k(p-1)(q-1)+1} \equiv m \mod p$ e $m^{k(p-1)(q-1)+1} \equiv m \mod q$;
+    poichè per definizione $gcd(p,q)=1$, allora $m^{k(p-1)(q-1)+1} \equiv m \mod pq$, ovvero $m^{\phi +1} = m^{ed} \equiv m \mod n$.
+
+  \item[3] verificato per definizione $n \in [0,n-1]$;
+\end{description}
+
+RSA è uno schema di cifratura lento, se paragonato a DES, considerato la sua controparte in chiave simmetrica. Per questo motivo viene principlamente utilizzato per la comunicazione di chiavi in schemi a chiave simmetrica su canali insicuri, crittagio di piccoli quantitativi di dati (e.g. PINs) e autenticazione con firma digitale.
+
+
+Il problema RSA (RSAP) consiste nel determinare il plaintext $m$ dati il ciphertext $c$ e la chiave pubblica $(n,e)$. Attualmente non esiste un algoritmo efficiente per risolvere RSAP.
+
+\subsection{Vulnerabilità}
+Un crittosistema RSA può essere completamente rotto se:
+si conosce la fattorizzazione del modulo $n=pq$;
+si conosce $\phi$, anche senza fattorizzare $n$;
+
+Un crittosistema RSA può essere parzialmente rotto se:
+\begin{itemize}
+  \item se si utilizza uno stesso esponente di crittazione $e$ piccolo per inviare uno stesso plaintext $m$ a più entità aventi moduli differenti a due a due primi $n_{i}$, il plaintext può essere decifrato risolvendo un sistema di equazioni. Questa vulnerabilità può essere risolta utilizzano $e$ grandi e preferibilmente distinti, e/o mediante il salting del plaintext\footnote{eseguire un salting di un plaintext vuol dire appendervi una stringa random prima di ogni sua cifratura cifratura.}.
+
+  \item se si utilizza un esponente di decrittazione $d$ piccolo (approssimativamente $\frac{1}{4}$ dei bit del modulo $n$), questo può essere determinato a partire dalla chiave pubblica mediante un \textit{attacco di Wiener}. Questa vulnerabilità può essere risolta adottando $d$ lungo quanto $n$.
+
+  \item se lo spazio dei messaggi è piccolo o prevedibile, un attaccante può criptare un messaggio $m$ mediante un \textit{attacco Forward Search}. Questa vulnerabilità può essere risolta mediante il salting del plaintext.
+
+  \item la proprietà di omomorfismo di RSA, ovvero $m_{1}^{e}m_{2}^{e} \equiv c_{1}c_{2} \mod n$, lo rende vulnerabile ad un attacco \textit{adaptive chosen ciphertext}.
+  Supponiamo che (i) l'attaccante voglia decifrare uno specifico ciphertext $c=m^{e} \mod n$ indirizzato ad A, e che (2) A decifri per l'attaccante qualunque ciphertext eccetto $c$. L'attaccante produce il ciphertext $c'=cx^{e} \mod n$, dove $x\in\mathcal{Z}_{n}$, e lo fa decifrare da A, ottenendo $m'=c'^{d}=c^{d}(x^{e})^{d}\equiv mx \mod n$, da cui $m=m'x^{-1} \mod n$.
+  Questa vulnerabilità può essere risolta considerando fraudolenti tutti quei ciphertext il cui plaintext non rispetti opportuni vincoli strutturali.
+\end{itemize}
+
+Una vulnerabilità teorica, sono i cosidetti \textit{messaggi rivelati}, ovvero plaintext per cui vale $m^{e} \equiv m \mod n$. Di fatto sono talmente pochi che non rappresentano una vulnerabilità pratica.
+
+\section{Key management}
+I crittosistemi a chiave asimmetrica assumono l'autenticità delle chiavi pubbliche. Questa viene generalmente ottenuta mediante certificati digitali rilasciati da Certification Authority.
+
+Un \textit{certificato digitale} è una struttura dati che consiste di una \textit{data part} contenente informazioni realtive all'entità da certificare, ed una \textit{signature part} contenente la firma digitale della Certification Authority che rilascia il certificato.
+
+Lo \textit{standard X.509} prevede nel data part informazioni generali dell'entità, la sua chiave pubblica, la durata di validità della stessa
+
+Un \textit{Certification Authority (CA)} è un TTP (Trusted Third Party) che assicura l'autenticità di una chiave pubblica mediante rilascio di un certificato.
+
+Un CA rilascia un certificato digitale per A solo dopo aver adottato misure di autenticazione. Il CA può creare la coppia di chiavi e trasmettere la chiave privata ad A su un canale sicuro. Oppure l'entità A genera la coppia di chiavi e trasmette la chiave pubblica al CA, il quale verifica l'autenticità mediante challenge-response.

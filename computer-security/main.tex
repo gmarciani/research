@@ -10,18 +10,28 @@
 %
 %*******************************************************************************
 
-\documentclass[12pt,a4paper,oneside,final]{amsbook}
+\documentclass[10pt,a4paper,oneside,final]{amsbook}
 
 %*******************************************************************************
 % Packages
 %*******************************************************************************
 \usepackage[utf8]{inputenc}
-\usepackage{amsfonts,amstext,amsmath,amsthm,amssymb,mathrsfs}
-\usepackage{algorithm, program}
+\usepackage{amsmath}
 \usepackage{lipsum}
 \usepackage{xr}
 \usepackage[hidelinks=true]{hyperref}
 \usepackage{cleveref}
+
+%*******************************************************************************
+% Algorithm
+%*******************************************************************************
+\usepackage[ruled]{algorithm2e}
+\renewcommand{\algorithmcfname}{ALGORITHM}
+\SetAlFnt{\small}
+\SetAlCapFnt{\small}
+\SetAlCapNameFnt{\small}
+\SetAlCapHSkip{0pt}
+\IncMargin{-\parindent}
 
 
 %*******************************************************************************
@@ -54,9 +64,14 @@
 \crefname{alg}{algorithm}{algorithms}
 \Crefname{alg}{Algorithm}{Algorithms}
 \externaldocument{sec/introduction}
-\externaldocument{sec/main-section}
-\externaldocument{sec/conclusions}
-\externaldocument{sec/app/latex-formats}
+\externaldocument{sec/block-ciphers}
+\externaldocument{sec/stream-ciphers}
+\externaldocument{sec/symmetric-key-cryptography}
+\externaldocument{sec/asymmetric-key-cryptography}
+\externaldocument{sec/digital-signature}
+\externaldocument{sec/authentication}
+\externaldocument{sec/bitcoin}
+\externaldocument{sec/attacks}
 
 \begin{document}
 	.
@@ -74,22 +89,19 @@
 %*******************************************************************************
 % Core Content
 %*******************************************************************************
-\chapter{First part}
 \input{sec/introduction}
-\input{sec/main-section}
-\chapter{Second part}
-\input{sec/conclusions}
+\input{sec/block-ciphers}
+\input{sec/stream-ciphers}
+\input{sec/symmetric-key-cryptography}
+\input{sec/asymmetric-key-cryptography}
+\input{sec/digital-signature}
+\input{sec/authentication}
+\input{sec/bitcoin}
+\input{sec/attacks}
 
 %*******************************************************************************
 % Bibliography
 %*******************************************************************************
-%\bibliographystyle{acmreferences}
 \bibliography{./ref/biblio}
-
-%*******************************************************************************
-% Online Appendix
-%*******************************************************************************
-%\elecappendix
-%\input{sec/app/latex-formats}
 
 \end{document}

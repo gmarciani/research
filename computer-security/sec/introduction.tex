@@ -1,20 +1,70 @@
-\section{Introduction}
-\label{sec:introduction}
+\chapter{Introduzione}
+\label{chp:introduction}
 
-\lipsum[1-3]
+La crittologia è la disciplina che si occupa delle scritture nascoste, nel suo duplice significato: da un lato la crittografia si occupa di occultare il reale significato dei testi, dall'altro la crittanalisi riguarda la decifrazione di testi occultati senza conoscerne a priori il metodo usato per cifrarli.
+La steganografia è la disciplina che si occupa di nascondere l'esistenza di un messaggio. La stenografia è più debole della crittografia, in quanto la scoperta di un messaggio stenografato implica la conoscenza del suo significato; mentre la crittografia nasconde il significato di un messaggio noto, qualora non sia nota la chiave per decifrarlo.
 
-\begin{definition}[Sample definition]
-	\lipsum[1]
-\end{definition}
+La crittografia si occupa di definire funzioni di trasformazione reversibile tra un testo in chiaro ed un testo cifrato, parametrizzate da una chiave segreta.
 
-\begin{theorem}[Sample theorem]
-	\lipsum[1]
-	\begin{proof}
-	\lipsum[1]
-	\end{proof}
-\end{theorem}
 
-\begin{algorithm}
-\caption{Sample Algorithm}
-\lipsum[1]
-\end{algorithm}
+
+Un crittosistema realizza la cifratura di dati. L'obiettivo di un crittosistema è tenere cifrati i dati per il tempo di vita del loro valore informativo. Un crittosistema fragile permette la decrittazione durante il tempo di vita dell'informazione. Il trade-off di un crittosistema è tra tempo e costo del crittosistema rispetto alla vita utile e valore dell'informazione.
+Un crittosistema a chiave privata prevede $k_{e}=k_{d}$, mentre un crittosistema a chiave pubblic prevede $k_{e}\neq k{d}$.
+
+\begin{description}
+  \item[confusione] avere rumore nel processo di cifratura. Questo si raggiunge facendo dipendere ogni bit plain da tutta la key ed aumentando la complessità del rapport plaintext/key.
+  \item[dispersione] disperdere le proprietà statistiche del plaintext.
+  \item[distribuzione della chiave] la key deve essere scambiata tra gli interlocutori. Questo è un problema in quanto può essere intercettata durante lo scambio, è un processo che non scala con il numero degli utenti.
+\end{description}
+
+\section{Principi generali}
+\begin{description}
+  \item[Kerchoff] la sicurezza di un crittosistema non dipende dalla segretezza del crittoalgoritmo, ma solo dalla segretezza della chiave.
+  \item[Shannon] un buon cifratore deve prevedere una fase di sostituzione (S-box) ed una fase di permutazione (P-box). Shannon ha provato che H$(K)\geq H(M)$ è condizione necessaria alla incondizionata sicurezza di un crittosistema, ovvero se l'entropia della chiave non è minore dell'entropia del plaintext. Questa condizione implica che $H(M\mid C)=H(M)$, ovvero che il ciphertext non fornisce alcuna informazione sul plaintext.
+\end{description}
+
+Un crittosistema deve dunque soddisfare i seguenti requisiti: schema di cifratura pubblicamente noto, $E$ proietta uniformamente $M$ su $C$, $E,D$ efficienti con $k$ nota, $D$ NP-hard con chiave sconosciuta, con complessità proporzionale alla lunghezza della chiave.
+
+La distribuzione uniforme aumenta la robustezza ad attacchi di crittanalisi statistica. La maggiore dimensione di $K$ aumenta la robustezza ad attacchi brute-force.
+
+Un crittosistema è perfettamente sicuro se ...
+Un crittosistema è computazionalmente sicuro se ...
+
+\section{Cifrario}
+Un crittosistema realizza la cifratura/decifratura secondo uno schema di cifratura definito come $(M,C,K,E,D)$, dove
+$M$ è lo spazio dei plaintext,
+$C$ è lo spazio dei ciphertext,
+$K$ è lo spazio delle chiavi,
+$E=\{E_{k_{e}:k_{e}\in K}\}$ è l'insieme delle funzioni di cifratura,
+$D=\{D_{k_d}:k_{d}\in K\}$ è l'insieme delle funzioni di decifratura
+tali che $\forall k_{e}\in K \exists! k_{d}\in K . D_{k_{d}}=E_{k_{e}}^{-1}$.
+
+Un crittosistema è tale che
+$G:N\rightarrow K \times K$
+$E: M \times K \rightarrow C$
+$D: C \times K \rightarrow M$
+
+Diciamo che $c=E_{k_{e}}(m)$ è la cifratura di $m$ sotto la chiave di cifratura $k_{e}$, mentre $m=D_{k_{d}}(c)$ è la decifratura di $c$ sotto la chiave di decifratura $k_{d}$.
+
+Un crittosistema deve soddisfare il requisito di reversibilità, ovvero
+$m=D_{k_{d}}(E_{k_{e}}(m))\quad \forall m\in M, k_{e}\in K \exists! k_{d}\in K$.
+$K$ deve essere abbastanza grande affinchè il crittosistema posso essere robusto ad attacchi brute-force.
+
+L'\textit{effetto a valanga} è una proprietà di un crittoalgoritmo che consiste nel cambiamento di akmeno metà ciphertext in corrispondenza del cambiamento di un singolo bit plaintext.
+
+\section{Cifrari e Codici}
+Un cifrario realizza la cifratura basandosi sulla sostituzione di unità simboliche independentemente dal loro vlore semantico, secondo una chiave segreta. La distribuzione della chiave è efficiente in quanto la chiave è tipicamente corta. È debole ad attacchi di crittologia statistica.
+
+Un codice, o codebook crittografico, realizza la cifratura basandosi sulla sostituzione di unità linguistiche (parole, gruppi di parole o frasi) secondo un dizionario segreto, detto codebook. La distribuzione della chiave è inefficiente, in quanto il dizionario è tipicamente grande. È robusto ad attacchi di crittologia statistica.
+
+Un codice è più difficile da rompere di un cifrario, in quanto lo spazio delle chiavi è maggiore, la distribuzione statistica viene alterata pertanto è robusto ad attacchi di crittanalisi statistica, ma è debole ad attacchi known-plaintext oin quanto si può fare reverse engineering sul codebook.
+
+
+\section{Protocolli}
+Un protocollo crittografico è un protocollo che impiega un crittoalgoritmo.
+Un protocollo crittografico è in prima battuta classificato in:
+\begin{description}
+  \item[self-enforcing] il protocollo è garantito senza intervento da parte di entità terze; le irregolarità sono individuate dal protocollo stesso.
+  \item[arbitrated] il protocollo è garantito da un TTP real-time.
+  \item[judged] il protocollo è garantito da un TTP coinvolto solo in caso di irregolarità. Il protocollo è dunque suddiviso in un sotto-protocollo semplice ed un sotto-protocollo arbitrated.
+\end{description}

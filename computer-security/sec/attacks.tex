@@ -1,0 +1,158 @@
+\chapter{Attacchi}
+\label{chp:attacks}
+
+Un \textit{attaccante passivo} è un agente che ha un accesso illegittimo in lettura a informazioni protette.
+Un \textit{attaccante attivo} è un agente che manipola in modo illegittimo informazioni protette.
+
+
+Gli attacchi crittanalitici variano in funzione della conoscenza assunta sul crittosistema da attaccare:
+
+\begin{description}
+  \item[known ciphertext] conoscenza del solo ciphertext, sul quale è possibile condurre analisi statistiche.
+  \item[known plaintext] conoscenza di porzioni corrispondenti plaintext/ciphertext.
+  \item[chosen plaintext] conoscenza ciphertext corrispondenti a plaintext opportunamente scelti.
+  \item[chosen ciphertext] conoscenza plaintext corrispondenti a ciphertext opportunamente scelti.
+  \item[adapted text] conoscenza dell'operato di un cifrario in corrispondenza di chiavi diverse scelte in funzione dell'output osservato. È la tipologia di attacco più potente.
+\end{description}
+
+La \textit{crittanalisi lineare} consiste nella determinazione di sistemi di equazioni lineari che approssimano il comportamento di un cifrario. Questa analisi sfrutta le proprietà di linearità delle trasformazioni eseguite dal cifrario.
+
+La \textit{crittanalisi differenziale} consiste nello studio di come le differenze nei dati forniti in ingresso ad una funzione crittografica possano incidere sulle differenze risultanti in uscita dalla stessa. Tale studio è volto a scoprire comportamenti non casuali della funzione, sfruttabili per recuperare la chiave segreta.
+
+\section{Forward Search}
+Un attacco \textit{Forward Search} consiste nel produrre un plaintext $m$, cifrarlo in $c=E_{e}(m)$ con chiave di crittazione nota $e$, poi provare a decifrarlo tentando chiavi di decrittazione $m'=D_{d_{i}}(c)$, finchè no si sia trovata quella chiave $d*$ tale che $D_{d*}(c)=m$.
+
+\section{Brute-Force e Dizionario}
+Un attacco \textit{brute-force} consiste nel determinare una chiave esplorando tutto lo spazio di ricerca sul quale la chiave è definita.
+
+Un attacco \textit{dictionary} consiste nel determinare una chiave esplorando un sottospazio di ricerca sul quale si suppone che la chiave sia definita.
+
+\section{Meet-In-The-Middle}
+Un attacco \textit{Meet-In-The-Middle (MITM)} consiste nel determinare una chiave in un cifrario composto $c=G_{k}(F_{k}(m))$ ricercando le coincidenze nel mezzo del \textit{forward mapping} e del \textit{backward mapping}, ovvero tra $F_{k}(m)$ e $G_{k}^{-1}(c)$.
+
+\section{Parallel session}
+Un attacco \textit{parallel session} consiste nel sovrapporre opportunamente i messaggi scambiati durante esecuzioni concorrenti di un protocollo.
+
+\bigskip
+\begin{algorithm}[H]
+  \caption{Parallel Session}
+  \label{alg:attack-parallel-session}
+  \SetAlgoNoLine
+  --- Esecuzione regolare --- \\
+  A -> B: $E(k_{A,B}:N_{A})$;\\
+  B -> A: $E(k_{A,B}:N_{A}+1)$;\\
+  --- Esecuzione attaccata --- \\
+  A -> B: $E(k_{A,B}:N_{A})$;\\
+  Z(B) -> A: $E(k_{A,B}:N_{A})$;\\
+  A -> Z(B): $E(k_{A,B}:N_{A}+1)$;\\
+  Z(B) -> A: $E(k_{A,B}:N_{A}+1)$;
+\end{algorithm}
+
+\section{Binding}
+Un attacco \textit{binding} consiste nel convincere A che la chiave pubblica di B è in realtà la chiave pubblica di Z(B). Questo attacco può essere implementato come attacco parallel session.
+
+\bigskip
+\begin{algorithm}[H]
+  \caption{Binding}
+  \label{alg:attack-binding}
+  \SetAlgoNoLine
+  --- Esecuzione regolare --- \\
+  C -> S: $C,S,N_{C}$;\\
+  S -> C: $E(k_{S}^{-1}:S,C,N_{C},N_{S})$;\\
+  --- Esecuzione attaccata --- \\
+  C -> S: $C,S,N_{C}$;\\
+  Z(C) -> S: $C,Z,N_{C}$;\\
+  S -> Z(C): $E(k_{S}^{-1}:S,C,N_{C},N_{Z})$;\\
+  Z(S) -> C: $E(k_{S}^{-1}:S,C,N_{C},N_{Z})$;\\
+\end{algorithm}
+
+\section{Freshness}
+Un attacco \textit{freshness} consiste nell'inoltrare nell'esecuzione corrente del protocollo opportuni messaggi registrati da esecuzioni precedenti.
+
+\section{Type Flaws}
+Un attacco \textit{type flaws} consiste nell'alterare opportunamente  il valore semantico di una o più componenti di un messaggio, mantenendone la validità.
+
+\section{Hardware timing}
+Un attacco \textit{hardware timing} consiste nel determinare gli input a blocchi crittografici mediante lo studio delle performance del hardware che li implementa.
+
+\section{Fluher-Martin-Shamir}
+L'attacco \textit{Fluher-Martin-Shamir (FMS)} è un attacco passivo known-plaintext ad RC4 che consente di determinare la chiave segreta.
+Questo attacco sfrutta il fatto che \textit{i primi bytes del keystream sono fortemente correlati con la chiave segreta}. Si esegue un attacco statistico sui pacchetti che reinizializzano il keystream. Esaminando un gran numero di questi pacchetti, si osserva un bias verso i byte della chiave.
+Le debolezze evideniate da questo attacco sono alla base di software di attacco al WEP come AirSnort ed AirCrack.
+
+\section{Attacco a WEP}
+\textit{Wired Equivalent Privacy (WEP)}\footnote{il nome deriva dal fatto che il WEP è stato definito con l'obiettivo  di realizzare una protezione equivalente o migliore di quella fornita dalle reti cablate.} è un protocollo di sicurezza per reti wireless (IEEE 802.11). Il protocollo si propone di garantire confidenzialità, controllo degli accessi e integrità dei dati.
+
+Ogni stazione (anche gli Access Point) fornisce una chiave per accedere alla rete. Il protocollo di distribuzione della chiave è lasciato ai vendors.
+Utilizza RC4 come keystream generator con chiave condivisa da ogni stazione.
+Utilizza CRC-32 come algoritmo di checksum dei pacchetti.
+
+Idealmente non dovrebbe usare la stessa chiave per messaggi diversi, pertanto ogni pacchetto è codificato utilizzando un keystream parametrizzato da un Initialization Vector (IV) distinto. Quindi IV non dovrebbe essere riutilizzato nel ciclo di vita di una chiave. Tuttavia IV viene resettato ad ogni attivazione delle card wireless, e nient'altro che incrementato ad ogni messaggio.
+
+Debolezze: stessa chiave condivisa da tutte le stazioni; la chiave è ASCII quindi lo spazio delle chiavi è limitato; il keystream è reciclato; essendo un protocollo di collegamento cripta i dati dello strato di rete, ed è dunque nota la struttura dei primi byte dei pacchetti cifrati; il protocollo di autentication WEP fornisce all'attacker una coppia $(m,c)$; linearità di CRC-32.
+
+È possibile eseguire un \textit{attacco dizionario}, sfruttando le collisioni di IV.
+L'attaccante ottiene una coppia plaintext/ciphertext $(p_{1},c_{1})$ potendo dunque ottenere il proprio IV, e, sfruttando la linearità dello XOR, ottiene il keystream $KS_{IV}=RC4(IV,k)=p_{1} \oplus c_{1}$.
+L'attaccante popola un dizionario contenente i keystream $KS$ indicizzati per IV.
+Per decifrare un messaggio $<\overline{c},\overline{IV}>$, calcola $\overline{m}=\overline{c} \oplus KS_{\overline{IV}}$.
+
+È possibile eseguire un \textit{attacco alla integrità dei dati}, sfruttando la linearità dello XOR e la linearità di CRC-32\footnote{$CRC(m \oplus d)=CRC(m) \oplus CRC(d)$.}.
+Un attaccante può modificare bit arbitrari di un messaggio cifrato sapendo deterministicamente come modificare i bit del checksum.
+L'attacante desidera inviare il messaggio manipolato $\tilde{m}=m \oplus \delta$, dove $\delta$ è il cambiamento da indurre su $m$ per ottenere $\tilde{m}$.
+Genera dunque il messaggio cifrato manipolato $\tilde{c}=c \oplus <\delta,CRC(\delta)>$, e trasmette $<\tilde{c},IV>$.
+Il ricevente legge il pacchetto $<m',CRC(m')>$, che soddisfa la seguente:
+
+\begin{equation}
+\begin{split}
+<m',CRC(m')> & = RC4(IV,k) \oplus \tilde{c}\\
+& = RC4(IV,k) \oplus c \oplus <\delta,CRC(\delta)>\\
+& = <m,CRC(m)> \oplus <\delta,CRC(\delta)>\\
+& = <m \oplus \delta,CRC(m) \oplus CRC(\delta)>\\
+& = <\tilde{m},CRC(\tilde{m})>
+\end{split}
+\end{equation}
+
+È possibile eseguire un \textit{attacco di message injection}, sfruttando la linearità dello XOR ed il fatto che CRC-32 non dipende dalla chiave.
+Un attaccante ottiene una coppia plaintext/ciphertext $<m,CRC(m)>,<c,IV>$.
+Ricava il keystream $RC4(IV,k)=c \oplus <m,CRC(m)>$.
+Avendo il keystream, può immetere un messaggio arbitrario $\tilde{m}$, cifrandolo come $\tilde{c}=<\tilde{m},CRC(\tilde{m})> \oplus RC4(IV,k)$, e rasmettendo infine il pacchetto $<\tilde{c},IV>$.
+
+\section{Classi di attacco}
+
+\begin{description}
+  \item[sniffing]
+  \item[spoofing] ARP spoofing, DNS spoofing
+  \item[smurfing]
+  \item[phishing]
+  \item[poisoning] DNS poisoning
+  \item[flooding] SYN flooding, SYN/ACK flooding, HTTP flooding, UDP flooding
+  \item[stripping] SSL stripping
+  \item[injection] message injection, SQL injection
+  \item[redirection] DNS redirection
+  \item[man-in-the-middle]
+\end{description}
+
+\section{Malwares}
+
+\begin{description}
+  \item[worm]
+  \item[virus] 
+  \item[trojan]
+  \item[adware]
+  \item[spyware]
+  \item[keylogger]
+  \item[cryptolocker]
+  \item[stripping]
+  \item[injection]
+  \item[redirection]
+  \item[man-in-the-middle]
+  \item[back-door]
+  \item[logic bomb]
+\end{description}
+
+\section{Botnets}
+
+\section{Attacchi DoS}
+Un attacco \textit{Denial-of-Service (DoS)} ha lo scopo di mettere fuori uso o impedire l'erogazione di un servizio ai suoi utenti legittimi.
+
+Questi attacchi possonmo essere implementati attraverso: \textit{consumo di risorse}, \textit{manipolazione (alterazione/distruzione) delle informazioni} o \textit{manipolazione hardware}

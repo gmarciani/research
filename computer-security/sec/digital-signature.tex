@@ -1,0 +1,144 @@
+\chapter{Firma digitale}
+\label{chp:digital-signature}
+
+Una firma digitale è una stringa che permette di associare un messaggio con l'entità che lo ha creato.
+Uno schema di firma digitale è un meccanismo costituito da un algoritmo di generazione della firma digitale ed un algoritmo di verifica della firma digitale.
+Uno schema di firma digitale può essere
+\textit{con appendice} se è necessario il messaggio originale per verificare la firma;
+\textit{con recovery del messaggio}, se il messaggio originale viene ricavato dalla firma, e non è pertanto necessario per verificare la firma.
+Uno schema di firma digitale può inoltre essere
+\textit{randomizzato} se la firma viene scelta casualmente da un set di firme;
+\textit{deterministico} se vi è un'unica firma.
+
+Uno schema di firma digitale prevede un algoritmo di \textit{generazione delle chiavi}, un algoritmo di \textit{generazione della firma} ed uno di \textit{verifica della firma}.
+
+In uno schema di firma digitale con appendice, non è il messaggio originale ad essere firmato, bensì il suo hashing.
+
+La firma digitale permette di realizzare autenticazione, integrità dei dati e non-repudiation. La sua applicazione più significativa è la certificazione delle chiavi pubbliche in un crittosistema a chiave asimmetrica.
+
+I requisiti fondamentali di uno schema di firma digitale sono:
+(i) $S_{A,k}$ deve essere efficiente da calcolare per ogni $k$;
+(ii) $V_{A}$ deve essere efficiente da calcolare;
+(iii) computazionalmente impossibile per un'entità $A'\neq A$ determinare un messaggio $m \in M$ e una firma $s \in S$ tali che $V_{A}(h(m),s)=True$.
+
+L'Algoritmo~\ref{alg:digital-signature-appendix} mostra il protocollo generale di uno schema di firma digitale con appendice.
+
+\bigskip
+\begin{algorithm}[H]
+  \caption{Firma digitale con appendice}
+  \label{alg:digital-signature-appendix}
+  \SetAlgoNoLine
+  A seleziona una chiave $k \in \mathcal{R}$;\\
+  A calcola $\tilde{m}=h(m)$ e $s*=S_{A,k}(\tilde{m})$;\\
+  A invia $(m,s*)$ a B.\\
+
+  B riceve $(m,s*)$ da A;\\
+  B ottiene la chiave pubblica $V_{A}$;\\
+  B calcola $\tilde{m}=h(m)$ e $u=V_{A}(\tilde{m},s*)$;\\
+  B accetta la firma se $u=True$.
+\end{algorithm}
+
+L'Algoritmo~\ref{alg:digital-signature-message-recovery} mostra il protocollo generale di uno schema di firma digitale con message recovery.
+
+\bigskip
+\begin{algorithm}[H]
+  \caption{Firma digitale con message recovery}
+  \label{alg:digital-signature-message-recovery}
+  \SetAlgoNoLine
+  A seleziona una chiave $k \in \mathcal{R}$;\\
+  A calcola $\tilde{m}=h(m)$ e $s*=S_{A,k}(\tilde{m})$;\\
+  A invia $(m,s*)$ a B.\\
+
+  B riceve $(m,s*)$ da A;\\
+  B ottiene la chiave pubblica $V_{A}$;\\
+  B calcola $\tilde{m}=h(m)$ e $u=V_{A}(\tilde{m},s*)$;\\
+  B accetta la firma se $u=True$.
+\end{algorithm}
+
+Gli attacchi a schemi di firma digitale sono volti a forgiare firme digitali, ovvero generare firme digitali autenticabili.
+Uno schema di firma digitale può essere soggetto a:
+(i) \textit{rottura totale}, se l'attaccante può generare la firma digitale della vittima;
+(ii) \textit{forgiatura selettiva}, se l'attaccante può generare la firma digitale per una specifica classe di messaggi;
+(iii) \textit{forgiatura esistenziale}, se l'attaccante può generare la firma digitale per almeno un messaggio, ma non di sua scelta.
+
+Gli attacchi sono classificati in:
+(i) \textit{key-only}: l'attaccante conosce solo la chiave pubblica della vittima;
+(ii) \textit{known-message}: l'attaccante conosce la firma di un insieme di messaggi non di sua scelta;
+(iii) \textit{chosen-message}: l'attaccante conosce la firma di un insieme di messaggi di sua scelta;
+\textit{adapative chosen-message}: l'attaccante può far firmare messaggi di sua scelta, e richiedere firme che dipendano dalle firme precedentemente ottenute.
+
+\section{DSA}
+Il Digital Signature Algorithm (DSA) è uno schema di firma digitale randomico con appendice, basato sull'intrattabilità computazionale del logaritmo discreto.
+Può essere visto come una variante dello schema ElGamal.
+
+\bigskip
+\begin{algorithm}[H]
+  \caption{DSA: generazione delle chiavi}
+  \label{alg:dsa-key-generation}
+  \SetAlgoNoLine
+  Seleziona un numero primo $p$ a 1024 bit;\\
+  Seleziona un numero primo $q$ a 160 bit che divida $(p-1)$;\\
+  Calcola $\alpha=g^{\frac{p-1}{q}} \mod p$ dove $g \in \mathcal{Z}_{p}*$;\\
+  Seleziona un intero $a \in [1,q-1]$;\\
+  Calcola $y=\alpha^{a} \mod p$;\\
+  La chiave pubblica è $(p,q,\alpha,y)$, la chiave privata è $a$.
+\end{algorithm}
+
+\bigskip
+\begin{algorithm}[H]
+  \caption{DSA: firma}
+  \label{alg:dsa-signature}
+  \SetAlgoNoLine
+  Seleziona un intero $k \in (0,q)$;\\
+  Calcola $r=(\alpha ^{k} \mod p) \mod q$;\\
+  Calcola $s=k^{-1}[H(m)+ar] \mod q$;\\
+  La firma è $(r,s)$.
+\end{algorithm}
+
+\bigskip
+\begin{algorithm}[H]
+  \caption{DSA: firma}
+  \label{alg:dsa-verification}
+  \SetAlgoNoLine
+  Ottieni la chiave pubblica $(p,q,\alpha,y)$;\\
+  Verifica $r\in (0,q)$;\\
+  Verifica $s\in (0,q)$;\\
+  Calcola $w=s^{-1} \mod q$;\\
+  Calcola $u_{1}=wH(m)\mod q$;\\
+  Calcola $u_{2}=rw\mod q$;\\
+  Calcola $v=(\alpha^{u_{1}}y^{u_{2}} \mod p) \mod q$;\\
+  La firma è verificata se $v=s$.
+\end{algorithm}
+
+
+\section{RSA-DS}
+RSA-DS è uno schema di firma digitale deterministico con message recovery basato su RSA.
+La chiave privata viene utilizzata per firmare il messaggio, e la chiave pubblica per verificarne la firma.
+
+
+\section{Blind signature}
+Uno \textit{schema di blind signature} è uno schema di firma digitale in cui il firmatario firma il messaggio senza poterne conoscere il contenuto.
+Questi schemi sono utilizzati in \textit{protocolli per la privacy} (e.g. e-voting, e-cash).
+
+Questi schemi richiedono:
+(i) un meccanismo $S_{B}(x)$ di firma digitale dell'entità $B$ sul messaggio $m$;
+(ii) una funzione $f$, detta \textit{blinding function}, ed una funzione $g$, detta \textit{unblinding function}, tali che $g(S_{B}(f(m)))=S_{B}(m)$.
+
+Uno schema di blinding signature prevede le seguenti fasi:
+(i) \textit{blinding} in cui A invia a B il messaggio $f(m)$;
+(ii) \textit{signing} in cui B firma $f(m)$ ottenendo $S_{B}(f(m))$;
+(iii) \textit{unblinding} in cui A ricava la firma di B $S_{B}(m)=g(S_{B}(f(m)))$;
+
+L'esempio più semplice di schema di blind signature è lo \textit{schema di Chaum}, la cui blinding function è basata su RSA.
+
+\bigskip
+\begin{algorithm}[H]
+  \caption{Chaum Blind Signature}
+  \label{alg:authentication-blind-signature-chaum}
+  \SetAlgoNoLine
+  A ottine la chiave pubblica di B $(n,e_{B})$;\\
+  A sceglie un plaintext $m$ ed un numero intero $r \in (0,n)$;\\
+  A $\rightarrow$ B: $b=mr^{e_{B}} \mod n$;\\
+  B $\rightarrow$ A: $s=b^{d_{e}} \mod n$;\\
+  A calcola $u=sr^{-1} \mod n=m^{d_{B}}$;
+\end{algorithm}
