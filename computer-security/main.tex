@@ -1,7 +1,7 @@
 %*******************************************************************************
 % Title: Computer Security
 %
-% Conference: Computer Science Lectures 2017
+% Conference: Computer Science Lectures
 %
 % Authors: Giacomo Marciani <gmarciani@acm.org>
 %
@@ -10,29 +10,24 @@
 %
 %*******************************************************************************
 
-\documentclass[10pt,a4paper,oneside,final]{amsbook}
+\documentclass[11pt,a4paper,oneside]{report}
 
 %*******************************************************************************
 % Packages
 %*******************************************************************************
 \usepackage[utf8]{inputenc}
 \usepackage{amsmath}
+\usepackage[ruled]{algorithm2e}
 \usepackage{lipsum}
 \usepackage{xr}
 \usepackage[hidelinks=true]{hyperref}
-\usepackage{cleveref}
+\usepackage[italian]{babel}
 
 %*******************************************************************************
-% Algorithm
+% Options
 %*******************************************************************************
-\usepackage[ruled]{algorithm2e}
-\renewcommand{\algorithmcfname}{ALGORITHM}
+\numberwithin{equation}{section}
 \SetAlFnt{\small}
-\SetAlCapFnt{\small}
-\SetAlCapNameFnt{\small}
-\SetAlCapHSkip{0pt}
-\IncMargin{-\parindent}
-
 
 %*******************************************************************************
 % Details
@@ -43,46 +38,28 @@
 %*******************************************************************************
 
 %*******************************************************************************
-% Notations
+% Commands
 %*******************************************************************************
-\newcommand{\probability}[1]{
+\newcommand{\prob}[1]{
 	\mathbf{P}[#1]
+}
+\newcommand{\enc}[2]{
+	\mathbf{E}_{#1}(#2)
+}
+\newcommand{\dec}[2]{
+	\mathbf{D}_{#1}(#2)
 }
 
 %*******************************************************************************
-% Numbering
+% Document
 %*******************************************************************************
-\numberwithin{equation}{section}
-
-%*******************************************************************************
-% References
-%*******************************************************************************
-\crefname{lem}{lemma}{lemmata}
-\Crefname{lem}{Lemma}{Lemmata}
-\crefname{cor}{corollary}{corollaries}
-\Crefname{cor}{Corollary}{Corollaries}
-\crefname{alg}{algorithm}{algorithms}
-\Crefname{alg}{Algorithm}{Algorithms}
-\externaldocument{sec/introduction}
-\externaldocument{sec/block-ciphers}
-\externaldocument{sec/stream-ciphers}
-\externaldocument{sec/symmetric-key-cryptography}
-\externaldocument{sec/asymmetric-key-cryptography}
-\externaldocument{sec/digital-signature}
-\externaldocument{sec/authentication}
-\externaldocument{sec/bitcoin}
-\externaldocument{sec/attacks}
-
 \begin{document}
-	.
-\newtheorem{definition}{Definition}
-\newtheorem{theorem}{Theorem}
-
-\title{Sicurezza Informatica}
-
+\title{
+	{Sicurezza Informatica}\\
+	{\large Università di Roma Tor Vergata}\\
+}
 \author{Giacomo Marciani}
-
-\address{University of Rome Tor Vergata}
+\maketitle
 
 \tableofcontents
 
