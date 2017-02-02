@@ -1,23 +1,23 @@
-\chapter{Crittografia a chiave privata}
-\label{chp:private-key-cryptography}
+\chapter{Crittografia a chiave simmetrica}
+\label{chp:symmetric-key-cryptography}
 
-Una \textit{rete S-P di Shannon} è una rete i cui nodi implementano una sostituzione (\textit{S-box}) o una permutazione (\textit{P-box}). Una rete S-P garantisce \textit{diffusione} e \textit{confusione} del plaintext.
-
-La \textit{diffusione} è la dissipazione statistica del plaintext nel ciphertext.
-La \textit{confusione} è la complessità della relazione tra il ciphertext e la chiave.
+\section{Rete S-P}
+Una \textit{rete S-P} è una rete i cui nodi implementano una sostituzione (\textit{S-box}) o una permutazione (\textit{P-box}). Una rete S-P garantisce un alto grado di \textit{diffusione} e \textit{confusione}.
 
 \section{Feistel}
-Il \textit{Feistel} è un cifrario a prodotto che implementa una \textit{rete S-P di Shannon}.
-Il cifrario prevede $n$ round, il plaintext diviso in due sottosequenze $p=L_{0}R_{0}$ (sinistra/destra), una funzione $F(x,y)$ che duplica alcuni bit di $x$, li permuta e li combina $y$, ed una funzione $KG(k,i)$ di generazione della sottochiave $k_{i}$ per il round $i$-esimo.
+Il \textit{cifrario di Feistel} è un cifrario di blocco a prodotto che implementa una \textit{rete S-P}.
+Il cifrario prevede tre fasi: \textit{initial permutation}, \textit{criss-crossing} e \textit{final permutation}.
+
+La fase di criss-crossing prevede $n$ round. Il plaintext è diviso in due sottosequenze $p=L_{0}R_{0}$ (sinistra/destra), una funzione\footnote{detta \textit{funzione di Feistel}.} $F(x,y)$ che duplica alcuni bit di $x$, li permuta e li combina con $y$, ed una funzione $KG(k,i)$ di generazione della sottochiave $k_{i}$ per il round $i$-esimo.
 
 Ogni round realizza la seguente trasformazione:
 
-$$
+\begin{equation}
 \begin{cases}
   L_{i+1}=R_{i}\\
   R_{i+1}=L_{i} \oplus F(R_{i},k_{i})
 \end{cases}
-$$
+\end{equation}
 
 Il processo di cifratura è facilmente reversibile: per la decifratura si applica lo stesso crittoalgoritmo con $L$ ed $R$ invertiti e con $k$ esaminata in ordine inverso.
 
@@ -27,6 +27,10 @@ Con \textit{schema di Feistel} si indica una struttura crittalgoritmica composta
 
 \section{DES}
 Il \textit{Data Encryption Standard (DES)}\footnote{talvolta si distingue lo standard DES dal suo algoritmo, identificando quest'utlimo con il nome di \textit{Data Encryption Algorithm (DEA)}.} è un cifrario a blocchi derivante dal \textit{cifrario di Feistel}, sviluppato dalla IBM e standardizzato dal NIST nel 1977, poi ritirato nel 1999 per eccessiva vulnerabilità ad attacchi brute-force e sostituito nel 2002 dal \textit{Advanced Encryption Standard (AES)}.
+
+Il DES è caratterizzato da un forte \textit{effetto valanga} ed un alto grado di \textit{confusione} e \textit{diffusione}.
+
+Il DES è vulnerabile ai seguenti attacchi: \textit{brute-force}, \textit{hardware timing}, \textit{crittanalisi lineare} e \textit{crittanalisi differenziale}.
 
 Il cifrario è implementa una \textit{rete S-P} mediante uno \textit{schema di Feistel} con blocchi a 64 bit, chiave da 56 bit shiftata di 48 bit a round e 16 round.
 La \textit{funzione di Feistel} è composta dalle seguenti fasi:
@@ -41,53 +45,49 @@ La cifratura del DES è facilmente reversibile: trattandosi di uno schema di Fei
 
 Il key-scheduling produce la chiave di round $k_{i}$ a 48 bit a partire dalla chiave segreta $k$ a 56 bit. La chiave è divisa in due sottochiavi $k=k_{L}k_{R}$ a 28 bit. Le sottochiavi vengono fatte shiftare a sinistra di 1 o 2 bit a seconda del numero di round. La sequenza risultante viene permutata. La chiave di round è costituita da 24 bit della sottochiave sinistra e da 24 bit della sottochiave destra.
 
-Il DES è caratterizzato da un forte \textit{effetto valanga} ed un alto grado di \textit{confusione} e \textit{diffusione}.
-
-Il DES è vulnerabile ai seguenti attacchi: \textit{brute-force}, \textit{hardware timing}, \textit{crittanalisi lineare} e \textit{crittanalisi differenziale}.
-
+\subsection{2-DES}
 Il \textit{2-DES} è realizzato mediante due DES in cascata, ovvero
 
-$$
+\begin{equation}
 \begin{cases}
   c=E_{k_{2}}(E_{k_{1}}(p))\\
   p=D_{k_{1}}(D_{k_{2}}(c))
 \end{cases}
-$$
+\end{equation}
 
 Il 2-DES non è sicuro in quanto altamente vulnerabile ad attacchi \textit{meet-in-the-middle} di complessità euivalente ad un attacco brute-force su DES.
 
+\subsection{3-DES}
 Il \textit{3-DES} è realizzato mediante tre DES alternati in cascata, ovvero
 
-$$
+\begin{equation}
 \begin{cases}
   c=E_{k_{3}}(D_{k_{2}}(E_{k_{1}(p)}))\\
   p=D_{k_{1}}(E_{k_{2}}(D_{k_{3}(p)}))
 \end{cases}
-$$
+\end{equation}
 
 Notiamo che un 3-DES con $k_{1}=k_{2}$ è equivalente ad un DES con chiave $k_{3}$.
 
 \section{AES}
-L'\textit{Advanced Encryption Standard (AES)}\footnote{talvolta si distingue lo standard AES dal suo algoritmo, identificando quest'utlimo con il nome di \textit{cifrario di Rijndael}.} è un cifrario a blocchi, sviluppato da Demen e Rijmen, e standardizzato dal NIST nel 2002 come successore del \textit{Data Encryption Standard (DES)}.
+L'\textit{Advanced Encryption Standard (AES)}\footnote{talvolta si distingue lo standard AES dal suo algoritmo, identificando quest'utlimo con il nome di \textit{cifrario di Rijndael}.} è un cifrario di blocco, sviluppato da Demen e Rijmen, e standardizzato dal NIST nel 2002 come successore del \textit{Data Encryption Standard (DES)}. AES è molto efficiente, semplice da realizzare e molto robusto ad attacchi crittanalitici.
 
-Il cifrario implementa una \textit{rete S-P} mediante uno \textit{schema iterativo} (invece di uno schema di Feistel) con blocchi a 128 bit, chiave a 128 (192 o 258) bit, 10 (12 o 14) round.
+Il cifrario implementa una \textit{rete S-P} mediante uno \textit{schema iterativo}\footnote{il DES implementa invece uno schema di Feistel.} con blocchi a 128 bit, chiave a 128 (192 o 258) bit, 10 (12 o 14) round.
 
 Un blocco definisce una matrice $S:4 \times 4$ bytes popolata per colonne dai byte del blocco. Tale matrice è detta \textit{state}.
-
-Ogni round è costituito dalle seguenti fasi:
-
-\begin{description}
-  \item[substitution] lo state viene processato da una S-box che implementa una funzione non lineare, ovvero ogni byte $S_{i,j}$ dello state è sosituito dal byte della matrice di S-box indicizzato dal suo valore (e.g. $S_{i,j}=95$ è sostituito dal byte $M[9,5]$).
-  \item[shift-row] le righe dello state vengono shiftate a sinistra di un valore pari al numero di riga (e.g. la riga $i$ è shiftata di $i$ posizioni a sinistra)
-  \item[column-mix] le colonne dello state vengono permutate secondo una trasformazione lineare.
-  \item[key-mix] lo state viene posto in XOR con il keystate prodotto dall'algoritmo di key-scheduling, producendo così lo state per il round successivo.
-\end{description}
 
 L'algoritmo di key-scheduling produce la chiave $k_{i}$ per il round $i$-esimo a partire dalla chiave segreta $k$.
 La chiave a 128 bit definisce una matrice $KS:4 \times 4$ bytes popolata per colonne dai byte della chiave. Tale matrice è detta \textit{key-state}. Ad ogni round, la chiave risulta dalla sostituzione, rotazione e XOR dipendenti dal key-state del round precedente.
 
+Ogni round è costituito dalle seguenti fasi:
+
+\begin{description}
+  \item[substitution] lo state viene processato da una S-box che implementa una funzione non lineare, ovvero ogni byte $S_{i,j}$ dello state è sosituito dal byte della matrice $M$ di S-box indicizzato dal suo valore (e.g. $S_{i,j}=95$ è sostituito dal byte $M[9,5]$).
+  \item[shift-row] le righe dello state vengono shiftate a sinistra di un valore pari al numero di riga (e.g. la riga $i$ è shiftata di $i$ posizioni a sinistra)
+  \item[column-mix] le colonne dello state vengono permutate secondo una trasformazione lineare.
+  \item[key-mix] lo state viene posto in XOR con il keystate, producendo così lo state per il round successivo.
+\end{description}
+
 Il primo round ha solo l'ultima fase, mentre l'ultimo round le ha tutte tranne la mix-columns.
 
-Il processo di cifratura non è immediatamente invertibile come il DES. In particolare la decifratura prevede un algoritmo di key-scheduling differente.
-
-AES è molto efficiente, semplice da realizzare e molto robusto ad attacchi crittanalitici.
+Il processo di cifratura non è immediatamente invertibile. In particolare la decifratura prevede un algoritmo di key-scheduling differente.

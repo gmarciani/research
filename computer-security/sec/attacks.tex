@@ -4,12 +4,12 @@
 Un \textit{attaccante passivo} è un agente che ha un accesso illegittimo in lettura a informazioni protette.
 Un \textit{attaccante attivo} è un agente che manipola in modo illegittimo informazioni protette.
 
-
+\section{Crittanalisi}
 Gli attacchi crittanalitici variano in funzione della conoscenza assunta sul crittosistema da attaccare:
 
 \begin{description}
   \item[known ciphertext] conoscenza del solo ciphertext, sul quale è possibile condurre analisi statistiche.
-  \item[known plaintext] conoscenza di porzioni corrispondenti plaintext/ciphertext.
+  \item[known plaintext] conoscenza di porzioni corrispondenti  plaintext ciphertext.
   \item[chosen plaintext] conoscenza ciphertext corrispondenti a plaintext opportunamente scelti.
   \item[chosen ciphertext] conoscenza plaintext corrispondenti a ciphertext opportunamente scelti.
   \item[adapted text] conoscenza dell'operato di un cifrario in corrispondenza di chiavi diverse scelte in funzione dell'output osservato. È la tipologia di attacco più potente.
@@ -28,7 +28,7 @@ Un attacco \textit{brute-force} consiste nel determinare una chiave esplorando t
 Un attacco \textit{dictionary} consiste nel determinare una chiave esplorando un sottospazio di ricerca sul quale si suppone che la chiave sia definita.
 
 \section{Meet-In-The-Middle}
-Un attacco \textit{Meet-In-The-Middle (MITM)} consiste nel determinare una chiave in un cifrario composto $c=G_{k}(F_{k}(m))$ ricercando le coincidenze nel mezzo del \textit{forward mapping} e del \textit{backward mapping}, ovvero tra $F_{k}(m)$ e $G_{k}^{-1}(c)$.
+Un attacco \textit{Meet-In-The-Middle (MITM)} consiste nel determinare una chiave in un cifrario composto $c=G_{k}(F_{k}(m))$ ricercando le coincidenze tra il \textit{forward mapping} $F_{k}(m)$ ed il \textit{backward mapping}, $G_{k}^{-1}(c)$. Si determina dunque una chiave $k.F_{k}(m)=G_{k}^{-1}(c)$.
 
 \section{Parallel session}
 Un attacco \textit{parallel session} consiste nel sovrapporre opportunamente i messaggi scambiati durante esecuzioni concorrenti di un protocollo.
@@ -39,13 +39,13 @@ Un attacco \textit{parallel session} consiste nel sovrapporre opportunamente i m
   \label{alg:attack-parallel-session}
   \SetAlgoNoLine
   --- Esecuzione regolare --- \\
-  A -> B: $E(k_{A,B}:N_{A})$;\\
-  B -> A: $E(k_{A,B}:N_{A}+1)$;\\
+  A $\rightarrow$ B: $E(k_{A,B}:N_{A})$;\\
+  B $\rightarrow$ A: $E(k_{A,B}:N_{A}+1)$;\\
   --- Esecuzione attaccata --- \\
-  A -> B: $E(k_{A,B}:N_{A})$;\\
-  Z(B) -> A: $E(k_{A,B}:N_{A})$;\\
-  A -> Z(B): $E(k_{A,B}:N_{A}+1)$;\\
-  Z(B) -> A: $E(k_{A,B}:N_{A}+1)$;
+  A $\rightarrow$ B: $E(k_{A,B}:N_{A})$;\\
+  Z(B) $\rightarrow$ A: $E(k_{A,B}:N_{A})$;\\
+  A $\rightarrow$ Z(B): $E(k_{A,B}:N_{A}+1)$;\\
+  Z(B) $\rightarrow$ A: $E(k_{A,B}:N_{A}+1)$;
 \end{algorithm}
 
 \section{Binding}
@@ -57,13 +57,13 @@ Un attacco \textit{binding} consiste nel convincere A che la chiave pubblica di 
   \label{alg:attack-binding}
   \SetAlgoNoLine
   --- Esecuzione regolare --- \\
-  C -> S: $C,S,N_{C}$;\\
-  S -> C: $E(k_{S}^{-1}:S,C,N_{C},N_{S})$;\\
+  C $\rightarrow$ S: $C,S,N_{C}$;\\
+  S $\rightarrow$ C: $E(k_{S}^{-1}:S,C,N_{C},N_{S})$;\\
   --- Esecuzione attaccata --- \\
-  C -> S: $C,S,N_{C}$;\\
-  Z(C) -> S: $C,Z,N_{C}$;\\
-  S -> Z(C): $E(k_{S}^{-1}:S,C,N_{C},N_{Z})$;\\
-  Z(S) -> C: $E(k_{S}^{-1}:S,C,N_{C},N_{Z})$;\\
+  C $\rightarrow$ S: $C,S,N_{C}$;\\
+  Z(C) $\rightarrow$ S: $C,Z,N_{C}$;\\
+  S $\rightarrow$ Z(C): $E(k_{S}^{-1}:S,C,N_{C},N_{Z})$;\\
+  Z(S) $\rightarrow$ C: $E(k_{S}^{-1}:S,C,N_{C},N_{Z})$;\\
 \end{algorithm}
 
 \section{Freshness}
@@ -76,26 +76,32 @@ Un attacco \textit{type flaws} consiste nell'alterare opportunamente  il valore 
 Un attacco \textit{hardware timing} consiste nel determinare gli input a blocchi crittografici mediante lo studio delle performance del hardware che li implementa.
 
 \section{Fluher-Martin-Shamir}
-L'attacco \textit{Fluher-Martin-Shamir (FMS)} è un attacco passivo known-plaintext ad RC4 che consente di determinare la chiave segreta.
-Questo attacco sfrutta il fatto che \textit{i primi bytes del keystream sono fortemente correlati con la chiave segreta}. Si esegue un attacco statistico sui pacchetti che reinizializzano il keystream. Esaminando un gran numero di questi pacchetti, si osserva un bias verso i byte della chiave.
-Le debolezze evideniate da questo attacco sono alla base di software di attacco al WEP come AirSnort ed AirCrack.
+L'attacco \textit{Fluher-Martin-Shamir (FMS)} è un attacco passivo known-plaintext al cifrario RC4 che consente di determinare la chiave segreta.
+Questo attacco sfrutta la \textit{correlazione tra i primi bytes del keystream e la chiave segreta} \footnote{Le debolezze evidenziate da questo attacco sono alla base di software di attacco al WEP, come \textit{AirSnort} ed \textit{AirCrack}.}.
+Si esegue un attacco statistico sui pacchetti che reinizializzano il keystream. Esaminando un gran numero di questi pacchetti, si osserva un bias verso i byte della chiave.
+
 
 \section{Attacco a WEP}
-\textit{Wired Equivalent Privacy (WEP)}\footnote{il nome deriva dal fatto che il WEP è stato definito con l'obiettivo  di realizzare una protezione equivalente o migliore di quella fornita dalle reti cablate.} è un protocollo di sicurezza per reti wireless (IEEE 802.11). Il protocollo si propone di garantire confidenzialità, controllo degli accessi e integrità dei dati.
+\textit{Wired Equivalent Privacy (WEP)}\footnote{il nome deriva dal fatto che il WEP è stato definito con l'obiettivo  di realizzare una protezione equivalente o migliore di quella fornita dalle reti cablate.} è un protocollo di sicurezza per reti wireless\footnote{IEEE 802.11}.
+Il protocollo si propone di garantire confidenzialità, controllo degli accessi e integrità dei dati.
 
-Ogni stazione (anche gli Access Point) fornisce una chiave per accedere alla rete. Il protocollo di distribuzione della chiave è lasciato ai vendors.
+Ogni stazione\footnote{anche gli Access Point.} fornisce una chiave per accedere alla rete. Il protocollo di distribuzione della chiave è lasciato ai vendors.
 Utilizza RC4 come keystream generator con chiave condivisa da ogni stazione.
 Utilizza CRC-32 come algoritmo di checksum dei pacchetti.
 
-Idealmente non dovrebbe usare la stessa chiave per messaggi diversi, pertanto ogni pacchetto è codificato utilizzando un keystream parametrizzato da un Initialization Vector (IV) distinto. Quindi IV non dovrebbe essere riutilizzato nel ciclo di vita di una chiave. Tuttavia IV viene resettato ad ogni attivazione delle card wireless, e nient'altro che incrementato ad ogni messaggio.
+Idealmente non dovrebbe usare la stessa chiave per messaggi diversi, pertanto ogni pacchetto è codificato utilizzando un keystream parametrizzato da un Initialization Vector (IV) distinto. Quindi IV non dovrebbe essere riutilizzato nel ciclo di vita di una chiave. Tuttavia IV viene resettato relativamente spesso\footnote{le modalità di gestione del IV sono lasciate ai vendors. Alcuni resettano l'IV ad ogni accensione della card, incrementando l'IV ad ogni pacchetto.}.
 
-Debolezze: stessa chiave condivisa da tutte le stazioni; la chiave è ASCII quindi lo spazio delle chiavi è limitato; il keystream è reciclato; essendo un protocollo di collegamento cripta i dati dello strato di rete, ed è dunque nota la struttura dei primi byte dei pacchetti cifrati; il protocollo di autentication WEP fornisce all'attacker una coppia $(m,c)$; linearità di CRC-32.
+Debolezze: stessa chiave condivisa da tutte le stazioni; la chiave è ASCII quindi lo spazio delle chiavi è limitato; il keystream è reciclato; essendo un protocollo di collegamento cripta i dati dello strato di rete, ed è dunque nota la struttura dei primi byte dei pacchetti cifrati; il protocollo di autenticazione WEP fornisce all'attaccante una coppia $(m,c)$; linearità di CRC-32.
 
+
+\subsection{Collisioni IV}
 È possibile eseguire un \textit{attacco dizionario}, sfruttando le collisioni di IV.
 L'attaccante ottiene una coppia plaintext/ciphertext $(p_{1},c_{1})$ potendo dunque ottenere il proprio IV, e, sfruttando la linearità dello XOR, ottiene il keystream $KS_{IV}=RC4(IV,k)=p_{1} \oplus c_{1}$.
 L'attaccante popola un dizionario contenente i keystream $KS$ indicizzati per IV.
 Per decifrare un messaggio $<\overline{c},\overline{IV}>$, calcola $\overline{m}=\overline{c} \oplus KS_{\overline{IV}}$.
 
+
+\subsection{Integrità dei dati}
 È possibile eseguire un \textit{attacco alla integrità dei dati}, sfruttando la linearità dello XOR e la linearità di CRC-32\footnote{$CRC(m \oplus d)=CRC(m) \oplus CRC(d)$.}.
 Un attaccante può modificare bit arbitrari di un messaggio cifrato sapendo deterministicamente come modificare i bit del checksum.
 L'attacante desidera inviare il messaggio manipolato $\tilde{m}=m \oplus \delta$, dove $\delta$ è il cambiamento da indurre su $m$ per ottenere $\tilde{m}$.
@@ -112,6 +118,8 @@ Il ricevente legge il pacchetto $<m',CRC(m')>$, che soddisfa la seguente:
 \end{split}
 \end{equation}
 
+
+\subsection{Message injection}
 È possibile eseguire un \textit{attacco di message injection}, sfruttando la linearità dello XOR ed il fatto che CRC-32 non dipende dalla chiave.
 Un attaccante ottiene una coppia plaintext/ciphertext $<m,CRC(m)>,<c,IV>$.
 Ricava il keystream $RC4(IV,k)=c \oplus <m,CRC(m)>$.
@@ -136,7 +144,7 @@ Avendo il keystream, può immetere un messaggio arbitrario $\tilde{m}$, cifrando
 
 \begin{description}
   \item[worm]
-  \item[virus] 
+  \item[virus]
   \item[trojan]
   \item[adware]
   \item[spyware]

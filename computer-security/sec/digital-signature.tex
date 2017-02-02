@@ -1,8 +1,9 @@
 \chapter{Firma digitale}
 \label{chp:digital-signature}
 
-Una firma digitale è una stringa che permette di associare un messaggio con l'entità che lo ha creato.
-Uno schema di firma digitale è un meccanismo costituito da un algoritmo di generazione della firma digitale ed un algoritmo di verifica della firma digitale.
+Una \textit{firma digitale} è una stringa che permette di associare un messaggio con l'entità che lo ha creato.
+Uno schema di firma digitale è un meccanismo costituito da un algoritmo di \textit{generazione delle chiavi}, un algoritmo di \textit{generazione della firma} ed uno di \textit{verifica della firma}.
+
 Uno schema di firma digitale può essere
 \textit{con appendice} se è necessario il messaggio originale per verificare la firma;
 \textit{con recovery del messaggio}, se il messaggio originale viene ricavato dalla firma, e non è pertanto necessario per verificare la firma.
@@ -19,9 +20,7 @@ La firma digitale permette di realizzare autenticazione, integrità dei dati e n
 I requisiti fondamentali di uno schema di firma digitale sono:
 (i) $S_{A,k}$ deve essere efficiente da calcolare per ogni $k$;
 (ii) $V_{A}$ deve essere efficiente da calcolare;
-(iii) computazionalmente impossibile per un'entità $A'\neq A$ determinare un messaggio $m \in M$ e una firma $s \in S$ tali che $V_{A}(h(m),s)=True$.
-
-L'Algoritmo~\ref{alg:digital-signature-appendix} mostra il protocollo generale di uno schema di firma digitale con appendice.
+(iii) computazionalmente impossibile per un'entità $Z(A)$ determinare un messaggio $m \in M$ e una firma $s \in S$ tali che $V_{A}(h(m),s)=True$.
 
 \bigskip
 \begin{algorithm}[H]
@@ -38,8 +37,6 @@ L'Algoritmo~\ref{alg:digital-signature-appendix} mostra il protocollo generale d
   B accetta la firma se $u=True$.
 \end{algorithm}
 
-L'Algoritmo~\ref{alg:digital-signature-message-recovery} mostra il protocollo generale di uno schema di firma digitale con message recovery.
-
 \bigskip
 \begin{algorithm}[H]
   \caption{Firma digitale con message recovery}
@@ -55,6 +52,8 @@ L'Algoritmo~\ref{alg:digital-signature-message-recovery} mostra il protocollo ge
   B accetta la firma se $u=True$.
 \end{algorithm}
 
+
+\subsection{Vulnerabilità}
 Gli attacchi a schemi di firma digitale sono volti a forgiare firme digitali, ovvero generare firme digitali autenticabili.
 Uno schema di firma digitale può essere soggetto a:
 (i) \textit{rottura totale}, se l'attaccante può generare la firma digitale della vittima;
@@ -68,60 +67,60 @@ Gli attacchi sono classificati in:
 \textit{adapative chosen-message}: l'attaccante può far firmare messaggi di sua scelta, e richiedere firme che dipendano dalle firme precedentemente ottenute.
 
 \section{DSA}
-Il Digital Signature Algorithm (DSA) è uno schema di firma digitale randomico con appendice, basato sull'intrattabilità computazionale del logaritmo discreto.
-Può essere visto come una variante dello schema ElGamal.
+Il \textit{Digital Signature Algorithm (DSA)} è uno schema di firma digitale randomico con appendice, basato sull'intrattabilità computazionale del \textit{problema del logaritmo discreto}\footnote{il DSA può essere visto come una variante dello \textit{schema ElGamal}.}.
+.
 
 \bigskip
 \begin{algorithm}[H]
   \caption{DSA: generazione delle chiavi}
   \label{alg:dsa-key-generation}
   \SetAlgoNoLine
-  Seleziona un numero primo $p$ a 1024 bit;\\
-  Seleziona un numero primo $q$ a 160 bit che divida $(p-1)$;\\
-  Calcola $\alpha=g^{\frac{p-1}{q}} \mod p$ dove $g \in \mathcal{Z}_{p}*$;\\
-  Seleziona un intero $a \in [1,q-1]$;\\
-  Calcola $y=\alpha^{a} \mod p$;\\
-  La chiave pubblica è $(p,q,\alpha,y)$, la chiave privata è $a$.
+  Seleziona un numero primo $p$ a 1024 bit\\
+  Seleziona un numero primo $q$ a 160 bit che divida $(p-1)$\\
+  Calcola $\alpha=g^{\frac{p-1}{q}} \mod p$ dove $g \in \mathcal{Z}_{p}*$\\
+  Seleziona un intero $a \in [1,q-1]$\\
+  Calcola $y=\alpha^{a} \mod p$\\
+  La chiave pubblica è $(p,q,\alpha,y)$, la chiave privata è $a$
 \end{algorithm}
 
 \bigskip
 \begin{algorithm}[H]
-  \caption{DSA: firma}
+  \caption{DSA: generazione della firma}
   \label{alg:dsa-signature}
   \SetAlgoNoLine
-  Seleziona un intero $k \in (0,q)$;\\
-  Calcola $r=(\alpha ^{k} \mod p) \mod q$;\\
-  Calcola $s=k^{-1}[H(m)+ar] \mod q$;\\
-  La firma è $(r,s)$.
+  Seleziona un intero $k \in (0,q)$\\
+  Calcola $r=(\alpha ^{k} \mod p) \mod q$\\
+  Calcola $s=k^{-1}[H(m)+ar] \mod q$\\
+  La firma è $(r,s)$
 \end{algorithm}
 
 \bigskip
 \begin{algorithm}[H]
-  \caption{DSA: firma}
+  \caption{DSA: verifica della firma}
   \label{alg:dsa-verification}
   \SetAlgoNoLine
-  Ottieni la chiave pubblica $(p,q,\alpha,y)$;\\
-  Verifica $r\in (0,q)$;\\
-  Verifica $s\in (0,q)$;\\
-  Calcola $w=s^{-1} \mod q$;\\
-  Calcola $u_{1}=wH(m)\mod q$;\\
-  Calcola $u_{2}=rw\mod q$;\\
-  Calcola $v=(\alpha^{u_{1}}y^{u_{2}} \mod p) \mod q$;\\
-  La firma è verificata se $v=s$.
+  Ottieni la chiave pubblica $(p,q,\alpha,y)$, la firma $(r,s)$ ed il messaggio $m$\\
+  Verifica $r\in (0,q)$\\
+  Verifica $s\in (0,q)$\\
+  Calcola $w=s^{-1} \mod q$\\
+  Calcola $u_{1}=wH(m)\mod q$\\
+  Calcola $u_{2}=rw\mod q$\\
+  Calcola $v=(\alpha^{u_{1}}y^{u_{2}} \mod p) \mod q$\\
+  La firma è verificata se $v=s$
 \end{algorithm}
 
 
 \section{RSA-DS}
-RSA-DS è uno schema di firma digitale deterministico con message recovery basato su RSA.
+\textit{RSA-Digital-Signature (RSA-DS)} è uno schema di firma digitale deterministico con message recovery basato su RSA.
 La chiave privata viene utilizzata per firmare il messaggio, e la chiave pubblica per verificarne la firma.
 
 
 \section{Blind signature}
 Uno \textit{schema di blind signature} è uno schema di firma digitale in cui il firmatario firma il messaggio senza poterne conoscere il contenuto.
-Questi schemi sono utilizzati in \textit{protocolli per la privacy} (e.g. e-voting, e-cash).
+Questi schemi sono utilizzati nei \textit{protocolli per la privacy} (e.g. e-voting, e-cash).
 
 Questi schemi richiedono:
-(i) un meccanismo $S_{B}(x)$ di firma digitale dell'entità $B$ sul messaggio $m$;
+(i) un meccanismo $S_{B}(m)$ di firma digitale dell'entità $B$ sul messaggio $m$;
 (ii) una funzione $f$, detta \textit{blinding function}, ed una funzione $g$, detta \textit{unblinding function}, tali che $g(S_{B}(f(m)))=S_{B}(m)$.
 
 Uno schema di blinding signature prevede le seguenti fasi:
@@ -129,16 +128,30 @@ Uno schema di blinding signature prevede le seguenti fasi:
 (ii) \textit{signing} in cui B firma $f(m)$ ottenendo $S_{B}(f(m))$;
 (iii) \textit{unblinding} in cui A ricava la firma di B $S_{B}(m)=g(S_{B}(f(m)))$;
 
-L'esempio più semplice di schema di blind signature è lo \textit{schema di Chaum}, la cui blinding function è basata su RSA.
+
+\subsection{Chaum Blind Signature}
+\textit{Chaum Blind Signature (Chaum-BS)} è uno schema di blind signature la cui blinding function è basata su RSA.
 
 \bigskip
 \begin{algorithm}[H]
   \caption{Chaum Blind Signature}
   \label{alg:authentication-blind-signature-chaum}
   \SetAlgoNoLine
-  A ottine la chiave pubblica di B $(n,e_{B})$;\\
-  A sceglie un plaintext $m$ ed un numero intero $r \in (0,n)$;\\
-  A $\rightarrow$ B: $b=mr^{e_{B}} \mod n$;\\
-  B $\rightarrow$ A: $s=b^{d_{e}} \mod n$;\\
-  A calcola $u=sr^{-1} \mod n=m^{d_{B}}$;
+  A ottiene la chiave pubblica di B $(n,e)$\\
+  A sceglie un plaintext $m$ ed un numero intero $r \in (0,n)$\\
+  A $\rightarrow$ B: $b=mr^{e} \mod n$\\
+  B $\rightarrow$ A: $s=b^{d} \mod n$\\
+  A calcola $u=sr^{-1} \mod n=m^{d}$
 \end{algorithm}
+
+
+\section{Certificati digitali}
+I crittosistemi a chiave asimmetrica assumono l'autenticità delle chiavi pubbliche. Questa viene generalmente ottenuta mediante certificati digitali rilasciati da Certification Authority.
+
+Un \textit{certificato digitale} è una struttura dati che consiste di una \textit{data part} contenente informazioni realtive all'entità da certificare, ed una \textit{signature part} contenente la firma digitale della Certification Authority che rilascia il certificato.
+
+Lo \textit{standard X.509} prevede nel data part informazioni generali dell'entità, la sua chiave pubblica, la durata di validità della stessa
+
+Un \textit{Certification Authority (CA)} è un TTP (Trusted Third Party) che assicura l'autenticità di una chiave pubblica mediante rilascio di un certificato.
+
+Un CA rilascia un certificato digitale per A solo dopo aver adottato misure di autenticazione. Il CA può creare la coppia di chiavi e trasmettere la chiave privata ad A su un canale sicuro. Oppure l'entità A genera la coppia di chiavi e trasmette la chiave pubblica al CA, il quale verifica l'autenticità mediante challenge-response.

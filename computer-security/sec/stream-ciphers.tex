@@ -1,60 +1,97 @@
-\chapter{Cifrario a flusso}
+\chapter{Cifrari di flusso}
 \label{chp:stream-ciphers}
 
-Un cifrario a flusso è un crittoalgoritmo che cifra il testo in chiaro un bit alla volta utilizzando funzioni di trasformazione con memoria.
-Questi cifrari possono essere a chiave privata o chiave pubblica, ma ci concdentreremo solo sui primi.
+Un cifrario di flusso è un crittalgoritmo che esegue \textit{bit-a-bit} una \textit{trasformazioni con memoria reversibili}. La trasformazione non utilizza direttamente la chiave, bensì un \textit{keystream} da essa dipendente.
 
 Questi cifrari sono adatti per applicazioni con buffering limitato e in cui è necessario minimizzare la propagazione dell'errore.
 
-Esistono pochi algoritmi pienamente definiti in letteratura, in quanto vengono tipicamente impiegati in applicazioni proprietarie e confidenziali.
+Un cifrario di flusso può essere:
 
-Un cifrario a flusso sincrono ha un keystream dipendente dalla sola chiave. Questo cifrario necessita la sincronizzazione degli interlocutori e blocca immediatamente la propagazione dell'errore.
-Un attaccante attivo può dunque far fallire facilmente la comunicazione compromettendo la sincronizzazione ed inoltre può prevedere gli effetti di manipolazione dei bit sul resto del testo.
-L'esempio più comune è il cifrario a flusso binario-additivo, dove p,c,k sono stringhe binarie e $c_{i}=m_{i} \oplus z_{i}$.
+\begin{description}
+  \item[sincrono] il keystream dipende solo dalla chiave. La perdita di sincronizzazione sul keystream compromette definitivamente il cifrario. L'errore non si propaga. Un esempio è il cifrario di Vernam.
+  \item[asincrono] il keystream dipende dalla chiave e da una sottostringa del ciphertext. La perdita di sincronizzazione sul keystream può essere recuperata. L'errore si propaga brevemente. Produce alta dispersione. Un esempio è il cifrario di blocco con block mode CFB.
+\end{description}
 
 Un cifrario a flusso asincrono ha un keystream dipendente dalla chiave e da una sottostringa del ciphertext.
 Questo cifrario può ristabilire la sincronizzazione qualora si perda (quindi difficile individuare intrusioni sul canale), diffondere brevemente la propagazione dell'errore (quindi rendere possibile individuare corruzione dei bit), inoltre disperde la distribuzione statistica del plaintext. L'esempio più comune è il cifrario a blocco con CFB.
 
+
 \section{Vernam}
-Il cifrario di Vernam è un cifrario a flusso sincrono binario-additivo.
+Il \textit{cifrario di Vernam}\footnote{anche detto \textit{cifrario di flusso binario-addittivo}.} è un cifrario di flusso sincrono con trasformazione
+
+\begin{equation}
+  \begin{cases}
+    c_{i}=m_{i} \oplus z_{i} \\
+    m_{i}=c_{i} \oplus z_{i}
+  \end{cases}
+\end{equation}
 Se il keystream è random viene detto one-time pad ed è dimostrato perfettamente sicuro.
 
+
 \section{One Time Pad}
-Un \textit{cifrario One Time Pad (OTP)} è un cifrario di Vernam con keystream random.
-Questo cifrario è \textit{perfettamente sicuro} a prescindere dalla distribuzione statistica del plaintext e ottimo nel senso che ha la chiave più piccola di tutti gli schemi di cifratura a chiave privata.
+Il \textit{One Time Pad (OTP)} è un cifrario di Vernam con \textit{keystream random}. Questo cifrario è \textit{perfettamente sicuro}.
 
 Dimostriamo che OTP è perfettamente sicuro.
-Dobbiamo provare che $\mathcal{P}(m \mid c)=\mathcal{P}(m)$.
-Abbiamo che $\mathcal{P}(m \mid c)=\frac{\mathcal{P}(c \mid m)\mathcal{P}(m)}{\mathcal{P}(c)}$.
+Dobbiamo provare che 
 
-Valgono le seguenti:
+\begin{equation*}
+\prob{m \mid c}=\prob{m}
+\end{equation*}
 
-(i) $\mathcal{P}(c \mid m)=\mathcal{P}(k=m \oplus c)=\frac{1}{2^{n}}$;
+Poichè abbiamo:
 
-(ii) $\mathcal{P}(c)=\sum_{m \in M}\mathcal{P}(c \mid m)\mathcal{P}(m)=\frac{1}{2^{n}}\sum_{m\in M}\mathcal{P}(m)=\frac{1}{2^{n}}$;
+\begin{equation*}
+\prob{m \mid c}=\frac{\prob{c \mid m}\prob{m}}{\prob{c}}
+\end{equation*}
 
-Pertanto $\mathcal{P}(m \mid c)=\frac{\mathcal{P}(c \mid m)\mathcal{P}(m)}{\mathcal{P}(c)}=\frac{\frac{1}{2^{n}}\mathcal{P}(m)}{\frac{1}{2^{n}}}=\mathcal{P}(m)$.
+e valgono le seguenti:
+
+\begin{itemize}
+	\item $\prob{c \mid m}=\prob{k=m \oplus c}=\frac{1}{2^{n}}$;
+	
+	\item $\prob{c}=\sum_{m \in M}\prob{c \mid m}\prob{m}=\frac{1}{2^{n}}\sum_{m\in M}\prob{m}=\frac{1}{2^{n}}$;
+\end{itemize}
+
+allora abbiamo che:
+
+\begin{equation*}
+\prob{m \mid c}=\frac{\prob{c \mid m}\prob{m}}{\prob{c}}=\frac{\frac{1}{2^{n}}\prob{m}}{\frac{1}{2^{n}}}=\prob{m}
+\end{equation*}
+
 
 \section{Two Time Pad}
-Un cifrario Two Time Pad (TTP) è un cifrario di Vernam con keystream costante.
-Questo cifrario è perfettamente insicuro, in quanto il riutilizzo di una stessa chiave per plaintext diversi permette di effettuare semplicmenete attacchi known-ciphertext.
+Il \textit{Two Time Pad (TTP)} è un cifrario di Vernam con \textit{keystream costante}. Questo cifrario è \textit{completamente insicuro}, in quanto il riutilizzo di uno stesso keystream per plainbit diversi permette di rompere il cifrario con un semplice attacco known-text.
 
-Dimostriamo che TTP non è perfettamente sicuro.
-Inviaando due messaggi cifrati con la stessa chiave, ottengo
-$c_{1}=m_{1} \oplus k$ e $c_{2}=m_{2} \oplus k$. Ponendo in XOR i due ciphertext ottengo
-$c_{1} \oplus c_{2} =
-m_{1} \oplus k \oplus m_{2} \oplus k =
-m_{1} \oplus m_{2} \oplus k \oplus k =
-m_{1} \oplus m_{2} 0 =
-m_{1} \oplus m_{2}$
-In particolare, se un attaccante conosce $c_{1}$ e $c_{2}$ perchè sniffati e $m_{1}$ perchè da lui stesso inviato, potrà decifrare $m_{2}$.
+Dimostriamo che TTP non è completamente insicuro.
+Inviando due messaggi cifrati con la stessa chiave, ottengo:
+
+\begin{equation*}
+\begin{cases}
+c_{1}=m_{1} \oplus k \\
+c_{2}=m_{2} \oplus k
+\end{cases}
+\end{equation*}
+
+Da cui
+
+\begin{equation}
+\begin{split}
+c_{1} \oplus c_{2} & = m_{1} \oplus k \oplus m_{2} \oplus k \\
+& = m_{1} \oplus m_{2} \oplus k \oplus k \\
+& = m_{1} \oplus m_{2} \oplus 0 \\
+& = m_{1} \oplus m_{2}
+\end{split}
+\end{equation}
+
+Ora, se un attaccante conosce $c_{1}$ e $c_{2}$ perchè sniffati e $m_{1}$ perchè da lui stesso inviato, potrà decifrare $m_{2}$.
 
 \section{RC4}
-RC4\footnote{RC4 è un cifrario proprietario di cui si è diffusa in rete un'implementazione, ed è pertanto spesso chiamato Alleged-RC4 (ARC4).} è un cifrario a flusso semplice ed altamente performante utilizzato per produrre un keystream pseudo-random.
+RC4\footnote{RC4 è un cifrario proprietario di cui si è diffusa in rete un'implementazione, ed è pertanto spesso chiamato Alleged-RC4 (ARC4).} è un cifrario di flusso sincrono, semplice ed altamente performante utilizzato per produrre un keystream pseudo-random.
 
 RC4 è stato adottato come generatore di keystream in molti protocolli (WEP, WPA, SSL, TLS) fino a quando è stato provato insicuro dall'\textit{attacco Fluhrer-Mantin-Shamir (FMS)} su WEP.
 
-Il cifrario è costituito da una fase di \textit{key-scheduling (KS)} seguita da una fase di \textit{pseudo-random generation (PRG)}. Lo stato del cifrario è costituito da una S-box $S$ a 256 bytes parametrizzata dalla chiave segreta $K$, e da due indici $i,j$.
+Il cifrario è costituito da una fase di \textit{key-scheduling (KS)} seguita da una fase di \textit{pseudo-random generation (PRG)}.
+Lo stato del cifrario è costituito da una S-box $S$ a 256 bytes parametrizzata dalla chiave segreta $K$, e da una coppia di indici $(i,j)$.
 
 \bigskip
 \begin{algorithm}[H]
@@ -88,4 +125,8 @@ Il cifrario è costituito da una fase di \textit{key-scheduling (KS)} seguita da
 \end{algorithm}
 
 Il cifrario è altamente performante (10x rispetto a DES), efficiente da un punto di vista di memoria, garantisce un buon one-time-padding, ed è robusto ad attacchi di crittanalisi lineare.
-Purtroppo, i primi bytes del keystream presentano una forte correlazione la chiave chiave, il keystream risulta inoltre leggermente polarizzato su specifiche sequenze. Infine lo spazio del keystream è limitato superiormente a $2^{1700}$ permutazioni, a prescindere dalla chiave segreta. Questo vuol dire che aumentare la lunghezza della chiave non migliora l'entropia.
+
+Purtroppo, presenta i seguenti difetti:
+(i) la dimensione spazio del keystream è limitata a $2^{1700}$ (a prescindere dalla chiave utilizzata)
+(ii) i primi bytes del keystream sono fortemente correlati alla chiave e
+(iii) il keystream è leggermente polarizzato su alcune sequenze.

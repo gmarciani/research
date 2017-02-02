@@ -1,70 +1,109 @@
 \chapter{Introduzione}
 \label{chp:introduction}
 
-La crittologia è la disciplina che si occupa delle scritture nascoste, nel suo duplice significato: da un lato la crittografia si occupa di occultare il reale significato dei testi, dall'altro la crittanalisi riguarda la decifrazione di testi occultati senza conoscerne a priori il metodo usato per cifrarli.
-La steganografia è la disciplina che si occupa di nascondere l'esistenza di un messaggio. La stenografia è più debole della crittografia, in quanto la scoperta di un messaggio stenografato implica la conoscenza del suo significato; mentre la crittografia nasconde il significato di un messaggio noto, qualora non sia nota la chiave per decifrarlo.
+La \textit{crittologia} è la disciplina che si occupa delle scritture nascoste, nel suo duplice significato: da un lato la \textit{crittografia} si occupa di occultare il significato di un testo, dall'altro la \textit{crittanalisi} si occupa di decifrare un testo cifrato senza conoscere il metodo usato per cifrarli.
+La \textit{steganografia} è la disciplina che si occupa di nascondere l'esistenza di un messaggio.
+La stenografia è più debole della crittografia, in quanto la scoperta di un messaggio stenografato implica la conoscenza del suo significato; la crittografia invece nasconde il significato di un messaggio anche quando questo sia noto, qualora non sia nota la chiave per decifrarlo.
 
-La crittografia si occupa di definire funzioni di trasformazione reversibile tra un testo in chiaro ed un testo cifrato, parametrizzate da una chiave segreta.
+La crittografia si occupa di definire funzioni biettive tra un testo in chiaro (\textit{plaintext}) ed un testo cifrato (\textit{ciphertext}), parametrizzate da una chiave (\textit{secret key}). La \textit{crittografia a chiave simmetrica} prevede un'unica chiave sia per cifrare che per decifrare. La \textit{crittografia a chiave asimmetrica} prevede una \textit{chiave pubblica} per cifrare ed una \textit{chiave privata} per decifrare.
 
+L'obiettivo della crittografia è tenere cifrati i dati per il tempo di vita del loro valore informativo. Una soluzione crittografica fragile permette la decrittazione durante il tempo di vita dell'informazione. Il trade-off della crittografia è dunque tra tempo e costo della soluzione adottata rispetto alla vita utile e valore dell'informazione.
 
+\section{Cifrari}
+Un \textit{cifrario} realizza la cifratura/decifratura secondo uno schema di cifratura definito come
 
-Un crittosistema realizza la cifratura di dati. L'obiettivo di un crittosistema è tenere cifrati i dati per il tempo di vita del loro valore informativo. Un crittosistema fragile permette la decrittazione durante il tempo di vita dell'informazione. Il trade-off di un crittosistema è tra tempo e costo del crittosistema rispetto alla vita utile e valore dell'informazione.
-Un crittosistema a chiave privata prevede $k_{e}=k_{d}$, mentre un crittosistema a chiave pubblic prevede $k_{e}\neq k{d}$.
+\begin{equation}
+  (M,C,K,E,D)
+\end{equation}
 
-\begin{description}
-  \item[confusione] avere rumore nel processo di cifratura. Questo si raggiunge facendo dipendere ogni bit plain da tutta la key ed aumentando la complessità del rapport plaintext/key.
-  \item[dispersione] disperdere le proprietà statistiche del plaintext.
-  \item[distribuzione della chiave] la key deve essere scambiata tra gli interlocutori. Questo è un problema in quanto può essere intercettata durante lo scambio, è un processo che non scala con il numero degli utenti.
-\end{description}
+dove
+$M$ è lo \textit{spazio dei plaintext},
+$C$ è lo \textit{spazio dei ciphertext},
+$K$ è lo \textit{spazio delle chiavi},
+$E=\{E_{k_{e}:k_{e}\in K}\}$ è l'insieme delle \textit{funzioni di cifratura},
+$D=\{D_{k_d}:k_{d}\in K\}$ è l'insieme delle \textit{funzioni di decifratura}.
+$K,M,C$ sono tali che 
 
-\section{Principi generali}
-\begin{description}
-  \item[Kerchoff] la sicurezza di un crittosistema non dipende dalla segretezza del crittoalgoritmo, ma solo dalla segretezza della chiave.
-  \item[Shannon] un buon cifratore deve prevedere una fase di sostituzione (S-box) ed una fase di permutazione (P-box). Shannon ha provato che H$(K)\geq H(M)$ è condizione necessaria alla incondizionata sicurezza di un crittosistema, ovvero se l'entropia della chiave non è minore dell'entropia del plaintext. Questa condizione implica che $H(M\mid C)=H(M)$, ovvero che il ciphertext non fornisce alcuna informazione sul plaintext.
-\end{description}
-
-Un crittosistema deve dunque soddisfare i seguenti requisiti: schema di cifratura pubblicamente noto, $E$ proietta uniformamente $M$ su $C$, $E,D$ efficienti con $k$ nota, $D$ NP-hard con chiave sconosciuta, con complessità proporzionale alla lunghezza della chiave.
-
-La distribuzione uniforme aumenta la robustezza ad attacchi di crittanalisi statistica. La maggiore dimensione di $K$ aumenta la robustezza ad attacchi brute-force.
-
-Un crittosistema è perfettamente sicuro se ...
-Un crittosistema è computazionalmente sicuro se ...
-
-\section{Cifrario}
-Un crittosistema realizza la cifratura/decifratura secondo uno schema di cifratura definito come $(M,C,K,E,D)$, dove
-$M$ è lo spazio dei plaintext,
-$C$ è lo spazio dei ciphertext,
-$K$ è lo spazio delle chiavi,
-$E=\{E_{k_{e}:k_{e}\in K}\}$ è l'insieme delle funzioni di cifratura,
-$D=\{D_{k_d}:k_{d}\in K\}$ è l'insieme delle funzioni di decifratura
-tali che $\forall k_{e}\in K \exists! k_{d}\in K . D_{k_{d}}=E_{k_{e}}^{-1}$.
-
-Un crittosistema è tale che
-$G:N\rightarrow K \times K$
-$E: M \times K \rightarrow C$
-$D: C \times K \rightarrow M$
+\begin{equation}
+\forall k_{e}\in K \exists! k_{d}\in K . D_{k_{d}}=E_{k_{e}}^{-1}
+\end{equation}
 
 Diciamo che $c=E_{k_{e}}(m)$ è la cifratura di $m$ sotto la chiave di cifratura $k_{e}$, mentre $m=D_{k_{d}}(c)$ è la decifratura di $c$ sotto la chiave di decifratura $k_{d}$.
 
-Un crittosistema deve soddisfare il requisito di reversibilità, ovvero
-$m=D_{k_{d}}(E_{k_{e}}(m))\quad \forall m\in M, k_{e}\in K \exists! k_{d}\in K$.
-$K$ deve essere abbastanza grande affinchè il crittosistema posso essere robusto ad attacchi brute-force.
+Un cifrario è tale che
+\begin{equation}
+\begin{cases}
+  G: \mathbf{N} \rightarrow \mathcal{K} \times \mathcal{K} \\
+  E: \mathcal{M} \times \mathcal{K} \rightarrow \mathcal{C} \\
+  D: \mathcal{C} \times \mathcal{K} \rightarrow \mathcal{M} \\
+\end{cases}
+\end{equation}
+dove $G$ è il \textit{generatore della chiave}.
 
-L'\textit{effetto a valanga} è una proprietà di un crittoalgoritmo che consiste nel cambiamento di akmeno metà ciphertext in corrispondenza del cambiamento di un singolo bit plaintext.
+Un cifrario deve godere della \textit{proprietà di reversibilità}
+\begin{equation}
+m=D_{k_{d}}(E_{k_{e}}(m))\quad \forall m\in M, k_{e}\in K \exists! k_{d}\in K
+\end{equation}
+In generale, $K$ deve essere abbastanza grande affinchè il crittosistema possa essere robusto ad attacchi brute-force.
 
-\section{Cifrari e Codici}
-Un cifrario realizza la cifratura basandosi sulla sostituzione di unità simboliche independentemente dal loro vlore semantico, secondo una chiave segreta. La distribuzione della chiave è efficiente in quanto la chiave è tipicamente corta. È debole ad attacchi di crittologia statistica.
-
-Un codice, o codebook crittografico, realizza la cifratura basandosi sulla sostituzione di unità linguistiche (parole, gruppi di parole o frasi) secondo un dizionario segreto, detto codebook. La distribuzione della chiave è inefficiente, in quanto il dizionario è tipicamente grande. È robusto ad attacchi di crittologia statistica.
-
-Un codice è più difficile da rompere di un cifrario, in quanto lo spazio delle chiavi è maggiore, la distribuzione statistica viene alterata pertanto è robusto ad attacchi di crittanalisi statistica, ma è debole ad attacchi known-plaintext oin quanto si può fare reverse engineering sul codebook.
+Un cifrario \textit{auto-key} utilizza come chiave lo stesso plaintext.
+Un cifrario \textit{running-key} utilizza una chiave di lunghezza pari al plaintext.
 
 
-\section{Protocolli}
-Un protocollo crittografico è un protocollo che impiega un crittoalgoritmo.
-Un protocollo crittografico è in prima battuta classificato in:
+\subsection{Proprietà}
+Alcune proprietà fondamentali sono:
+\begin{description}
+	\item[confusione] avere rumore nel processo di cifratura. Questo si raggiunge facendo dipendere ogni bit plain da tutta la key ed aumentando la complessità del rapport plaintext/key.
+	\item[diffusione] disperdere le proprietà statistiche del plaintext. Questa proprietà aumenta la robustezza ad attacchi di crittanalisi statistica.
+	\item[effetto valanga] il cambiamento di un bit plaintext implica il cambiamento di almeno metà ciphertext.
+\end{description}
+
+
+\subsection{Cifrari e Codici}
+Un cifrario realizza la cifratura basandosi sulla sostituzione di unità simboliche independentemente dal loro valore semantico, secondo una chiave segreta.
+
+Un \textit{codice} realizza la cifratura basandosi sulla sostituzione di unità linguistiche (parole, gruppi di parole o frasi) secondo un dizionario segreto, detto \textit{codebook}.
+
+Un codice è più difficile da rompere di un cifrario, in quanto
+(i) lo spazio delle chiavi è maggiore
+(ii) realizza una maggiore diffusione ed è pertanto più robusto ad attacchi di crittanalisi statistica.
+Tuttavia è più vulnerabile ad attacchi known-plaintext, in quanto si può fare reverse engineering sul codebook.
+
+
+\section{Algoritmi, protocolli e sistemi}
+Un \textit{crittalgoritmo} è un algoritmo che realizza una primitiva crittografica.
+Un \textit{protocollo crittografico} è un protocollo che impiega una qualche primitva crittografica. In prima battuta un protocollo crittografico è classificato in:
 \begin{description}
   \item[self-enforcing] il protocollo è garantito senza intervento da parte di entità terze; le irregolarità sono individuate dal protocollo stesso.
-  \item[arbitrated] il protocollo è garantito da un TTP real-time.
+  \item[arbitrated] il protocollo è garantito da un TTP\footnote{ovvero \textit{Trusted Third Party}.} real-time.
   \item[judged] il protocollo è garantito da un TTP coinvolto solo in caso di irregolarità. Il protocollo è dunque suddiviso in un sotto-protocollo semplice ed un sotto-protocollo arbitrated.
+\end{description}
+
+Un \textit{crittosistema} è un sistema che adotta crittoalgoritmi e protocolli crittografici. 
+Un crittosistema deve soddisfare i seguenti requisiti:
+(i) schema di cifratura pubblico
+(ii) $E,D$ efficienti con $k$ nota
+(iii) $D$ NP-hard con $K$ ignota e proporzionale alla sua lunghezza
+(iv) alta diffusione
+(v) alta confusione.
+
+
+\section{Principi}
+Si distinguono due tipi di sicurezza:
+
+\begin{description}
+	\item[sicurezza perfetta] un cifrario è perfettamente sicuro se $\prob{m \mid c}=\prob{m}$.
+	\item[sicurezza computazionale] un cifrario è computazionalmente sicuro se il tempo di decrittazione con chiave ignota è superiore al tempi di vita dell'informazione cifrata.
+\end{description}
+
+\begin{description}
+  \item[Kerchoff] la sicurezza di un crittosistema dipende solo dalla segretezza della chiave. In particolare essa non dipende dalla segretezza del crittalgoritmo.
+
+  \item[Shannon] un buon cifratore deve prevedere sia una fase di sostituzione che una fase di permutazione. Il componente che realizza la sostituzione è detto \textit{S-box}. Il componente che realizza la permutazione è detto \textit{P-box}.
+
+  Shannon ha dimostrato che
+  \begin{equation}
+    sicurezzaperfetta \Leftrightarrow H(\mathcal{K}) \geq H(\mathcal{M})
+  \end{equation}
+  dove $H(x)$ è l'entropia dello spazio $x$.
 \end{description}

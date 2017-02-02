@@ -1,81 +1,59 @@
 \chapter{Bitcoin}
 \label{chp:bitcoin}
 
-Una \textit{criptovaluta} è una valuta digitale la cui creazione e distribuzione è affidata a primitiva crittografiche.
+Una \textit{criptovaluta} è una valuta digitale la cui creazione e distribuzione è affidata a primitive crittografiche. Una criptovaluta \textit{decentralizzata} è una criptovaluta le cui transazioni sono gestite in modo distribuito.
 
-Un Bitcoin è una criptovaluta decentralizzata scambiata attraverso l'omonimo sistema di trasazioni. Bitcoin è la criptovaluta più diffusa. Tale sistema è una rete P2P in cui ogni nodo esegue il software Bitcoin.
+Il Bitcoin è una criptovaluta decentralizzata scambiata attraverso l'omonimo sistema di transazioni, implementato da una \textit{rete P2P} in cui ogni nodo esegue il software Bitcoin.
 
 Bitcoin fu sviluppato e annunciato da Satoshi Nakamoto nel 2009, utilizzato dapprima esclusivamente per scambi commerciali nella rete Tor, ed infine conosciuto pubblicamente per l'inpennata del valore nel 2013.
 
 Bitcoin ha implementato ed esteso il concetto di e-cash libero, anonimo, sicuro e basato esclusivamente sulle transazioni, teorizzato da David Chaum nel 1990.
 
-Un Bitcoin è una stringa alfanumerica che rappresenta univocamente una transazione valida.
 
-Il sistema Bitcoin deve garantire il consenso sulle regole (validità delle transazioni), consenso sullo stato (autenticità dei proprietari) e consenso sul valore (accettazione dei BT come forma di pagamento).
+
+Il sistema Bitcoin si fonda sul \textit{consenso sulle regole} (validità delle transazioni), \textit{consenso sullo stato} (autenticità dei proprietari) e \textit{consenso sul valore} (accettazione dei BT come forma di pagamento).
 
 Una moneta reale deve garantire: riconoscibilità, divisibilità, trasportabilità, trasferibilità, utilizzabilità, auntenticità e durevolezza.
-Bitcoin soddisfa questi requisiti aggiungendovi l'anonimicità.
+Bitcoin soddisfa questi requisiti aggiungendovi l'anonimicità. Bitcoin realizza l'anonimato mediante uno schema pseudonimo in cui le transazioni sono pubbliche, ma ogni transazione può essere associata ad una identità differente (nuova coppia chiave-pubblica/privata).
 
-Ogni utente conserva i Bitcoin in un portafoglio digitale, detto wallet, contenente le chiavi private che permettono l'invio e la ricezione di Bitcoin.
-
-I Bitcoin sono creati e distribuiti come ricompensa per la validazione di una transazione. Il processo di validazione di una transazione è detto mining, e i partecipanti al processo sono detti miners. In particolare, la validazione di una transazione ha un ritorno di 50BTC divisi tra tutti i miners.
-
-Il sistema Bitcoin risolve il problema del double spending attraverso l'utilizzo di Blockchain.
-
-Blockchain sostituisce i TTP delle valute tradizionali.
+Un Bitcoin (BTC) è una stringa alfanumerica che rappresenta univocamente una transazione valida.
+Ogni utente conserva i propri BTC in un portafoglio digitale, detto \textit{wallet}, contenente le chiavi private che permettono l'invio e la ricezione di Bitcoin.
 
 Bitcoin non mantiene un database dei conti correnti indicizzati per utente. Come fa dunque a sapere quanti soldi ho? Non importa quanti soldi io abbia, importa solo che abbia abbastanza soldi per eseguire la transazione richiesta.
 Questo rende superfluo registrare il conto corrente di un utente, e quindi serve solo un meccanismo che certifichi le transazioni: Blockchain.
 
-Quando si dichiara una nuova transazione, questa viene inserita in un blocco, detto blocco di output, al quale si connettono altri blocchi, detti blocchi di input, che sono transazioni valide la cui somma di denaro è quella della transazione corrente.
 
-Ogni blocco può essere utilizzato solo una volta come blocco di input: questo risolve il problema del double spending.
-Blockchian deve dunque permettere ai nodi di raggiungere il consenso sulle connessioni dei blocchi.
+\section{Mining}
+Il \textit{mining} è il processo di validazione di una transazione. Al mining di una stessa transazione prendono parte uno o più \textit{miners}, eventualmente associati in \textit{mining pools} o \textit{mining farms}.
+I Bitcoin sono creati e distribuiti come ricompensa al processo di mining.
 
-"Avere bitcoin" vuol dire che all'interno di blockchain c'è almeno un blocco mai usato come input che punt al nostro id.
-
-Per ricostruire il conto corrnte di un utente è dunue necessario analizzare tutta la blockchain.
-
-Perdere la propria chiave privata rende inutilizzabili i bitcoin associati alla corrispondente chiave pubblica perchè non è più possibile sottomettere transazioni validabili.
-
-L'ordine temporale delle transazioni è mantenuto mediante algoritmo del consenso distribuito.
+Tutti i Bitcoin attuali sono stati creati come mining reward in transazioni coinbase. Il protocollo Bitcoin prevede il dimezzamento del mining reward ogni 210000 blocchi (più o meno 4 anni), arrivando ad annullarsi quando il mercato avra raggiunto 21M BT e il compenso sarà allora solamente costitutito da una piccola fee.
 
 
 \section{Blockchain}
-Blockchain è un database distribuito contenente un albero in cui ogni nodo, detti blocco, rappresenta una transazione valida ed ogni arco orientato rappresenta la sua evoluzione temporale.
+\textit{Blockchain} è un database distribuito contenente un albero in cui ogni nodo, detti blocco, rappresenta una transazione valida ed ogni arco orientato rappresenta la sua evoluzione temporale\footnote{Blockchain non è utilizzato solo per realizzare il consenso distribuiti sulle transazioni Bitcoin, ma anche, ad esempio, per tracciare il ciclo di vita dei diamanti.}.
+Ogni nodo della rete Bitcoin ha una copia locale di Blockchain e l'ordine temporale delle transazioni è mantenuto mediante \textit{algoritmo del consenso distribuito}
+.
+Ogni blocco contiene la certificazione di uno stato. I blocchi sono crittograficamente collegati. La modifica di un blocco validato si propaga in tutti gli altri blocchi sicchè i nodi possono rilevare e localizzare la modifica.
 
 Da un punto di vista di servizio economico, Bockchain realizza un libro mastro distribuito delle transazioni Bitcoin.
-
-Ogni nodo della rete ha una copia locale di Blockchain.
-
-I blocchi sono crittograficamente collegati.
-
-Blockchain non è utilizzato solo per realizzare il consenso distribuiti sulle transazioni Bitcoin, ma anche, ad esempio, per tracciare il ciclo di vita dei diamanti.
-
-Ogni blocco contiene la certificazione di uno stato: transazione valida, posizione di un diamante, storia medica di un paziente.
-
-La modifica di un blocco validato si propaga in tutti gli altri blocchi sicchè i nodi possono rilevare e localizzare la modifica.
 
 Ogni transazione è autenticata mediante firma digitale a chiave pubblica. La firma digitale viene effettuata mediante chiave privata e verificata mediante chiave pubblica. La perdita della chiave privata comporta l'impossibilità di transare Bitcoin associati alla corrispondente chiave pubblica.
 Un wallet immagazzina le informazioni necessarie a transare Bitcoin. Mantiene la collezione di coppie chiave publica-privata. I wallet possono essere implementati da software locali, servizi web o hardware ad-hoc.
 
-Bitcoin realizza l'anonimato mediante uno schema pseudonimo in cui le transazioni sono pubbliche, ma ogni transazione può essere associata ad una identità differente (nuova coppia chiave-pubblica/privata).
+Quando si dichiara una nuova transazione, questa viene inserita in un blocco, detto blocco di output, al quale si connettono altri blocchi, detti blocchi di input, che sono transazioni valide la cui somma di denaro deve essere almeno pari a quella della transazione corrente.
+Ogni blocco può essere utilizzato solo una volta come blocco di input, risolvendo così il problema del \textit{double spending}.
+Una transazione può comportare uno o più blocchi di output: questo garantisce il pagamento simultaneo e il meccanismo del resto qualora la somma degli input ecceda la somma della transazione.
 
-Ogni blocco contiene transazioni contemporanee. Bisogna raggiungere il consenso distribuito sui link tra blocchi.
-Ogni blocco contiene la risposta ad un problema matematico.
-
-Approssimativamente viene pubblicato un blocco ogni dieci minuti.
-
-Una transazione referenzia uno o più input validi (blocchi mai utilizzati come input) mediante firma digitale. Una transazione può comportare uno o più uutput: questo garantisce il pagamento simultaneo e il meccanismo del resto qualora la somma degli input ecceda la somma della transazione.
+"Possedere bitcoin" vuol dire che all'interno di Blockchain c'è almeno un blocco mai usato come input che punta al nostro id. Quindi perdere la propria chiave privata rende inutilizzabili i bitcoin associati alla corrispondente chiave pubblica in quanto non è più possibile sottomettere transazioni validabili.
 
 Ogni blocco contiene l'hashing SHA-256 del blocco precedente, il quale permette a Blockchain di connetterlo al blocco specificato.
 
-Ogni blocco contiene un proof-of-work basato sulla inversione di funzioni hash.
+Ogni blocco deve essere validato mediante il processo di mining per poter essere inserito all'interno di Blockchain.
+
+Ogni blocco contiene un \textit{proof-of-work} basato sulla inversione di funzioni hash\footnote{Un proof-of-work è compito computazionalemnte complesso da svolgere, le cui soluzioni sono però molto semplici da verificare. È un compito che induce sforzo computazionale, ed è una metodo adottato come contromisura al DOS.}.
 In particolare il problema consiste nel determinare una stringa x, detta nonce, tale che H(B,x)<T, dove H è la funzione hash SHA256, B è il blocco e T, detto network target, è un valore inversamente proporzionale alla attuale potenza di calcolo di riferimento. Tipicamente i miners determinano il nonce per tentativi.
 I miners si uniscono in mioning poll per mettere in comune la potenza di calcolo e effettuare mining più rapidi, dividendosi proporzionalmente l'award.
 Ad oggi le mining pool adottano hw ad-hoc e per minimizzare i costi di elettricità vengono realizzate mining farm laddove si abbatte il costo di refrigerazione e l'energia elettrica costa poco.
 
-Un proof-of-work è compito computazionalemnte complesso da svolgere, le cui soluzioni sono però molto semplici da verificare. È un compito che induce sforzo computazionale, ed è una metodo adottato come contromisura al DOS.
-Il proof-of-work in Blockchain è basato sulla inversione di funzioni hash.
-
-Il miner che risolve il problema di un blocco ottiene un compenso in Bitcoin\footnote{ad oggi, più o meno 12BT.}, incluso in una transazione speciale, detta coinbase, integrata nella transazione validata. e pertanto registrata in Blockchain.Tutti i Bitcoin attuali sono stati creati come mining reward in transazioni coinbase. Il protocollo Bitcoin prevede il dimezzamento del mining reward ogni 210000 blocchi (più o meno 4 anni), arrivando ad annullarsi quando il mercato avra raggiunto 21M BT e il compenso sarà allora solamente costitutito da una piccola fee.
+Il miner che risolve il problema di un blocco ottiene un compenso in Bitcoin\footnote{ad oggi, più o meno 12BT.}, incluso in una transazione speciale, detta \textit{coinbase}, integrata nella transazione validata. e pertanto registrata in Blockchain. Approssimativamente viene pubblicato un blocco ogni dieci minuti.
