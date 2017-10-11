@@ -5,6 +5,7 @@
 I Relational Data Base Management Systems (RDBMS) sono i sistemi tradizionali di data storage relazionale.
 
 I vantaggi principali sono:
+
 * garanzia ACID
 * linguaggio SQL
 * data model relazionale (tabelle, righe, colonne) molto intuitivo
@@ -15,6 +16,7 @@ I vantaggi principali sono:
 * DBMS stabili e standardizzati
 
 Gli svantaggi principali sono:
+
 * non progettati per essere distribuiti
 * non scalabili orizzontalmente
 * supporto limitato per la definizione di strutture dati complesse
@@ -24,12 +26,14 @@ Gli svantaggi principali sono:
 * limiti sulla dimensione dei campi
 
 Le moderne applicazioni web comportano:
+
 * massive data
 * spikes di traffico
 * alto rate R/W
 * modifiche ai data schema, supposti flesibili
 
 Una possibile soluzione per gli RDBMS è di prevedere:
+
 * *replicazione:* un'architettura master-slave in cui il Master regola la replicazione sugli Slave permetterebbe di scalare le Read, ma non le Write.
 * *sharding:* il partizionamento orizzontale dei dati su più nodi (ad esempio, mediante consistent hashing) permetterebbe di scalare le Read e le Write, ma eliminerebbe le garanzie ACID.
 
@@ -40,11 +44,13 @@ Pertanto, scalare i RDBMS è costoso ed inefficiente.
 I datastore NoSQL (Not-Only-SQL) sono una classe di tecnologie di data storage che si propone come alternativa ai tradizionali RDBMS, per ovviare ai limiti di questi ultimi in termini di scalabilità orizzontale. Il principio fondante di questi sistemi è evitare complessità non strettamente necessarie, a favore delle performance.
 
 Le caratteristiche principali sono:
+
 * garanzia BASE
-* scalabilità orizzontale
+* scalabilità orizzontale, grazie a sharding e replicazione
 * distribuzione geografica
 * schemi flessibili
 * alta disponibilità grazie alla replicazione dei dati su più nodi
+* fault-tolerance grazie alla replicazione
 * API molto semplice
 
 Il data model NoSQL possono essere:
@@ -74,6 +80,7 @@ I tipi di aggregato sono:
   * **document:** i dati sono rappresentati come una collezione di coppie chiave-documento, in cui il documento è un aggregato strutturato (eventualmente innestato) con struttura visibile (sono possibili query sui campi dell'aggregato).
 
   Le caratteristiche principali sono:
+
     * aggregato con struttura visibile
     * schemi flessibili
     * documenti codificati con formati standard (e.g. XML, JSON, YAML)
@@ -114,10 +121,11 @@ In particolare, tecnologie diverse rispondono diversamente al *trade-off individ
 Pertanto, sistemi in cui il data storage è implemetato da una singola tecnologia possono risultare inefficienti.
 
 Ad esempio, un'applicazione di e-commerce può implementare lo strato di data storage nel seguente modo:
-(i) gestione dello shopping cart e della sessione utente basata su key-value datastore;
-(ii) gestione degli ordini basata su document datastore;
-(iii) gestione dell'inventario basata su RDBMS;
-(iv) gestione delle relazioni tra utenti basata su graph datastore.
+
+* gestione dello shopping cart e della sessione utente basata su key-value datastore;
+* gestione degli ordini basata su document datastore;
+* gestione dell'inventario basata su RDBMS;
+* gestione delle relazioni tra utenti basata su graph datastore.
 
 ---
 
@@ -126,6 +134,7 @@ Amazon DynamoDB è un *key-value datastore* sviluppato da Amazon e noto per (i) 
 È parte integrante del portfolio AWS.
 
 Le caratteristiche principali sono:
+
 * sistema AP
 * architettura  *P2P con membership gossip-based*
 * sharding basato su *consistent hashing*:
@@ -154,9 +163,12 @@ Un datastore molto simile a Dynamo è *RiakKV*, il quale prevede però anche il 
 ---
 
 ## Redis
-REmote DIrectory Server (Redis) è un key-value datastore in-memory spesso utilizzato per implementare lo *strato di caching*.
+REmote DIrectory Server (Redis) è un *key-value datastore* in-memory spesso utilizzato per implementare lo *strato di caching*.
+
+Fino al 2015 è stato il più famoso della sua categoria.
 
 Le caratteristiche principali sono:
+
  * in-memory datastore
  * molte operazioni sono atomiche
  * molto efficiente
@@ -221,6 +233,35 @@ Le caratteristiche principali sono:
 
 ---
 
+## HBase
+Apache HBase è un *column-family datastore* open-source sviluppato come clone di BigTable (stesso data-model, architettura e sharding).
+È utilizzato sia per applicazioni batch che per applicazioni real-time.
+
+Le caratteristiche principali sono:
+
+* sistema CP
+
+* architettura *master-slave*:
+  * **MasterServer (MS):** gestione mapping region->RegionServer.
+  * **RegionServer (RS):** gestiscono la persistenza sul proprio nodo. Possono essere aggiunti/rimossi a runtime per un migliore load-balancing.
+
+* basato su HDFS
+
+* sharding:
+  * le righe sono organizzate in *Region* (righe contigue)
+  * ogni Region è assegnata ad un RegionServer
+  * auto-sharding di Region troppo grandi
+
+* versioning delle celle mediante timestamp associato al valore
+
+* I/O:
+  * consistenza forte a livello delle righe, in quanto ogni riga è servita da un unico RegionServer
+  * scanning e row-key lookup molto efficienti
+
+* coordinazione mediante Zookeeper
+
+---
+
 ## Cassandra
 Cassandra è un *column-family datastore* sviluppato da Facebook, noto per (i) alta disponibilità (ii) scalabilità orizzontale (iii) supporto per distribuzione geografica e (iv) bassa latenza.
 
@@ -244,40 +285,11 @@ Le caratteristiche principali sono:
 
 ---
 
-## HBase
-Apache HBase è un *column-family datastore* open-source sviluppato come clone di BigTable (stesso data-model, architettura e sharding).
-È utilizzato sia per applicazioni batch che per applicazioni real-time.
-
-Le caratteristiche principali sono:
-
-* sistema CP
-
-* architettura *master-slave*:
-  * **MasterServer (MS):** gestione mapping region->RegionServer
-  * **RegionServer (RS):** gestiscono la persistenza sul proprio nodo, possono essere aggiunti/rimossi a runtime per migliore load-balancing
-
-* basato su HDFS
-
-* sharding:
-  * le righe sono organizzate in Region
-  * ogni Region è assegnata ad un RegionServer
-  * ogni riga è memorizzata da un solo RegionServer
-  * auto-sharding di Region troppo grandi
-
-* versioning delle celle mediante timestamp associato al valore
-
-* I/O:
-  * atomicità a livello delle righe, quindi consistenza forte a livello delle righe
-  * scanning e row-key lookup molto efficienti
-
-* coordinazione mediante Zookeeper
-
----
-
 ## MongoDB
 MongoDB è un *document datastore* considerato ad oggi un de-facto standard.
 
 Le caratteristiche principali sono:
+
 * i document sono:
   * rappresentati in formato *BSON*, ovvero un'estensione di JSON in formato binario con supporto a più tipi di dato (e.g. timestamp, objectID)
   * identificato da un documentID univoco da utilizzare per fare collegamenti tra document
@@ -296,7 +308,6 @@ Le caratteristiche principali sono:
 
 * garanzia ACID
 * architettura *master-slave*: il master esegue operazioni R/W e gli slave eseguono operazioni Read-Only.
-* multi-level caching per aumentare il throughput
-* Cypher come query language SQL-like per operazioni CRUD e primitive built-in per query sui path (e.g. shortestPath, allShortestPath)
-* nodi taggabili con uno o più *label* per distinguerne il ruolo nel dominio
-* archi unidirezionali e taggabili con *label* per distinguerne il ruolo nel dominio.
+* *multi-level caching* per aumentare il throughput
+* *Cypher* come query language SQL-like per operazioni CRUD e *primitive built-in per query sui path* (e.g. shortestPath, allShortestPath)
+* nodi e archi taggabili con uno o più *node/edge label* per distinguerne il ruolo nel dominio

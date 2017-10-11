@@ -86,6 +86,33 @@ Estende GFS, prevedendo:
 
 ---
 
+## HDFS
+Hadoop Distributed File System (HDFS) è un DFS sviluppato come versione open-source di GFS.
+
+È il de-facto standard per il data storage in applicazioni batch.
+
+Le caratteristiche principali e le considerazioni sono simili a GFS. A queste si aggiungono:
+
+* un cluster HDFS è costituito da nodi:
+  * **NameNode (NN):** master, responsabile del namespace, dei metadati e del mapping blocco-DataNode.
+  * **DataNode (DN):** worker, esegue operazioni R/W sui propri blocchi.
+
+* sharding:
+  * un file è partizionato in *blocchi da 128MB*
+  * ogni blocco è replicati su un insieme di DataNode
+  * di ogni file è possibile specificare il grado di replicazione
+
+* fault-tolerance:
+  * meccanismo di snapshooting molto efficiente.
+  * non tollerante al guasto del NameNode.
+
+* progettato per commodity HW
+* portabile
+
+* disponibile una WebUI
+
+---
+
 ## FDS
 Il Flat Datacenter Storage (FDS) è una classe di DFS in cui il datacenter è visto come un insieme omogeneo di risorse di storage (cioè senza distinguere dischi locali e dischi remoti).
 
@@ -137,28 +164,3 @@ Le principali caratteristiche sono:
 
 * I/O:
   * alto throughput per Read/Write.
-
----
-
-## HDFS
-Hadoop Distributed File System (HDFS) è un DFS sviluppato come versione open-source di GFS.
-È il de-facto standard per il data storage in applicazioni batch.
-
-Le caratteristiche principali e le considerazioni sono simili a GFS. A queste si aggiungono:
-
-* un cluster HDFS è costituito da nodi:
-  * **NameNode (NN):** master, responsabile del namespace, dei metadati e del mapping blocco-DataNode.
-  * **DataNode (DN):** worker, memorizza i blocchi dei file.
-
-* sharding:
-  * un file è partizionato in blocchi da 128MB, distribuiti e replicati su un insieme di DataNode
-  * di ogni file è possibile specificare il grado di replicazione
-
-* fault-tolerance:
-  * meccanismo di snapshooting molto efficiente.
-  * non tollerante al guasto del NameNode.
-
-* progettato per commodity HW
-* portabile
-
-* disponibile una WebUI
