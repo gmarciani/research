@@ -3,13 +3,13 @@ Molte definizioni sono state date per il termine "Big Data":
 
 * Big data exceeds the reach of commonly used hardware environments and software tools to capture, manage, and process it within a tolerable elapsed time for its user population. -- Teradata Magazine article, 2011.
 * Big data refers to data sets whose size is beyond the ability of typical database software tools to capture, store, manage and analyze. -- The McKinsey Global Institute, 2012.
-* Big data is high volume, high velocity, and/or high variety information assets that require new forms of processing to enable enhanced decision making, insight discovery and process optimization. -- Gartner, 2012.
 * Big data is a term for data sets that are so large or complex that traditional data processing application softwares are inadequate to deal with them. -- Wikipedia, 2017.
-* Big data is mostly about taking numbers and using those numbers to make predictions about the future. The bigger the data set you have, the more accurate the predictions about the future will be. -- Anthony Goldbloom, Kaggle’s founder.
+* Big data is high volume, high velocity, and/or high variety information assets that require new forms of processing to enable enhanced decision making, insight discovery and process optimization. -- Gartner, 2012.
 
+I Big Data hanno motivato l'affermazione dei concetti: Extract-Load-Transform (ELT), data lake, NoSQL.
 
 ## Modello 7V
-Con il termine Big Data si indica uno scenario in cui il dataset risponde al **modello 7V*:
+Con il termine Big Data si indica uno scenario in cui il dataset risponde al **modello 7V**:
 * **volume:** la dimensione del flusso dei dati è così grande da rendere impossibile l'approccio store&process.
 * **variety:** i dati sono eterogenei in termini di dominio, formato e grado di strutturazione.
 * **velocity:** i dati vengono prodotti velocemente e devono essere analizzati velocemente.
@@ -24,7 +24,7 @@ Nel 2012, il modello di riferimento era il **modello 3V**: value, variety, veloc
 ## Motivazioni
 I motivi per cui oggi si parla di Big Data sono i seguenti:
 * i dati sono nativamente digitali.
-* i dati sono generati con crescita del 40% annuo.
+* i dati sono generati con crescita annua del 40%.
 * diminuzione del costo hardware.
 * aumento della capacità computazionale.
 * interesse delle compagnie (76% delle compagnie interessate ai Big Data nel 2016).
@@ -48,22 +48,6 @@ La gestione dei Big Data segue il seguente processo iterativo:
 * **analysis:** esplorazione, data mining, machine learning, visualizzazione.
 * **interpretation:** conoscenza del dominio, identificazione dei pattern di interesse.
 * **decision:** formulazione strategia, CI/CD del processo.
-
-
-## ETL/ELT
-Il paradigma di analisi dati tradizionale è **Extract-Transform-Load (ETL)**, in cui i dati sono
-(i) estratti dalle sorgenti e memorizzati temporaneamente in una staging area,
-(ii) trasformati nel formato previsto per l'analisi e
-(iii) caricati del sistema finale di data-warehouse.
-
-I Big Data hanno portato all'adozione del nuovo paradigma **Extract-Load-Transform (ELT)**, in cui i dati sono
-(i) estratti dalle sorgenti,
-(ii) caricati in un data lake e
-(iii) trasformati per l'analisi finale.
-
-
-## Data Lake
-Un Data Lake è un metodo di storage dei dati all'interno di un sistema nel suo formato naturale (in forma di BLOB o file), ficilitando la collocazione dei dati secondo schemi diversi.
 
 
 ## Challenges

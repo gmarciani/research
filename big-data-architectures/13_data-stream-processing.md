@@ -48,6 +48,16 @@ Una open issue è l'identificazione della porzione di stato da migrare, la quale
 * **fault-tolerance:** gli approcci di fault-tolerance devono tenere in conto il trade-off tra costo di recovery e costo di runtime in assenza di failure. Gli approcci più diffusi sono: *replicazione, check-pointing, replay log*.
 * **architetture lambda:** sistemi che integrano DSP e batch processing.
 
+---
+
+# DSP Placement Problem
+Il DSP Placement Problem consiste nel determinare il posizionamento ottimo di operatori DSP su un insieme di nodi computazionali.
+È un problema NP-Hard affrontato mediante (i) programmazione matematica (ii) algoritmi euristici o (iii) algoritmi su grafi.
+L'approccio può essere:
+* *centralizzato:* determina l'ottimo globale, considerando tutta la rete. Non scala.
+* *distribuito:* determina l'ottimo locale considerando le caratteristiche locali della rete. Non garantisce ottimalità globale della soluzione.
+
+---
 
 ## Storm
 Apache Storm è un framework DSP.
