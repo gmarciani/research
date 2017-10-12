@@ -7,8 +7,9 @@ Le caratteristiche principali sono:
 
 * *in-memory data storage* per rendere efficienti le iterazioni (velocità 10x rispetto ad Hadoop MapReduce)
 * *in-memory data sharing* per rendere efficiente l'interazione tra job paralleli
-* scheduling basato su *Mesos*, *YARN* o *Standalone Spark Scheduler* (scheduler interno a Spark)
+* supporta più tipi di computazione: Batch, DSP, interactive query
 * supporto per *HDFS*
+* scheduling basato su *Mesos*, *YARN* o *Standalone Spark Scheduler* (scheduler interno a Spark)
 * *Resilient Distributed Dataset (RDD)* come astrazione dati. Un RDD è un collezione di dati che possono essere processati in parallelo. Un RDD è partizionato su tutti i nodi.
 * architettura *master-slave*
    * il master è realizzato dall'interazione tra *Spark Context* e *Cluster Manager*

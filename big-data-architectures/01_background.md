@@ -87,3 +87,7 @@ Un protocollo di gossiping é un protocollo di comunicaziome in cui i messaggi s
 
 ## Chubby
 Chubby è un sistema di locking distribuito basato su Paxos e utilizzato in molti prodotti di Google.
+
+
+## Chandy-Lamport
+L'algoritmo di Chandy-Lamport è un *algoritmo di snapshot distribuito* che permette dunque ad un sistema distribuito di registrate il proprio stato globale. L'algoritmo è basato su un approccio di gossiping, in cui i processi diffondono nel sistema le richieste di snapshot.

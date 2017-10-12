@@ -48,6 +48,8 @@ I framework DSP prevedono due tipologie di processamento:
 * **one-at-a-time:** ogni tupla è processata nel momento in cui entra in un operatore. Questa modalità minimizza la latenza.
 * **micro-batching:** le tuple vengono raggruppate in un cosidetto *micro-batch* per poi essere processate. Questa modalità massimizza il throughput.
 
+Con il termine **data flow processing framework** si indica una tecnologia finalizzata alla implementazione sia di applicazioni DSP che Batch.
+
 
 ## Challenges
 Le sfide più importanti in ambito DSP sono:
@@ -91,9 +93,18 @@ I vantaggi principali sono:
 
 I maggiori servizi Cloud sono:
 
-* **Google DataFlow:** servizio di Google Cloud noto per (i) auto-scaling e (ii) integrazione nativa con Beam.
-* **Amazon Kinesis Streams:** servizio di AWS noto per (i) load-balancing tra istanze EC2, (ii) adaptive sharding e (iii) fault-tolerance.
-Mediante *Kinesis Producer Library (KPL)* sorgenti eterogenee possono pushare dati su Kinesis sottoforma di Kinesis Stream, ovvero sequenze di Data Record, i quali vengono partizionati in Kinesis Shard leggibili mediante *Kinesis Client Library (KCL)*.
+* **Google DataFlow:** servizio di Google Cloud Platform noto per
+  * integrazione nativa con altri servizi Google Cloud Platform.
+  * auto-scaling
+  * comunicazione exactly-once
+  * modello di programmazione uniforme per più pattern (ETL, Batch, DSP) mediante *Beam*
+
+* **Amazon Kinesis Streams:** servizio di AWS noto per
+  * integrazione nativa con altri servizi AWS
+  * load-balancing tra istanze EC2
+  * adaptive sharding
+  * fault-tolerance
+Mediante *Kinesis Producer Library (KPL)* sorgenti eterogenee possono pushare dati su Kinesis sottoforma di *Kinesis Stream*, ovvero sequenze di *Data Record*, i quali vengono partizionati in *Kinesis Shard* leggibili mediante *Kinesis Client Library (KCL)*.
 
 ---
 
@@ -128,7 +139,7 @@ Le caratteristiche principali sono:
 ---
 
 ## Storm Trident
-Apache Storm Trident è un framework DSP sviluppato come estensione di Apache Storm.
+Apache Storm Trident è un *DSP framework** sviluppato come estensione di Apache Storm.
 
 Le caratteristiche principali sono:
 
@@ -161,65 +172,70 @@ Le caratteristiche principali sono:
 ---
 
 ## Heron
-Heron è un framework DSP sviluppato da Twitter come successore di Storm, con l'obiettivo di superarne i limiti di performance e affidabilità.
+Heron è un *DSP framework* sviluppato da Twitter con l'obiettivo di superare i limiti di performance e affidabilità di Storm.
 
 Le caratteristiche principali sono:
-* compatibilità piena con Storm, sia a livello di API che a livello terminologico
-* isolation: le topologie sono process-based piuttosto che thread-based.
-* possibilità di definire vincoli sull'utilizzo delle risorse, quindi sicuro per esecuzione su cluster condivisi.
-* meccanismo built-in di back-pressure
-* fine-tuning del trade-off tra latenza e throughput
-* supporto per semantica at-most-once e at-least-once
-* architettura Master/Slave
-  * Topology Master (TM): unico, gestisce tutto il ciclo di vita della topologia
-  * Container (C): comunica con il TM per coordinarsi sul ciclo di vita della topologia.
-    * Stream Manager (SM): responsabile del routing degli stream, comunica con gli altri SM, responsabile del meccanismo di back-pressure.
-    * Metric Manager (MM):
-* supporta Mesos
-* permette diversi tipi di deployment: standalone/single-node, cluster-testing e cluster-production
+
+* architettura **master-slave**
+  * **Topology Master (TM):** unico, gestisce il ciclo di vita della topologia.
+  * **Container (C):** su ogni nodo, comunica con il TM per coordinarsi sul ciclo di vita della topologia.
+    * **Stream Manager (SM):** responsabile del routing degli stream, comunica con gli altri SM, responsabile del meccanismo di back-pressure.
+    * **Metric Manager (MM):** responsabile del monitoring del nodo e della comunicazione delle statistiche al TM.
+* **Storm-compatibility:** la compatibilità con Storm è piena, sia a livello terminologico che a livello di API.
+* **isolation:** le topologie sono *process-based* piuttosto che thread-based.
+* **resource contraints:** è possibile definire vincoli sull'utilizzo delle risorse, così da renderne sicura l'esecuzione su cluster condiviso.
+* **back-pressure:** prevede un meccanismo built-in di back-pressure.
+* **tuning latency/throughput:** è possibile fare tuning a grana fine sul trade-off tra latenza e throughput.
+* **comunicazione exactly-once/atleast-once:** supporta sia semantica *at-most-once* che *at-least-once*.
+* **deployment**: fornisce deployment *standalone/single-node*, *cluster-testing* e *cluster-production*.
+* **resource management:** supporta *Mesos* e *Aurora*.
 
 ---
 
 ## Flink
-Apache Flink è un framework di data flow processing distribuiti per lo sviluppo di applicazioni DSP e batch.
+Apache Flink è un *data flow processing framework* distribuito per lo sviluppo di applicazioni *DSP* e *Batch* da eseguire su cluster di grandi dimensioni (>1000 nodi).
+
 Le caratteristiche principali sono:
-* framework DSP nativo
-* supporto per lo sviluppo di applicazioni batch
-* software stack molto ricca:
-  * *DataStream API:* sviluppo di applicazioni DSP. Su di esso sono stati sviluppati *CEP* (event processing) e *Table* (relational analysis).
-  * *DataSet API:* sviluppo di applicazioni batch. Su di esso sono stati sviluppati *FlinkML* (machine learning), *Gelly* (graph analysis) e *Table* (relational analysis).
-* minimizzazione della latenza
-* modalità DSP one-at-a-time
-* supporto per operatori stateful
-* semantica di comunicazione exactly-once
-* windowing molto flessibile
-* supporto per topologie cicliche
-* meccanismo built-in di backpressure
-* ottimizzazione automatica del flusso dati in applicazioni batch (e.g., caching di outut intermedi e rimozione di operazioni shuffle&sort inutili)
-* fault-tolerance mediante meccanismo Chandy-Lamport mediante checkpointing barrier e watermark
-* non garantisce ordinamento di stream partizionati
-* architettura Master/Slave
-  * JobManager (JM): master, unico, responsabile dello scheduling di task, checkpointing e failure recovery.
-  * TaskManager (TM): responsabile per esecuzione dei task (un task per ogni task slot), buffering delle tuple, comunicazione degli stream con altri TM.
-* progettato per essere eseguito su custer di grandi dimensioni
-* supporto per Mesos e YARN
-* modalità di gestione interna della memoria JVM
+
+* **architettura master-slave:**
+  * **JobManager (JM):** unico master, responsabile dello scheduling di task, checkpointing e failure recovery.
+  * **TaskManager (TM):** un worker per ogni nodo, responsabile dell'esecuzione dei task e routing degli stream. È composto da (i) una collezione di *Task Slot* per l'esecuzione dei task (uno per ogni task), (ii) un *Memory Manager* per il buffering delle tuple e (iii) un *Network Manager* per la trasmissione degli stream.
+* **data flow processing:** è un framework *DSP nativo* che supporta lo sviluppo di applicazioni Batch.
+* **Flink Stack:** la software stack prevede:
+  * **DataStream API:** sviluppo di applicazioni DSP.
+  Su di esso sono stati sviluppati *CEP* (event processing) e *Table* (relational analysis).
+  * **DataSet API:** sviluppo di applicazioni Batch.
+  Su di esso sono stati sviluppati *FlinkML* (machine learning), *Gelly* (graph analysis) e *Table* (relational analysis).
+* **one-at-a-time**: la modalità DSP one-at-a-time permette la minimizzazione della latenza.
+* **operatori stateful:** lo stato degli operatori può essere modellato internamente.
+* **comunicazione exactly-once**
+* **topologie cicliche:** la pipeline può contenere dei feedback.
+* **back-pressure:** prevede un meccanismo built-in di back-pressure.
+* **fault-tolerance:** la tolleranza ai guasti è garantita da *snapshotting Chandy-Lamport*, *checkpointing barrier* e *watermark*.
+* **deployment**: fornisce deployment *local*, *cluster* e *Cloud*.
+* **resource management:** supporta *Mesos* e *YARN*.
+* **ottimizzazione batch**: fornisce l'ottimizzazione automatica del flusso dati in applicazioni batch, mediante *caching di output intermedi* e *rimozione shuffle&sort inutili*.
+* **ordinamento tuple:** non garantisce l'ordinamento delle tuple in stream partizionati; la gestione dell'ordinamento è lasciato all'implementazione dell'operatore.
+* **windowing flessibile:** è possibile definire discipline di windowing custom.
+* **memory management:** è possibile definire la ripartizione della memoria JVM tra JM e TM; inoltre Flink ottimizza internamente la gestione della memoria JVM.
 
 ---
 
 ## Spark Streaming
-Spark Streaming è un componente della Spark Stack che permette a Spark Core di processare datastream.
+Spark Streaming è un componente della Spark Stack che permette a Spark Core di realizzare applicazioni DSP.
+
 Le principali caratteristiche sono:
-* risultati parziali in-memory (40x più veloce rispetto a Hadoop MapReduce).
-* supporto per data ingestion dai più famosi framework (e.g., Kafka, Flume) e socket TCP.
-* supporto per data extraction verso i più famosi framework (e.g., Kafka, Flume, HDFS, Elasticsearch).
-* modello DSP micro-batch (un nuovo batch di tuple è generato ogni volta che scade il batch-interval definito, tipicamente ogni 500ms).
-* i dati fluiscono come DStream, ovvero sequenza continua di micro-batch, quindi le operazioni definite sul DStream sono internamente convertite in operazioni sui singoli micro-batch.
-* una trasformazione può essere stateless o stateful.
-* supporto per trasformazioni di windowing (bisogna specificare windowSize e SlidingInterval).
-* l'esecuzione di operazioni di riduzione su windowing, richiede che sia attivato esplicitamente il checkpointing.
+
+* **micro-batching**: un nuovo batch di tuple è generato ogni volta che scade il *batch-interval* definito, tipicamente ogni 500ms.
+* **DStream:** i dati fluiscono come una sequenza continua di micro-batch, detta DStream, quindi le operazioni definite sul DStream sono internamente convertite in operazioni sui singoli micro-batch.
+* **in-memory:** i risultati parziali in-memory (40x più veloce rispetto a Hadoop MapReduce).
+* **data ingestion:** supporta i più famosi framework di data ingestion (e.g., Kafka, Flume) e socket TCP.
+* **data extraction:** supporta i più famosi framework di data extraction (e.g., Kafka, Flume, HDFS, Elasticsearch).
+* **stateful operators:** supporta operatori stateful.
+* **windowing:** supporta trasformazioni di windowing, ma necessità che sia esplicitamente attivato il checkpointing.
 
 ---
 
 ## Beam
-Apache Beam è un framework che permette di definire, mediante un modello di programmazione uniforme, pipeline DSP e batch eseguibili dai framework più diffusi (e.g., Flink, Spark, Google DataFlow). Tipicamente, è impiegato per definire job trivialmente parallelizzabili.
+Apache Beam è un *worflow framework* che permette di definire, mediante un modello di programmazione uniforme, pipeline DSP e batch eseguibili dai framework più diffusi (e.g., Flink, Spark, Google DataFlow).
+Tipicamente, è impiegato per definire job trivialmente parallelizzabili.
