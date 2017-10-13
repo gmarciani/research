@@ -156,6 +156,8 @@ Le caratteristiche principali sono:
 
 Un datastore molto simile a Dynamo è *RiakKV*, il quale prevede però anche il supporto per Mesos.
 
+![DynamoDB, architettura](img/data-storage-dynamodb-architecture.png "DynamoDB, architettura")
+
 ---
 
 ## Redis
@@ -170,6 +172,8 @@ Le caratteristiche principali sono:
  * **aggregato:**
   * la chiave è una stringa ASCII a cui è possibile associare un timeout di validità.
   * il valore è una stringa (al più 512MB) o (ii) un contenitore di stringhe (hashmap, list, set, sortedset).
+
+![Redix, architettura](img/data-storage-redis-architecture.png "Redis, architettura")
 
 ---
 
@@ -208,6 +212,8 @@ Le caratteristiche principali sono:
   * gestione delle informazioni sugli schemi.
 
 * **atomicità:** l'atomicità è garantita sulla singola riga.
+
+![BigTable, architettura](img/data-storage-bigtable-architecture.png "BigTable, architettura")
 
 
 ### Focus: fasi principali
@@ -255,6 +261,8 @@ Le caratteristiche principali sono:
   * *consistenza forte su riga*, in quanto ogni riga è servita da un unico RegionServer.
   * *lookup molto efficiente*.
 
+![HBase, architettura](img/data-storage-hbase-architecture.png "HBase, architettura")
+
 ---
 
 ## Cassandra
@@ -265,7 +273,7 @@ Cassandra è un *column-family datastore* sviluppato da Facebook, noto per *scal
 Le caratteristiche principali sono:
 
 * **sistema AP**
-* **architettura masterless** per minimizzare la latenza delle operazioni.
+* **architettura master-less** per minimizzare la latenza delle operazioni.
 * **consistenza configurabile** è possibile stabilire il grado di consistenza per ogni query, specificando il *tipo di quorum* richiesto:
   * **ONE:** una sola replica.
   * **QUORUM:** la maggioranza delle repliche.
@@ -273,6 +281,8 @@ Le caratteristiche principali sono:
   * **LOCAL_QUORUM:** tutte le repliche dello stesso datacenter.
 
 * **Cassandra Query Language (CQL)** come query language *SQL-like*.
+
+![Cassandra, architettura](img/data-storage-cassandra-architecture.png "Cassandra, architettura")
 
 ---
 
@@ -290,6 +300,8 @@ Le caratteristiche principali sono:
   * *dot-notation* per indicizzazione di array e esplorazione attributi (e.g, array.2, document.attribute).
   * una query ritorna un *cursor* per scorrere i document risultanti.
 
+![MongoDB, architettura](img/data-storage-mongodb-architecture.png "MongoDB, architettura")
+
 ---
 
 ## Neo4j
@@ -303,3 +315,5 @@ Le caratteristiche principali sono:
 * **Cypher** come query language *SQL-like*.
 * **path query:** primitive built-in per eseguire query sui path (e.g. shortestPath, allShortestPath).
 * **label:** nodi e archi taggabili con uno o più *label* per distinguerne il ruolo nel dominio.
+
+![Neo4j, architettura](img/data-storage-neo4j-architecture.png "Neo4j, architettura")

@@ -80,6 +80,8 @@ Considerazioni:
   * chunk di grandi dimensioni.
   * coordinamento delle repliche delegato alla replica primaria.
 
+![GFS, architettura](img/data-storage-gfs-architecture.png "GFS, architettura")
+
 ---
 
 ## Colossus
@@ -110,6 +112,8 @@ Le caratteristiche principali e le considerazioni sono simili a GFS. Riportiamo 
 * progettato per commodity HW
 * portabile
 * disponibile una WebUI
+
+![HDFS, architettura](img/data-storage-hdfs-architecture.png "HDFS, architettura")
 
 ---
 
@@ -143,6 +147,8 @@ Le caratteristiche principali sono:
   * Read/Write atomiche, ma senza garanzia di ordinamento.
   * API: asincrona
 
+![FDS, architettura](img/data-storage-fds-architecture.png "FDS, architettura")
+
 ---
 
 ## Alluxio
@@ -163,3 +169,5 @@ Le principali caratteristiche sono:
 * **fault-tolerance:**
   * la **tecnica lineage** permette di mantenere le dipendenze delle modifiche ai file, ricostruendoli in caso di fallimento.
   * il *checkpointing persistente dei dati* viene eseguito dando *maggiore priorità ai file maggiormente acceduti*.
+
+![Alluxio, architettura](img/data-storage-alluxio-architecture.png "Alluxio, architettura")

@@ -27,6 +27,9 @@ Le caratteristiche principali sono:
   * le transazioni Read/Write sono locked
   * transazioni Read-Only sono lock-free
 * **versioning dei dati**
+
+![Spanner, architettura](img/data-storage-spanner-architecture.png "Spanner, architettura")
+
 ---
 
 ## VoltDB
@@ -44,3 +47,5 @@ Le caratteristiche principali sono:
 * **sharding:** ogni tabella è partizionata in **shards**, ognuno dei quali è replicato su più nodi, secondo un *grado di replicazione custom per-tabella*.
 * **transazioni serializzate:** le transazioni sono eseguite sequenzialmente da un singolo thread senza locking.
 * **snapshoting continuo o schedulabile**
+
+![VoltDB, architettura](img/data-storage-voltdb-architecture.png "VoltDB, architettura")

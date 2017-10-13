@@ -125,12 +125,12 @@ Le caratteristiche principali sono:
   Ogni WorkerNode esegue un *Supervisor* che riceve da Nimbus i task da schedulare e notifica periodicamente a Nimbus il proprio stato.
   * **Zookeeper:** mantiene lo stato di esecuzione della topologia.
 
-* data parallelism: uno stream può essere partizionato su più operatori mediante:
-  * *shuffle grouping:* randomicamente.
-  * *field grouping:* secondo il valore di uno o più attributi della tupla.
-  * *all grouping:* lo stream è replicato su tutti gli operatori.
-  * *global grouping:* lo stream è inviato interamente ad uno specifico operatore.
-  * *direct grouping:* lo stream è inviato interamente ad un operatore esegutio nello stesso Executor.
+* **data parallelism:** uno stream può essere partizionato su più operatori mediante:
+  * **shuffle grouping:** randomicamente.
+  * **field grouping:** secondo il valore di uno o più attributi della tupla.
+  * **all grouping:** lo stream è replicato su tutti gli operatori.
+  * **global grouping:** lo stream è inviato interamente ad uno specifico operatore.
+  * **direct grouping:** lo stream è inviato interamente ad un operatore esegutio nello stesso Executor.
 
 * applicazione è eseguita sottoponendo la topologia mediante il *TopologySubmitter*, il quale la trasmette a *Nimbus*.
 * non supporta operatori stateful.
@@ -143,19 +143,19 @@ Apache Storm Trident è un *DSP framework** sviluppato come estensione di Apache
 
 Le caratteristiche principali sono:
 
-* modalità *micro-batching per gli spout* -> maggiore throughput
+* modalità **micro-batching per gli spout** -> maggiore throughput
 
-* supporto per *operatori stateful*
+* supporto per **operatori stateful**
 
-* data model *TridentTuple*, ovvero *(inputFields, function, outputFields)*: la tupla di outout contiene sia gli inputField che gli outputField.
+* **data model TridentTuple**, ovvero *(inputFields, function, outputFields)*: la tupla di outout contiene sia gli inputField che gli outputField.
 
-* funzioni built-in complesse per aggregazione su partizione di micro-batch:
+* **funzioni built-in complesse per aggregazione su partizione di micro-batch:**
   * *PartitionAggregator:* sostituzione degli inputField con gli outputField.
   * *CombinerAggregator:* combina i valori di ogni tupla della stessa partizione o esegue una specifica funzione se non sono presenti tuple nella partizione.
   * *ReducerAggregator:* itera su un valore applicandovi una tupla alla volta.
   * *Aggregator:* aggregazione generica.
 
-* semantica *exactly-once* garantita con *Spout (opaque) transactional* e *State transactional*.
+* **comunicazione exactly-once** garantita con *Spout (opaque) transactional* e *State transactional*.
   * ad ogni micro-batch è associato un *transactionID (txid)*.
   * classi di spout:
     * *non-transactional:* non garantisce semantica exactly-once.
@@ -164,8 +164,7 @@ Le caratteristiche principali sono:
 
 * stato memorizzabile sia *in-memory* che *in-DB*.
 
-* windowing: *sliding-window* e *tumbling-window*, ma con necessità di bufferizzare la window su storage esterno.
-
+* **windowing:** *sliding-window* e *tumbling-window*, ma con necessità di bufferizzare la window su storage esterno.
 
 * supporto per operazioni di *JOIN*
 
