@@ -1,4 +1,4 @@
-# Background
+# Appendix A: Background
 
 ## ACID vs BASE
 I sistemi di data storage prevedono due modelli di consistenza:

@@ -1,9 +1,10 @@
-# Organization
+# Introduzione
 In questo corso studiamo pricipi, paradigmi, tools e tecnologie per la progettazione e gestione di sistemi e architetture distribuite per servizi e applicazioni di big data analytics.
 
 
 ## Syllabus
 Il programma del corso è il seguente:
+
 * background: ACID, BASE, consistenza, comunicazione, teorema CAP, data/storage model, consistent hashing, gossiping, quorum
 * big data
 * fog computing
