@@ -34,9 +34,9 @@ I Big Data hanno portato all'adozione del nuovo paradigma **Extract-Load-Transfo
 ## OLTP vs OLAP
 Un sistema IT può essere:
 
-* **OnLine Transaction Processing (OLTP):** realizza ETL su datawarehouse, molte transazioni, query poco complesse, massimizzazione del throughput.
+* **OnLine Transaction Processing (OLTP):** realizza ETL su datawarehouse; molte transazioni, query poco complesse; focalizzato sulla massimizzazione del throughput.
 
-* **OnLine Analytics Processing (OLAP):** utilizzato per analizzare i dati memorizzati su datawarehouse, focalizzato sull'analisi dati, minimizzazione della latenza, poche transazioni, query molto complesse.
+* **OnLine Analytics Processing (OLAP):** utilizzato per analizzare i dati memorizzati su datawarehouse;  poche transazioni, query molto complesse; focalizzato sulla minimizzazione della latenza,
 
 
 ## Teorema CAP
@@ -59,20 +59,27 @@ I modelli di consistenza sono i seguenti, in ordine decrescente di consistenza e
 
 ## Modelli di comunicazione
 Una comunicazione può essere:
-* **persistente (transiente):** il middleware memorizza il messaggio sempre (solo se mittente e destinatario sono entrambe in esecuziome), quindi la consegna avviene sempre (soo se sono entrambe in esecuzione).
+
+* **persistente (transiente):** il middleware memorizza il messaggio sempre (solo se mittente e destinatario sono entrambe in esecuziome), quindi la consegna avviene sempre (solo se sono entrambe in esecuzione).
+
 * **sincrona (asincrona):** invio/ricezione bloccanti (non bloccanti).
+
 * **discreta (streaming):** ogni messaggio inviato contiene l'informaziome per intero (l'informaziome é partizionata in un flusso di tuple).
 
 La semantica di comunicazione può essere:
+
 * **may-be:** non vi è garanzia di consegna del messagio.
+
 * **at-least-once:** il messaggio viene consegnato almeno una volta.
+
 * **at-most-once:** il messaggio viene consegnato al più una volta.
+
 * **exactly-once:** il messaggio viene consegnato esattamente una volta.
 
 
 ## Data/Storage Model
-Un data model è un insieme di costrutti per la rappresentazione dell'informazione.
-Uno storage model è un insieme di modalità con cui il DBMS memorizza e manipola i file sul file system.
+Un **data model** definisce come i dati vengono rappresentati.
+Uno **storage model** definisce come i dati vengono memorizzati
 Il data model è tipicamente indipendente dallo storage model.
 
 
@@ -91,3 +98,7 @@ Chubby è un sistema di locking distribuito basato su Paxos e utilizzato in molt
 
 ## Chandy-Lamport
 L'algoritmo di Chandy-Lamport è un *algoritmo di snapshot distribuito* che permette dunque ad un sistema distribuito di registrate il proprio stato globale. L'algoritmo è basato su un approccio di gossiping, in cui i processi diffondono nel sistema le richieste di snapshot.
+
+
+## Serie Temporali
+Una **serie temporale** è una sequenza di punti indicizzati dal tempo (i.e. istanti temporali o intervalli temporali).

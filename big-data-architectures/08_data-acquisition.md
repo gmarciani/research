@@ -1,17 +1,18 @@
 # Data Acquisition
-La data acquisition è una funzionalità del *layer support/integration* della Big Data Stack.
+La data acquisition è un servizio del layer *support/integration*.
 
-Lo scopo è acquisire dati da sorgenti distinte al fine di inserirli nel layer di data storage (e.g. all'interno di un DFS per farci Batch Processing) o di immetterli nel layer di data processing (e.g. come data stream per farci DSP).
+Un sistema di data acquisition è usato per:
 
-Questi sistemi vengono usati per:
+* **immissione dati:** i dati sono acquisiti da sorgenti distinte al fine di inserirli nel *layer di data storage* (e.g. all'interno di un DFS per farci Batch Processing) o di immetterli nel *layer di data processing* (e.g. come data stream per farci DSP).
 
-* **immissione dati** nel sistema.
 * **comunicazione asincrona** tra servizi per il *decoupling* e *statelessness* dei componenti.
 
-Questi sistemi si distinguono in base al *pattern della comunicazione*:
+
+## Pattern di comunicazione
+I sistemi di data acquisition si distinguono in base al *pattern di comunicazione*, che può essere:
 
 * **Message Queue System (MQS):** il producer incoda un messaggio nella message queue di un consumer, il quale viene notificato dalla queue.
-Realizza la **comunicazione one-to-one persistente asincrona**.
+Realizza la **comunicazione persistente one-to-one asincrona**.
 Le tecnologie più diffuse sono: *RabbitMQ, ZeroMQ, Amazon SQS*.
 La API prevede le seguenti chiamate:
   * *put(queue, msg):* inserisce in modo asincrono il messagio nella coda.
@@ -20,27 +21,25 @@ La API prevede le seguenti chiamate:
   * *notify(queue, func):* installa in modo asincrono una callback da eseguire quando un messaggio è inserito nella coda.
 
 * **Publish-Subscribe System (Pub/Sub):** il producer incoda un messaggio nella message queue relativa al topic del messaggio, il consumer iscritto a quel topic ne richiede i messaggi e si copia il messaggio non ancora letto, il consumer è poi cancellato dalla lista dei subscriber per la ricezione di quel messaggio.
-Realizza la **comunicazione one-to-many asincrona**.
-Le tecnologie più diffuse sono: *Kafka, Pulsar, Redis*.
+Realizza la **comunicazione persistente one-to-many asincrona**.
+Le tecnologie più diffuse sono: *Kafka, Pulsar*.
 La API prevede le seguenti chiamate:
   * *publish(topic, msg):* pubblica un messaggio su uno specifico topic.
   * *subscribe(filter, func, exp) => sub_handler:* installa la sottoscrizione al topic, associando una callback da eseguire quando un nuovo messaggio è pubblicato sul topic; la durata della sottoscrizione è definita da un expiring time; ritorna un handler per ricevere i messaggi del topic.
   * *unsubscribe(sub_handler):* elimina la sottoscrizione al topic.
   * *notify(sub_handler, msg):* eseguita dal sistema Pub/Sub per la consegna di un nuovo messaggio.
 
-* **Data Transportation System (DTS):** trasporto di grandi quantità di dati, da sorgenti eterogenee verso uno o più datastore.
-Le tecnologie più diffuse sono: *Scribe, Sqoop*.
+* **Data Transportation System (DTS):** trasporto di grandi quantità di dati, da sorgenti eterogenee verso uno o più database/datastore.
+Le tecnologie più diffuse sono: *Scribe, Sqoop, Flume, Amazon IoT*.
 
-* **Data Collection System (DCS):** collezione, aggregazione e trasporto di grandi quantità di dati, da sorgenti eterogenee verso uno o più datastore.
-Le tecnologie più diffuse sono: *Flume, Amazon IoT*.
-
-Alcuni framework supportano sia il pattern MQS che Pub/Sub (e.g. RabbitMQ, Kafka).
+Alcuni framework supportano sia il pattern MQS che Pub/Sub (e.g. Kafka).
 
 ---
 
 ## Kafka
-Apache Kafka è un *sistema distribuito di Pub/Sub topic-based*, sviluppato nel 2010 da LinkedIn e noto per la sua alta scalabilità e load balancing.
-Oggi è utilizzato da importanti player, come Uber e Netflix.
+Apache Kafka è un *Pub/Sub system topic-based distribuito*, sviluppato nel 2010 da LinkedIn e noto per la sua alta scalabilità e load balancing.
+
+È utilizzato da importanti player, come Uber e Netflix.
 
 Le principali caratteristiche sono:
 
@@ -58,7 +57,7 @@ Le principali caratteristiche sono:
 
 * **load-balancing:** ogni Broker è leader per alcune partizioni e follower per altre.
 
-* **fault tolerance:** le partizioni sono replicate e i messaggi sono resi disponibili dopo aver raggiunto la consistenza tra leader e follower.
+* **fault tolerance:** le partizioni sono replicate e i messaggi sono resi disponibili solo dopo aver raggiunto la consistenza tra leader e follower.
 
 * **comunicazione:** supporta il pattern *MQS* e la *semantica at-least-once*.
 
@@ -66,19 +65,18 @@ Le principali caratteristiche sono:
 
 * **I/O su page cache:** scrive solo su filesystem page cache, aumentando l'efficienza, ma diminuendo la durabilità.
 
-* API:
+* **API:** disponibili per molti linguaggi (e.g. Java, Go, Python) e framework (e.g. Flink, Spark, Node.js).
   * **Producer API:** permette di pubblicare messaggi su topic.
   * **Consumer API:** permette di gestire iscrizioni ai topic e consumarne i messaggi.
-  * **Connector API:** permette di creare Producer e Consumer custom (e.g. data migration tra DB).
+  * **Connector API:** permette di creare Producer e Consumer custom.
   * **Streams API:** permette di definire una pipeline in cui ogni stage è un'applicazione che riceve in input uno stream di dati associato a specifici topic e produce in output uno stream di dati per specifici topic.
 
-* sviluppati client Kafka per molti linguaggi (e.g. Java, Go, Python) e framework (e.g. Flink, Spark, Node.js).
 * scritto in Scala
 
 ---
 
 ## Scribe
-Scribe è un *data transportation system* distribuito, usato in Facebook per inviare dati a sistemi batch e real-time.
+Scribe è un *data transportation system* distribuito, sviluppato da Facebook per *inviare dati a sistemi batch e real-time*.
 
 Le principali caratteristiche sono:
 
@@ -97,19 +95,21 @@ Sqoop è un *data transportation system*, usato per il trasporto di grandi quant
 ---
 
 ## Flume
-Flume è un *data collection system* distribuito per il trasporto di grandi quantità di dati da sorgenti eterogenee verso uno o più datastore.
+Flume è un *data transportation system* distribuito per il trasporto di grandi quantità di dati da sorgenti eterogenee verso uno o più datastore o DFS.
 
 Le caratteristiche principali sono:
 
 * **architettura componibile:**
   * **Source System:** sistema dal quale si devono estrarre i dati.
-  * **Destination System:** sistema nel quale si devno immettere i dati.
-  * **Flume Agent:** compinente responsabile del trasporto dei dati da un sistema sorgente ad un sistema destinazione. È costituito dai seguenti componenti:
-    * **Source:** legge i dai in formato raw dal sistema sorgente e li immette nel Channel incapsulati in eventi.
+  * **Destination System:** sistema nel quale si devono immettere i dati.
+  * **Flume Agent:** responsabile del trasporto dei dati da un sistema sorgente ad un sistema destinazione. È costituito dai seguenti componenti:
+    * **Source:** legge i dati in formato raw dal sistema sorgente e li immette nel Channel incapsulati in eventi.
     * **Sink:** legge gli eventi dal Channel e li immette nel sistema di destinazione in formato raw.
     * **Channel:** staging area per la gestione del flusso dati da Source a Sink. Vi sono varie tipologie di canale di trasmissione (e.g. in-memory, filesystem, RDBMS, ...).
-* fornisce molti *Source e Sink built-in* (e.g. HDFS, Avro).
+
 * permette di definire una **pipeline di trasporto dati**, da un Flume Agent all'altro.
+
+* fornisce molti *Source e Sink built-in* (e.g. HDFS, Avro).
 
 * **alta affidabilità:**
   * *comunicazione transazionale* tra Source e Sink.
@@ -122,4 +122,4 @@ Le caratteristiche principali sono:
 ---
 
 ## Amazon IoT
-Amazon IoT è un *servizio AWS di data collection* pensato per il collezionamento di dati provenienti da *dispositivi IoT* all'interno del Cloud.
+Amazon IoT è un *servizio AWS di data transportation* pensato per il collezionamento di dati provenienti da *dispositivi IoT* all'interno del Cloud.
