@@ -10,19 +10,17 @@ I vantaggi principali sono:
 * linguaggio SQL
 * data model relazionale (tabelle, righe, colonne) molto intuitivo
 * schemi relazionali modificabili senza downtime
-* integrità relazionale
 * supporto per applicazioni OLTP (OnLine Transaction Processing)
-* DBMS stabili e standardizzati
+* tecnologia stabile e standardizzata
 
 Gli svantaggi principali sono:
 
-* non progettati per essere distribuiti
 * non scalabili orizzontalmente
-* supporto limitato per la definizione di strutture dati complesse
 * necessaria conoscenza completa del DB per formulare query
-* DBMS proprietari costosi
-* supporto limitato a data integration tra DBMS diversi
+* difficile definire strutture dati complesse
 * limiti sulla dimensione dei campi
+* supporto limitato a data integration tra DBMS diversi
+* tecnologie proprietarie costose
 
 Le moderne applicazioni web comportano:
 
@@ -38,6 +36,7 @@ Una possibile soluzione per gli RDBMS è di prevedere:
 
 Pertanto, scalare i RDBMS è costoso ed inefficiente.
 
+---
 
 ## NoSQL Datastore
 I datastore NoSQL (Not-Only-SQL) sono una classe di tecnologie di data storage che si propone come alternativa ai tradizionali RDBMS, per ovviare ai limiti di questi ultimi in termini di scalabilità orizzontale.
@@ -46,24 +45,26 @@ Il principio fondante di questi sistemi è *evitare complessità non strettament
 
 Le caratteristiche principali sono:
 
-* *garanzia BASE*
-* *scalabilità orizzontale, disponibilità, fault-tolerance* mediante *sharding* e *replicazione*
-* *distribuzione geografica*
-* *schemi flessibili*
-* *API semplice*
+* **garanzia BASE**
+* **scalabilità orizzontale, disponibilità, fault-tolerance** mediante *sharding* e *replicazione*
+* **distribuzione geografica**
+* **schemi flessibili**
+* **query-language semplice**
+* **API semplice**
 
-Il data model NoSQL possono essere:
+I datastore NoSQL si differenziano anzitutto per il **data-model** adottato, che può essere:
 
 * **aggregate-oriented:** i dati sono rappresentati come aggregati, ovvero strutture dati complesse (record con field semplici, array e record innestati) tali che vi è *garanzia ACID intra-aggregato*. I tipi di aggregato sono:
 
   * **key-value:** i dati sono rappresentati come una collezione di coppie chiave-valore, in cui il valore può essere a sua volta un aggregato (tra cui anche array e map), memorizzato come un *BLOB* con *struttura opaca* (non sono possibili query sul valore) e *accessibile solo mediante key-lookup*. Alcuni datastore supportano anche (i) ordinamento delle chiavi, (ii) store in-memory dei dati e (iii) query con full-text search sul contenuto del valore. I modelli di consistenza adottati sono: *consistenza finale* in sistemi AP e *consistenza linearizzabile* in sistemi CP.
 
-  Gli esempi applicativi più diffusi sono: *caching, storing di informazioni di sessione, profili utente*.
-  I datastore più diffusi sono: *DynamoDB, Redis, Memcached, RiakKV, Voldemort, LevelDB, BerkeleyDB*.
+  Gli esempi applicativi più diffusi sono: *caching, storing di informazioni di sessione e profili utente*.
+  I datastore più diffusi sono: *DynamoDB, Redis, Memcached, Voldemort e LevelDB*.
 
-  * **column-family:** i dati sono rappresentati come una collezione di coppie chiave-valore, in cui il valore è una *struttura visibile* di colonne organizzate in *column-family*. Una colonna è una collezione di attributi dello stesso tipo. Una column-family è una collezione di colonne spesso accedute contemporaneamente.
+  * **column-family:** i dati sono rappresentati come una collezione di coppie chiave-valore, in cui il valore è una *struttura flessibile e visibile* di colonne organizzate in *column-family*. Una colonna è una collezione di attributi dello stesso tipo. Una column-family è una collezione di colonne spesso accedute contemporaneamente.
 
   Le caratteristiche principali sono:
+
   * struttura visibile: sono possibili query sulle colonne.
   * schemi flessibili: ogni riga può avere colonne diverse.
   * i dati sono memorizzati column-oriented: le colonne sono memorizzate in settori contigui del disco per minimizzare la latenza di I/O.
@@ -72,9 +73,9 @@ Il data model NoSQL possono essere:
   * sharding di righe e colonne
 
   Gli esempi applicativi più diffusi sono: *applicazioni data-intensive read-mostly in cui le query riguardano operazioni su poche colonne*.
-  I datastore più diffusi sono: *BigTable, HBase, Cassandra, HyperTable, Accumulo, Amazon Redshift*.
+  I datastore più diffusi sono: *BigTable, HBase, Cassandra*.
 
-  * **document:** i dati sono rappresentati come una collezione di coppie chiave-documento, in cui il documento è un *aggregato complesso, flessibile e con struttura visibile* .
+  * **document:** i dati sono rappresentati come una collezione di coppie chiave-documento, in cui il documento è un *aggregato complesso, struttura flessibile e visibile* .
 
   Le caratteristiche principali sono:
     * struttura visibile: sono possibili query sui campi dell'aggregato.
@@ -85,32 +86,32 @@ Il data model NoSQL possono essere:
     * API CRUD uniformi, ma non standardizzate.
 
   Possiamo dunque dire che un document datastore
-  (i) è simile ad un key-value datastore, avente però come valore un aggregato con struttura visibile e interrogabile;
-  (ii) è simile ad un column-family datastore, avente però come valore un aggregato con schemi flessibili.
+  (i) è simile ad un key-value datastore, avente però come valore un aggregato con struttura visibile;
+  (ii) è simile ad un column-family datastore, avente però come valore un aggregato con schemi più flessibili.
 
   Gli esempi applicativi più diffusi sono: *applicazioni data-intensive operanti su dati semi-strutturati e sparsi*.
-  I datastore più diffusi sono: *MongoDB, CouchDB, Couchbase, RavenDB*.
+  I datastore più diffusi sono: *MongoDB, CouchDB, Couchbase e RavenDB*.
 
 * **graph-oriented:** i dati sono rappresentati come un grafo, in cui
 (i) i nodi sono caratterizzati da un ID e da una collezione di coppie chiave-valore e
 (ii) gli archi sono indiretti o diretti e caratterizzati da una collezione di coppie chiave-valore.
 Questi datastore tendono a fornire garanzie ACID.
-Di contro, lo *sharding e la scalabilità orizzontale sono difficoltosi*, in quanto è difficile partizionare dati fortemente correlati ed attraversare una struttura partizionata su più nodi.
+Di contro, *la scalabilità orizzontale è difficoltosa*, in quanto è difficile partizionare dati fortemente correlati ed attraversare una struttura partizionata su più nodi.
 
 Gli esempi applicativi più diffusi sono: *applicazioni di social networks analysis* e *pattern recognition*.
-I datastore più diffusi sono: *Neo4j, OrientDB, InfiniteGraph, AllegroGraph e HyperGraphDB*.
+I datastore più diffusi sono: *Neo4j, OrientDB, InfiniteGraph e HyperGraphDB*.
 
 
 ## Performance
 Non è stato ancora stabilito un benchmark standard per la valutazione delle performance dei NoSQL datastore.
-Un primo tentativo è *Yahoo! Cloud Serving Benchmark (YCSB)*, ovvero un generatore di workload open-source.
+Un primo tentativo è **Yahoo! Cloud Serving Benchmark (YCSB)**, ovvero un generatore di workload open-source.
 In ogni caso, datastore distinti rispondono a requisiti distinti, pertanto non è possibile individuare una soluzione unica per tutti i casi.
 
 
 ## Persistenza poliglotta
-Con il termine *peristenza poliglotta* si intende un'architettura in cui lo strato di data storage è implementato da DB e datastore differenti.
+Con il termine **persistenza poliglotta** si indica uno strato di data storage implementato da DB e datastore differenti.
 Ogni classe di datastore è infatti progettata per rispondere a requisiti diversi.
-In particolare, tecnologie diverse rispondono diversamente al *trade-off individuato dal teorema CAP*.
+In particolare, tecnologie diverse rispondono diversamente al **trade-off CAP**.
 
 ![CAP Trade-off for NoSQL Datastore](img/nosql-datastore-cap-tradeoff.jpg "CAP Trade-off for NoSQL Datastore")
 
@@ -126,13 +127,16 @@ Ad esempio, un'applicazione di e-commerce può implementare lo strato di data st
 ---
 
 ## DynamoDB
-Amazon DynamoDB è un *key-value datastore* sviluppato da Amazon e noto per *alta scalabilità, alta disponibilità e garanzie SLA stringenti*.
-È parte integrante del portfolio AWS.
+DynamoDB è un *datastore key-value* sviluppato da Amazon, noto per la sua *alta scalabilità, alta disponibilità e garanzie SLA stringenti*.
+
+È disponibile come servizio Amazon Web Services (AWS) ed è utilizzato per implementare lo strato di persistenza in altri servizi AWS (e.g. EMR).
 
 Le caratteristiche principali sono:
 
 * **sistema AP**
-* **architettura  P2P** con *membership gossip-based*
+
+* **architettura  P2P** con **membership gossip-based**
+
 * **sharding basato su consistent hashing:**
   * ogni nodo fisico può rappresentare più nodi logici dell'anello.
   * distribuzione del carico in funzione delle risorse del nodo fisico.
@@ -140,7 +144,7 @@ Le caratteristiche principali sono:
 
 * **alta disponibilità:**
   * i conflitti non sono prevenuti, ma risolti dall'applicazione o datastore (last-write wins) *durante operazioni Read*.
-  * **sloppy-quorum:** se il quorum su operazioni R/W non può essere raggiunto a causa del partizionamento della rete, si creano delle *repliche transitorie* mediante la prefence list con le quali si raggiunge il quorum.
+  * **sloppy-quorum:** se il quorum su operazioni R/W non può essere raggiunto a causa del partizionamento della rete, si creano delle *repliche transitorie* con le quali si raggiunge il quorum.
   * **hinted handoff**: se una put deve scrivere su un nodo temporanemente non disponibile, la richiesta viene reindirizzata ad un altro nodo, il quale è responsabile di rigirarla al nodo originario una volta ristabilità la disponibilità.
   * **passive failure-detection:** vengono ignorati i fallimenti di nodi non coinvolti in richieste dell'utente.
 
@@ -154,31 +158,34 @@ Le caratteristiche principali sono:
   * metodi get/put applicabili ad un'unica entità alla volta.
   * metodi get/put usati anche per risolvere conflitti (se ci sono versioni in conflitto, la get ritorna una lista di valori con version number).
 
-Un datastore molto simile a Dynamo è *RiakKV*, il quale prevede però anche il supporto per Mesos.
+Un datastore molto simile a DynamoDB è *RiakKV*, il quale prevede però anche il supporto per Mesos.
 
 ![DynamoDB, architettura](img/data-storage-dynamodb-architecture.png "DynamoDB, architettura")
 
 ---
 
 ## Redis
-REmote DIrectory Server (Redis) è un *key-value datastore in-memory* spesso utilizzato per implementare lo *strato di caching*.
+REmote DIrectory Server (Redis) è un *datastore key-value in-memory* spesso utilizzato per implementare lo *strato di caching*.
 
 Fino al 2015 è stato il più famoso della sua categoria.
 
 Le caratteristiche principali sono:
 
- * **in-memory storage:** le gestione in-memory dei dati garantisce una efficienza altissima.
- * **atomicità:** molte operazioni sono atomiche.
- * **aggregato:**
-  * la chiave è una stringa ASCII a cui è possibile associare un timeout di validità.
-  * il valore è una stringa (al più 512MB) o (ii) un contenitore di stringhe (hashmap, list, set, sortedset).
+* **in-memory storage:** le gestione in-memory dei dati garantisce una efficienza altissima.
+
+* **atomicità:** molte operazioni sono atomiche.
+
+* **aggregato:**
+* la chiave è una stringa ASCII a cui è possibile associare un timeout di validità.
+* il valore è una stringa (al più 512MB) o (ii) un contenitore di stringhe (hashmap, list, set, sortedset).
 
 ![Redix, architettura](img/data-storage-redis-architecture.png "Redis, architettura")
 
 ---
 
 ## BigTable
-BigTable è un *column-family datastore* sviluppato da Google.
+BigTable è un *datastore column-family* sviluppato da Google.
+
 È disponibile come servizio di *Google Cloud Platform* ed è utilizzato in molte applicazioni di Google (e.g. Web indexing, Maps, YouTube).
 
 Le caratteristiche principali sono:
@@ -187,12 +194,18 @@ Le caratteristiche principali sono:
 
 * **architettura master-slave:**
   * **Master Server (MS):** unico, gestisce il mapping Tablet/TabletServer, gestisce schemi e metadati, esegue load balancing e garbage collection.
-  * **Tablet Server (TS):** gestisce  tipicamente 1000 Tablet, Read/Write delle proprie Tablet, sharding delle proprie Tablet
+  * **Tablet Server (TS):** gestisce  tipicamente 1000 Tablet, Read/Write delle proprie Tablet, sharding delle proprie Tablet.
   * **Client Library (CL):** interagisce con MS per avere i metadati necessari ad interagire con i TS; comunica direttamente con TS per operazioni R/W; caching delle posizioni delle Tablet.
+  * **Chubby:** utilizzato per:
+    * garantire unicità del master.
+    * garantire atomicità delle operazioni R/W.
+    * mantenimento della *ServerDirectory*, contenente gli indirizzi dei TS.
+    * mantenimento della *RootTable*, contenente le locazioni delle Tablet della *MetadataTable*, contenente le locazioni delle Tablet.
+    * gestione delle informazioni sugli schemi.
 
-* **basato su GFS:**
-  * raw storage su GFS
-  * replicazione gestita da GFS
+* **disaccoppiamento control/data plane:** il Client interagisce con il Master per conoscere la locazione delle Tablet; il Client interagisce con i Tablet Server per leggere i file SSTable.
+
+* **persistenza/replicazione GFS:** raw storage su GFS e replicazione gestita da GFS.
 
 * **sharding:**
   * le righe sono partizionate in **Tablet** (righe contigue), partizionate in **Chunk**.
@@ -200,16 +213,10 @@ Le caratteristiche principali sono:
   * righe appartenenti ad uno stesso Tablet sono memorizzate insieme.
   * ogni Tablet è servita da un solo TS.
   * **auto-sharding** di Tablet troppo grandi.
+
 * **indexing ottimizzato** mediante il partizionamento in *column-family*.
 
-* **data versioning:** ogni cella può avere più versioni di uno stesso valore, ad ognuna delle quali è associato un *timestamp*.
-
-* **Chubby:** utilizzato per:
-  * garantire atomicità delle operazioni R/W.
-  * garantire unicità del master.
-  * mantenimento della *ServerDirectory*, contenente gli indirizzi dei TS.
-  * mantenimento della *RootTable*, contenente le locazioni delle Tablet della *MetadataTable*, contenente le locazioni delle Tablet.
-  * gestione delle informazioni sugli schemi.
+* **data versioning:** ogni cella può avere più versioni di uno stesso valore, ad ognuno dei quali è associato un *timestamp*.
 
 * **atomicità:** l'atomicità è garantita sulla singola riga.
 
@@ -237,7 +244,8 @@ Le caratteristiche principali sono:
 ---
 
 ## HBase
-Apache HBase è un *column-family datastore* open-source sviluppato come *clone di BigTable* (stesso data-model, architettura e sharding).
+Apache HBase è un *datastore column-family* open-source sviluppato come *clone di BigTable* (stesso data-model, architettura e sharding).
+
 È utilizzato sia per applicazioni batch che per applicazioni real-time.
 
 Le caratteristiche principali sono:
@@ -266,14 +274,16 @@ Le caratteristiche principali sono:
 ---
 
 ## Cassandra
-Cassandra è un *column-family datastore* sviluppato da Facebook, noto per *scalabilità orizzontale, alta disponibilità, bassa latenza e distribuzione geografica*:
+Cassandra è un *datastore column-family* sviluppato da Facebook, noto per la sua *alta scalabilità orizzontale, alta disponibilità, bassa latenza e distribuzione geografica*.
 
-È stato sviluppato l'intenzione di fondere i punti di forza di Amazon DynamoDB e Google BigTable.
+È stato sviluppato con l'intenzione di fondere i punti di forza di *Amazon DynamoDB* e *Google BigTable*.
 
 Le caratteristiche principali sono:
 
 * **sistema AP**
+
 * **architettura master-less** per minimizzare la latenza delle operazioni.
+
 * **consistenza configurabile** è possibile stabilire il grado di consistenza per ogni query, specificando il *tipo di quorum* richiesto:
   * **ONE:** una sola replica.
   * **QUORUM:** la maggioranza delle repliche.
@@ -287,14 +297,15 @@ Le caratteristiche principali sono:
 ---
 
 ## MongoDB
-MongoDB è un *document datastore* considerato ad oggi un de-facto standard.
+MongoDB è un *datastore document* considerato ad oggi un de-facto standard della sua categoria.
 
 Le caratteristiche principali sono:
 
-* i document sono:
-  * rappresentati in formato **BSON**, ovvero un'estensione di JSON in formato binario con supporto a più tipi di dato (e.g. timestamp, objectID).
-  * identificati da un **documentID** univoco da utilizzare per fare collegamenti tra document.
-  * raccolti in **collection**.
+* **document:**
+  * i document sono rappresentati in formato **BSON**, ovvero un'estensione di JSON in formato binario con supporto a più tipi di dato (e.g. timestamp, objectID).
+  * ogni document è identificato da un **documentID** univoco da utilizzare per fare collegamenti tra document.
+  * i document sono raccolti in **collection**.
+
 * **query language semplice e flessibile:**
   * *filtraggio* per selezione document molto semplice.
   * *dot-notation* per indicizzazione di array e esplorazione attributi (e.g, array.2, document.attribute).
@@ -305,15 +316,18 @@ Le caratteristiche principali sono:
 ---
 
 ## Neo4j
-Neo4j è un *graph datastore* considerato ad oggi un de-facto standard.
+Neo4j è un *datastore graph* considerato ad oggi un de-facto standard della sua categoria.
 
 Le caratteristiche principali sono:
 
 * **garanzia ACID**
+
 * **architettura master-slave:** il master esegue operazioni R/W e gli slave eseguono operazioni Read-Only.
+
 * **multi-level caching** per aumentare il throughput.
-* **Cypher** come query language *SQL-like*.
-* **path query:** primitive built-in per eseguire query sui path (e.g. shortestPath, allShortestPath).
+
+* **query language:** fornisce **Cypher** come query language *SQL-like* avente anche primitive built-in per eseguire query sui path (e.g. shortestPath, allShortestPath).
+
 * **label:** nodi e archi taggabili con uno o più *label* per distinguerne il ruolo nel dominio.
 
 ![Neo4j, architettura](img/data-storage-neo4j-architecture.png "Neo4j, architettura")

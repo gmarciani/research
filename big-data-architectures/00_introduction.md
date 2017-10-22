@@ -11,14 +11,10 @@ Il programma del corso è il seguente:
 
 * **resource management:** definizioni, motivazioni, modello di partizionamento delle risorse (static patitioning, dynamic partitioning), policy di resource management (fair share, max-min fairness, weighted max-min fairness, dominant resource fairness, online dominant resource fairness), Mesos, YARN, Borg, Omega, Kubernetes.
 
-* data storage:
-  * distributed file system: GFS, HDFS, Colossus, FDS, Alluxio
-  * NoSQL database:
-    * key-value: Dynamo, Redis,
-    * column-family: BigTable, Cassandra, HBase
-    * document: MongoDB
-    * graph: Neo4j
-  * NewSQL database: Spanner, VoltDB
+* **data storage:**
+  * **distributed file system:** definizioni, motivazioni, GFS, HDFS, Colossus, FDS, Alluxio
+  * **NoSQL database:** definizioni, motivazioni, key-value, column-family, document, graph, performance, persistenza poliglotta, DynamoDB, Redis, BigTable, Cassandra, HBase, MongoDB, Neo4j.
+  * **NewSQL database:** definizioni, motivazioni, Spanner, VoltDB.
 
 * **data acquisition:** definizioni, motivazioni, pattern di comunicazione (message queue, publish-subscribe, data transportation), Kafka, Scribe, Sqoop, Flume, Amazon IoT.
 
