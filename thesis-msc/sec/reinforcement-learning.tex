@@ -1,0 +1,114 @@
+\chapter{Reinforcement Learning}
+\label{chp:reinforcement-learning}
+
+
+% %
+% HEADER
+% %
+\lipsum[1]
+
+Reinforcement
+Learning (RL) refers to a collection of trial-and-error methods by which an agent
+can learn to make good decisions through a sequence of interactions with a
+system or environment
+
+
+% %
+% DEFINITIONS
+% %
+\section{Definitions}
+\label{sec:reinforcement-learning-definitions}
+
+One
+of the challenges that arise in reinforcement learning is the trade-off between
+exploration and exploitation. To maximize the obtained reward, a RL agent
+must prefer actions that it has tried in the past and found to be effective in
+producing reward (exploitation). However, in order to discover such actions, it
+has to try actions that it has not selected before (exploration). The dilemma
+is that neither exploration nor exploitation can be pursued exclusively without
+failing at the task. The agent must try a variety of actions and progressively
+favor those that appear to be best [12]. To the best of our knowledge, only one
+work [5] has so far exploited RL techniques to drive the auto-scaling decisions in
+DSP systems. Heinze et al. [5] propose a simple RL approach that learns from
+experience when to acquire and release computing nodes so to efficiently process
+the incoming workload. The per-operator auto-scaler populates a lookup table
+that associates the utilization of the node on which the operator is executed with
+the action to perform (i.e., scale in, scale out, or do nothing). The adaptation
+goal is to keep the system utilization within a specific range; the SARSA learning
+algorithm [12] is used to update the lookup table.
+A larger number of works has exploited RL techniques to drive elasticity in
+the Cloud computing context, as surveyed in [9]. Most of them use the simple Q-
+learning RL algorithm (described in Sec. 5), which suffers from slow convergence,
+as we also show in Section 6. Tesauro et al. [13] observe that RL approaches
+can suffer from poor scalability in systems with a large state space, because
+the lookup table has to store a separate value for every possible state-action
+pair. Moreover, the performance obtained during the on-line training may be
+unacceptably poor, due to the absence of domain knowledge or good heuristics.
+To overcome these issues, they combine RL with a model of the system, defined
+using queuing theory, which computes the initial deployment decisions and drives
+the exploration actions. They use the SARSA learning algorithm, which however
+suffers from slow convergence as Q-learning.
+
+The goal of the Operator Manager is to take scaling decisions as to minimize
+a long-term cost function which accounts for the operator downtime and for the
+monetary cost to run the operator. The latter comprises: (i) the cost for running
+the number of instances during the next time slot, and (ii) possibly a penalty
+in case of SLA violation. In particular, we consider a constraint on the operator
+response time, so that a penalty is paid every time the response time exceeds a
+given threshold T SLA.
+
+Since decisions are taken periodically, we consider a slotted time system with
+fixed-length time intervals of length ∆t, with the i-th time slot corresponding
+to the time interval [i∆t, (i + 1)∆t] (see Fig. 2). We denote by k i the number
+of parallel instances at the beginning of slot i, and by λ i the average tuple rate
+during slot i − 1 (the previous slot). At the beginning of slot i the Operator-
+Manager makes the decision a i on whether modify or keep the current instance
+configuration.
+
+
+% %
+% Q-LEARNING
+% %
+\section{Q Learning}
+\label{sec:reinforcement-learning-q-learning}
+
+It has been proven that, independently of the policy
+being followed and the initial values assigned to Q, the learned action-value
+function converges with probability 1 to Q ∗ \cite{watkins1992q}, under the condition that every
+state-action pair continues to be sampled as i → ∞.
+
+
+% %
+% PDS-LEARNING
+% %
+\section{PDS Learning}
+\label{reinforcement-learning-pds-learning}
+
+In order to integrate the partial knowledge of the system into a learning
+algorithm, we rely on the post-decision state (PDS) concept, exploiting the gen-
+eralized definition given in [10]. A PDS (also known as afterstate) describes the
+state of the system after the known dynamics take place, but before the unknown
+dynamics take place. 
+
+where s  ̃ i fully reflects the consequences of the action a i , and the next state s i+1
+incorporates the unknown system dynamics (i.e., the input rate variation).
+
+We exploit the PDS concept to design a learning algorithm that aims at
+finding an optimal policy in less time than Q-Learning. To this end, we adapt
+the algorithm proposed in [10] to our problem. We integrate that solution into
+the generic Algorithm 1 by extending the update phase. In particular, the Q
+function has only to deal with the known system dynamics, since the unknown
+parts are hidden by the PDS, for which we introduce a PDS value function V  ̃
+that is updated along with Q
+
+It is worth noting that, since the unknown system dynamics do not depend on
+the selected action, randomized exploration is not required any more, and a
+greedy policy can be followed during the learning phase.
+
+% %
+% FULL BACKUP LEARNING
+% %
+\section{FBMB Learning}
+\label{reinforcement-learning-fbmb-learning}
+
+\lipsum[1]

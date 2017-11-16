@@ -2,17 +2,29 @@
 \usepackage{lgrind}
 \usepackage{cmap}
 \usepackage[T1]{fontenc}
+\usepackage{graphicx}
+\usepackage[ruled,noend,noline]{algorithm2e}
 \usepackage{lipsum}
+
 \pagestyle{plain}
+
+\graphicspath{ {./fig/} {./fig/plot/} }
 
 \begin{document}
 
 \include{sec/cover}
 \pagestyle{plain}
 \include{sec/contents}
-\include{sec/chap1}
-\include{sec/notes}
+\include{sec/introduction}
+\include{sec/containers-orchestration}
+\include{sec/elasticity}
+\include{sec/reinforcement-learning}
+\include{sec/openshift}
+\include{sec/smart-elasticity}
+\include{sec/evaluation}
+\include{sec/conclusions}
 \appendix
-\include{sec/appa}
+\include{sec/usage}
 \include{bib/biblio}
+\include{sec/notes}
 \end{document}
