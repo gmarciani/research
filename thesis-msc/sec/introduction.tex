@@ -5,18 +5,17 @@
 % %
 % HEADER
 % %
-\lipsum[1]
+INSERT HERE AN EXPANSION OF THE ABSTRACT
 
 
 % %
 % RELATED WORKS
 % %
-Elasticity is a key feature for DSP systems that is attracting many research
-efforts. Most approaches that enable elasticity in DSP systems, e.g., [3], exploit
-best-effort threshold-based policies based on the utilization of either the system
-nodes or the operator instances. Other works, e.g., [1,2,8], use more complex
-policies to determine the scaling decisions, exploiting optimization theory [1],
-control theory [2], or queueing theory [8].
+Elasticity is a key feature for DSP systems that is attracting many research efforts. 
+%
+Most approaches that enable elasticity exploit best-effort threshold-based policies based on the utilization of either the system nodes or the operational abstraction, e.g. containers or data stream processing operators.
+%
+Other works, e.g., [1,2,8], use more complex policies to determine the scaling decisions, exploiting optimization theory [1], control theory [2], or queueing theory [8].
 
 
 % %
@@ -24,16 +23,14 @@ control theory [2], or queueing theory [8].
 % %
 The remainder of this thesis is organized as follows.
 %
-In Chapter~\ref{chp:containers-orchestration} we ...
+In Chapter~\ref{chp:containers-orchestration} we introduce the context of containers orchestrations, thus focusing on resource management, containerization and elasticity.
 %
-In Chapter~\ref{chp:elasticity} we ...
+In Chapter~\ref{chp:reinforcement-learning} we give the necessary background notions about reinforcement learning, focusing on the Q-Learning technique and its comparison with respect to other techniques.
 %
-In Chapter~\ref{chp:reinforcement-learning} we ...
+In Chapter~\ref{chp:kubernetes} we describe the technological environment of our work, that is focused on Kubernetes. In particular we describe its architecture and how it implements elasticity.
 %
-In Chapter~\ref{chp:openshift} we ...
+In Chapter~\ref{chp:smart-elasticity} we introduce the concept of smart elasticity, showing how we implemented it leveraging Q-Learning as an auto-scaling service in the Kuberntes anvironment.
 %
-In Chapter~\ref{chp:smart-elasticity} we ...
+In Chapter~\ref{chp:evaluation} we show the experimental results of the proposed smart elasticity technique.
 %
-In Chapter~\ref{chp:evaluation} we ...
-%
-In Chapter~\ref{chp:conclusions} we ...
+In Chapter~\ref{chp:conclusions} we sum up our work, giving its conclusions and pointing out some promising future improvements.

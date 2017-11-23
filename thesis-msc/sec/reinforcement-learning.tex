@@ -69,20 +69,19 @@ configuration.
 % %
 % Q-LEARNING
 % %
-\section{Q Learning}
+\section{$\mathcal{Q}$-Learning}
 \label{sec:reinforcement-learning-q-learning}
 
-It has been proven that, independently of the policy
-being followed and the initial values assigned to Q, the learned action-value
-function converges with probability 1 to Q ∗ \cite{watkins1992q}, under the condition that every
-state-action pair continues to be sampled as i → ∞.
+It has been proven that, independently of the policy being followed and the initial values assigned to Q, the learned action-value function converges with probability 1 to $\mathcal{Q}*$\cite{watkins1992q}, under the condition that every state-action pair continues to be sampled.
+
+It works by successively improving its evaluations of the quality of particular actions at particular states.
 
 
 % %
-% PDS-LEARNING
+% OTHER TECHNIQUES
 % %
-\section{PDS Learning}
-\label{reinforcement-learning-pds-learning}
+\section{Other Techniques}
+\label{reinforcement-learning-other-techniques}
 
 In order to integrate the partial knowledge of the system into a learning
 algorithm, we rely on the post-decision state (PDS) concept, exploiting the gen-
@@ -104,11 +103,3 @@ that is updated along with Q
 It is worth noting that, since the unknown system dynamics do not depend on
 the selected action, randomized exploration is not required any more, and a
 greedy policy can be followed during the learning phase.
-
-% %
-% FULL BACKUP LEARNING
-% %
-\section{FBMB Learning}
-\label{reinforcement-learning-fbmb-learning}
-
-\lipsum[1]
