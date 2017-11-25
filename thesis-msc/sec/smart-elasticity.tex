@@ -211,7 +211,7 @@ In Figure \ref{fig:smart-elasticity-sequence-diagram} we show the flow of intera
 	\begin{figure}	
 		\label{fig:smart-elasticity-sequence-diagram}
 		\centering
-		\includegraphics[width=.85\columnwidth]{smart-elasticity-sequence-diagram}
+		\includegraphics[height=.6\columnwidth, width=.95\columnwidth]{smart-elasticity-sequence-diagram}
 		\caption{The auto-scaling activity.}
 	\end{figure}
 \end{landscape}
@@ -232,15 +232,15 @@ Furthermore we detail the REST calls executed by ScalerAI on ClusterMonitor to g
 \begin{table}
 	\label{tbl:smart-elasticity-rest-scalerai}
 	\centering
-	\begin{tabular}{| m{1.5cm} | m{3cm} | m{3cm} | m{8cm} | }\hline
+	\begin{tabular}{| m{1.5cm} | m{3cm} | m{3cm} | m{6cm} | }\hline
 		
 		\textbf{Method} & \textbf{Resource} & \textbf{Params} & \textbf{Description} \\\hline
 
-		\texttt{GET}	& scaling-action  & api-token & Retrieves a new scaling action. \\\hline
+		\texttt{GET}	& scaling-action    & api-token & Retrieves a new scaling action. \\\hline
 
-		\texttt{GET}    & context         & api-token & Retrieves the learning context. \\\hline
+		\texttt{GET}    & context           & api-token & Retrieves the learning context. \\\hline
 		
-		\texttt{PATCH}  & context         & api-token, learningParameters & Modifies the learning context. \\\hline
+		\texttt{PATCH}  & context           & api-token, learningParameters & Modifies the learning context. \\\hline
 		
 	\end{tabular}
 	\caption{The REST interface exposed by \texttt{ScalerAI}.}
@@ -249,7 +249,7 @@ Furthermore we detail the REST calls executed by ScalerAI on ClusterMonitor to g
 \begin{table}
 	\label{tbl:smart-elasticity-rest-cluster-monitor}
 	\centering
-	\begin{tabular}{| m{1.5cm} | m{3cm} | m{3cm} | m{8cm} | }\hline
+	\begin{tabular}{| m{1.5cm} | m{3cm} | m{3cm} | m{6cm} | }\hline
 		
 		\textbf{Method} & \textbf{Resource} & \textbf{Params} & \textbf{Description} \\\hline
 		
