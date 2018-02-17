@@ -17,13 +17,52 @@ Most approaches that enable elasticity exploit best-effort threshold-based polic
 %
 Other works, e.g., [1,2,8], use more complex policies to determine the scaling decisions, exploiting optimization theory [1], control theory [2], or queueing theory [8].
 
+To the best of our knowledge, only one
+work [5] has so far exploited RL techniques to drive the auto-scaling decisions in
+DSP systems. Heinze et al. [5] propose a simple RL approach that learns from
+experience when to acquire and release computing nodes so to efficiently process
+the incoming workload. The per-operator auto-scaler populates a lookup table
+that associates the utilization of the node on which the operator is executed with
+the action to perform (i.e., scale in, scale out, or do nothing). The adaptation
+goal is to keep the system utilization within a specific range; the SARSA learning
+algorithm [12] is used to update the lookup table.
+
+A larger number of works has exploited RL techniques to drive elasticity in
+the Cloud computing context, as surveyed in [9]. Most of them use the simple Q-
+learning RL algorithm (described in Sec. 5), which suffers from slow convergence,
+as we also show in Section 6. Tesauro et al. [13] observe that RL approaches
+can suffer from poor scalability in systems with a large state space, because
+the lookup table has to store a separate value for every possible state-action
+pair. Moreover, the performance obtained during the on-line training may be
+unacceptably poor, due to the absence of domain knowledge or good heuristics.
+To overcome these issues, they combine RL with a model of the system, defined
+using queuing theory, which computes the initial deployment decisions and drives
+the exploration actions. They use the SARSA learning algorithm, which however
+suffers from slow convergence as Q-learning.
+
+The goal of the Operator Manager is to take scaling decisions as to minimize
+a long-term cost function which accounts for the operator downtime and for the
+monetary cost to run the operator. The latter comprises: (i) the cost for running
+the number of instances during the next time slot, and (ii) possibly a penalty
+in case of SLA violation. In particular, we consider a constraint on the operator
+response time, so that a penalty is paid every time the response time exceeds a
+given threshold T SLA.
+
+Since decisions are taken periodically, we consider a slotted time system with
+fixed-length time intervals of length ∆t, with the i-th time slot corresponding
+to the time interval [i∆t, (i + 1)∆t] (see Fig. 2). We denote by k i the number
+of parallel instances at the beginning of slot i, and by λ i the average tuple rate
+during slot i − 1 (the previous slot). At the beginning of slot i the Operator-
+Manager makes the decision a i on whether modify or keep the current instance
+configuration.
+
 
 % %
 % REMAINDER
 % %
 The remainder of this thesis is organized as follows.
 %
-In Chapter~\ref{chp:containers-orchestration} we introduce the context of containers orchestrations, thus focusing on resource management, containerization and elasticity.
+In Chapter~\ref{chp:elasticity} we introduce the context of containers orchestrations, thus focusing on resource management, containerization and elasticity.
 %
 In Chapter~\ref{chp:reinforcement-learning} we give the necessary background notions about reinforcement learning, focusing on the Q-Learning technique and its comparison with respect to other techniques.
 %

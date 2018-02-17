@@ -1,0 +1,126 @@
+%*******************************************************************************
+% Title: Advanced Probability and Statistics
+%
+% Conference: Computer Science Lectures 2017
+%
+% Authors: Giacomo Marciani <gmarciani@ieee.org>
+%
+% Institution: Department of Civil Engineering and Computer Science Engineering,
+% 			   University of Rome Tor Vergata, Italy
+%
+% Style: ACM Large VERSION 1.7
+%*******************************************************************************
+
+\documentclass[prodmode,gmlecture]{acmlarge}
+
+%*******************************************************************************
+% Packages
+%*******************************************************************************
+\usepackage[utf8]{inputenc}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{lipsum}
+\usepackage{xr}
+\usepackage{hyperref}
+\usepackage{cleveref}
+
+%*******************************************************************************
+% Details
+%*******************************************************************************
+\acmVolume{2}
+\acmNumber{1}
+\acmArticle{1}
+\articleSeq{1}
+\acmMonth{12}
+\acmYear{2017}
+
+\issn{1234-56789}
+\doi{0000001.0000001}
+
+%*******************************************************************************
+% Copyright
+%*******************************************************************************
+\setcopyright{rightsretained}
+
+%*******************************************************************************
+% Algorithm
+%*******************************************************************************
+\usepackage[ruled]{algorithm2e}
+\SetAlFnt{\algofont}
+\SetAlCapFnt{\algofont}
+\SetAlCapNameFnt{\algofont}
+\SetAlCapHSkip{0pt}
+\IncMargin{-\parindent}
+\renewcommand{\algorithmcfname}{ALGORITHM}
+
+%*******************************************************************************
+% Notations
+%*******************************************************************************
+\newcommand{\probability}[1]{
+	\mathbf{P}[#1]
+}
+\newcommand{\expected}[1]{
+	\mathbf{E}[#1]
+}
+\newcommand{\variance}[1]{
+	\mathbf{Var}[#1]
+}
+\newcommand{\covariance}[2]{
+	\mathbf{Cov}[#1,#2]
+}
+\newcommand{\correlation}[2]{
+	\mathbf{Corr}[#1,#2]
+}
+
+%*******************************************************************************
+% Numbering
+%*******************************************************************************
+\numberwithin{equation}{section}
+
+%*******************************************************************************
+% References
+%*******************************************************************************
+\crefname{lem}{lemma}{lemmata}
+\Crefname{cor}{Corollary}{Corollaries}
+
+%*******************************************************************************
+% Title and Authors
+%*******************************************************************************
+\markboth{G. Marciani}{Advanced Probability and Statistics}
+\title{Advanced Probability and Statistics}
+\author{GIACOMO MARCIANI \affil{University of Rome Tor Vergata}}
+
+%*******************************************************************************
+% Content
+%*******************************************************************************
+
+\input{sec/abstract}
+\input{sec/ccs-keywords}
+
+\acmformat{Giacomo Marciani. 2017. Advanced Probability and Statistics.}
+
+\begin{document}
+
+\begin{bottomstuff}
+	This work is supported by the Department of Civil Engineering and Computer Science
+	Engineering, University of Rome Tor Vergata, Italy.\\
+	Author's address: G. Marciani, Via del Politecnico 1, Rome, RM 00133, Italy;
+	email: gmarciani@ieee.org.
+\end{bottomstuff}
+
+\maketitle
+
+\input{sec/introduction}
+\input{sec/set-theory}
+\input{sec/data-sets}
+\input{sec/formulary}
+\input{sec/tips-tricks}
+\input{sec/related-readings}
+
+%*******************************************************************************
+% Bibliography
+%*******************************************************************************
+\bibliographystyle{acmreferences}
+\bibliography{ref/biblio}
+
+\end{document}

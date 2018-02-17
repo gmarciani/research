@@ -1,0 +1,902 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg
+   xmlns:dc="http://purl.org/dc/elements/1.1/"
+   xmlns:cc="http://creativecommons.org/ns#"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:xlink="http://www.w3.org/1999/xlink"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   width="476.1"
+   height="385.3"
+   version="1.1"
+   id="svg197"
+   sodipodi:docname="kubernetes-uas.svg"
+   inkscape:version="0.92.2 (5c3e80d, 2017-08-06)">
+  <metadata
+     id="metadata203">
+    <rdf:RDF>
+      <cc:Work
+         rdf:about="">
+        <dc:format>image/svg+xml</dc:format>
+        <dc:type
+           rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
+      </cc:Work>
+    </rdf:RDF>
+  </metadata>
+  <defs
+     id="defs201" />
+  <sodipodi:namedview
+     pagecolor="#ffffff"
+     bordercolor="#666666"
+     borderopacity="1"
+     objecttolerance="10"
+     gridtolerance="10"
+     guidetolerance="10"
+     inkscape:pageopacity="0"
+     inkscape:pageshadow="2"
+     inkscape:window-width="1600"
+     inkscape:window-height="837"
+     id="namedview199"
+     showgrid="false"
+     inkscape:zoom="1.7324392"
+     inkscape:cx="210.33694"
+     inkscape:cy="-39.988868"
+     inkscape:window-x="-8"
+     inkscape:window-y="-8"
+     inkscape:window-maximized="1"
+     inkscape:current-layer="svg197" />
+  <style
+     type="text/css"
+     id="style2">.st0{fill:#FFFFFF;stroke:#006DE9;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:10;}
+	.st1{fill:#FFFFFF;stroke:#006DE9;stroke-width:6;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:10;}
+	.st2{fill:#FFFFFF;stroke:#326DE6;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:10;}
+	.st3{opacity:0.71;fill:#326CE6;}
+	.st4{opacity:0.45;fill:#FFFFFF;}
+	.st5{fill:#FFFFFF;stroke:#006DE9;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:10;}
+	.st6{fill:#006DE9;}
+	.st7{fill:#A0CAEA;}
+	.st8{fill:#FFFFFF;}
+	.st9{opacity:0.13;}
+	.st10{fill:url(#SVGID_1_);}
+	.st11{fill:url(#SVGID_2_);}
+	.st12{fill:#FFFFFF;stroke:#326DE6;stroke-width:3.2;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:10;}
+	.st13{fill:#326DE6;}
+	.st14{fill:none;stroke:#326DE6;stroke-width:2.4;stroke-miterlimit:10;}
+	.st15{fill:#A0CAE9;}
+	.st16{fill:#FFFFFF;stroke:#326DE6;stroke-width:1.6;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:10;}
+	.st17{fill:#FFFFFF;stroke:#326DE6;stroke-width:1.6;stroke-miterlimit:10;}
+	.st18{fill:none;stroke:#06F7C9;stroke-width:2;stroke-miterlimit:10;}
+	.st19{fill:none;stroke:#06F7C9;stroke-width:2;stroke-miterlimit:10;stroke-dasharray:2.3749,1.5832;}
+	.st20{fill:none;stroke:#06F7C9;stroke-width:2;stroke-miterlimit:10;stroke-dasharray:2.4006,1.6004;}
+	.st21{fill:none;stroke:#EEF406;stroke-width:2;stroke-miterlimit:10;stroke-dasharray:2.4,1.6;}
+	.st22{fill:none;stroke:#EEF406;stroke-width:2;stroke-miterlimit:10;}
+	.st23{fill:none;stroke:#EEF406;stroke-width:2;stroke-miterlimit:10;stroke-dasharray:2.3975,1.5984;}
+	.st24{fill:none;stroke:#EEF406;stroke-width:2;stroke-miterlimit:10;stroke-dasharray:2.395,1.5966;}
+	.st25{fill:none;stroke:#EEF406;stroke-width:2;stroke-miterlimit:10;stroke-dasharray:2.3963,1.5976;}
+	.st26{opacity:0.1;fill:#EEF406;}
+	.st27{opacity:2.000000e-02;fill:#EEF406;}
+	.st28{opacity:0.1;fill:#06F7C9;}
+	.st29{fill:none;stroke:#006DE9;stroke-width:0.8;stroke-miterlimit:10;}
+	.st30{opacity:0.1;fill:url(#SVGID_3_);}
+	.st31{opacity:0.1;fill:url(#SVGID_4_);}
+	.st32{opacity:0.1;fill:url(#SVGID_5_);}
+	.st33{opacity:0.1;fill:url(#SVGID_6_);}
+	.st34{fill:none;stroke:#326DE6;stroke-width:1.2;stroke-miterlimit:10;}
+	.st35{opacity:0.1;fill:url(#SVGID_7_);}
+	.st36{opacity:0.1;fill:url(#SVGID_8_);}
+	.st37{opacity:0.1;fill:url(#SVGID_9_);}
+	.st38{opacity:0.1;fill:url(#SVGID_10_);}
+	.st39{fill:none;stroke:#326DE6;stroke-width:2;stroke-miterlimit:10;}
+	.st40{opacity:0.4;fill:none;stroke:#EEF406;stroke-width:2;stroke-miterlimit:10;}
+	.st41{fill:none;stroke:#EEF406;stroke-width:2.4596;stroke-miterlimit:10;}
+	.st42{fill:#011F38;}
+	.st43{opacity:0.4;}
+	.st44{opacity:0.1;}
+	.st45{fill:#326DE6;stroke:#EEF406;stroke-width:2;stroke-miterlimit:10;}
+	.st46{fill:none;stroke:#FFFFFF;stroke-width:1.2;stroke-linecap:round;stroke-linejoin:round;}
+	.st47{fill:#06F7C9;stroke:#FFFFFF;stroke-width:0.3;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:10;}
+	.st48{fill:none;stroke:#011F38;stroke-width:1.2;stroke-linecap:round;stroke-linejoin:round;}
+	.st49{fill:#326DE6;stroke:#06F7C9;stroke-width:2;stroke-miterlimit:10;}
+	.st50{fill:#06F7C9;stroke:#011F38;stroke-width:0.8;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:10;}
+	.st51{fill:#8115FF;stroke:#011F38;stroke-width:0.8;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:10;}
+	.st52{opacity:0.3;}
+	.st53{opacity:0.2;fill:#6D6E71;}
+	.st54{fill:#EEF406;}
+	.st55{fill:#06F7C9;}
+	.st56{fill:#FFFFFF;stroke:#06F7C9;stroke-width:2;stroke-miterlimit:10;stroke-dasharray:2.4,1.6;}
+	.st57{fill:#FFFFFF;stroke:#EEF406;stroke-width:1.6;stroke-miterlimit:10;stroke-dasharray:2.4,1.6;}
+	.st58{fill:none;stroke:#06F7C9;stroke-width:2;stroke-miterlimit:10;stroke-dasharray:2.4938,1.6626;}
+	.st59{fill:none;stroke:#06F7C9;stroke-width:2;stroke-miterlimit:10;stroke-dasharray:2.0084,1.3389;}
+	.st60{fill:none;stroke:#06F7C9;stroke-width:2;stroke-miterlimit:10;stroke-dasharray:2.724,1.816;}
+	.st61{fill:#011F38;stroke:#414042;stroke-width:0.3;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:10;}
+	.st62{fill:none;stroke:#011F38;stroke-width:0.3;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:10;}
+	.st63{fill:none;stroke:#011F38;stroke-width:0.2813;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:10;}</style>
+  <symbol
+     id="master_x5F_level1_1_"
+     viewBox="-68.6 -66.9 137.2 133.9">
+    <g
+       id="svg_1">
+      <g
+         id="svg_2">
+        <line
+           class="st0"
+           x1="0"
+           y1="-11.1"
+           x2="0"
+           y2="0.7"
+           id="svg_3" />
+        <line
+           class="st0"
+           x1="5.9"
+           y1="-5.2"
+           x2="-5.9"
+           y2="-5.2"
+           id="svg_4" />
+      </g>
+      <polygon
+         class="st1"
+         points="-29.2,-63.9 -65.6,-18.3 -52.6,38.6 0,63.9 52.6,38.6 65.6,-18.3 29.2,-63.9   "
+         id="svg_5" />
+    </g>
+  </symbol>
+  <symbol
+     id="node_high_level"
+     viewBox="-81 -93 162 186.1">
+    <polygon
+       class="st2"
+       points="-80,-46 -80,46 0,92 80,46 80,-46 0,-92  "
+       id="svg_6" />
+    <g
+       id="Isolation_Mode_3_" />
+  </symbol>
+  <symbol
+     id="node_x5F_empty"
+     viewBox="-87.5 -100.6 175.1 201.1">
+    <use
+       xlink:href="#node_high_level"
+       width="162"
+       height="186.1"
+       id="XMLID_201_"
+       x="-81"
+       y="-93"
+       transform="matrix(1.0808,0,0,1.0808,-0.00003292006,-0.00003749943) " />
+    <g
+       id="svg_7">
+      <polygon
+         class="st3"
+         points="76.8,-28.1 -14,-80.3 0,-88.3 76.7,-44.4   "
+         id="svg_8" />
+      <polygon
+         class="st4"
+         points="76.8,-28.1 32.1,-53.8 38.8,-66.1 76.7,-44.4   "
+         id="svg_9" />
+    </g>
+  </symbol>
+  <symbol
+     id="node_x5F_new"
+     viewBox="-87.6 -101 175.2 202">
+    <polygon
+       class="st5"
+       points="0,-100 -86.6,-50 -86.6,50 0,100 86.6,50 86.6,-50  "
+       id="svg_10" />
+    <polygon
+       class="st6"
+       points="-86.6,-20.2 -86.6,-50 0,-100 25.8,-85.1  "
+       id="svg_11" />
+    <polygon
+       class="st7"
+       points="-40.8,-70.7 -32.9,-57 15.7,-85.1 0,-94.3  "
+       id="svg_12" />
+    <text
+       transform="matrix(0.866,-0.5,-0.5,-0.866,-33.9256,-70.7388) "
+       class="st8"
+       font-size="11.3632px"
+       font-family="'RobotoSlab-Regular'"
+       id="svg_13">Docker</text>
+    <text
+       transform="matrix(0.866,-0.5,-0.5,-0.866,-76.0668,-46.4087) "
+       class="st8"
+       font-size="11.3632px"
+       font-family="'RobotoSlab-Regular'"
+       id="svg_14">Kubelt</text>
+  </symbol>
+  <g
+     id="CLUSTER"
+     inkscape:export-xdpi="96"
+     inkscape:export-ydpi="96">
+    <g
+       style="opacity:0.12999998"
+       class="st9"
+       id="XMLID_8_">
+      <g
+         id="svg_15">
+        <linearGradient
+           y2="185.5114"
+           x2="342.4509"
+           y1="185.5114"
+           x1="27.995501"
+           gradientUnits="userSpaceOnUse"
+           id="SVGID_1_">
+          <stop
+             id="stop26"
+             stop-color="#326DE6"
+             offset="0" />
+          <stop
+             id="stop28"
+             stop-color="#10FFC6"
+             offset="1" />
+        </linearGradient>
+        <polygon
+           style="fill:url(#SVGID_1_)"
+           id="svg_16"
+           points="255.2,338.8 115.3,338.8 28,229.4 59.1,92.9 185.2,32.2 311.3,92.9 342.5,229.4 "
+           class="st10" />
+      </g>
+    </g>
+  </g>
+  <g
+     id="master"
+     inkscape:export-xdpi="96"
+     inkscape:export-ydpi="96">
+    <g
+       id="master_x5F_level1" />
+    <use
+       id="svg_17"
+       transform="matrix(0.4,0,0,-0.4,185.2213,187.4709)"
+       y="-66.900002"
+       x="-68.599998"
+       height="133.89999"
+       width="137.2"
+       xlink:href="#master_x5F_level1_1_" />
+  </g>
+  <g
+     id="Node"
+     inkscape:export-xdpi="96"
+     inkscape:export-ydpi="96">
+    <g
+       id="Node_x5F_level3_x5F_1">
+      <g
+         id="Isolation_Mode" />
+    </g>
+    <polygon
+       style="fill:#ffffff;stroke:#326de6;stroke-width:1.60000002;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:10"
+       id="svg_18"
+       points="189,98.9 224.6,78.4 260.3,98.9 260.3,140.1 224.6,160.7 189,140.1 "
+       class="st16" />
+    <polygon
+       style="fill:#326de6"
+       id="svg_19"
+       points="224.6,160.7 235.2,154.5 189,127.8 189,140.1 "
+       class="st13" />
+    <polygon
+       style="fill:#a0caea"
+       id="svg_20"
+       points="231.1,154.5 224.6,158.3 207.8,148.6 211.1,143 "
+       class="st7" />
+    <g
+       id="svg_21">
+      <path
+         style="fill:#ffffff"
+         inkscape:connector-curvature="0"
+         id="svg_22"
+         d="m 213.7,146.5 c 0.4,0.2 0.6,0.5 0.7,0.9 0.1,0.4 0,0.7 -0.2,1.1 l -0.2,0.4 c -0.2,0.4 -0.5,0.6 -0.9,0.7 -0.4,0.1 -0.7,0 -1.1,-0.2 l -1.2,-0.7 0.1,-0.2 0.4,0.1 1.3,-2.3 -0.3,-0.2 0.1,-0.3 0.3,0.2 z m -0.6,0 -1.3,2.3 0.5,0.3 c 0.3,0.2 0.5,0.2 0.8,0.1 0.3,-0.1 0.5,-0.3 0.6,-0.5 l 0.2,-0.4 c 0.2,-0.3 0.2,-0.5 0.2,-0.8 -0.1,-0.3 -0.2,-0.5 -0.5,-0.6 z"
+         class="st8" />
+      <path
+         style="fill:#ffffff"
+         inkscape:connector-curvature="0"
+         id="svg_23"
+         d="m 214.3,149.2 c 0.2,-0.3 0.4,-0.5 0.7,-0.6 0.3,-0.1 0.6,-0.1 0.9,0.1 0.3,0.2 0.5,0.4 0.5,0.7 0.1,0.3 0,0.6 -0.2,0.9 v 0 c -0.2,0.3 -0.4,0.5 -0.7,0.6 -0.3,0.1 -0.6,0.1 -0.9,-0.1 -0.3,-0.2 -0.5,-0.4 -0.5,-0.7 0,-0.2 0,-0.5 0.2,-0.9 z m 0.4,0.3 c -0.1,0.2 -0.2,0.4 -0.2,0.6 0,0.2 0.1,0.4 0.3,0.5 0.2,0.1 0.4,0.1 0.5,0 0.2,-0.1 0.3,-0.3 0.5,-0.5 v 0 c 0.1,-0.2 0.2,-0.4 0.2,-0.6 0,-0.2 -0.1,-0.4 -0.3,-0.5 -0.2,-0.1 -0.4,-0.1 -0.6,0 -0.2,0.1 -0.2,0.2 -0.4,0.5 z"
+         class="st8" />
+      <path
+         style="fill:#ffffff"
+         inkscape:connector-curvature="0"
+         id="svg_24"
+         d="m 217.1,151.9 c 0.1,0.1 0.3,0.1 0.4,0.1 0.1,0 0.2,-0.1 0.3,-0.2 l 0.4,0.2 v 0 c -0.1,0.2 -0.3,0.3 -0.5,0.3 -0.3,0 -0.5,0 -0.7,-0.1 -0.3,-0.2 -0.5,-0.4 -0.5,-0.7 0,-0.3 0,-0.6 0.2,-0.9 v -0.1 c 0.2,-0.3 0.4,-0.5 0.7,-0.6 0.3,-0.1 0.6,-0.1 0.9,0.1 0.2,0.1 0.3,0.2 0.4,0.4 0.1,0.1 0.2,0.3 0.2,0.4 l -0.3,0.5 -0.3,-0.2 0.1,-0.4 c 0,-0.1 -0.1,-0.1 -0.1,-0.2 -0.1,-0.1 -0.1,-0.1 -0.2,-0.2 -0.2,-0.1 -0.4,-0.1 -0.6,0 -0.2,0.1 -0.3,0.3 -0.4,0.5 v 0.1 c -0.1,0.2 -0.2,0.4 -0.2,0.6 -0.1,0.2 0,0.3 0.2,0.4 z"
+         class="st8" />
+      <path
+         style="fill:#ffffff"
+         inkscape:connector-curvature="0"
+         id="svg_25"
+         d="m 219.7,150 0.1,-0.3 0.7,0.4 -1,1.8 0.2,0.1 0.8,-0.3 -0.2,-0.1 0.1,-0.3 0.9,0.5 -0.1,0.3 -0.3,-0.1 -1,0.3 0.2,1.3 0.2,0.2 -0.1,0.2 -0.9,-0.5 0.1,-0.2 0.2,0.1 -0.2,-1 -0.3,-0.1 -0.1,0.7 0.3,0.2 -0.1,0.2 -1,-0.6 0.1,-0.2 0.4,0.1 1.4,-2.5 z"
+         class="st8" />
+      <path
+         style="fill:#ffffff"
+         inkscape:connector-curvature="0"
+         id="svg_26"
+         d="m 221.5,154.9 c -0.3,-0.2 -0.5,-0.4 -0.5,-0.7 0,-0.3 0,-0.6 0.2,-0.9 v -0.1 c 0.2,-0.3 0.4,-0.5 0.7,-0.6 0.3,-0.1 0.6,-0.1 0.8,0.1 0.3,0.2 0.5,0.4 0.5,0.6 0,0.3 0,0.5 -0.2,0.8 l -0.1,0.2 -1.4,-0.8 v 0 c -0.1,0.2 -0.2,0.4 -0.1,0.6 0,0.2 0.1,0.3 0.3,0.4 0.1,0.1 0.3,0.1 0.4,0.1 0.1,0 0.2,0 0.3,0 v 0.3 c -0.1,0 -0.3,0 -0.4,0 -0.1,0.2 -0.3,0.1 -0.5,0 z m 1.1,-1.9 c -0.1,-0.1 -0.3,-0.1 -0.4,0 -0.2,0.1 -0.3,0.2 -0.4,0.3 v 0 l 1,0.6 v -0.1 c 0.1,-0.2 0.1,-0.3 0.1,-0.5 -0.1,-0.1 -0.2,-0.2 -0.3,-0.3 z"
+         class="st8" />
+      <path
+         style="fill:#ffffff"
+         inkscape:connector-curvature="0"
+         id="svg_27"
+         d="m 223.9,153.7 0.1,-0.3 0.7,0.4 -0.1,0.3 c 0.1,-0.1 0.2,-0.1 0.4,-0.1 0.1,0 0.2,0 0.4,0.1 0,0 0.1,0 0.1,0.1 0,0 0.1,0 0.1,0.1 l -0.3,0.3 -0.2,-0.1 c -0.1,-0.1 -0.2,-0.1 -0.3,-0.1 -0.1,0 -0.2,0 -0.3,0.1 l -0.7,1.2 0.3,0.2 -0.1,0.2 -1,-0.6 0.1,-0.2 0.4,0.1 0.9,-1.5 z"
+         class="st8" />
+    </g>
+    <g
+       id="svg_28">
+      <path
+         style="fill:#ffffff"
+         inkscape:connector-curvature="0"
+         id="svg_29"
+         d="m 194.3,135.3 0.1,-0.3 0.7,0.4 -1,1.8 0.2,0.1 0.8,-0.3 -0.2,-0.1 0.1,-0.3 0.9,0.5 -0.1,0.3 -0.3,-0.1 -1,0.3 0.2,1.3 0.2,0.2 -0.1,0.2 -0.9,-0.5 0.1,-0.2 0.2,0.1 -0.2,-1 -0.3,-0.1 -0.4,0.7 0.3,0.2 -0.1,0.2 -1,-0.6 0.1,-0.2 0.4,0.1 1.4,-2.5 z"
+         class="st8" />
+      <path
+         style="fill:#ffffff"
+         inkscape:connector-curvature="0"
+         id="svg_30"
+         d="m 196.8,140.2 c -0.1,0.1 -0.3,0.1 -0.4,0.1 -0.1,0 -0.3,0 -0.4,-0.1 -0.2,-0.1 -0.4,-0.3 -0.4,-0.5 0,-0.2 0,-0.5 0.2,-0.8 l 0.6,-1 -0.2,-0.2 0.1,-0.3 0.2,0.1 0.4,0.2 -0.7,1.3 c -0.1,0.2 -0.2,0.4 -0.2,0.5 0,0.1 0.1,0.2 0.2,0.3 0.1,0.1 0.3,0.1 0.4,0.1 0.1,0 0.2,0 0.3,-0.1 l 0.7,-1.2 -0.3,-0.2 0.1,-0.3 0.3,0.2 0.4,0.2 -1.1,1.8 0.2,0.2 -0.1,0.2 -0.6,-0.3 z"
+         class="st8" />
+      <path
+         style="fill:#ffffff"
+         inkscape:connector-curvature="0"
+         id="svg_31"
+         d="m 200.1,141.2 c -0.2,0.3 -0.4,0.5 -0.7,0.6 -0.3,0.1 -0.5,0.1 -0.8,-0.1 -0.1,-0.1 -0.2,-0.2 -0.3,-0.3 -0.1,-0.1 -0.1,-0.2 -0.1,-0.4 l -0.2,0.3 -0.3,-0.2 1.6,-2.8 -0.3,-0.2 0.1,-0.3 0.7,0.4 -0.7,1.2 c 0.1,-0.1 0.2,-0.1 0.4,-0.1 0.1,0 0.3,0 0.4,0.1 0.3,0.2 0.4,0.4 0.4,0.7 0.1,0.4 0,0.7 -0.2,1.1 z m -0.4,-0.3 c 0.1,-0.2 0.2,-0.5 0.2,-0.7 0,-0.2 -0.1,-0.4 -0.3,-0.5 -0.1,-0.1 -0.2,-0.1 -0.4,-0.1 -0.1,0 -0.2,0.1 -0.3,0.1 l -0.5,0.9 c 0,0.1 0,0.2 0.1,0.3 0.1,0.1 0.1,0.2 0.3,0.3 0.2,0.1 0.4,0.1 0.5,0 0.2,0.1 0.3,0 0.4,-0.3 z"
+         class="st8" />
+      <path
+         style="fill:#ffffff"
+         inkscape:connector-curvature="0"
+         id="svg_32"
+         d="m 200.9,143 c -0.3,-0.2 -0.5,-0.4 -0.5,-0.7 0,-0.3 0,-0.6 0.2,-0.9 v -0.1 c 0.2,-0.3 0.4,-0.5 0.7,-0.6 0.3,-0.1 0.6,-0.1 0.8,0.1 0.3,0.2 0.5,0.4 0.5,0.6 0,0.3 0,0.5 -0.2,0.8 l -0.1,0.2 -1.4,-0.8 v 0 c -0.1,0.2 -0.2,0.4 -0.1,0.6 0,0.2 0.1,0.3 0.3,0.4 0.1,0.1 0.3,0.1 0.4,0.1 0.1,0 0.2,0 0.3,0 v 0.3 c -0.1,0 -0.3,0 -0.4,0 -0.2,0.2 -0.3,0.1 -0.5,0 z m 1,-2 c -0.1,-0.1 -0.3,-0.1 -0.4,0 -0.2,0.1 -0.3,0.2 -0.4,0.3 v 0 l 1,0.6 v -0.1 c 0.1,-0.2 0.1,-0.3 0.1,-0.5 0,0 -0.1,-0.2 -0.3,-0.3 z"
+         class="st8" />
+      <path
+         style="fill:#ffffff"
+         inkscape:connector-curvature="0"
+         id="svg_33"
+         d="m 203.7,140.8 0.1,-0.3 0.7,0.4 -1.6,2.8 0.3,0.2 -0.1,0.2 -1,-0.6 0.1,-0.2 0.4,0.1 1.4,-2.5 z"
+         class="st8" />
+      <path
+         style="fill:#ffffff"
+         inkscape:connector-curvature="0"
+         id="svg_34"
+         d="m 204.3,145 c -0.3,-0.2 -0.5,-0.4 -0.5,-0.7 -0.1,-0.3 0,-0.6 0.2,-0.9 v -0.1 c 0.2,-0.3 0.4,-0.5 0.7,-0.6 0.3,-0.1 0.6,-0.1 0.8,0.1 0.3,0.2 0.5,0.4 0.5,0.6 0,0.3 0,0.5 -0.2,0.8 l -0.1,0.2 -1.4,-0.8 v 0 c -0.1,0.2 -0.2,0.4 -0.1,0.6 0,0.2 0.1,0.3 0.3,0.4 0.1,0.1 0.3,0.1 0.4,0.1 0.1,0 0.2,0 0.3,0 v 0.3 c -0.1,0 -0.3,0 -0.4,0 -0.1,0.1 -0.3,0.1 -0.5,0 z m 1.1,-2 c -0.1,-0.1 -0.3,-0.1 -0.4,0 -0.2,0.1 -0.3,0.2 -0.4,0.3 v 0 l 1,0.6 v -0.1 c 0.1,-0.2 0.1,-0.3 0.1,-0.5 -0.1,-0.1 -0.2,-0.2 -0.3,-0.3 z"
+         class="st8" />
+      <path
+         style="fill:#ffffff"
+         inkscape:connector-curvature="0"
+         id="svg_35"
+         d="m 207.8,143.4 -0.3,0.5 0.4,0.2 -0.2,0.3 -0.4,-0.2 -0.8,1.3 c -0.1,0.1 -0.1,0.2 -0.1,0.2 0,0.1 0.1,0.1 0.1,0.2 0,0 0.1,0 0.1,0.1 0,0 0.1,0 0.1,0 l -0.1,0.3 c -0.1,0 -0.1,0 -0.2,0 -0.1,0 -0.2,-0.1 -0.2,-0.1 -0.2,-0.1 -0.3,-0.2 -0.3,-0.4 0,-0.2 0,-0.3 0.1,-0.5 l 0.8,-1.3 -0.3,-0.2 0.2,-0.3 0.3,0.2 0.3,-0.5 z"
+         class="st8" />
+    </g>
+    <polygon
+       style="fill:#ffffff;stroke:#326de6;stroke-width:1.60000002;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:10"
+       id="svg_36"
+       points="111,140.1 111,99 146.6,78.4 182.3,99 182.3,140.1 146.6,160.7 "
+       class="st16" />
+    <polygon
+       style="fill:#326de6"
+       id="svg_37"
+       points="182.3,140.1 182.2,127.9 136,154.5 146.6,160.7 "
+       class="st13" />
+    <polygon
+       style="fill:#a0caea"
+       id="svg_38"
+       points="180.2,131.4 180.2,138.9 163.4,148.6 160.2,143 "
+       class="st7" />
+    <g
+       id="svg_39">
+      <path
+         style="fill:#ffffff"
+         inkscape:connector-curvature="0"
+         id="svg_40"
+         d="m 164.6,142.5 c 0.4,-0.2 0.7,-0.3 1.1,-0.2 0.4,0.1 0.6,0.3 0.9,0.7 l 0.2,0.4 c 0.2,0.4 0.3,0.7 0.2,1.1 -0.1,0.4 -0.3,0.7 -0.7,0.9 l -1.2,0.7 -0.1,-0.2 0.3,-0.2 -1.3,-2.3 -0.4,0.1 -0.1,-0.3 0.3,-0.2 z m -0.3,0.6 1.3,2.3 0.5,-0.3 c 0.3,-0.2 0.4,-0.4 0.5,-0.6 0.1,-0.3 0,-0.5 -0.2,-0.8 l -0.2,-0.4 c -0.2,-0.3 -0.4,-0.5 -0.6,-0.5 -0.3,-0.1 -0.5,-0.1 -0.8,0.1 z"
+         class="st8" />
+      <path
+         style="fill:#ffffff"
+         inkscape:connector-curvature="0"
+         id="svg_41"
+         d="m 167.3,143.4 c -0.2,-0.3 -0.2,-0.6 -0.2,-0.9 0.1,-0.3 0.2,-0.5 0.5,-0.7 0.3,-0.2 0.6,-0.2 0.9,-0.1 0.3,0.1 0.5,0.3 0.7,0.6 v 0 c 0.2,0.3 0.2,0.6 0.2,0.9 -0.1,0.3 -0.2,0.5 -0.5,0.7 -0.3,0.2 -0.6,0.2 -0.9,0.1 -0.3,0 -0.5,-0.3 -0.7,-0.6 z m 0.4,-0.2 c 0.1,0.2 0.3,0.4 0.5,0.5 0.2,0.1 0.4,0.1 0.6,0 0.2,-0.1 0.3,-0.3 0.3,-0.5 0,-0.2 0,-0.4 -0.2,-0.6 v 0 c -0.1,-0.2 -0.3,-0.4 -0.5,-0.5 -0.2,-0.1 -0.4,-0.1 -0.6,0 -0.2,0.1 -0.3,0.3 -0.3,0.5 0,0.2 0,0.3 0.2,0.6 z"
+         class="st8" />
+      <path
+         style="fill:#ffffff"
+         inkscape:connector-curvature="0"
+         id="svg_42"
+         d="m 171,142.3 c 0.1,-0.1 0.2,-0.2 0.3,-0.3 0.1,-0.1 0,-0.3 0,-0.4 l 0.3,-0.2 v 0 c 0.1,0.2 0.1,0.4 0,0.6 -0.1,0.2 -0.2,0.4 -0.5,0.6 -0.3,0.2 -0.6,0.2 -0.9,0.1 -0.3,-0.1 -0.5,-0.3 -0.7,-0.6 V 142 c -0.2,-0.3 -0.2,-0.6 -0.2,-0.9 0,-0.3 0.2,-0.5 0.5,-0.7 0.2,-0.1 0.3,-0.2 0.5,-0.2 0.2,0 0.3,0 0.5,0 l 0.3,0.5 -0.3,0.2 -0.3,-0.3 c -0.1,0 -0.2,0 -0.2,0 -0.1,0 -0.2,0 -0.3,0.1 -0.2,0.1 -0.3,0.3 -0.3,0.5 0,0.2 0.1,0.4 0.2,0.6 v 0.1 c 0.1,0.2 0.3,0.4 0.4,0.5 0.3,0.1 0.5,0.1 0.7,-0.1 z"
+         class="st8" />
+      <path
+         style="fill:#ffffff"
+         inkscape:connector-curvature="0"
+         id="svg_43"
+         d="m 170.6,139.1 -0.1,-0.3 0.7,-0.4 1,1.8 0.2,-0.1 0.1,-0.8 -0.2,0.1 -0.1,-0.3 0.9,-0.5 0.1,0.3 -0.2,0.2 -0.2,1 1.2,0.5 0.3,-0.1 0.1,0.2 -0.9,0.5 -0.1,-0.2 0.2,-0.1 -1,-0.4 -0.3,0.1 0.4,0.7 0.4,-0.1 0.1,0.2 -1,0.6 -0.1,-0.2 0.3,-0.2 -1.4,-2.6 z"
+         class="st8" />
+      <path
+         style="fill:#ffffff"
+         inkscape:connector-curvature="0"
+         id="svg_44"
+         d="m 175.8,140 c -0.3,0.2 -0.6,0.2 -0.9,0.1 -0.3,-0.1 -0.5,-0.3 -0.7,-0.6 l -0.1,-0.1 c -0.2,-0.3 -0.2,-0.6 -0.2,-0.9 0.1,-0.3 0.2,-0.5 0.5,-0.7 0.3,-0.2 0.6,-0.2 0.8,-0.1 0.2,0.1 0.5,0.3 0.6,0.6 l 0.1,0.2 -1.4,0.8 v 0 c 0.1,0.2 0.3,0.3 0.4,0.4 0.2,0.1 0.4,0.1 0.5,0 0.1,-0.1 0.2,-0.2 0.3,-0.3 0.1,-0.1 0.1,-0.2 0.2,-0.3 l 0.3,0.2 c 0,0.1 -0.1,0.2 -0.2,0.4 0.1,0.1 -0.1,0.2 -0.2,0.3 z m -1.2,-1.9 c -0.1,0.1 -0.2,0.2 -0.2,0.4 0,0.2 0,0.3 0.1,0.5 v 0 l 1,-0.6 v -0.1 c -0.1,-0.2 -0.2,-0.3 -0.3,-0.3 -0.3,0 -0.4,0 -0.6,0.1 z"
+         class="st8" />
+      <path
+         style="fill:#ffffff"
+         inkscape:connector-curvature="0"
+         id="svg_45"
+         d="m 175.8,137.4 -0.1,-0.3 0.7,-0.4 0.2,0.3 c 0,-0.1 0,-0.3 0.1,-0.4 0.1,-0.1 0.1,-0.2 0.3,-0.3 0,0 0.1,0 0.1,0 0,0 0.1,0 0.1,0 l 0.2,0.4 -0.2,0.1 c -0.1,0.1 -0.2,0.1 -0.2,0.2 0,0.1 -0.1,0.2 0,0.3 l 0.7,1.2 0.4,-0.1 0.1,0.2 -1,0.6 -0.1,-0.2 0.3,-0.2 -0.9,-1.5 z"
+         class="st8" />
+    </g>
+    <g
+       id="svg_46">
+      <path
+         style="fill:#ffffff"
+         inkscape:connector-curvature="0"
+         id="svg_47"
+         d="m 145.1,153.8 -0.1,-0.3 0.7,-0.4 1,1.8 0.2,-0.1 0.1,-0.8 -0.2,0.1 -0.1,-0.3 0.9,-0.5 0.1,0.3 -0.2,0.2 -0.2,1 1.2,0.5 0.3,-0.1 0.1,0.2 -0.9,0.5 -0.1,-0.2 0.2,-0.1 -1,-0.4 -0.3,0.1 0.4,0.7 0.4,-0.1 0.1,0.2 -1,0.6 -0.1,-0.2 0.3,-0.2 -1.4,-2.5 z"
+         class="st8" />
+      <path
+         style="fill:#ffffff"
+         inkscape:connector-curvature="0"
+         id="svg_48"
+         d="m 150.6,154 c 0,0.2 0,0.3 -0.1,0.4 -0.1,0.1 -0.2,0.2 -0.3,0.3 -0.2,0.1 -0.5,0.2 -0.7,0.1 -0.2,-0.1 -0.4,-0.3 -0.6,-0.6 l -0.6,-1 -0.3,0.1 -0.1,-0.3 0.2,-0.1 0.4,-0.2 0.7,1.3 c 0.1,0.2 0.3,0.4 0.4,0.4 0.1,0 0.2,0 0.4,-0.1 0.1,-0.1 0.2,-0.2 0.3,-0.3 0.1,-0.1 0.1,-0.2 0.1,-0.4 l -0.7,-1.2 -0.3,0.1 -0.1,-0.3 0.3,-0.2 0.4,-0.2 1.1,1.8 0.3,-0.1 0.1,0.2 -0.6,0.3 z"
+         class="st8" />
+      <path
+         style="fill:#ffffff"
+         inkscape:connector-curvature="0"
+         id="svg_49"
+         d="m 153.1,151.7 c 0.2,0.3 0.2,0.6 0.2,0.9 0,0.3 -0.2,0.5 -0.4,0.6 -0.1,0.1 -0.3,0.1 -0.4,0.1 -0.1,0 -0.3,0 -0.4,-0.1 l 0.1,0.3 -0.3,0.2 -1.6,-2.8 -0.4,0.1 -0.1,-0.3 0.7,-0.4 0.7,1.2 c 0,-0.1 0.1,-0.3 0.1,-0.4 0.1,-0.1 0.2,-0.2 0.3,-0.3 0.3,-0.2 0.5,-0.2 0.8,0 0.3,0.2 0.5,0.5 0.7,0.9 z m -0.4,0.1 c -0.1,-0.2 -0.3,-0.4 -0.5,-0.5 -0.2,-0.1 -0.4,-0.1 -0.5,0 -0.1,0.1 -0.2,0.2 -0.3,0.3 0,0.1 -0.1,0.2 -0.1,0.3 l 0.5,0.9 c 0.1,0.1 0.2,0.1 0.3,0.1 0.1,0 0.2,0 0.4,-0.1 0.2,-0.1 0.3,-0.2 0.3,-0.4 0.1,-0.1 0.1,-0.3 -0.1,-0.6 z"
+         class="st8" />
+      <path
+         style="fill:#ffffff"
+         inkscape:connector-curvature="0"
+         id="svg_50"
+         d="m 155.1,151.9 c -0.3,0.2 -0.6,0.2 -0.9,0.1 -0.3,-0.1 -0.5,-0.3 -0.7,-0.6 l -0.1,-0.1 c -0.2,-0.3 -0.2,-0.6 -0.2,-0.9 0.1,-0.3 0.2,-0.5 0.5,-0.7 0.3,-0.2 0.6,-0.2 0.8,-0.1 0.2,0.1 0.5,0.3 0.6,0.6 l 0.1,0.2 -1.4,0.8 v 0 c 0.1,0.2 0.3,0.3 0.4,0.4 0.2,0.1 0.4,0.1 0.5,0 0.1,-0.1 0.2,-0.2 0.3,-0.3 0.1,-0.1 0.1,-0.2 0.2,-0.3 l 0.3,0.2 c 0,0.1 -0.1,0.2 -0.2,0.4 0.1,0.1 0,0.2 -0.2,0.3 z m -1.2,-1.9 c -0.1,0.1 -0.2,0.2 -0.2,0.4 0,0.2 0,0.3 0.1,0.5 v 0 l 1,-0.6 v -0.1 c -0.1,-0.2 -0.2,-0.3 -0.3,-0.3 -0.3,0 -0.4,0 -0.6,0.1 z"
+         class="st8" />
+      <path
+         style="fill:#ffffff"
+         inkscape:connector-curvature="0"
+         id="svg_51"
+         d="m 154.6,148.4 -0.1,-0.3 0.7,-0.4 1.6,2.8 0.4,-0.1 0.1,0.2 -1,0.6 -0.1,-0.2 0.3,-0.2 -1.4,-2.5 z"
+         class="st8" />
+      <path
+         style="fill:#ffffff"
+         inkscape:connector-curvature="0"
+         id="svg_52"
+         d="m 158.6,149.9 c -0.3,0.2 -0.6,0.2 -0.9,0.1 -0.3,-0.1 -0.5,-0.3 -0.7,-0.6 l -0.1,-0.1 c -0.2,-0.3 -0.2,-0.6 -0.2,-0.9 0.1,-0.3 0.2,-0.5 0.5,-0.7 0.3,-0.2 0.6,-0.2 0.8,-0.1 0.2,0.1 0.5,0.3 0.6,0.6 l 0.1,0.2 -1.4,0.8 v 0 c 0.1,0.2 0.3,0.3 0.4,0.4 0.2,0.1 0.4,0.1 0.5,0 0.1,-0.1 0.2,-0.2 0.3,-0.3 0.1,-0.1 0.1,-0.2 0.2,-0.3 l 0.3,0.2 c 0,0.1 -0.1,0.2 -0.2,0.4 0.1,0.1 -0.1,0.2 -0.2,0.3 z m -1.2,-1.9 c -0.1,0.1 -0.2,0.2 -0.2,0.4 0,0.2 0,0.3 0.1,0.5 v 0 l 1,-0.6 v -0.1 c -0.1,-0.2 -0.2,-0.3 -0.3,-0.3 -0.3,0 -0.5,0 -0.6,0.1 z"
+         class="st8" />
+      <path
+         style="fill:#ffffff"
+         inkscape:connector-curvature="0"
+         id="svg_53"
+         d="m 158.9,146.1 0.3,0.5 0.4,-0.2 0.2,0.3 -0.4,0.2 0.8,1.3 c 0.1,0.1 0.1,0.2 0.2,0.2 0.1,0 0.1,0 0.2,0 0,0 0.1,0 0.1,-0.1 0,0 0.1,-0.1 0.1,-0.1 l 0.2,0.2 c 0,0 -0.1,0.1 -0.1,0.2 -0.1,0.1 -0.1,0.1 -0.2,0.1 -0.2,0.1 -0.3,0.1 -0.5,0.1 -0.1,0 -0.3,-0.2 -0.4,-0.4 l -0.7,-1.3 -0.3,0.2 -0.2,-0.3 0.3,-0.2 -0.3,-0.5 z"
+         class="st8" />
+    </g>
+    <polygon
+       style="fill:#ffffff;stroke:#326de6;stroke-width:1.60000002;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:10"
+       id="svg_54"
+       points="110.6,234.9 146.2,214.4 181.9,234.9 181.9,276.1 146.2,296.6 110.6,276.1 "
+       class="st16" />
+    <polygon
+       style="fill:#326de6"
+       id="svg_55"
+       points="181.9,234.9 181.8,247.2 135.6,220.5 146.2,214.4 "
+       class="st13" />
+    <polygon
+       style="fill:#a0caea"
+       id="svg_56"
+       points="179.8,243.6 179.8,236.1 163,226.4 159.8,232.1 "
+       class="st7" />
+    <g
+       id="svg_57">
+      <path
+         style="fill:#ffffff"
+         inkscape:connector-curvature="0"
+         id="svg_58"
+         d="m 145.8,218.8 0.1,-0.3 0.7,0.4 -1,1.8 0.2,0.1 0.8,-0.3 -0.2,-0.1 0.1,-0.3 0.9,0.5 -0.1,0.3 -0.3,-0.1 -1,0.3 0.2,1.3 0.2,0.2 -0.1,0.2 -0.9,-0.5 0.1,-0.2 0.2,0.1 -0.2,-1 -0.3,-0.1 -0.4,0.7 0.3,0.2 -0.1,0.2 -1,-0.6 0.1,-0.2 0.4,0.1 1.4,-2.5 z"
+         class="st8" />
+      <path
+         style="fill:#ffffff"
+         inkscape:connector-curvature="0"
+         id="svg_59"
+         d="m 148.4,223.7 c -0.1,0.1 -0.3,0.1 -0.4,0.1 -0.1,0 -0.3,0 -0.4,-0.1 -0.2,-0.1 -0.4,-0.3 -0.4,-0.5 0,-0.2 0,-0.5 0.2,-0.8 l 0.6,-1 -0.2,-0.2 0.1,-0.3 0.2,0.1 0.4,0.2 -0.7,1.3 c -0.1,0.2 -0.2,0.4 -0.2,0.5 0,0.1 0.1,0.2 0.2,0.3 0.1,0.1 0.3,0.1 0.4,0.1 0.1,0 0.2,0 0.3,-0.1 l 0.7,-1.2 -0.3,-0.2 0.1,-0.3 0.3,0.2 0.4,0.2 -1.1,1.8 0.2,0.2 -0.1,0.2 -0.6,-0.3 z"
+         class="st8" />
+      <path
+         style="fill:#ffffff"
+         inkscape:connector-curvature="0"
+         id="svg_60"
+         d="m 151.7,224.7 c -0.2,0.3 -0.4,0.5 -0.7,0.6 -0.3,0.1 -0.5,0.1 -0.8,-0.1 -0.1,-0.1 -0.2,-0.2 -0.3,-0.3 -0.1,-0.1 -0.1,-0.2 -0.1,-0.4 l -0.2,0.3 -0.3,-0.2 1.6,-2.8 -0.3,-0.2 0.1,-0.3 0.7,0.4 -0.7,1.2 c 0.1,-0.1 0.2,-0.1 0.4,-0.1 0.1,0 0.3,0 0.4,0.1 0.3,0.2 0.4,0.4 0.4,0.7 0.1,0.4 0,0.7 -0.2,1.1 z m -0.4,-0.3 c 0.1,-0.2 0.2,-0.5 0.2,-0.7 0,-0.2 -0.1,-0.4 -0.3,-0.5 -0.1,-0.1 -0.2,-0.1 -0.4,-0.1 -0.1,0 -0.2,0.1 -0.3,0.1 l -0.5,0.9 c 0,0.1 0,0.2 0.1,0.3 0.1,0.1 0.1,0.2 0.3,0.3 0.2,0.1 0.4,0.1 0.5,0 0.1,0.1 0.3,-0.1 0.4,-0.3 z"
+         class="st8" />
+      <path
+         style="fill:#ffffff"
+         inkscape:connector-curvature="0"
+         id="svg_61"
+         d="m 152.5,226.5 c -0.3,-0.2 -0.5,-0.4 -0.5,-0.7 0,-0.3 0,-0.6 0.2,-0.9 l 0.1,-0.1 c 0.2,-0.3 0.4,-0.5 0.7,-0.6 0.3,-0.1 0.6,-0.1 0.8,0.1 0.3,0.2 0.5,0.4 0.5,0.6 0,0.3 0,0.5 -0.2,0.8 l -0.1,0.2 -1.4,-0.8 v 0 c -0.1,0.2 -0.2,0.4 -0.1,0.6 0,0.2 0.1,0.3 0.3,0.4 0.1,0.1 0.3,0.1 0.4,0.1 0.1,0 0.2,0 0.3,0 v 0.3 c -0.1,0 -0.3,0 -0.4,0 -0.3,0.1 -0.5,0.1 -0.6,0 z m 1,-2 c -0.1,-0.1 -0.3,-0.1 -0.4,0 -0.2,0.1 -0.3,0.2 -0.4,0.3 v 0 l 1,0.6 v -0.1 c 0.1,-0.2 0.1,-0.3 0.1,-0.5 0,-0.2 -0.1,-0.2 -0.3,-0.3 z"
+         class="st8" />
+      <path
+         style="fill:#ffffff"
+         inkscape:connector-curvature="0"
+         id="svg_62"
+         d="m 155.3,224.3 0.1,-0.3 0.7,0.4 -1.6,2.8 0.3,0.2 -0.1,0.2 -1,-0.6 0.1,-0.2 0.4,0.1 1.4,-2.5 z"
+         class="st8" />
+      <path
+         style="fill:#ffffff"
+         inkscape:connector-curvature="0"
+         id="svg_63"
+         d="m 155.9,228.5 c -0.3,-0.2 -0.5,-0.4 -0.5,-0.7 0,-0.3 0,-0.6 0.2,-0.9 v -0.1 c 0.2,-0.3 0.4,-0.5 0.7,-0.6 0.3,-0.1 0.6,-0.1 0.8,0.1 0.3,0.2 0.5,0.4 0.5,0.6 0,0.3 0,0.5 -0.2,0.8 l -0.1,0.2 -1.4,-0.8 v 0 c -0.1,0.2 -0.2,0.4 -0.1,0.6 0,0.2 0.1,0.3 0.3,0.4 0.1,0.1 0.3,0.1 0.4,0.1 0.1,0 0.2,0 0.3,0 v 0.3 c -0.1,0 -0.3,0 -0.4,0 -0.1,0.1 -0.3,0.1 -0.5,0 z m 1.1,-2 c -0.1,-0.1 -0.3,-0.1 -0.4,0 -0.1,0.1 -0.3,0.2 -0.4,0.3 v 0 l 1,0.6 v -0.1 c 0.1,-0.2 0.1,-0.3 0.1,-0.5 -0.1,-0.1 -0.2,-0.2 -0.3,-0.3 z"
+         class="st8" />
+      <path
+         style="fill:#ffffff"
+         inkscape:connector-curvature="0"
+         id="svg_64"
+         d="m 159.4,226.9 -0.3,0.5 0.4,0.2 -0.2,0.3 -0.4,-0.2 -0.8,1.3 c -0.1,0.1 -0.1,0.2 -0.1,0.2 0,0.1 0.1,0.1 0.1,0.2 0,0 0.1,0 0.1,0.1 0,0 0.1,0 0.1,0 l -0.1,0.3 c -0.1,0 -0.1,0 -0.2,0 -0.1,0 -0.2,-0.1 -0.2,-0.1 -0.2,-0.1 -0.3,-0.2 -0.3,-0.4 0,-0.2 0,-0.3 0.1,-0.5 l 0.8,-1.3 -0.3,-0.2 0.2,-0.3 0.3,0.2 0.3,-0.5 z"
+         class="st8" />
+    </g>
+    <g
+       id="svg_65">
+      <path
+         style="fill:#ffffff"
+         inkscape:connector-curvature="0"
+         id="svg_66"
+         d="m 166.1,230.5 c 0.4,0.2 0.6,0.5 0.7,0.9 0.1,0.4 0,0.7 -0.2,1.1 l -0.2,0.4 c -0.2,0.4 -0.5,0.6 -0.9,0.7 -0.4,0.1 -0.7,0 -1.1,-0.2 l -1.2,-0.7 0.1,-0.2 0.4,0.1 1.3,-2.3 -0.3,-0.2 0.1,-0.3 0.3,0.2 z m -0.7,0 -1.3,2.3 0.5,0.3 c 0.3,0.2 0.5,0.2 0.8,0.1 0.3,-0.1 0.5,-0.3 0.6,-0.5 l 0.2,-0.4 c 0.2,-0.3 0.2,-0.5 0.2,-0.8 -0.1,-0.3 -0.2,-0.5 -0.5,-0.6 z"
+         class="st8" />
+      <path
+         style="fill:#ffffff"
+         inkscape:connector-curvature="0"
+         id="svg_67"
+         d="m 166.7,233.2 c 0.2,-0.3 0.4,-0.5 0.7,-0.6 0.3,-0.1 0.6,-0.1 0.9,0.1 0.3,0.2 0.5,0.4 0.5,0.7 0.1,0.3 0,0.6 -0.2,0.9 v 0 c -0.2,0.3 -0.4,0.5 -0.7,0.6 -0.3,0.1 -0.6,0.1 -0.9,-0.1 -0.3,-0.2 -0.5,-0.4 -0.5,-0.7 -0.1,-0.2 0,-0.5 0.2,-0.9 z m 0.3,0.3 c -0.1,0.2 -0.2,0.4 -0.2,0.6 0,0.2 0.1,0.4 0.3,0.5 0.2,0.1 0.4,0.1 0.5,0 0.2,-0.1 0.3,-0.3 0.5,-0.5 v 0 c 0.1,-0.2 0.2,-0.4 0.2,-0.6 0,-0.2 -0.1,-0.4 -0.3,-0.5 -0.2,-0.1 -0.4,-0.1 -0.6,0 -0.1,0.1 -0.2,0.2 -0.4,0.5 z"
+         class="st8" />
+      <path
+         style="fill:#ffffff"
+         inkscape:connector-curvature="0"
+         id="svg_68"
+         d="m 169.4,235.9 c 0.1,0.1 0.3,0.1 0.4,0.1 0.1,0 0.2,-0.1 0.3,-0.2 l 0.3,0.2 v 0 c -0.1,0.2 -0.3,0.3 -0.5,0.3 -0.3,0 -0.5,0 -0.7,-0.1 -0.3,-0.2 -0.5,-0.4 -0.5,-0.7 0,-0.3 0,-0.6 0.2,-0.9 v -0.1 c 0.2,-0.3 0.4,-0.5 0.7,-0.6 0.3,-0.1 0.6,-0.1 0.9,0.1 0.2,0.1 0.3,0.2 0.4,0.4 0.1,0.1 0.2,0.3 0.2,0.4 l -0.3,0.5 -0.3,-0.2 0.1,-0.4 c 0,-0.1 -0.1,-0.1 -0.1,-0.2 -0.1,-0.1 -0.1,-0.1 -0.2,-0.2 -0.2,-0.1 -0.4,-0.1 -0.6,0 -0.2,0.1 -0.3,0.3 -0.4,0.5 v 0.1 c -0.1,0.2 -0.2,0.4 -0.2,0.6 0,0.1 0.1,0.3 0.3,0.4 z"
+         class="st8" />
+      <path
+         style="fill:#ffffff"
+         inkscape:connector-curvature="0"
+         id="svg_69"
+         d="m 172.1,234 0.1,-0.3 0.7,0.4 -1,1.8 0.2,0.1 0.8,-0.3 -0.2,-0.1 0.1,-0.3 0.9,0.5 -0.1,0.3 -0.3,-0.1 -1,0.3 0.2,1.3 0.2,0.2 -0.1,0.2 -0.9,-0.5 0.1,-0.2 0.2,0.1 -0.2,-1 -0.3,-0.1 -0.4,0.7 0.3,0.2 -0.1,0.2 -1,-0.6 0.1,-0.2 0.4,0.1 1.4,-2.5 z"
+         class="st8" />
+      <path
+         style="fill:#ffffff"
+         inkscape:connector-curvature="0"
+         id="svg_70"
+         d="m 173.9,238.9 c -0.3,-0.2 -0.5,-0.4 -0.5,-0.7 -0.1,-0.3 0,-0.6 0.2,-0.9 v -0.1 c 0.2,-0.3 0.4,-0.5 0.7,-0.6 0.3,-0.1 0.6,-0.1 0.8,0.1 0.3,0.2 0.5,0.4 0.5,0.6 0,0.3 0,0.5 -0.2,0.8 l -0.1,0.2 -1.4,-0.8 v 0 c -0.1,0.2 -0.2,0.4 -0.1,0.6 0,0.2 0.1,0.3 0.3,0.4 0.1,0.1 0.3,0.1 0.4,0.1 0.1,0 0.2,0 0.3,0 v 0.3 c -0.1,0 -0.3,0 -0.4,0 -0.2,0.2 -0.4,0.1 -0.5,0 z m 1,-2 c -0.1,-0.1 -0.3,-0.1 -0.4,0 -0.2,0.1 -0.3,0.2 -0.4,0.3 v 0 l 1,0.6 v -0.1 c 0.1,-0.2 0.1,-0.3 0.1,-0.5 0,0 -0.1,-0.2 -0.3,-0.3 z"
+         class="st8" />
+      <path
+         style="fill:#ffffff"
+         inkscape:connector-curvature="0"
+         id="svg_71"
+         d="m 176.2,237.7 0.1,-0.3 0.7,0.4 -0.1,0.3 c 0.1,-0.1 0.2,-0.1 0.4,-0.1 0.1,0 0.2,0 0.4,0.1 0,0 0.1,0 0.1,0.1 0,0 0.1,0 0.1,0.1 l -0.3,0.3 -0.2,-0.1 c -0.1,-0.1 -0.2,-0.1 -0.3,-0.1 -0.1,0 -0.2,0 -0.3,0.1 l -0.7,1.2 0.3,0.2 -0.1,0.2 -1,-0.6 0.1,-0.2 0.4,0.1 0.9,-1.5 z"
+         class="st8" />
+    </g>
+  </g>
+  <g
+     id="service" />
+  <g
+     id="pods"
+     inkscape:export-xdpi="96"
+     inkscape:export-ydpi="96">
+    <circle
+       style="fill:none;stroke:#006de9;stroke-width:0.80000001;stroke-miterlimit:10"
+       id="svg_72"
+       r="20.9"
+       cy="119.5"
+       cx="146.2"
+       class="st29" />
+  </g>
+  <g
+     id="IP" />
+  <g
+     id="g1292"
+     transform="translate(7.8213067,-4.0815677)"
+     inkscape:export-xdpi="96"
+     inkscape:export-ydpi="96">
+    <circle
+       style="fill:#06f7c9;stroke:#ffffff;stroke-width:0.30000001;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:10"
+       id="svg_75"
+       r="10.1"
+       cy="181.7"
+       cx="177.39999"
+       class="st47" />
+    <g
+       id="svg_76">
+      <g
+         id="svg_77">
+        <path
+           style="fill:none;stroke:#011f38;stroke-width:1.20000005;stroke-linecap:round;stroke-linejoin:round"
+           inkscape:connector-curvature="0"
+           id="svg_78"
+           d="m 180.9,176 c 1.9,1.2 3.2,3.3 3.2,5.8 0,3.7 -3,6.7 -6.7,6.7 -3.7,0 -6.7,-3 -6.7,-6.7 0,-2.9 1.9,-5.4 4.5,-6.4"
+           class="st48" />
+        <g
+           id="svg_79">
+          <polygon
+             style="fill:#011f38"
+             id="svg_80"
+             points="182.1,178.9 181.2,176.2 183.9,175.3 182.4,174.5 179.6,175.4 180.5,178.1 "
+             class="st42" />
+        </g>
+      </g>
+    </g>
+    <g
+       id="svg_81">
+      <path
+         style="fill:#011f38"
+         inkscape:connector-curvature="0"
+         id="svg_82"
+         d="m 174.8,185.1 v -6.7 h 2.3 c 0.8,0 1.5,0.3 2,0.8 0.5,0.5 0.8,1.2 0.8,2 v 1.1 c 0,0.8 -0.3,1.5 -0.8,2 -0.5,0.5 -1.2,0.8 -2,0.8 z m 1.3,-5.7 v 4.7 h 0.9 c 0.5,0 0.9,-0.2 1.1,-0.5 0.3,-0.3 0.4,-0.8 0.4,-1.3 v -1.1 c 0,-0.5 -0.1,-0.9 -0.4,-1.3 -0.3,-0.3 -0.7,-0.5 -1.1,-0.5 z"
+         class="st42" />
+    </g>
+  </g>
+  <g
+     id="labels_x2F_selectors" />
+  <line
+     class="st62"
+     x1="360.01306"
+     y1="213.89999"
+     x2="203.59471"
+     y2="213.89999"
+     id="svg_113"
+     style="fill:none;stroke:#011f38;stroke-width:0.28658912;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:10"
+     inkscape:export-xdpi="96"
+     inkscape:export-ydpi="96" />
+  <text
+     id="text1255"
+     y="357.20404"
+     x="128.47917"
+     style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:40px;line-height:1.25;font-family:RobotoSlab-Regular;-inkscape-font-specification:RobotoSlab-Regular;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none"
+     xml:space="preserve"
+     inkscape:export-xdpi="96"
+     inkscape:export-ydpi="96"><tspan
+       y="357.20404"
+       x="128.47917"
+       id="tspan1253"
+       sodipodi:role="line"
+       style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:13.33333302px;font-family:Roboto;-inkscape-font-specification:Roboto">Kubernetes Cluster</tspan></text>
+  <line
+     class="st62"
+     x1="360.01556"
+     y1="181.7"
+     x2="197.8512"
+     y2="181.7"
+     id="svg_125"
+     style="fill:none;stroke:#011f38;stroke-width:0.2859433;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:10"
+     inkscape:export-xdpi="96"
+     inkscape:export-ydpi="96" />
+  <line
+     class="st62"
+     x1="360.013"
+     y1="229"
+     x2="171.23158"
+     y2="229"
+     id="svg_126"
+     style="fill:none;stroke:#011f38;stroke-width:0.29102841;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:10"
+     inkscape:export-xdpi="96"
+     inkscape:export-ydpi="96" />
+  <line
+     class="st62"
+     x1="360.00842"
+     y1="99.590248"
+     x2="242.80844"
+     y2="99.590248"
+     id="svg_127"
+     style="fill:none;stroke:#011f38;stroke-width:0.30000001;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:10"
+     inkscape:export-xdpi="96"
+     inkscape:export-ydpi="96" />
+  <line
+     class="st62"
+     x1="360.01639"
+     y1="122.91978"
+     x2="171.5426"
+     y2="122.91978"
+     id="svg_145"
+     style="fill:none;stroke:#011f38;stroke-width:0.28434393;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:10"
+     inkscape:export-xdpi="96"
+     inkscape:export-ydpi="96" />
+  <g
+     id="Layer_14" />
+  <g
+     transform="translate(-3.0517578e-6,1.1541583e-5)"
+     id="containers_x2F_volumes-9"
+     inkscape:export-xdpi="96"
+     inkscape:export-ydpi="96">
+    <g
+       id="svg_83-6">
+      <polygon
+         style="fill:#06f7c9;stroke:#011f38;stroke-width:0.80000001;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:10"
+         id="svg_84-6"
+         points="136.5,113.9 146.2,108.3 155.9,113.9 146.2,119.5 "
+         class="st50" />
+      <polygon
+         style="fill:#06f7c9;stroke:#011f38;stroke-width:0.80000001;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:10"
+         id="svg_85-3"
+         points="136.5,125.1 136.5,113.9 146.2,119.5 146.2,130.7 "
+         class="st50" />
+      <polygon
+         style="fill:#06f7c9;stroke:#011f38;stroke-width:0.80000001;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:10"
+         id="svg_86-6"
+         points="146.2,130.7 146.2,119.5 155.9,113.9 155.9,125.1 "
+         class="st50" />
+    </g>
+  </g>
+  <line
+     class="st62"
+     x1="360.01602"
+     y1="197.02463"
+     x2="198.87587"
+     y2="197.02463"
+     id="svg_125-4"
+     style="fill:none;stroke:#011f38;stroke-width:0.28503886;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:10"
+     inkscape:export-xdpi="96"
+     inkscape:export-ydpi="96" />
+  <g
+     id="g1302"
+     transform="translate(-7.8736854,3.7945122)"
+     inkscape:export-xdpi="96"
+     inkscape:export-ydpi="96">
+    <circle
+       style="fill:#06c8c9;fill-opacity:1;stroke:#ffffff;stroke-width:0.30000001;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:10"
+       id="svg_75-0"
+       r="10.1"
+       cy="196.51639"
+       cx="193.09499"
+       class="st47" />
+    <g
+       transform="translate(15.744986,14.766388)"
+       id="svg_81-9">
+      <path
+         style="fill:#011f38"
+         inkscape:connector-curvature="0"
+         id="svg_82-4"
+         d="m 174.8,185.1 v -6.7 h 2.3 c 0.8,0 1.5,0.3 2,0.8 0.5,0.5 0.8,1.2 0.8,2 v 1.1 c 0,0.8 -0.3,1.5 -0.8,2 -0.5,0.5 -1.2,0.8 -2,0.8 z m 1.3,-5.7 v 4.7 h 0.9 c 0.5,0 0.9,-0.2 1.1,-0.5 0.3,-0.3 0.4,-0.8 0.4,-1.3 v -1.1 c 0,-0.5 -0.1,-0.9 -0.4,-1.3 -0.3,-0.3 -0.7,-0.5 -1.1,-0.5 z"
+         class="st42" />
+    </g>
+    <g
+       transform="translate(15.694986,14.716388)"
+       id="svg_76-3">
+      <g
+         id="svg_77-1">
+        <path
+           style="fill:none;stroke:#011f38;stroke-width:1.20000005;stroke-linecap:round;stroke-linejoin:round"
+           inkscape:connector-curvature="0"
+           id="svg_78-2"
+           d="m 180.9,176 c 1.9,1.2 3.2,3.3 3.2,5.8 0,3.7 -3,6.7 -6.7,6.7 -3.7,0 -6.7,-3 -6.7,-6.7 0,-2.9 1.9,-5.4 4.5,-6.4"
+           class="st48" />
+        <g
+           id="svg_79-3">
+          <polygon
+             style="fill:#011f38"
+             id="svg_80-4"
+             points="181.2,176.2 183.9,175.3 182.4,174.5 179.6,175.4 180.5,178.1 182.1,178.9 "
+             class="st42" />
+        </g>
+      </g>
+    </g>
+  </g>
+  <text
+     id="text1255-1"
+     y="104.52515"
+     x="365.18881"
+     style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:40px;line-height:1.25;font-family:RobotoSlab-Regular;-inkscape-font-specification:RobotoSlab-Regular;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none"
+     xml:space="preserve"
+     inkscape:export-xdpi="96"
+     inkscape:export-ydpi="96"><tspan
+       y="104.52515"
+       x="365.18881"
+       id="tspan1253-6"
+       sodipodi:role="line"
+       style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:13.33333302px;font-family:Roboto;-inkscape-font-specification:Roboto">node</tspan></text>
+  <text
+     id="text1255-1-1"
+     y="126.56561"
+     x="365.50131"
+     style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:40px;line-height:1.25;font-family:RobotoSlab-Regular;-inkscape-font-specification:RobotoSlab-Regular;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none"
+     xml:space="preserve"
+     inkscape:export-xdpi="96"
+     inkscape:export-ydpi="96"><tspan
+       y="126.56561"
+       x="365.50131"
+       id="tspan1253-6-3"
+       sodipodi:role="line"
+       style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:13.33333302px;font-family:Roboto;-inkscape-font-specification:Roboto">containerized app</tspan></text>
+  <text
+     id="text1255-1-1-5"
+     y="182.4185"
+     x="365.48178"
+     style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:40px;line-height:1.25;font-family:RobotoSlab-Regular;-inkscape-font-specification:RobotoSlab-Regular;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none"
+     xml:space="preserve"
+     inkscape:export-xdpi="96"
+     inkscape:export-ydpi="96"><tspan
+       y="182.4185"
+       x="365.48178"
+       id="tspan1253-6-3-3"
+       sodipodi:role="line"
+       style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:13.33333302px;font-family:Roboto;-inkscape-font-specification:Roboto">deployment app</tspan></text>
+  <text
+     id="text1255-1-1-5-1"
+     y="201.12534"
+     x="365.48178"
+     style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:40px;line-height:1.25;font-family:RobotoSlab-Regular;-inkscape-font-specification:RobotoSlab-Regular;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none"
+     xml:space="preserve"
+     inkscape:export-xdpi="96"
+     inkscape:export-ydpi="96"><tspan
+       y="201.12534"
+       x="365.48178"
+       id="tspan1253-6-3-3-7"
+       sodipodi:role="line"
+       style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:13.33333302px;font-family:Roboto;-inkscape-font-specification:Roboto">deployment uas</tspan></text>
+  <text
+     id="text1255-1-1-5-1-0"
+     y="216.6353"
+     x="365.19531"
+     style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:40px;line-height:1.25;font-family:RobotoSlab-Regular;-inkscape-font-specification:RobotoSlab-Regular;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none"
+     xml:space="preserve"
+     inkscape:export-xdpi="96"
+     inkscape:export-ydpi="96"><tspan
+       y="216.6353"
+       x="365.19531"
+       id="tspan1253-6-3-3-7-3"
+       sodipodi:role="line"
+       style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:13.33333302px;font-family:Roboto;-inkscape-font-specification:Roboto">master</tspan></text>
+  <text
+     id="text1255-1-1-5-1-0-1"
+     y="234.5103"
+     x="365.18881"
+     style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:40px;line-height:1.25;font-family:RobotoSlab-Regular;-inkscape-font-specification:RobotoSlab-Regular;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none"
+     xml:space="preserve"
+     inkscape:export-xdpi="96"
+     inkscape:export-ydpi="96"><tspan
+       y="234.5103"
+       x="365.18881"
+       id="tspan1253-6-3-3-7-3-8"
+       sodipodi:role="line"
+       style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:13.33333302px;font-family:Roboto;-inkscape-font-specification:Roboto">node processes</tspan></text>
+  <g
+     transform="translate(-2.5288181,138.45508)"
+     id="pods-7"
+     inkscape:export-xdpi="96"
+     inkscape:export-ydpi="96">
+    <circle
+       style="fill:none;stroke:#006de9;stroke-width:0.80000001;stroke-miterlimit:10"
+       id="svg_72-2"
+       r="20.9"
+       cy="119.5"
+       cx="146.2"
+       class="st29" />
+  </g>
+  <polygon
+     style="fill:#06c8c9;stroke:#011f38;stroke-width:0.80000001;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:10;fill-opacity:1"
+     id="svg_84-6-2"
+     points="146.2,108.3 155.9,113.9 146.2,119.5 136.5,113.9 "
+     class="st50"
+     transform="translate(-2.5288181,138.45509)"
+     inkscape:export-xdpi="96"
+     inkscape:export-ydpi="96" />
+  <polygon
+     style="fill:#06c8c9;stroke:#011f38;stroke-width:0.80000001;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:10;fill-opacity:1"
+     id="svg_85-3-8"
+     points="136.5,113.9 146.2,119.5 146.2,130.7 136.5,125.1 "
+     class="st50"
+     transform="translate(-2.5288181,138.45509)"
+     inkscape:export-xdpi="96"
+     inkscape:export-ydpi="96" />
+  <polygon
+     style="fill:#06c8c9;stroke:#011f38;stroke-width:0.80000001;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:10;fill-opacity:1"
+     id="svg_86-6-7"
+     points="146.2,119.5 155.9,113.9 155.9,125.1 146.2,130.7 "
+     class="st50"
+     transform="translate(-2.5288181,138.45509)"
+     inkscape:export-xdpi="96"
+     inkscape:export-ydpi="96" />
+  <text
+     id="text1255-1-1-5-1-0-1-3"
+     y="264.04984"
+     x="365.50131"
+     style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:40px;line-height:1.25;font-family:RobotoSlab-Regular;-inkscape-font-specification:RobotoSlab-Regular;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none"
+     xml:space="preserve"
+     inkscape:export-xdpi="96"
+     inkscape:export-ydpi="96"><tspan
+       y="264.04984"
+       x="365.50131"
+       id="tspan1253-6-3-3-7-3-8-4"
+       sodipodi:role="line"
+       style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:13.33333302px;font-family:Roboto;-inkscape-font-specification:Roboto">containerized uas</tspan></text>
+  <line
+     class="st62"
+     x1="360.01318"
+     y1="260.07806"
+     x2="171.71179"
+     y2="260.07806"
+     id="svg_126-5"
+     style="fill:none;stroke:#011f38;stroke-width:0.29065818;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:10"
+     inkscape:export-xdpi="96"
+     inkscape:export-ydpi="96" />
+</svg>

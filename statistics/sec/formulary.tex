@@ -1,0 +1,871 @@
+\clearpage
+\section{Formulario}
+\label{sec:formulary}
+
+\subsection{Fondamenti}
+
+\begin{description}
+	
+	\item [Funzione di ripartizione]
+		\begin{equation}
+		F_{X}(a) = \probability{X \leq a} = \int_{-\infty}^{a} f_{X}(a) \partial x \qquad\forall X \; v.a.
+		\end{equation}
+		
+		\begin{equation}
+		f_{X}(a) = \frac{\partial F_{X}(a)}{\partial a}
+		\end{equation}
+		
+	\item [Momento]	
+		\begin{equation}
+		\expected{X^{n}} = \left\{\begin{matrix}
+		\sum_{x=-\infty}^{\infty} x^{n} f(x) & X \; discreta \\
+		\int_{-\infty}^{\infty} x^{n} f(x) \partial x & X \; continua
+		\end{matrix}\right.
+		\end{equation}
+	
+	\item [Media]
+		\begin{equation}
+		\expected{X} = \left\{\begin{matrix}
+		\sum_{x=-\infty}^{\infty} xf(x) & X \; discreta \\
+		\int_{-\infty}^{\infty} x f(x) \partial x & X \; continua
+		\end{matrix}\right.
+		\end{equation}
+	
+		\begin{equation}
+		\expected{aX+b} = a \expected{X} + b
+		\end{equation}
+		
+		\begin{equation}
+		\expected{X+Y} = \expected{X} + \expected{Y}
+		\end{equation}
+		
+		\begin{equation}
+		\expected{XY} = \expected{X} \expected{Y} \qquad\forall X,Y \; i.i.d
+		\end{equation}
+		
+		\begin{equation}
+		\expected{g(X)} = \left\{\begin{matrix}
+		\sum_{x=-\infty}^{\infty} g(x) f(x) & X \; discreta \\
+		\int_{-\infty}^{\infty} g(x) f(x) & X \; continua
+		\end{matrix}\right.
+		\end{equation}
+		
+	\item [Varianza]
+		\begin{equation}
+		\variance{X} = \expected{X^{2}}-\expected{X}^{2}
+		\end{equation}
+
+		\begin{equation}
+		\variance{X} = \expected{(X-\expected{X})^{2}}
+		\end{equation}
+		
+		\begin{equation}
+		\variance{aX+b} = a^{2}\variance{X}
+		\end{equation}
+		
+		\begin{equation}
+		\variance{X+Y} = \variance{X}+\variance{Y} \qquad\forall X,Y \; i.i.d.
+		\end{equation}
+		
+		\begin{equation}
+		\variance{I_{A}} = \probability{A}(1-\probability{A}) \qquad\forall I_{A} \; indicatrice \; di \; A
+		\end{equation}
+		
+		\begin{equation}
+		\variance{\sum_{i=1}^{n}X_{i}} = \sum_{i=1}^{n}\variance{X_{i}} + \sum_{i=1}^{n}\sum_{j=1}^{n}\covariance{X_{i}}{X_{j}}
+		\end{equation}
+		
+		\begin{equation}
+		\variance{X^{2}} = \variance{X}+\expected{X}^{2}
+		\end{equation}
+	
+	\item [Deviazione Standard]
+		\begin{equation}
+		\sigma_{X} := \sqrt{\variance{X}}
+		\end{equation}
+	
+	\item [Covarianza]
+		\begin{equation}
+		\covariance{X}{Y} = \expected{(X-\expected{X})(Y-\expected{Y})}
+		\end{equation}
+		
+		\begin{equation}
+		\covariance{X}{Y} = \expected{XY}-\expected{X}\expected{Y}
+		\end{equation}
+		
+		\begin{equation}
+		\covariance{X}{Y} = \covariance{Y}{X}
+		\end{equation}
+		
+		\begin{equation}
+		\covariance{X}{X} = \variance{X}
+		\end{equation}
+		
+		\begin{equation}
+		\covariance{aX}{Y} = a\covariance{X}{Y}
+		\end{equation}
+		
+		\begin{equation}
+		\covariance{X+Y}{Z} = \covariance{X}{Z}+\covariance{Y}{Z}
+		\end{equation}
+		
+		\begin{equation}
+		\covariance{X}{Y} = 0 \qquad\forall X,Y \; i.i.d.
+		\end{equation}
+		
+		\begin{equation}
+		\covariance{\sum_{i=1}^{n}X_{i},\sum_{j=1}^{m}Y_{j}} = \sum_{i=1}^{n}\sum_{j=1}^{m}\covariance{X_{i}}{Y_{j}}
+		\end{equation}
+	
+	\item [Correlazione]
+		\begin{equation}
+		\correlation{X}{Y} := \frac{\covariance{X}{Y}}{\sqrt{\variance{X}\variance{Y}}}
+		\end{equation}
+	
+	\item [Funzione generatrice]
+		\begin{equation}
+		\phi_{X}(t) = \expected{e^tX} \qquad\forall X v.a.
+		\end{equation}
+		
+		\begin{equation}
+		\frac{\partial^{(n)} \phi_{X}(0)}{\partial^{(n)}t} = \expected{X^{n}}
+		\end{equation}
+		
+		\begin{equation}
+		\phi_{X+Y}(t) = \phi_{X}(t) \cdot \phi_{Y}(t) \qquad\forall X,Y i.i.d.
+		\end{equation}
+	
+\end{description}
+
+
+\subsection{Relazioni importanti}
+
+\begin{description}
+	
+	\item [Disuguaglianza di Markov]
+		\begin{equation}
+		\probability{X \geq a} \leq \frac{\expected{X}}{a} \qquad\forall X v.a. \geq 0
+		\end{equation}
+		
+	\item [Disuguaglianza di Chebychev]
+		\begin{equation}
+		\probability{|X-\expected{X}| \geq r} \leq \frac{\variance{X}}{r} \qquad\forall X \; v.a., r \geq 0
+		\end{equation}
+
+\end{description}
+
+\subsection{Distribuzione Bernoulliana di parametro $p$}
+
+\begin{description}
+	
+	\item [Notazione]
+		\begin{equation}
+		X \sim Bern(p)
+		\end{equation}
+
+	\item [Massa]
+		\begin{equation}
+		f(i) = \left\{\begin{matrix}
+		p & i=1\\
+		1-p & i=0
+		\end{matrix}\right.
+		\end{equation}
+		
+	\item [Media]
+		\begin{equation}
+		\expected{X}=p
+		\end{equation}
+		
+	\item [Varianza]
+		\begin{equation}
+		\variance{X}=p(1-p)
+		\end{equation}
+		
+\end{description}
+
+\subsection{Distribuzione Binomiale di parametri $(n,p)$}
+
+\begin{description}
+	
+	\item [Notazione]
+		\begin{equation}
+		X \sim Binom(n,p)
+		\end{equation}
+		
+	\item [Massa]
+		\begin{equation}
+		f(i) = \binom{n}{i}p^{i}(1-p)^{n-i} \qquad\forall i=0,1,...,n
+		\end{equation}
+	
+	\item [Media]
+		\begin{equation}
+		\expected{X}=np
+		\end{equation}
+		
+	\item [Varianza]
+		\begin{equation}
+		\variance{X}=np(1-p)
+		\end{equation}
+		
+	\item [Ripartizione]
+		\begin{equation}
+		\probability{X\leq i}=\sum_{k=0}^{i}\binom{n}{k}p^{k}(1-p)^{n-k} \qquad\forall i=0,1,...,n
+		\end{equation}
+	
+	\item [Calcolo Esplicito]
+		\begin{equation}
+		\probability{X=k+1}=\frac{p}{1-p}\frac{n-k}{k+1}\probability{X=k}
+		\end{equation}
+\end{description}
+
+
+\subsection{Distribuzione Poissoniana di intensità $\lambda$}
+
+\begin{description}
+	
+	\item [Notazione]
+		\begin{equation}
+		X \sim Pois(\lambda)
+		\end{equation}
+
+	\item [Massa]
+		\begin{equation}
+		f(i) = \frac{(\lambda)^{i}}{i!}e^{-\lambda} \qquad\forall i=0,1,2,...
+		\end{equation}
+
+	\item [Ripartizione]
+		\begin{equation}
+		F(k,t) = \sum_{x=0}^{t} f(k,x)
+		\end{equation}
+		
+	\item [Generatrice]
+		\begin{equation}
+		\phi(t) = exp\{\lambda(e^{t}-1)\}
+		\end{equation}
+
+	\item [Media]
+		\begin{equation}
+		\expected{X} = \lambda
+		\end{equation}
+
+	\item [Varianza]
+		\begin{equation}
+		\variance{X} = \lambda
+		\end{equation}
+		
+	\item [Riproducibilità]
+		\begin{equation}
+			X_{1} \sim Pois(\lambda_{1}) \land X_{2} \sim Pois(\lambda_{2}) \Rightarrow (X_{1}+X_{2})\sim Pois(\lambda_{1}+\lambda_{2})
+		\end{equation}
+		
+	\item [Calcolo esplicito]
+		\begin{equation}
+		\probability{X=i+1} = \frac{\lambda}{i+1}\probability{X=i}
+		\end{equation}
+		
+	%\item [Poisson Inter-arrivals]
+	%	\begin{equation}
+	%	\probability{N(s+t)-N(s) = n} \sim Poisson(\lambda t)
+	%	\end{equation}
+
+	%\item [Poisson Merging]
+	%Given two independent Poisson process with rate $\lambda_{1}$ and $\lambda_{2}$, the merged process is a Poisson process with rate $(\lambda_{1} + \lambda_{2})$.
+
+	%\item [Poisson Splitting]
+	%Given a Poisson process with rate $\lambda$, whose events are partitioned in class-A with probability $p$ and class-B with probability $(1-p)$, the class-A process is a Poisson process with rate $p \lambda$ and the class-B process is a Poisson process with rate $(1-p) \lambda$, and these processes are independent.
+
+	%\item [Poisson Uniformity]
+	%If $k$ events of a Poisson process occur by time $t$, then the $k$ events are distributed independently and uniformly in $[0,t]$.
+
+\end{description}
+
+
+\subsection{Distribuzione ipergeometrica}
+
+\begin{description}
+	
+	\item [Notazione]
+		\begin{equation}
+		X \sim Iper(N,M)
+		\end{equation}
+
+	\item [Massa]
+		\begin{equation}
+		f(i) = \frac{\binom{N}{i}\binom{M}{n-i}}{\binom{N+M}{n}} \qquad\forall i=0,1,...,n
+		\end{equation}
+
+\end{description}
+
+
+\subsection{Distribuzione uniforme di intervallo $[\alpha,\beta]$}
+
+\begin{description}
+	
+	\item [Notazione]
+		\begin{equation}
+		X \sim Unif(\alpha,\beta)
+		\end{equation}
+	
+	\item [Densità]
+		\begin{equation}
+		f(x) = \left\{\begin{matrix}
+		\frac{1}{\beta - \alpha} & x\in [ \alpha,\beta ] \\
+		0 & altrimenti
+		\end{matrix}\right.
+		\end{equation}
+	
+	\item [Media]
+		\begin{equation}
+		\expected{X} = \frac{\alpha+\beta}{2}
+		\end{equation}
+	
+	\item [Varianza]
+		\begin{equation}
+		\variance{X} = \frac{(\beta-\alpha)^{2}}{12}
+		\end{equation}
+	
+\end{description}
+
+
+\subsection{Distribuzione Esponenziale di intensità $\lambda$}
+
+\begin{description}
+	
+	\item [Notazione]
+		\begin{equation}
+		X \sim Exp(\lambda)
+		\end{equation}
+	
+	\item [Densità]
+		\begin{equation}
+		f(x) = \left\{\begin{matrix}
+		\lambda e^{-\lambda x} & x \geq 0\\
+		0 & x \leq 0
+		\end{matrix}\right.
+		\end{equation}
+	
+	\item [Ripartizione]
+		\begin{equation}
+		\begin{aligned}
+		F(x) =
+		\left\{\begin{matrix}
+		1 - e^{-\lambda x} & x \geq 0\\
+		0 & x < 0
+		\end{matrix}\right.
+		\end{aligned}
+		\end{equation}
+	
+	\item [Generatrice]
+		\begin{equation}
+		\phi(t) = \frac{\lambda}{\lambda-t} \qquad\forall t< \lambda
+		\end{equation}
+	
+	\item [Media]
+		\begin{equation}
+		\expected{X} = \frac{1}{\lambda}
+		\end{equation}
+	
+	\item [Varianza]
+		\begin{equation}
+		\variance{X} = \frac{1}{\lambda^{2}}
+		\end{equation}
+	
+	\item [Assenza di memoria]
+		\begin{equation}
+		\probability{X>t+s | X>t}=\probability{X>s} \qquad\forall s,t\geq 0
+		\end{equation}
+	
+	\item [Minimo]
+		\begin{equation}
+		\min(X_{1},...,X_{n}) \sim Exp(\sum_{i=1}^{n}\lambda_{i})
+		\end{equation}
+		
+	\item [Moltiplicazione]
+		\begin{equation}
+		X \sim Exp(\lambda) \Rightarrow cX \sim Exp(\frac{\lambda}{c})
+	\end{equation}
+	
+	\item [Precedenza]
+		\begin{equation}
+		X_{1} \sim Exp(\lambda_{1}),X_{2} \sim Exp(\lambda_{2}) \Rightarrow \probability{X_{1} < X_{2}} = \frac{\lambda_{1}}{\lambda_{1} + \lambda_{2}}
+		\end{equation}
+	
+\end{description}
+
+
+\subsection{Distribuzione normale di media $\mu$ e varianza $\sigma^{2}$}
+
+\begin{description}
+	
+	\item [Notazione]
+		\begin{equation}
+		X \sim Norm(\mu,\sigma^{2})
+		\end{equation}
+	
+	\item [Densità]
+		\begin{equation}
+		f(x) = \frac{1}{\sqrt{2\pi}\sigma}e^{-\frac{(x-\mu)^{2}}{2\sigma^{2}}} \qquad\forall x\in \mathbb{R}
+		\end{equation}
+	
+	\item [Generatrice]
+		\begin{equation}
+		\phi(t) = e^{\mu t + \frac{\sigma^{2}t^{2}}{2}}
+		\end{equation}
+	
+	\item [Media]
+		\begin{equation}
+		\expected{X} = \mu
+		\end{equation}
+	
+	\item [Varianza]
+		\begin{equation}
+		\variance{X} = \sigma^{2}
+		\end{equation}
+		
+	\item [Riproducibilità]
+		\begin{equation}
+		X_{i} \sim Norm(\mu_{i},\sigma_{i}^{2}) \Rightarrow \sum_{i=1}^{n}X_{i} \sim Norm(\sum_{i=1}^{n}\mu_{i},\sum_{i=1}^{n}\sigma_{i}^{2})
+		\end{equation}	
+		
+	\item [Combinazione lineare]
+		\begin{equation}
+		X \sim Norm(\mu,\sigma^{2}) \Rightarrow (\alpha X + \beta) \sim Norm(\alpha\mu + \beta,\alpha^{2}\sigma^{2}) 
+		\end{equation}
+		
+
+\subsection{Distribuzione normale standard}
+
+	\item [Notazione]
+		\begin{equation}
+		X \sim Norm_{std}
+		\end{equation}
+		
+	\item [Definizione]
+		\begin{equation}
+		X \sim Norm_{std} \equiv Norm(0,1)
+		\end{equation}
+		
+		\begin{equation}
+		X \sim Norm(\mu,\sigma^{2}) \Rightarrow \frac{X-\mu}{\sigma} \sim Norm_{std} \sim Norm(0,1) 
+		\end{equation}
+		
+	\item [Ripartizione Normale standard]
+		\begin{equation}
+		\Phi(x) = \frac{1}{\sqrt{2\pi}} \int_{-\infty}^{x} e^{-\frac{y^{2}}{2}} dy \qquad\forall x \in \mathbb{R}
+		\end{equation}
+		
+		\begin{equation}
+		\Phi(-x) = 1 - \Phi(x)
+		\end{equation}
+		
+		\begin{equation}
+		\probability{X<b} = \Phi(\frac{b-\mu}{\sigma})
+		\end{equation}
+		
+	\item [Percentile normale standard]
+		\begin{equation}
+		z_{\alpha}\quad t.c. \quad \probability{Z>z_{\alpha}} = 1-\Phi(z_{\alpha}) = \alpha \qquad\forall \alpha \in (0,1)
+		\end{equation}	
+	
+\end{description}
+
+
+\subsection{Distribuzione Gamma di parametri $(\alpha,\lambda)$}
+
+\begin{description}
+	
+	\item [Notazione]
+		\begin{equation}
+		X \sim Gamma(\alpha,\lambda)
+		\end{equation}
+	
+	\item [Funzione Gamma]
+		\begin{equation}
+		\Gamma(\alpha) = \int_{0}^{\infty} y^{\alpha-1}e^{-y} dy
+		\end{equation}
+		
+		\begin{equation}
+		\Gamma(\alpha) = (\alpha-1)\Gamma(\alpha-1) = (\alpha-1)!
+		\end{equation}
+	
+	\item [Densità]
+		\begin{equation}
+		f(x) = \left\{\begin{matrix}
+		\frac{\lambda^{\alpha}}{\Gamma(\alpha)} x^{\alpha-1}e^{-\lambda x} & x > 0\\
+		0 & x \leq 0
+		\end{matrix}\right.
+		\end{equation}
+		
+	\item [Generatrice]
+		\begin{equation}
+		\phi(t) = (\frac{\lambda}{\lambda-t})^{\alpha}
+		\end{equation}
+		
+	\item [Media]
+		\begin{equation}
+		\expected{X} = \frac{\alpha}{\lambda}
+		\end{equation}
+
+	\item [Varianza]
+		\begin{equation}
+		\variance{X} = \frac{\alpha}{\lambda^{2}}
+		\end{equation}
+		
+	\item [Riproducibilità]
+		\begin{equation}
+		X_{i} \sim Gamma(\alpha_{i},\lambda) \Rightarrow \sum_{i=1}^{n}X_{i} \sim Gamma(sum_{i=1}^{n}\alpha_{i},\lambda)
+		\end{equation}
+		
+	\item [Somma di esponenziali indipendenti]
+		\begin{equation}
+		X_{i} \sim Exp(\lambda) \Rightarrow \sum_{i=1}^{n}X_{i} \sim Gamma(n,\lambda)
+		\end{equation}
+
+\end{description}
+
+
+\subsection{Distribuzione Chi-Quadro con $n$ gradi di libertà}
+
+\begin{description}
+	
+	\item [Notazione]
+		\begin{equation}
+		X \sim Chi(n)
+		\end{equation}
+	
+	\item [Definizione]
+		\begin{equation}
+		X := \sum_{i=1}^{n}Z_{i}^{2} \qquad Z_{i} \sim Norm_{std}
+		\end{equation}
+	
+	\item [Densità]
+		\begin{equation}
+		f(x) = \left\{\begin{matrix}
+		\frac{x^{\frac{n}{2}-1}e^{-\frac{x}{2}}}{2^{\frac{n}{2}}\Gamma(\frac{n}{2})} & x > 0\\
+		0 & x \leq 0
+		\end{matrix}\right.
+		\end{equation}
+	
+	\item [Generatrice]
+		\begin{equation}
+		\phi(t) = (1-2t)^{-\frac{n}{2}}
+		\end{equation}
+	
+	\item [Media]
+		\begin{equation}
+		\expected{X} = n
+		\end{equation}
+	
+	\item [Varianza]
+		\begin{equation}
+		\variance{X} = 2n
+		\end{equation}
+	
+	\item [Riproducibilità]
+		\begin{equation}
+		X_{i} \sim Chi(n_{i}) \Rightarrow \sum_{i=1}^{n}X_{i} \sim Chi(sum_{i=1}^{n}n_{i})
+		\end{equation}
+	
+	\item [Percentili Chi-Quadro]
+		\begin{equation}
+		\chi^{2}_{\alpha,n}\quad t.c. \quad \probability{X > \chi^{2}_{\alpha,n}} = \alpha \qquad\forall \alpha \in (0,1)
+		\end{equation}
+	
+\end{description}
+
+
+\subsection{Distribuzione T di Student con $n$ gradi di libertà}
+
+\begin{description}
+	
+	\item [Notazione]
+		\begin{equation}
+		X \sim Student(n)
+		\end{equation}
+	
+	\item [Definizione]
+		\begin{equation}
+		X := \frac{Z}{\sqrt{\frac{C_{n}}{n}}} \qquad Z \sim Norm_{std},C_{n} \sim Chi(n)
+		\end{equation}
+	
+	\item [Media]
+		\begin{equation}
+		\expected{X} = 0
+		\end{equation}
+	
+	\item [Varianza]
+		\begin{equation}
+		\variance{X} = \frac{n}{n-2}
+		\end{equation}
+	
+	\item [Percentili T di Student]
+		\begin{equation}
+		t_{\alpha,n}\quad t.c. \quad \probability{X > t_{\alpha,n}} = \alpha \qquad\forall \alpha \in (0,1)
+		\end{equation}
+		
+		\begin{equation}
+		-t_{\alpha,n} = t_{1-\alpha,n}
+		\end{equation}
+	
+\end{description}
+
+
+\subsection{Distribuzione F di Fisher con $n,m$ gradi di libertà}
+
+\begin{description}
+	
+	\item [Notazione]
+		\begin{equation}
+		X \sim Fisher(n,m)
+		\end{equation}
+	
+	\item [Definizione]
+		\begin{equation}
+		X := \frac{\frac{C_{n}}{n}}{\frac{C_{m}}{m}} \qquad C_{n} \sim Chi(n),C_{m} \sim Chi(m)
+		\end{equation}
+	
+	\item [Percentili F di Fisher]
+		\begin{equation}
+		F_{\alpha,n,m}\quad t.c. \quad \probability{X > F_{\alpha,n,m}} = \alpha \qquad\forall \alpha \in (0,1)
+		\end{equation}
+	
+		\begin{equation}
+		\frac{1}{F_{\alpha,n,m}} = F_{1-\alpha,n,m}
+		\end{equation}
+	
+\end{description}
+
+
+\subsection{Distribuzione logistica di media $\mu$ e dispersione $\nu$}
+
+\begin{description}
+	
+	\item [Notazione]
+	\begin{equation}
+		X \sim Logit(\mu,\nu)
+	\end{equation}
+	
+	\item [Densità]
+		\begin{equation}
+		f(x) = \frac{e^{\frac{(x-\mu)}{\nu}}}{\nu (1+e^{\frac{(x-\mu)}{\nu}})^{2}} \qquad\forall x \in \mathbb{R}
+		\end{equation}
+		
+	\item [Media]
+		\begin{equation}
+		\expected{X} = \mu
+		\end{equation}		
+	\end{description}
+
+
+\subsection{Distribuzione logistica standard}
+
+\begin{description}
+
+	\item [Notazione]
+	\begin{equation}
+		X \sim Logit_{std}
+	\end{equation}
+	
+	\item [Definizione]
+	\begin{equation}
+		X \sim Logit_{std} \equiv Logit(0,1)
+	\end{equation}
+\end{description}
+
+
+\subsection{Statistiche Campionarie}
+
+\begin{description}
+	
+	\item[Teorema del Limite Centrale]
+	\begin{equation}
+	\frac{\sum_{i=1}^{n} X_{i} - n\mu}{\sigma\sqrt{n}} \sim Norm(0,1) \qquad X_{i} \sim Norm(\mu,\sigma^{2}) 
+	\end{equation}
+	
+	\begin{equation}
+	\probability{\frac{\sum_{i=1}^{n} X_{i} - n\mu}{\sigma\sqrt{n}} < x} \approxeq \Phi(x)
+	\end{equation}
+	
+	\item[Media Campionaria]
+	\begin{equation}
+	\overline{X} = \frac{\sum_{i=1}^{n} X_{i}}{n}
+	\end{equation}
+	
+	\item[Valore Atteso della Media Campionaria]
+	\begin{equation}
+	\expected{\overline{X}} = \mu \qquad X \; v.a. \; con \; media \; \mu
+	\end{equation}
+	
+	\item[Varianza della Media Campionaria]
+	\begin{equation}
+	\variance{\overline{X}} = \frac{\sigma^{2}}{n} \qquad X \; v.a. \; con \; varianza \; \sigma
+	\end{equation}
+	
+	\item[Distribuzione della Media Campionaria]
+	\begin{equation}
+	\frac{\overline{X}-\mu}{\frac{\sigma}{\sqrt{n}}} \sim Norm(0,1)
+	\end{equation}
+	
+	\item[Correzione di Continuità]
+	\begin{equation}
+	\probability{X > a} \equiv \probability{X > a+0.5}
+	\end{equation}
+	
+	\item[Varianza Campionaria]
+	\begin{equation}
+	S^{2} = \frac{1}{n-1}\sum_{i=1}^{n} (X_{i}-\overline{X})^{2}
+	\end{equation}
+	
+	\item[Valore Atteso della Varianza Campionaria]
+	\begin{equation}
+	\expected{S^{2}} = \sigma^{2} \qquad \sigma \; varianza \; della \; popolazione
+	\end{equation}
+	
+	\item[Distribuzione della Varianza Campionaria]
+	\begin{equation}
+	(n-1)\frac{S^{2}}{\sigma^{2}} \sim Chi(n-1)
+	\end{equation}
+	
+	\item[Relazioni tra Media e Varianza Campionarie]
+	\begin{equation}
+	\overline{X} \; indipendente \; da \; S^{2}
+	\end{equation}
+	
+	\begin{equation}
+	\frac{\overline{X}-\mu}{\frac{S}{\sqrt{n}}} \sim T(n-1)
+	\end{equation}
+	
+	\begin{equation}
+	\frac{\overline{X}-\mu}{\frac{\sigma}{\sqrt{n}}} \sim Norm(0,1)
+	\end{equation}
+	
+	\begin{equation}
+	\frac{\overline{X}-\mu}{\frac{S}{\sqrt{n}}} \sim T(n-1)
+	\end{equation}
+	
+\end{description}
+
+\subsection{Stimatori di massima verosimiglianza}
+
+\begin{description}
+
+	\item[Parametro di una Bernoulliana]
+	\begin{equation}
+	\hat{p} = \frac{1}{n}\sum_{i=1}^{n} X_{i}
+	\end{equation}
+	
+	\item[Parametro di una Poissoniana]
+	\begin{equation}
+	\hat{\lambda} = \frac{1}{n}\sum_{i=1}^{n} X_{i}
+	\end{equation}
+	
+	\item[Parametri di una Normale]
+	\begin{equation}
+	\hat{\mu} = \overline{X}
+	\end{equation}
+
+	\begin{equation}
+	\hat{\sigma} = \sqrt{\frac{1}{n}|sum_{i=1}^{n} (X_{i}-\overline{X})^{2}}
+	\end{equation}
+	
+	\item[Media di una Uniforme]
+	\begin{equation}
+	\hat{\mu} = \frac{\max (X_{1},X_{2},...,X_{n})}{2}
+	\end{equation}
+	
+	\item[Stima dei tempi di vita]
+	\begin{equation}
+	\probability{X=N}=\probability{X>n-1}\lambda_{n}=\lambda_{n}\prod_{i=1}^{n}s_{i}
+	\end{equation}
+	dove $\lambda_{i}=\frac{\probability{X=i}}{\probability{X>i-1}}$ è detto \textit{funzione di rischio}; mentre
+	$s_{i}=1-\lambda_{i}$ è detto \textit{funzione di sopravvivenza}.
+\end{description}
+
+\subsection{Intervalli di confidenza}
+
+\begin{description}
+	
+	\item[Intervalli di confidenza di livello $1-\alpha$ per la media $\mu$ di una normale con varianza nota]
+	\begin{equation}
+	\mu \in \Big(\overline{X}-z_{\frac{\alpha}{2}}\frac{\sigma}{\sqrt{n}},\overline{X}+z_{\frac{\alpha}{2}}\frac{\sigma}{\sqrt{n}}\Big)
+	\end{equation}
+	\begin{equation}
+	\mu \in \Big(\overline{X}-z_{\alpha}\frac{\sigma}{\sqrt{n}},\infty\Big)
+	\end{equation}
+	\begin{equation}
+	\mu \in \Big(-\infty,\overline{X}+z_{\alpha}\frac{\sigma}{\sqrt{n}}\Big)
+	\end{equation}
+	
+	\item[Intervalli di confidenza di livello $1-\alpha$ per la media $\mu$ di una normale con varianza incognita]
+	\begin{equation}
+	\mu \in \Big(\overline{X}-t_{\frac{\alpha}{2},n-1}\frac{S}{\sqrt{n}},\overline{X}+t_{\frac{\alpha}{2},n-1}\frac{\sigma}{\sqrt{n}}\Big)
+	\end{equation}
+	\begin{equation}
+	\mu \in \Big(\overline{X}-t_{\alpha,n-1}\frac{S}{\sqrt{n}},\infty\Big)
+	\end{equation}
+	\begin{equation}
+	\mu \in \Big(-\infty,\overline{X}+t_{\alpha,n-1}\frac{S}{\sqrt{n}}\Big)
+	\end{equation}
+	
+	\item[Intervalli di confidenza di livello $1-\alpha$ per la varianza $\sigma^{2}$ di una normale]
+	\begin{equation}
+	\sigma^{2} \in \Big(\frac{(n-1)S^{2}}{\chi^{2}_{\frac{\alpha}{2},n-1}},\frac{(n-1)S^{2}}{\chi^{2}_{1-\frac{\alpha}{2},n-1}}\Big)
+	\end{equation}
+	\begin{equation}
+	\sigma^{2} \in \Big(\frac{(n-1)S^{2}}{\chi^{2}_{\alpha,n-1}},\infty\Big)
+	\end{equation}
+	\begin{equation}
+	\sigma^{2} \in \Big(-\infty,\frac{(n-1)S^{2}}{\chi^{2}_{1-\alpha,n-1}}\Big)
+	\end{equation}
+	
+	\item[Intervalli di confidenza di livello $1-\alpha$ per la differenza di medie di normali con varianze note]
+	\begin{equation}
+	\mu_{1}-\mu{2} \in \Big((\overline{X}-\overline{Y})-z_{\frac{\alpha}{2}}\sqrt{\frac{\sigma^{2}_{1}}{n_{1}}+\frac{\sigma^{2}_{2}}{n_{2}}},(\overline{X}-\overline{Y})+z_{\frac{\alpha}{2}}\sqrt{\frac{\sigma^{2}_{1}}{n_{1}}+\frac{\sigma^{2}_{2}}{n_{2}}}\Big)
+	\end{equation}
+	\begin{equation}
+	\mu_{1}-\mu{2} \in \Big((\overline{X}-\overline{Y})-z_{\alpha}\sqrt{\frac{\sigma^{2}_{1}}{n_{1}}+\frac{\sigma^{2}_{2}}{n_{2}}},\infty\Big)
+	\end{equation}
+	\begin{equation}
+	\mu_{1}-\mu{2} \in \Big(-\infty,(\overline{X}-\overline{Y})+z_{\alpha}\sqrt{\frac{\sigma^{2}_{1}}{n_{1}}+\frac{\sigma^{2}_{2}}{n_{2}}}\Big)
+	\end{equation}
+	
+	\item[Intervalli di confidenza di livello $1-\alpha$ per la differenza di medie di normali con varianze incognite ma uguali]
+	\begin{equation}
+	\mu_{1}-\mu{2} \in \Big((\overline{X}-\overline{Y})-t_{\frac{\alpha}{2},n_{1}+n_{2}-2}S\sqrt{\frac{1}{n_{1}}+\frac{1}{n_{2}}},(\overline{X}-\overline{Y})+t_{\frac{\alpha}{2},n_{1}+n_{2}-2}S\sqrt{\frac{1}{n_{1}}+\frac{1}{n_{2}}}\Big)
+	\end{equation}
+	\begin{equation}
+	\mu_{1}-\mu{2} \in \Big((\overline{X}-\overline{Y})-t_{\alpha,n_{1}+n_{2}-2}S\sqrt{\frac{1}{n_{1}}+\frac{1}{n_{2}}},\infty\Big)
+	\end{equation}
+	\begin{equation}
+	\mu_{1}-\mu{2} \in \Big(-\infty,(\overline{X}-\overline{Y})+t_{\alpha,n_{1}+n_{2}-2}S\sqrt{\frac{1}{n_{1}}+\frac{1}{n_{2}}}\Big)
+	\end{equation}
+	
+	\item[Intervalli di confidenza di livello $1-\alpha$ per il parametro $p$ di una Bernoulliana]
+	\begin{equation}
+	p \in \Big(\hat{p}-z_{\frac{\alpha}{2}}\sqrt{\frac{\hat{p}(1-\hat{p})}{n}},\hat{p}+z_{\frac{\alpha}{2}}\sqrt{\frac{\hat{p}(1-\hat{p})}{n}}\Big)
+	\end{equation}
+	\begin{equation}
+	p \in \Big(\hat{p}-z_{\alpha}\sqrt{\frac{\hat{p}(1-\hat{p})}{n}},\infty\Big)
+	\end{equation}
+	\begin{equation}
+	p \in \Big(-\infty,\hat{p}+z_{\alpha}\sqrt{\frac{\hat{p}(1-\hat{p})}{n}}\Big)
+	\end{equation}
+	
+	\begin{equation}
+	n = \frac{4z_{\frac{\alpha}{2}^{2}}}{b^{2}} p*(1-p*) \qquad b \; lunghezza \; intervallo, \;p* \; stima \; di \; p
+	\end{equation}
+	\begin{equation}
+	n < \frac{z_{\frac{\alpha}{2}^{2}}}{b^{2}} \qquad b \; lunghezza \; intervallo
+	\end{equation}
+	
+	\item[Intervalli di confidenza di livello $1-\alpha$ per la media $\theta$ di una Esponenziale]
+	\begin{equation}
+	\theta \in \Big(\frac{2n\overline{X}}{\chi^{2}_{\frac{\alpha}{2},2n}},\frac{2n\overline{X}}{\chi^{2}_{1-\frac{\alpha}{2},2n}}\Big)
+	\end{equation}
+	\begin{equation}
+	\theta \in \Big(\frac{2n\overline{X}}{\chi^{2}_{\alpha,2n}},\infty\Big)
+	\end{equation}
+	\begin{equation}
+	\theta \in \Big(-\infty,\frac{2n\overline{X}}{\chi^{2}_{1-\alpha,2n}}\Big)
+	\end{equation}
+\end{description}

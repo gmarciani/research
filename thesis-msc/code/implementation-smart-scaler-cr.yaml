@@ -1,0 +1,13 @@
+apiVersion: gmarciani.com/v1
+kind: SmartScaler
+metadata:
+  name: MyAppSmartScaler
+spec:
+  deployment: MyApp
+  algorithm: qlearning
+  parameters:
+    rewardFunction: rfunc1
+    alpha: 0.7
+    gamma: 0.8
+  replicationMin: 1
+  replicationMax: 100

@@ -5,12 +5,21 @@
 \usepackage{graphicx}
 \usepackage{array}
 \usepackage{lscape}
-\usepackage[ruled,noend,noline]{algorithm2e}
+\usepackage[ruled,noend,noline,linesnumbered]{algorithm2e}
 \usepackage{lipsum}
+\usepackage{amsmath}
+\usepackage{amsthm}
+\usepackage{amssymb}
+\usepackage{hyperref}
+\usepackage{listings}
 
 \pagestyle{plain}
 
 \graphicspath{ {./fig/} {./fig/plot/} }
+
+\newtheorem{theorem}{Theorem}
+
+\setlength\extrarowheight{5pt}
 
 \begin{document}
 
@@ -18,10 +27,10 @@
 \pagestyle{plain}
 \include{sec/contents}
 \include{sec/introduction}
-\include{sec/containers-orchestration}
+\include{sec/elasticity}
 \include{sec/reinforcement-learning}
 \include{sec/kubernetes}
-\include{sec/smart-elasticity}
+\include{sec/implementation}
 \include{sec/evaluation}
 \include{sec/conclusions}
 \appendix
