@@ -106,36 +106,36 @@
 	
 	\item[Integrali Notevoli]
 		\begin{equation}
-		\int x^{a} dx \rightarrow \frac{x^{a+1}}{a+1}
+		\int x^{a} \partial x \rightarrow \frac{x^{a+1}}{a+1}
 		\end{equation}
 		
 		\begin{equation}
-		\int \frac{1}{x} dx \rightarrow \log(x)
+		\int \frac{1}{x} \partial x \rightarrow \log(x)
 		\end{equation}
 		
 		\begin{equation}
-		\int \sin(x) dx \rightarrow -\cos(x)
+		\int \sin(x) \partial x \rightarrow -\cos(x)
 		\end{equation}
 		
 		\begin{equation}
-		\int \cos(x) dx \rightarrow \sin(x)
+		\int \cos(x) \partial x \rightarrow \sin(x)
 		\end{equation}
 		
 		\begin{equation}
-		\int e^{ax} dx \rightarrow \frac{e^{ax}}{a}
+		\int e^{ax} \partial x \rightarrow \frac{e^{ax}}{a}
 		\end{equation}
 		
 		\begin{equation}
-		\int xe^{ax} dx \rightarrow \frac{e^{ax}(ax-1)}{a^{2}}
+		\int xe^{ax} \partial x \rightarrow \frac{e^{ax}(ax-1)}{a^{2}}
 		\end{equation}
 		
 		\begin{equation}
-		\int x^{2}e^{ax} dx \rightarrow \frac{e^{ax}(a^{2}x^{2}2ax+2)}{a^{3}}
+		\int x^{2}e^{ax} \partial x \rightarrow \frac{e^{ax}(a^{2}x^{2}2ax+2)}{a^{3}}
 		\end{equation}
 	
 	\item[Integrazione per Parti]
 		\begin{equation}
-		\int f(x)'g(x) dx = f(x)g(x) - \int f(x)g(x)'dx
+		\int f(x)'g(x) \partial x = f(x)g(x) - \int f(x)g(x)' \partial x
 		\end{equation}
 	
 \end{description}
@@ -530,10 +530,10 @@
 	
 	\item[Dirac $Dirac(x_{0})$]
 		\begin{equation}
-		\probability{X=k} = p\ind{\{1\}}{k}+(1-p)\ind{\{0\}}{k}
+		\probability{X=k} = \ind{\{x_{0}\}}{k}
 		\end{equation}
 		\begin{equation}
-		F_{X}(x)=p\ind{[x_{0},\infty)}{x}
+		F_{X}(x)=\ind{[x_{0},\infty)}{x}
 		\end{equation}
 		\begin{equation}
 		\expected{X}=0
@@ -1047,4 +1047,176 @@
 	\item[Note]
 	Se il campione è piccolo, $X$ deve essere Normale per poter definire intervalli di confidenza.
 	Se il campione è grande, è sufficiente che $X\in\mathcal{L}^{2}$.
+\end{description}
+\newpage
+
+\subsection{Convergenza}
+\begin{description}
+	
+	\item[Convergenza Quasi Certa]
+		\begin{equation}
+		X_{n}\overset{as}{\rightarrow}X
+		\iff
+		\probability{E}=1 \land \lim_{n\rightarrow\infty}X_{n}(\omega)=X(\omega)
+		\qquad\forall\omega\in E
+		\end{equation}
+		\begin{equation}
+		X_{n}\overset{as}{\rightarrow}X
+		\iff
+		\probability{F}=0 \land \lim_{n\rightarrow\infty}X_{n}(\omega)=X(\omega)
+		\qquad\forall\omega\in F^{c}
+		\end{equation}
+		\begin{equation}
+		X_{n}\overset{as}{\rightarrow}X
+		\Leftarrow
+		\probability{\lim_{n\rightarrow\infty} \sup \{|X_{n}-X| > \epsilon\}}=0
+		\end{equation}
+		\begin{equation}
+		X_{n}\overset{as}{\rightarrow}X
+		\Leftarrow
+		\sum_{i=1}^{\infty}\probability{|X_{n}-X| > \epsilon}<\infty
+		\end{equation}
+		\begin{equation}
+		X_{n}\overset{as}{\rightarrow}X
+		\iff
+		\lim_{n\rightarrow\infty}(X_{n}-X)=0
+		\end{equation}
+		\begin{equation}
+		X_{n}\overset{as}{\rightarrow}X
+		\Rightarrow
+		g(X_{n})\overset{as}{\rightarrow}g(X)
+		\end{equation}
+		\begin{equation}
+		X_{n}\overset{as}{\rightarrow}X \land Y_{n}\overset{as}{\rightarrow}Y
+		\Rightarrow
+		aX_{n}+bY_{n}\overset{as}{\rightarrow}aX+bY
+		\end{equation}
+		\begin{equation}
+		X_{n}\overset{as}{\rightarrow}X \land Y_{n}\overset{as}{\rightarrow}Y
+		\Rightarrow
+		X_{n}Y_{n}\overset{as}{\rightarrow}XY
+		\end{equation}
+		\begin{equation}
+		X_{n}\overset{as}{\rightarrow}X \land Y_{n}\overset{as}{\rightarrow}Y
+		\Rightarrow
+		X_{n}/Y_{n}\overset{as}{\rightarrow}X/Y
+		\end{equation}
+		\begin{equation}
+		X_{n}\overset{as}{\rightarrow}X \Rightarrow X_{n}\overset{P}{\rightarrow}X
+		\end{equation}
+		
+	\item[Convergenza in Probabilità]
+		\begin{equation}
+		X_{n}\overset{P}{\rightarrow}X
+		\iff
+		\lim_{n\rightarrow\infty}\probability{|X_{n}-X|<\epsilon}=1
+		\qquad\forall\epsilon >0
+		\end{equation}
+		\begin{equation}
+		X_{n}\overset{P}{\rightarrow}X
+		\iff
+		\lim_{n\rightarrow\infty}\probability{|X_{n}-X|>\epsilon}=0
+		\qquad\forall\epsilon >0
+		\end{equation}
+		\begin{equation}
+		X_{n}\overset{P}{\rightarrow}X
+		\Rightarrow
+		g(X_{n})\overset{P}{\rightarrow}g(X)
+		\end{equation}
+		\begin{equation}
+		X_{n}\overset{P}{\rightarrow}X \land Y_{n}\overset{P}{\rightarrow}Y
+		\Rightarrow
+		aX_{n}+bY_{n}\overset{P}{\rightarrow}aX+bY
+		\end{equation}
+		\begin{equation}
+		X_{n}\overset{P}{\rightarrow}X \land Y_{n}\overset{P}{\rightarrow}Y
+		\Rightarrow
+		X_{n}Y_{n}\overset{P}{\rightarrow}XY
+		\end{equation}
+		\begin{equation}
+		X_{n}\overset{P}{\rightarrow}X \land Y_{n}\overset{P}{\rightarrow}Y
+		\Rightarrow
+		X_{n}/Y_{n}\overset{P}{\rightarrow}X/Y
+		\end{equation}
+		\begin{equation}
+		X_{n}\overset{P}{\rightarrow}X
+		\Rightarrow
+		\exists (X_{n_{k}}).(X_{n_{k}})\overset{as}{\rightarrow}X
+		\end{equation}
+		
+	\item[Convergenza in Distribuzione]
+		\begin{equation}
+		X_{n}\overset{d}{\rightarrow}X
+		\iff
+		\lim_{n\rightarrow\infty}F_{X_{n}}(x)=F_{X}(x)
+		\end{equation}
+		\begin{equation}
+		X_{n}\overset{d}{\rightarrow}X
+		\Rightarrow
+		g(X_{n})\overset{d}{\rightarrow}g(X)
+		\end{equation}
+		\begin{equation}
+		X_{n}\overset{d}{\rightarrow}X \land Y_{n}\overset{d}{\rightarrow}Y \land Corr(X_{n},Y_{n})=0
+		\Rightarrow
+		aX_{n}+bY_{n}\overset{d}{\rightarrow}aX+bY
+		\end{equation}
+		\begin{equation}
+		X_{n}\overset{d}{\rightarrow} Dirac(x_{0})
+		\Rightarrow
+		X_{n}\overset{P}{\rightarrow}x_{0}
+		\end{equation}
+		\begin{equation}
+		X_{n}\overset{d}{\rightarrow}X \land Y_{n}\overset{P}{\rightarrow} Dirac(x_{0})
+		\Rightarrow
+		X_{n}Y_{n}\overset{P}{\rightarrow}x_{0}X
+		\end{equation}
+		
+	\item[Convergenza in Momento p-esimo]
+		\begin{equation}
+		X_{n}\overset{L^{p}}{\rightarrow}X
+		\iff
+		\lim_{n\rightarrow\infty}\expected{|X_{n}-X|^{p}}^{\frac{1}{p}} = 0
+		\end{equation}
+		\begin{equation}
+		X_{n}\overset{L^{p}}{\rightarrow}X
+		\Rightarrow
+		X_{n}\overset{P}{\rightarrow}X
+		\end{equation}
+		\begin{equation}
+		X_{n}\overset{L^{p}}{\rightarrow}X \land Y_{n}\overset{L^{p}}{\rightarrow}Y
+		\Rightarrow
+		aX_{n}+bY_{n}\overset{L^{p}}{\rightarrow}aX+bY
+		\end{equation}
+		\begin{equation}
+		X_{n}\overset{L^{p}}{\rightarrow}X \land Y_{n}\overset{L^{p}}{\rightarrow}Y
+		\Rightarrow
+		X_{n}Y_{n}\overset{L^{1}}{\rightarrow}XY
+		\end{equation}
+		\begin{equation}
+		X_{n}\overset{L^{p}}{\rightarrow}X \land Y_{n}\overset{L^{p}}{\rightarrow}Y
+		\Rightarrow
+		X_{n}/Y_{n}\overset{L^{1}}{\rightarrow}X/Y
+		\end{equation}
+		\begin{equation}
+		X_{n}\overset{L^{p}}{\rightarrow}X
+		\Rightarrow
+		\exists (X_{n_{k}}).(X_{n_{k}})\overset{as}{\rightarrow}X
+		\end{equation}
+		\begin{equation}
+		X_{n}\overset{L^{1}}{\rightarrow}X
+		\Leftarrow
+		X_{n}\overset{P}{\rightarrow}X
+		\land
+		X\in\mathcal{L}^{1}
+		\land
+		X\;uniformemente\;integrabile
+		\end{equation}
+		\begin{equation}
+		|X_{n}|\leq Y \land Y\in\mathcal{L}^{p}
+		\Rightarrow
+		X_{n}\in\mathcal{L}^{p}
+		\land
+		X_{n}\;uniformemente\;integrabile
+		\end{equation}
+	
 \end{description}
