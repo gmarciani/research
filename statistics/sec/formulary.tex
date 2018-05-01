@@ -461,6 +461,12 @@
 		\begin{equation}
 		\variance{X}=p(1-p)
 		\end{equation}
+		\begin{equation}
+		X_{i}\sim Ber(p) \Rightarrow \sum_{i=1}^{n}X_{i}\sim Bin(n,p)
+		\end{equation}
+		\begin{equation}
+		X_{i}\sim Ber(p_{i}) \Rightarrow \sum_{i=1}^{n}X_{i}\sim Pois(\sum_{i=1}^{n}p_{i})
+		\end{equation}
 	
 	\item[Binomiale $Bin(n,p)$]
 		\begin{equation}
@@ -474,6 +480,15 @@
 		\end{equation}
 		\begin{equation}
 		\variance{X}=np(1-p)
+		\end{equation}
+		\begin{equation}
+		X_{i}\sim Bin(n_{i},p)\Rightarrow \sum_{i=1}^{n}X_{i} \sim Bin(\sum_{i=1}^{n}n_{i},p)
+		\end{equation}
+		\begin{equation}
+		X\sim Bin(n,p).np\geq 5,n(1-p)\geq 5\Rightarrow X\sim Norm(np,np(1-p))
+		\end{equation}
+		\begin{equation}
+		X\sim Bin(n,p).n>>p \Rightarrow X\sim Poiss(np)
 		\end{equation}
 	
 	\item[Geometrica $Geom(p)$]
@@ -489,20 +504,6 @@
 		\begin{equation}
 		\variance{X}=\frac{1-p}{p^{2}}
 		\end{equation}
-		
-	\item[Ipergeometrica $Iper(N,M,n)$]
-		\begin{equation}
-		\probability{X=k}=\frac{\binom{N}{k}\binom{M}{n-k}}{\binom{N+M}{n}}
-		\end{equation}
-		\begin{equation}
-		F_{X}(k)=\dots
-		\end{equation}
-		\begin{equation}
-		\expected{X}=np
-		\end{equation}
-		\begin{equation}
-		\variance{X}=\frac{np(N-M)(N-n)}{N(N-1)}
-		\end{equation}
 	
 	\item[Poisson $Pois(\lambda)$]
 		\begin{equation}
@@ -516,6 +517,9 @@
 		\end{equation}
 		\begin{equation}
 		\variance{X}=\lambda
+		\end{equation}
+		\begin{equation}
+		X_{i}\sim Pois(\lambda_{i}) \Rightarrow \sum_{i=1}^{n}X_{i}\sim Pois(\sum_{i=1}^{n}\lambda_{i})
 		\end{equation}
 	
 \end{description}
@@ -568,7 +572,19 @@
 		\begin{equation}
 		\expected{X^{n}}=\frac{n!}{\lambda^{n}}
 		\end{equation}
-		
+		\begin{equation}
+		\probability{X>t+x|X>t}=\probability{X>x}
+		\end{equation}
+		\begin{equation}
+		X\sim Exp(\lambda)\Rightarrow cX\sim Exp(\frac{\lambda}{c})
+		\end{equation}
+		\begin{equation}
+		X_{i}\sim Exp(\lambda_{i})\Rightarrow \min(X_{i})\sim Exp(\sum_{i}\lambda_{i})
+		\end{equation}
+		\begin{equation}
+		X_{i}\sim Exp(\lambda)\Rightarrow \sum_{i=1}^{n}X_{i}\sim Gamma(n,\lambda)
+		\end{equation}		
+
 	\item[Normale $Norm(\mu,\sigma^{2})$]
 		\begin{equation}
 		f_{X}(x)=\frac{1}{\sigma\sqrt{2\pi}}e^{-\frac{(x-\mu)^{2}}{2\sigma^{2}}}
@@ -578,6 +594,27 @@
 		\end{equation}
 		\begin{equation}
 		\variance{X}=\sigma^{2}
+		\end{equation}
+		\begin{equation}
+		X\sim Norm(\mu,\sigma^{2}) \Rightarrow aX+b\sim Norm(a\mu +b,a^{2}\sigma^{2})
+		\end{equation}
+		\begin{equation}
+		X\sim Norm(\mu,\sigma^{2}) \Rightarrow \frac{X-\mu}{\sigma}\sim Norm(0,1)
+		\end{equation}
+		\begin{equation}
+		X\sim Norm(\mu,\sigma^{2}) \Rightarrow \expected{X^{2}}=\mu^{2}+\sigma^{2}
+		\end{equation}
+		\begin{equation}
+		X\sim Norm(0,1) \Rightarrow \mu + \sigma X \sim Norm(\mu,\sigma^{2})
+		\end{equation}
+		\begin{equation}
+		X_{i}\sim Norm(\mu_{i},\sigma_{i}^{2}) \Rightarrow \sum_{i=1}^{n}X_{i} \sim Norm(\sum_{i=1}^{n}\mu_{i},\sum_{i=1}^{n}\sigma_{i}^{2})
+		\end{equation}
+		\begin{equation}
+		\probability{Norm(0,1)\geq z_{\alpha}}=\alpha
+		\end{equation}
+		\begin{equation}
+		\probability{Norm(\mu,\sigma^{2}) < x}=\probability{Norm(0,1) < \frac{x-\mu}{\sigma}}
 		\end{equation}
 		
 	\item[Gamma $Gamma(\alpha,\lambda)$]
@@ -589,6 +626,12 @@
 		\end{equation}
 		\begin{equation}
 		\variance{X}=\frac{\alpha}{\lambda^{2}}
+		\end{equation}
+		\begin{equation}
+		Gamma(1,\lambda) \equiv Exp(\lambda)
+		\end{equation}
+		\begin{equation}
+		X_{i}\sim Gamma(\alpha_{i},\lambda)\Rightarrow \sum_{i}X_{i}\sim Gamma(\sum_{i}\alpha_{i},\lambda)
 		\end{equation}
 		
 	\item[Chi Quadro $Chi(n)$]
@@ -603,6 +646,15 @@
 		\begin{equation}
 		\variance{X}=2n
 		\end{equation}
+		\begin{equation}
+		\probability{Chi(n)\geq \chi^{2}_{\alpha,n}}=\alpha
+		\end{equation}
+		\begin{equation}
+		-\chi^{2}_{\alpha,n}=\chi^{2}_{1-\alpha,n}
+		\end{equation}
+		\begin{equation}
+		X_{i}\sim Chi(n_{i}) \Rightarrow \sum_{i=1}^{n}X_{i} \sim Chi(\sum_{i=1}^{n}n_{i})
+		\end{equation}
 		
 	\item[T-Student $T(n)$]
 		\begin{equation}
@@ -616,6 +668,15 @@
 		\end{equation}
 		\begin{equation}
 		\variance{X}=\frac{n}{n-2}
+		\end{equation}
+		\begin{equation}
+		\probability{T(n)\geq t_{\alpha,n}}=\alpha
+		\end{equation}
+		\begin{equation}
+		-t_{\alpha,n}=t_{1-\alpha,n}
+		\end{equation}
+		\begin{equation}
+		\lim_{n\rightarrow\infty} T(n) = Norm(0,1)
 		\end{equation}
 
 	\item[F-Fisher $F(n,m)$]
@@ -636,6 +697,12 @@
 		\frac{2n^{2}(m+n-2)}{m(n-2)^{2}(n-4)} & n>4 \\
 		indefinita & altrimenti
 		\end{matrix}\right.
+		\end{equation}
+		\begin{equation}
+		\probability{F(n,m)\geq f_{\alpha,n,m}}=\alpha
+		\end{equation}
+		\begin{equation}
+		f_{\alpha,n,m}^{-1}=f_{1-\alpha,n,m}
 		\end{equation}
 		
 	\item[Logistica $Logi(\mu,\nu)$]
