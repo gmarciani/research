@@ -3,265 +3,258 @@
 \label{sec:formulary}
 
 \subsection{Fondamenti Matematici}
-
 \begin{description}
 	
 	\item[Fattoriale]
-	\begin{equation}
-	n! = n(n-1)\mathfrak{1}_{\mathbb{N}}(n) + \mathfrak{1}_{\{0\}}(n)
-	\end{equation}
+		\begin{equation}
+		n! = n(n-1)\mathfrak{1}_{\mathbb{N}}(n) + \mathfrak{1}_{\{0\}}(n)
+		\end{equation}
 	
 	\item[Coefficiente Binomiale]
-	\begin{equation}
-	\binom{n}{k} = \frac{n!}{(n-k)!k!} \qquad\forall k,n\in\mathbb{N}_{0}.k\leq n
-	\end{equation}
+		\begin{equation}
+		\binom{n}{k} = \frac{n!}{(n-k)!k!} \qquad\forall k,n\in\mathbb{N}_{0}.k\leq n
+		\end{equation}
 	
-	\begin{equation}
-	\binom{n}{k} = \binom{n}{n-k}
-	\end{equation}
+		\begin{equation}
+		\binom{n}{k} = \binom{n}{n-k}
+		\end{equation}
 	
-	\begin{equation}
-	\binom{n}{n} = \binom{n}{0} = 1
-	\end{equation}
-	
-	\begin{equation}
-	\binom{n}{k}+\binom{n}{k+1} = \binom{n+1}{k+1}
-	\end{equation}
-	
-	\begin{equation}
-	\binom{m+n}{k} = \sum_{j=0}^{k}\binom{m}{j}\binom{n}{k-j}
-	\end{equation}
+		\begin{equation}
+		\binom{n}{n} = \binom{n}{0} = 1
+		\end{equation}
+		
+		\begin{equation}
+		\binom{n}{k}+\binom{n}{k+1} = \binom{n+1}{k+1}
+		\end{equation}
+		
+		\begin{equation}
+		\binom{m+n}{k} = \sum_{j=0}^{k}\binom{m}{j}\binom{n}{k-j}
+		\end{equation}
 	
 	\item[Coefficiente Multinomiale]
-	\begin{equation}
-	\binom{n}{k_{1},...,k_{m}} = \frac{n!}{\prod_{j=1}^{m}k_{j}!}
-	\end{equation}
+		\begin{equation}
+		\binom{n}{k_{1},...,k_{m}} = \frac{n!}{\prod_{j=1}^{m}k_{j}!}
+		\end{equation}
 	
 	\item[Funzione Gamma]
-	\begin{equation}
-	\Gamma(\alpha) = \int_{\mathbb{R}^{+}} x^{\alpha-1}e^{-x}dx
-	\end{equation}
-	
-	\begin{equation}
-	\Gamma(\alpha+1) = 	\alpha\Gamma(\alpha) = \alpha!
-	\end{equation}
-	
-	\begin{equation}
-	\Gamma(0.5) = \sqrt{\pi}
-	\end{equation}
+		\begin{equation}
+		\Gamma(\alpha) = \int_{\mathbb{R}^{+}} x^{\alpha-1}e^{-x}dx
+		\end{equation}
+		
+		\begin{equation}
+		\Gamma(\alpha+1) = 	\alpha\Gamma(\alpha) = \alpha!
+		\end{equation}
+		
+		\begin{equation}
+		\Gamma(0.5) = \sqrt{\pi}
+		\end{equation}
 	
 	\item[Limiti Notevoli]
-	\begin{equation}
-	\Bigg(1-\frac{a}{n}\Bigg)^{n} \overset{n\rightarrow\infty}{\rightarrow} e^{-a}
-	\end{equation}
+		\begin{equation}
+		\Bigg(1-\frac{a}{n}\Bigg)^{n} \overset{n\rightarrow\infty}{\rightarrow} e^{-a}
+		\end{equation}
 	
 	\item[Serie Notevoli]
-	\begin{equation}
-	\sum_{i=1}^{\infty} a^{i} = \frac{a}{1-a} \qquad a\in(0,1)
-	\end{equation}
-	
-	\begin{equation}
-	\sum_{i=0}^{\infty} a^{i} = \frac{1}{1-a} \qquad a\in(0,1)
-	\end{equation}
-	
-	\begin{equation}
-	\sum_{i=1}^{n} i = \frac{n(n+1)}{2}
-	\end{equation}
-	
-	\begin{equation}
-	\sum_{i=1}^{n} (x_{i}-a)^{2} = 	\sum_{i=1}^{n} x_{i}^{2}-na^{2}
-	\end{equation}
-	
-	\begin{equation}
-	\sum_{i=0}^{\infty} \frac{\lambda^{i}}{i!} = e^{\lambda}
-	\end{equation}
-	
-	\begin{equation}
-	\sum_{i=1}^{n} i^{2} = \frac{n(n+1)(2n+1)}{6}
-	\end{equation}
-	
-	\begin{equation}
-	\sum_{i=1}^{n} i^{3} = \Bigg(\frac{n(n+1)}{2}\Bigg)^{2}
-	\end{equation}
+		\begin{equation}
+		\sum_{i=1}^{\infty} a^{i} = \frac{a}{1-a} \qquad a\in(0,1)
+		\end{equation}
+		
+		\begin{equation}
+		\sum_{i=0}^{\infty} a^{i} = \frac{1}{1-a} \qquad a\in(0,1)
+		\end{equation}
+		
+		\begin{equation}
+		\sum_{i=1}^{n} i = \frac{n(n+1)}{2}
+		\end{equation}
+		
+		\begin{equation}
+		\sum_{i=1}^{n} (x_{i}-a)^{2} = 	\sum_{i=1}^{n} x_{i}^{2}-na^{2}
+		\end{equation}
+		
+		\begin{equation}
+		\sum_{i=0}^{\infty} \frac{\lambda^{i}}{i!} = e^{\lambda}
+		\end{equation}
+		
+		\begin{equation}
+		\sum_{i=1}^{n} i^{2} = \frac{n(n+1)(2n+1)}{6}
+		\end{equation}
+		
+		\begin{equation}
+		\sum_{i=1}^{n} i^{3} = \Bigg(\frac{n(n+1)}{2}\Bigg)^{2}
+		\end{equation}
 	
 	\item[Derivate Notevoli]
-	\begin{equation}
-	x^{a} \rightarrow ax^{a-1}
-	\end{equation}
-	
-	\begin{equation}
-	e^{x} \rightarrow e^{x}
-	\end{equation}
-	
-	\begin{equation}
-	\log(x) \rightarrow \frac{1}{x}
-	\end{equation}
-	
-	\begin{equation}
-	\sin(x) \rightarrow \cos(x)
-	\end{equation}
-	
-	\begin{equation}
-	\cos(x) \rightarrow -\sin(x)
-	\end{equation}
+		\begin{equation}
+		x^{a} \rightarrow ax^{a-1}
+		\end{equation}
+		
+		\begin{equation}
+		e^{x} \rightarrow e^{x}
+		\end{equation}
+		
+		\begin{equation}
+		\log(x) \rightarrow \frac{1}{x}
+		\end{equation}
+		
+		\begin{equation}
+		\sin(x) \rightarrow \cos(x)
+		\end{equation}
+		
+		\begin{equation}
+		\cos(x) \rightarrow -\sin(x)
+		\end{equation}
 	
 	\item[Integrali Notevoli]
-	\begin{equation}
-	\int x^{a} dx \rightarrow \frac{x^{a+1}}{a+1}
-	\end{equation}
-	
-	\begin{equation}
-	\int \frac{1}{x} dx \rightarrow \log(x)
-	\end{equation}
-	
-	\begin{equation}
-	\int \sin(x) dx \rightarrow -\cos(x)
-	\end{equation}
-	
-	\begin{equation}
-	\int \cos(x) dx \rightarrow \sin(x)
-	\end{equation}
-	
-	\begin{equation}
-	\int e^{ax} dx \rightarrow \frac{e^{ax}}{a}
-	\end{equation}
-	
-	\begin{equation}
-	\int xe^{ax} dx \rightarrow \frac{e^{ax}(ax-1)}{a^{2}}
-	\end{equation}
-	
-	\begin{equation}
-	\int x^{2}e^{ax} dx \rightarrow \frac{e^{ax}(a^{2}x^{2}2ax+2)}{a^{3}}
-	\end{equation}
+		\begin{equation}
+		\int x^{a} dx \rightarrow \frac{x^{a+1}}{a+1}
+		\end{equation}
+		
+		\begin{equation}
+		\int \frac{1}{x} dx \rightarrow \log(x)
+		\end{equation}
+		
+		\begin{equation}
+		\int \sin(x) dx \rightarrow -\cos(x)
+		\end{equation}
+		
+		\begin{equation}
+		\int \cos(x) dx \rightarrow \sin(x)
+		\end{equation}
+		
+		\begin{equation}
+		\int e^{ax} dx \rightarrow \frac{e^{ax}}{a}
+		\end{equation}
+		
+		\begin{equation}
+		\int xe^{ax} dx \rightarrow \frac{e^{ax}(ax-1)}{a^{2}}
+		\end{equation}
+		
+		\begin{equation}
+		\int x^{2}e^{ax} dx \rightarrow \frac{e^{ax}(a^{2}x^{2}2ax+2)}{a^{3}}
+		\end{equation}
 	
 	\item[Integrazione per Parti]
-	\begin{equation}
-	\int f(x)'g(x) dx = f(x)g(x) - \int f(x)g(x)'dx
-	\end{equation}
+		\begin{equation}
+		\int f(x)'g(x) dx = f(x)g(x) - \int f(x)g(x)'dx
+		\end{equation}
 	
 \end{description}
-
 \newpage
 
 \subsection{Calcolo Combinatorio}
 \begin{description}
 	
 	\item[Permutazione di ordine $n$]
-	\begin{equation}
-	P_{n}=n!
-	\end{equation}
+		\begin{equation}
+		P_{n}=n!
+		\end{equation}
 	
 	\item[Permutazione di ordine $n$ e classe $k$]
-	\begin{equation}
-	P_{n,k}=\frac{n!}{(n-k)!}
-	\end{equation}
+		\begin{equation}
+		P_{n,k}=\frac{n!}{(n-k)!}
+		\end{equation}
 	
 	\item[Permutazione di ordine $n$ e classe $k$, con rimpiazzo]
-	\begin{equation}
-	P_{n,k}^{(r)}=n^{k}
-	\end{equation}
+		\begin{equation}
+		P_{n,k}^{(r)}=n^{k}
+		\end{equation}
 	
 	\item[Permutazione di ordine $n$ con ripetizioni $k_{i}$]
-	\begin{equation}
-	P_{n,k_{1},...,k_{m}}^{(r)}=\binom{n}{k_{1},...,k_{m}}
-	\end{equation}
+		\begin{equation}
+		P_{n,k_{1},...,k_{m}}^{(r)}=\binom{n}{k_{1},...,k_{m}}
+		\end{equation}
 	
 	\item[Combinazione di ordine $n$ e classe $k$]
-	\begin{equation}
-	C_{n,k}=\binom{n}{k}
-	\end{equation}
+		\begin{equation}
+		C_{n,k}=\binom{n}{k}
+		\end{equation}
 	
 	\item[Permutazione di ordine $n$ e classe $k$, con rimpiazzo]
-	\begin{equation}
-	C_{n,k}^{(r)}=\binom{n+k-1}{k}
-	\end{equation}
+		\begin{equation}
+		C_{n,k}^{(r)}=\binom{n+k-1}{k}
+		\end{equation}
 	
 	\item[Combinazione di ordine $n$ con ripetizioni $k_{i}$]
-	\begin{equation}
-	C_{n,k_{1},...,k_{m}}^{(r)}=\prod_{i=1}^{m}\binom{l_{i}}{k_{i}}
-	\end{equation}
+		\begin{equation}
+		C_{n,k_{1},...,k_{m}}^{(r)}=\prod_{i=1}^{m}\binom{l_{i}}{k_{i}}
+		\end{equation}
 	
 \end{description}
-
 \newpage
 
 \subsection{Probabilità}
 \begin{description}
 	
 	\item[Fondamentali]
-	\begin{equation}
-	\probability{E}\leq\probability{F}\iff E\subseteq F
-	\end{equation}
+		\begin{equation}
+		\probability{E}\leq\probability{F}\iff E\subseteq F
+		\end{equation}
 	
 	\item[Unione]
-	\begin{equation}
-	\probability{E \cup F} = \probability{E}+\probability{F}-\probability{E \cap F}
-	\end{equation}
-	
-	\begin{equation}
-	\probability{E \cup F} = \probability{E-E\cap F}+\probability{F-F\cap E}-\probability{E \cap F}
-	\end{equation}
+		\begin{equation}
+		\probability{E \cup F} = \probability{E}+\probability{F}-\probability{E \cap F}
+		\end{equation}
+		
+		\begin{equation}
+		\probability{E \cup F} = \probability{E-E\cap F}+\probability{F-F\cap E}-\probability{E \cap F}
+		\end{equation}
 	
 	\item [Disuguaglianza di Markov]
-	\begin{equation}
-	\probability{X \geq a} \leq \frac{\expected{X}}{a}
-	\qquad
-	\forall X v.a. \geq 0
-	\end{equation}
+		\begin{equation}
+		\probability{X \geq a} \leq \frac{\expected{X}}{a}
+		\qquad
+		\forall X \geq 0
+		\end{equation}
 	
 	\item [Disuguaglianza di Chebychev]
-	\begin{equation}
-	\probability{|X-\expected{X}| \geq r} \leq \frac{\variance{X}}{r^{2}}
-	\qquad
-	\forall X \; v.a., r \geq 0
-	\end{equation}
+		\begin{equation}
+		\probability{|X-\expected{X}| \geq r} \leq \frac{\variance{X}}{r^{2}}
+		\qquad
+		\forall X, r \geq 0
+		\end{equation}
 	
 	\item [Disuguaglianze di Bonferroni]
-	\begin{equation}
-	\probability{\bigcup_{k=1}^{n}E_{k}} \geq \sum_{k=1}^{n}\probability{E_{k}}-\sum_{\substack{k,l=1\\k<l}}^{n}\probability{E_{k}\cap E_{l}}
-	\end{equation}
-	
-	\begin{equation}
-	\probability{\bigcup_{k=1}^{n}E_{k}} \leq \sum_{k=1}^{n}\probability{E_{k}}
-	-\sum_{\substack{k,l=1\\k<l}}^{n}\probability{E_{k}\cap F_{l}}
-	+\sum_{\substack{j,k,l=1\\j<k<l}}^{n}\probability{E_{j}\cap E_{k}\cap E_{l}}
-	\end{equation}
+		\begin{equation}
+		\probability{\bigcup_{k=1}^{n}E_{k}} \geq \sum_{k=1}^{n}\probability{E_{k}}-\sum_{\substack{k,l=1\\k<l}}^{n}\probability{E_{k}\cap E_{l}}
+		\end{equation}
+		
+		\begin{equation}
+		\probability{\bigcup_{k=1}^{n}E_{k}} \leq \sum_{k=1}^{n}\probability{E_{k}}
+		-\sum_{\substack{k,l=1\\k<l}}^{n}\probability{E_{k}\cap F_{l}}
+		+\sum_{\substack{j,k,l=1\\j<k<l}}^{n}\probability{E_{j}\cap E_{k}\cap E_{l}}
+		\end{equation}
 	
 	\item[Probabilità Totali]
-	\begin{equation}
-	\probability{X}=\sum_{i=1}^{n}\probability{X|Y_{i}}\probability{Y_{i}}
-	\qquad
-	\forall \{Y_{i}\}_{i=1}^{n}\;partizione\;evento\;certo
-	\end{equation}
+		\begin{equation}
+		\probability{X}=\sum_{i=1}^{n}\probability{X|Y_{i}}\probability{Y_{i}}
+		\qquad
+		\forall \{Y_{i}\}_{i=1}^{n}\;partizione\;evento\;certo
+		\end{equation}
 	
 	\item[Probabilità Condizionata]
-	\begin{equation}
-	\probability{X|Y}=\frac{\probability{X \cap Y}}{\probability{Y}}
-	\end{equation}
-	
-	\begin{equation}
-	\probability{Y|X}=\frac{\probability{X|Y}\probability{Y}}{\probability{X}}
-	\end{equation}
-	
-	\begin{equation}
-	\expected{g(X)} = \expected{\expected{g(X)|X}}
-	\end{equation}
-	
-	\begin{equation}
-	\expected{XY|X} = X\expected{Y|X}
-	\end{equation}
-	
-	\begin{equation}
-	\expected{X\expected{Y}} = \expected{X}\expected{Y}
-	\end{equation}
-	
-	\begin{equation}
-	X=\expected{X|X}
-	\end{equation}
-	
-	\begin{equation}
-	\expected{\sum_{k=1}^{N} X_{k}|N} = \sum_{k=1}^{\infty}\expected{\sum_{k=1}^{N}X_{k}|N=n}\mathfrak{1}_{N=n}
-	\end{equation}
+		\begin{equation}
+		\probability{X|Y}=\frac{\probability{X \cap Y}}{\probability{Y}}
+		\end{equation}
+		
+		\begin{equation}
+		\probability{Y|X}=\frac{\probability{X|Y}\probability{Y}}{\probability{X}}
+		\end{equation}
+		
+		\begin{equation}
+		\expected{g(X)} = \expected{\expected{g(X)|X}}
+		\end{equation}
+		
+		\begin{equation}
+		\expected{XY|X} = X\expected{Y|X}
+		\end{equation}
+		
+		\begin{equation}
+		\expected{X\expected{Y}} = \expected{X}\expected{Y}
+		\end{equation}
+		
+		\begin{equation}
+		X=\expected{X|X}
+		\end{equation}
 	
 	\item [Funzione di ripartizione]
 		\begin{equation}
@@ -272,28 +265,41 @@
 		f_{X}(a) = \frac{\partial F_{X}(a)}{\partial a}
 		\end{equation}
 		
-	\item [Momento]	
 		\begin{equation}
-		\expected{X^{n}} = \left\{\begin{matrix}
+		\probability{a<X<b}=F_{X}(b)-F_{X}(a)
+		\end{equation}
+	\item [Momento n-esimo]	
+		\begin{equation}
+		\mu^{(n)}=\expected{X^{n}} = \left\{\begin{matrix}
 		\sum_{x=-\infty}^{\infty} x^{n} f(x) & X \; discreta \\
 		\int_{-\infty}^{\infty} x^{n} f(x) \partial x & X \; continua
 		\end{matrix}\right.
 		\end{equation}
+		
+	\item [Momento Centrale n-esimo]	
+		\begin{equation}
+		\mu_{c}^{(n)}=\expected{(X-\expected{X})^{n}}
+		\end{equation}
+	
+	\item [Momento Centrale Standardizzato n-esimo]	
+		\begin{equation}
+		\tilde{\mu}_{c}^{(n)}=\frac{\mu_{c}^{(n)}}{\sigma^{n}}
+		\end{equation}
 	
 	\item [Media]
 		\begin{equation}
-		\expected{X} = \left\{\begin{matrix}
+		\mu=\expected{X} = \left\{\begin{matrix}
 		\sum_{x=-\infty}^{\infty} xf(x) & X \; discreta \\
 		\int_{-\infty}^{\infty} x f(x) \partial x & X \; continua
 		\end{matrix}\right.
 		\end{equation}
 	
 		\begin{equation}
-		\expected{aX+b} = a \expected{X} + b
+		\expected{aX+b} = a\expected{X} + b
 		\end{equation}
 		
 		\begin{equation}
-		\expected{X+Y} = \expected{X} + \expected{Y}
+		\expected{aX+bY} = a\expected{X} + b\expected{Y}
 		\end{equation}
 		
 		\begin{equation}
@@ -311,9 +317,17 @@
 		\expected{(X,Y)} = (\expected{X},\expected{Y}) \qquad\forall X,Y
 		\end{equation}
 		
+		\begin{equation}
+		X\leq Y \Rightarrow \expected{X}\leq\expected{Y}
+		\end{equation}
+		
+		\begin{equation}
+		\expected{|X|}\geq|\expected{X}|
+		\end{equation}
+		
 	\item [Varianza]
 		\begin{equation}
-		\variance{X} = \expected{X^{2}}-\expected{X}^{2}
+		\sigma^{2} = \variance{X} = \expected{X^{2}}-\expected{X}^{2}
 		\end{equation}
 
 		\begin{equation}
@@ -342,7 +356,17 @@
 	
 	\item [Deviazione Standard]
 		\begin{equation}
-		\sigma_{X} := \sqrt{\variance{X}}
+		\sigma = \deviation{X} = \sqrt{\variance{X}}
+		\end{equation}
+
+	\item [Skewness]
+		\begin{equation}
+		\gamma = \skewness{X} = \mu_{c}^{(3)}
+		\end{equation}		
+		
+	\item [Kurtosis]
+		\begin{equation}
+		\kappa = \kurtosis{X} = \mu_{c}^{(4)}
 		\end{equation}
 	
 	\item [Covarianza]
@@ -403,161 +427,388 @@
 \end{description}
 \newpage
 
-\subsection{Distribuzioni Notevoli}
+\subsection{Distribuzioni Notevoli Discrete}
+\begin{description}
+	
+	\item[Equilikely $Equi(\{x_{1},\dots,x_{n}\})$]
+		\begin{equation}
+		\probability{X=k}=\frac{1}{n}\ind{\{x_{1},\dots,x_{n}\}}{k}
+		\end{equation}
+		\begin{equation}
+		F_{X}(x)=\dots
+		\end{equation}
+		\begin{equation}
+		\expected{X}=\dots
+		\end{equation}
+		\begin{equation}
+		\variance{X}=\dots
+		\end{equation}
+	
+	\item[Bernoulli $Ber(p)$]
+		\begin{equation}
+		\probability{X=k} = p\ind{\{1\}}{k}+(1-p)\ind{\{0\}}{k}
+		\end{equation}
+		\begin{equation}
+		\probability{X=k}=p^{x}(1-p)^{1-x}
+		\qquad\forall x\in\{0,1\}
+		\end{equation}
+		\begin{equation}
+		F_{X}(x)=(1-p)\ind{(-\infty,1)}{x}+p\ind{[1,\infty)}{x}
+		\end{equation}
+		\begin{equation}
+		\expected{X}=p
+		\end{equation}
+		\begin{equation}
+		\variance{X}=p(1-p)
+		\end{equation}
+	
+	\item[Binomiale $Bin(n,p)$]
+		\begin{equation}
+		\probability{X=k}=\binom{n}{k}p^{k}(1-p)^{n-k}
+		\end{equation}
+		\begin{equation}
+		F_{X}(k)=\beta(n-k,k+1)
+		\end{equation}
+		\begin{equation}
+		\expected{X}=np
+		\end{equation}
+		\begin{equation}
+		\variance{X}=np(1-p)
+		\end{equation}
+	
+	\item[Geometrica $Geom(p)$]
+		\begin{equation}
+		\probability{X=k}=p(1-p)^{k-1}
+		\end{equation}
+		\begin{equation}
+		F_{X}(k)=1-(1-p)^{k}
+		\end{equation}
+		\begin{equation}
+		\expected{X}=\frac{1}{p}
+		\end{equation}
+		\begin{equation}
+		\variance{X}=\frac{1-p}{p^{2}}
+		\end{equation}
+		
+	\item[Ipergeometrica $Iper(N,M,n)$]
+		\begin{equation}
+		\probability{X=k}=\frac{\binom{N}{k}\binom{M}{n-k}}{\binom{N+M}{n}}
+		\end{equation}
+		\begin{equation}
+		F_{X}(k)=\dots
+		\end{equation}
+		\begin{equation}
+		\expected{X}=np
+		\end{equation}
+		\begin{equation}
+		\variance{X}=\frac{np(N-M)(N-n)}{N(N-1)}
+		\end{equation}
+	
+	\item[Poisson $Pois(\lambda)$]
+		\begin{equation}
+		\probability{X=k}=\frac{\lambda^{k}e^{-\lambda}}{k!}
+		\end{equation}
+		\begin{equation}
+		F_{X}(k)=\frac{\Gamma(k+1,\lambda)}{k!}
+		\end{equation}
+		\begin{equation}
+		\expected{X}=\lambda
+		\end{equation}
+		\begin{equation}
+		\variance{X}=\lambda
+		\end{equation}
+	
+\end{description}
+\newpage
+
+\subsection{Distribuzioni Notevoli Continue}
+\begin{description}
+	
+	\item[Dirac $Dirac(x_{0})$]
+		\begin{equation}
+		\probability{X=k} = p\ind{\{1\}}{k}+(1-p)\ind{\{0\}}{k}
+		\end{equation}
+		\begin{equation}
+		F_{X}(x)=p\ind{[x_{0},\infty)}{x}
+		\end{equation}
+		\begin{equation}
+		\expected{X}=0
+		\end{equation}
+		\begin{equation}
+		\variance{X}=0
+		\end{equation}
+	
+	\item[Uniforme $Unif(a,b)$]
+		\begin{equation}
+		f_{X}(x)=\frac{1}{b-a}\ind{[a,b]}{x}
+		\end{equation}
+		\begin{equation}
+		F_{X}(x)=\frac{x-a}{b-a}\ind{[a,b]}{x}+\ind{(b,\infty)}{x}
+		\end{equation}
+		\begin{equation}
+		\expected{X}=\frac{a+b}{2}
+		\end{equation}
+		\begin{equation}
+		\variance{X}=\frac{(a-b)^{2}}{12}
+		\end{equation}
+		
+	\item[Esponenziale $Exp(\lambda)$]
+		\begin{equation}
+		f_{X}(x)=\lambda e^{-\lambda x} \ind{\Re^{+}}{x}
+		\end{equation}
+		\begin{equation}
+		F_{X}(x)=1-e^{-\lambda x}
+		\end{equation}
+		\begin{equation}
+		\expected{X}=\frac{1}{\lambda}
+		\end{equation}
+		\begin{equation}
+		\variance{X}=\frac{1}{\lambda^{2}}
+		\end{equation}
+		\begin{equation}
+		\expected{X^{n}}=\frac{n!}{\lambda^{n}}
+		\end{equation}
+		
+	\item[Normale $Norm(\mu,\sigma^{2})$]
+		\begin{equation}
+		f_{X}(x)=\frac{1}{\sigma\sqrt{2\pi}}e^{-\frac{(x-\mu)^{2}}{2\sigma^{2}}}
+		\end{equation}
+		\begin{equation}
+		\expected{X}=\mu
+		\end{equation}
+		\begin{equation}
+		\variance{X}=\sigma^{2}
+		\end{equation}
+		
+	\item[Gamma $Gamma(\alpha,\lambda)$]
+		\begin{equation}
+		f_{X}(x)=\frac{\lambda^{\alpha}}{\Gamma(\alpha)}x^{\alpha-1}e^{-\lambda x}\ind{\Re^{+}}{x}
+		\end{equation}
+		\begin{equation}
+		\expected{X}=\frac{\alpha}{\lambda}
+		\end{equation}
+		\begin{equation}
+		\variance{X}=\frac{\alpha}{\lambda^{2}}
+		\end{equation}
+		
+	\item[Chi Quadro $Chi(n)$]
+		\begin{equation}
+		Chi(n) = \sum_{k=1}^{n}Z_{k}
+		\qquad
+		Z_{k}\sim Norm(0,1)
+		\end{equation}
+		\begin{equation}
+		\expected{X}=n
+		\end{equation}
+		\begin{equation}
+		\variance{X}=2n
+		\end{equation}
+		
+	\item[T-Student $T(n)$]
+		\begin{equation}
+		T(n) = \frac{Z}{\sqrt{\frac{C}{n}}}
+		\qquad
+		Z\sim Norm(0,1),
+		C\sim Chi(n),
+		\end{equation}
+		\begin{equation}
+		\expected{X}=0
+		\end{equation}
+		\begin{equation}
+		\variance{X}=\frac{n}{n-2}
+		\end{equation}
+
+	\item[F-Fisher $F(n,m)$]
+		\begin{equation}
+		F(n,m) = \frac{\frac{C_{n}}{n}}{\frac{C_{m}}{m}}
+		\qquad
+		C_{n}\sim Chi(n),
+		C_{m}\sim Chi(m),
+		\end{equation}
+		\begin{equation}
+		\expected{X} = \left\{\begin{matrix}
+		\frac{m}{m-2} & m>2 \\
+		\infty & altrimenti
+		\end{matrix}\right.
+		\end{equation}
+		\begin{equation}
+		\variance{X} = \left\{\begin{matrix}
+		\frac{2n^{2}(m+n-2)}{m(n-2)^{2}(n-4)} & n>4 \\
+		indefinita & altrimenti
+		\end{matrix}\right.
+		\end{equation}
+		
+	\item[Logistica $Logi(\mu,\nu)$]
+		\begin{equation}
+		f_{X}(x)=\frac{e^{-\frac{x-\mu}{\nu}}}{\nu(1+e^{-\frac{x-\mu}{\nu}})^{2}}
+		\end{equation}
+		\begin{equation}
+		F_{X}(x)=\frac{1}{1+e^{-\frac{x-\mu}{\nu}}}
+		\end{equation}
+		\begin{equation}
+		\expected{X}=\mu
+		\end{equation}
+		\begin{equation}
+		\variance{X}=\frac{\pi^{{2}}}{3}\nu^{2}
+		\end{equation}
+	
+\end{description}
+\newpage
+
 \subsection{Statistiche Campionarie}
 \begin{description}
 	
 	\item[Frequenza del valore $x_{i}$]
-	\begin{equation}
-	n_{i} = \#\{k\in\{1,...,n\}: x_{i}=x_{k}\}
-	\end{equation}
-	
-	\begin{equation}
-	\sum_{i=i}^{n} n_{i} = n
-	\end{equation}
+		\begin{equation}
+		n_{i} = \#\{k\in\{1,...,n\}: x_{i}=x_{k}\}
+		\end{equation}
+		
+		\begin{equation}
+		\sum_{i=i}^{n} n_{i} = n
+		\end{equation}
 	
 	\item[Frequenza relativa del valore $x_{i}$]
-	\begin{equation}
-	f_{i} = \frac{n_{i}}{n}
-	\end{equation}
-	
-	\begin{equation}
-	\sum_{i=i}^{n} f_{i} = 1
-	\end{equation}
+		\begin{equation}
+		f_{i} = \frac{n_{i}}{n}
+		\end{equation}
+		
+		\begin{equation}
+		\sum_{i=i}^{n} f_{i} = 1
+		\end{equation}
 	
 	\item[Somma Campionaria]
-	\begin{equation}
-	Z_{n} = \sum_{k=1}^{n}X_{k}
-	\end{equation}
-	
-	\begin{equation}
-	\expected{Z_{n}} = n\mu_{X}
-	\end{equation}
-	
-	\begin{equation}
-	\variance{Z_{n}} = n\sigma_{X}^{2}
-	\end{equation}
-	
-	\begin{equation}
-	X \sim Ber(p) \Rightarrow Z_{n} \sim Bin(n,p)
-	\end{equation}
-	
-	\begin{equation}
-	X \sim Ber(p) \Rightarrow Z_{n} \sim Bin(n,p)
-	\end{equation}
-	
-	\begin{equation}
-	X \sim Pois(\lambda) \Rightarrow Z_{n} \sim Pois(n\lambda)
-	\end{equation}
-	
-	\begin{equation}
-	X \sim Norm(\mu,\sigma^{2}) \Rightarrow Z_{n} \sim Norm(\sum_{k=1}^{n}\mu_{k}, \sum_{k=1}^{n} \sigma_{k}^{2})
-	\end{equation}
-	
-	\begin{equation}
-	X \sim Exp(\lambda) \Rightarrow Z_{n} \sim Gamma(n, \lambda) \equiv \frac{1}{2\lambda}Chi(2n)\\
-	\end{equation}
-	
-	\begin{equation}
-	X \sim Chi(1) \Rightarrow Z_{n} \sim Chi(n)
-	\end{equation}
+		\begin{equation}
+		Z_{n} = \sum_{k=1}^{n}X_{k}
+		\end{equation}
+		
+		\begin{equation}
+		\expected{Z_{n}} = n\mu_{X}
+		\end{equation}
+		
+		\begin{equation}
+		\variance{Z_{n}} = n\sigma_{X}^{2}
+		\end{equation}
+		
+		\begin{equation}
+		X \sim Ber(p) \Rightarrow Z_{n} \sim Bin(n,p)
+		\end{equation}
+		
+		\begin{equation}
+		X \sim Ber(p) \Rightarrow Z_{n} \sim Bin(n,p)
+		\end{equation}
+		
+		\begin{equation}
+		X \sim Pois(\lambda) \Rightarrow Z_{n} \sim Pois(n\lambda)
+		\end{equation}
+		
+		\begin{equation}
+		X \sim Norm(\mu,\sigma^{2}) \Rightarrow Z_{n} \sim Norm(\sum_{k=1}^{n}\mu_{k}, \sum_{k=1}^{n} \sigma_{k}^{2})
+		\end{equation}
+		
+		\begin{equation}
+		X \sim Exp(\lambda) \Rightarrow Z_{n} \sim Gamma(n, \lambda) \equiv \frac{1}{2\lambda}Chi(2n)\\
+		\end{equation}
+		
+		\begin{equation}
+		X \sim Chi(1) \Rightarrow Z_{n} \sim Chi(n)
+		\end{equation}
 	
 	\item[Media Campionaria]
-	\begin{equation}
-	\overline{X}_{n} = \frac{1}{n}\sum_{k=1}^{n} X_{k}
-	\end{equation}
-	
-	\begin{equation}
-	\expected{\overline{X}_{n}} = \mu_{X} \qquad X \; v.a. \; con \; media \; \mu_{X}
-	\end{equation}
-	
-	\begin{equation}
-	\variance{\overline{X}_{n}} = \frac{\sigma_{X}^{2}}{n} \qquad X \; v.a. \; con \; media \; \mu_{X}
-	\end{equation}
-	
-	\begin{equation}
-	X \sim Norm(\mu,\sigma^{2}) \Rightarrow \overline{X}_{n} \sim Norm(\mu,\frac{\sigma^{2}}{n})
-	\end{equation}
+		\begin{equation}
+		\overline{X}_{n} = \frac{1}{n}\sum_{k=1}^{n} X_{k}
+		\end{equation}
+		
+		\begin{equation}
+		\expected{\overline{X}_{n}} = \mu_{X} \qquad X \; v.a. \; con \; media \; \mu_{X}
+		\end{equation}
+		
+		\begin{equation}
+		\variance{\overline{X}_{n}} = \frac{\sigma_{X}^{2}}{n} \qquad X \; v.a. \; con \; media \; \mu_{X}
+		\end{equation}
+		
+		\begin{equation}
+		X \sim Norm(\mu,\sigma^{2}) \Rightarrow \overline{X}_{n} \sim Norm(\mu,\frac{\sigma^{2}}{n})
+		\end{equation}
 	
 	\item[Varianza Campionaria]
-	\begin{equation}
-	S_{n}^{2} = \frac{1}{n-1}\sum_{k=1}^{n} (X_{k}-\overline{X}_{n})^{2}
-	\end{equation}
-	
-	\begin{equation}
-	S_{n}^{2} = \frac{1}{n-1}(\sum_{k=1}^{n} X_{k}-\overline{X}_{n}^{2})
-	\end{equation}
-	
-	\begin{equation}
-	S_{n}^{2} = \frac{1}{n-1}\sum_{k=1}^{n}X_{k}^{2}-n\overline{X}_{n}^{2}
-	\end{equation}
-	
-	\begin{equation}
-	\expected{S_{n}^{2}} = \sigma_{X}^{2}
-	\end{equation}
-	
-	\begin{equation}
-	\variance{S_{n}^{2}} = \frac{\sigma_{X}^{4}}{n}(kurt_{X}-\frac{n-3}{n-1})
-	\end{equation}
+		\begin{equation}
+		S_{n}^{2} = \frac{1}{n-1}\sum_{k=1}^{n} (X_{k}-\overline{X}_{n})^{2}
+		\end{equation}
+		
+		\begin{equation}
+		S_{n}^{2} = \frac{1}{n-1}(\sum_{k=1}^{n} X_{k}-\overline{X}_{n}^{2})
+		\end{equation}
+		
+		\begin{equation}
+		S_{n}^{2} = \frac{1}{n-1}\sum_{k=1}^{n}X_{k}^{2}-n\overline{X}_{n}^{2}
+		\end{equation}
+		
+		\begin{equation}
+		\expected{S_{n}^{2}} = \sigma_{X}^{2}
+		\end{equation}
+		
+		\begin{equation}
+		\variance{S_{n}^{2}} = \frac{\sigma_{X}^{4}}{n}(kurt_{X}-\frac{n-3}{n-1})
+		\end{equation}
 	
 	\item[Covarianza Campionaria]
-	\begin{equation}
-	S_{X,Y,n}=\frac{1}{n-1}\sum_{k=1}^{n}(X_{k}-\overline{X}_{n})(Y_{k}-\overline{Y}_{n})
-	\end{equation}
-	
-	\begin{equation}
-	S_{X,Y,n}=\frac{1}{n-1}(\sum_{k=1}^{n}(X_{k}Y_{k}-n\overline{X}_{n}Y_{n})
-	\end{equation}
+		\begin{equation}
+		S_{X,Y,n}=\frac{1}{n-1}\sum_{k=1}^{n}(X_{k}-\overline{X}_{n})(Y_{k}-\overline{Y}_{n})
+		\end{equation}
+		
+		\begin{equation}
+		S_{X,Y,n}=\frac{1}{n-1}(\sum_{k=1}^{n}(X_{k}Y_{k}-n\overline{X}_{n}Y_{n})
+		\end{equation}
 	
 	\item[Correlazione Campionaria]
-	\begin{equation}
-	r_{X,Y,n} = \frac{S_{X,Y,n}}{S_{X,n}S_{Y,n}}
-	\end{equation}
+		\begin{equation}
+		r_{X,Y,n} = \frac{S_{X,Y,n}}{S_{X,n}S_{Y,n}}
+		\end{equation}
 	
 	\item[Momento Campionario $p$-esimo]
-	\begin{equation}
-	\overline{X}_{n}^{(p)} = \frac{1}{n}\sum_{k=1}^{n}X_{k}^{p}
-	\end{equation}
+		\begin{equation}
+		\overline{X}_{n}^{(p)} = \frac{1}{n}\sum_{k=1}^{n}X_{k}^{p}
+		\end{equation}
 	
 	\item[Teorema del Limite Centrale]
-	\begin{equation}
-	X\in\mathcal{L}^{2}
-	\overset{n\rightarrow\infty}{\Rightarrow}
-	\frac{\sum_{i=1}^{n} X_{i}-n\mu_{X}}{\sigma_{X}\sqrt{n}} \sim Norm(0,1)
-	\end{equation}
-	
-	\begin{equation}
-	X\in\mathcal{L}^{2}
-	\overset{n\rightarrow\infty}{\Rightarrow}
-	\frac{\overline{X}_{n}-\mu_{X}}{\sigma_{X}/\sqrt{n}} \sim Norm(0,1)
-	\end{equation}
+		\begin{equation}
+		X\in\mathcal{L}^{2}
+		\overset{n\rightarrow\infty}{\Rightarrow}
+		\frac{\sum_{i=1}^{n} X_{i}-n\mu_{X}}{\sigma_{X}\sqrt{n}} \sim Norm(0,1)
+		\end{equation}
+		
+		\begin{equation}
+		X\in\mathcal{L}^{2}
+		\overset{n\rightarrow\infty}{\Rightarrow}
+		\frac{\overline{X}_{n}-\mu_{X}}{\sigma_{X}/\sqrt{n}} \sim Norm(0,1)
+		\end{equation}
 	
 	\item[Legge Debole dei Grandi Numeri]
-	\begin{equation}
-	\probability{|\overline{X}_{n}-\expected{X}| > \epsilon} \overset{n\rightarrow\infty}{\rightarrow}0
-	\end{equation}
+		\begin{equation}
+		\probability{|\overline{X}_{n}-\expected{X}| > \epsilon} \overset{n\rightarrow\infty}{\rightarrow}0
+		\end{equation}
 	
 	\item[Statistiche Campionarie Notevoli]
-	\begin{equation}
-	\frac{\overline{X_{n}}-\mu_{x}}{\sigma / \sqrt{(n)}} \sim Norm(0,1)
-	\qquad
-	\sigma\;nota,X\sim?(\mu,\sigma^{2}),campione\;qualunque
-	\end{equation}
-	\begin{equation}
-	\frac{\overline{X_{n}}-\mu_{x}}{S_{n}/\sqrt{(n)}} \sim Norm(0,1)
-	\qquad
-	\sigma\;incognita,X\sim?(\mu,\sigma^{2}),campione\;grande
-	\end{equation}
-	\begin{equation}
-	\frac{\overline{X_{n}}-\mu_{x}}{S_{n}/\sqrt{(n)}} \sim T(n-1)
-	\qquad
-	\sigma\;incognita,X\sim Norm(\mu,\sigma^{2}),campione\;piccolo
-	\end{equation}
-	\begin{equation}
-	\frac{(n-1)S_{n}^{2}}{\sigma^{2}} \sim Chi(n-1)
-	\qquad
-	\sigma\;incognita,X\sim ?(\mu,\sigma^{2}),campione\;grande
-	\end{equation}	
+		\begin{equation}
+		\frac{\overline{X_{n}}-\mu_{x}}{\sigma / \sqrt{(n)}} \sim Norm(0,1)
+		\qquad
+		\sigma\;nota,X\sim?(\mu,\sigma^{2}),campione\;qualunque
+		\end{equation}
+		\begin{equation}
+		\frac{\overline{X_{n}}-\mu_{x}}{S_{n}/\sqrt{(n)}} \sim Norm(0,1)
+		\qquad
+		\sigma\;incognita,X\sim?(\mu,\sigma^{2}),campione\;grande
+		\end{equation}
+		\begin{equation}
+		\frac{\overline{X_{n}}-\mu_{x}}{S_{n}/\sqrt{(n)}} \sim T(n-1)
+		\qquad
+		\sigma\;incognita,X\sim Norm(\mu,\sigma^{2}),campione\;piccolo
+		\end{equation}
+		\begin{equation}
+		\frac{(n-1)S_{n}^{2}}{\sigma^{2}} \sim Chi(n-1)
+		\qquad
+		\sigma\;incognita,X\sim ?(\mu,\sigma^{2}),campione\;grande
+		\end{equation}	
 \end{description}
 \newpage
 
@@ -566,109 +817,108 @@
 \begin{description}
 	
 	\item[Errore Quadratico Medio]
-	\begin{equation}
-	MSE(\hat{\theta})=\expected{(\hat{\theta}-\theta)^{2}}
-	\end{equation}
+		\begin{equation}
+		MSE(\hat{\theta})=\expected{(\hat{\theta}-\theta)^{2}}
+		\end{equation}
 	
-	\begin{equation}
-	MSE(\hat{\theta})=\variance{\hat{\theta}}+BIAS(\hat{\theta})^{2}
-	\end{equation}
+		\begin{equation}
+		MSE(\hat{\theta})=\variance{\hat{\theta}}+BIAS(\hat{\theta})^{2}
+		\end{equation}
 	
 	\item[Errore Standard]
-	\begin{equation}
-	SE(\hat{\theta})=\sqrt{\variance{\hat{\theta}}}
-	\end{equation}
+		\begin{equation}
+		SE(\hat{\theta})=\sqrt{\variance{\hat{\theta}}}
+		\end{equation}
 	
 	\item[Bias (Distorsione)]
-	\begin{equation}
-	BIAS(\hat{\theta})=\expected{\hat{\theta}}-\theta
-	\end{equation}
+		\begin{equation}
+		BIAS(\hat{\theta})=\expected{\hat{\theta}}-\theta
+		\end{equation}
 	
 	\item[Stimatore Non Distorto]
-	\begin{equation}
-	BIAS(\hat{\theta})=0
-	\end{equation}
+		\begin{equation}
+		BIAS(\hat{\theta})=0
+		\end{equation}
 
 	\item[Stimatore di $Ber(p)$]
-	\begin{equation}
-	\hat{p} = \overline{X}_{n}
-	\end{equation}
+		\begin{equation}
+		\hat{p} = \overline{X}_{n}
+		\end{equation}
 	
 	\item[Stimatore di $Bin(m,p)$]
-	\begin{equation}
-	\hat{p} = \frac{1}{m} \overline{X}_{n}
-	\end{equation}
+		\begin{equation}
+		\hat{p} = \frac{1}{m} \overline{X}_{n}
+		\end{equation}
 	
 	\item[Stimatore di $Geom(p)$]
-	\begin{equation}
-	\hat{p} = \frac{1}{\overline{X}_{n}}
-	\end{equation}
+		\begin{equation}
+		\hat{p} = \frac{1}{\overline{X}_{n}}
+		\end{equation}
 	
 	\item[Stimatore di $Pois(\lambda)$]
-	\begin{equation}
-	\hat{\lambda} = \overline{X}_{n}
-	\end{equation}
+		\begin{equation}
+		\hat{\lambda} = \overline{X}_{n}
+		\end{equation}
 	
 	\item[Stimatore di $Norm(\mu,\sigma^{2})$]
-	\begin{equation}
-	\hat{\mu} = \overline{X}_{n}
-	\end{equation}
-	
-	\begin{equation}
-	\hat{\sigma^{2}} = S_{n}^{2}
-	\end{equation}
+		\begin{equation}
+		\hat{\mu} = \overline{X}_{n}
+		\end{equation}
+		
+		\begin{equation}
+		\hat{\sigma^{2}} = S_{n}^{2}
+		\end{equation}
 	
 	\item[Stimatore di $Unif(0,b)$]
-	\begin{equation}
-	\hat{b} = 2\overline{X}_{n}
-	\end{equation}
+		\begin{equation}
+		\hat{b} = 2\overline{X}_{n}
+		\end{equation}
 	
 	\item[Metodo dei Momenti]
-	\begin{equation}
-	\hat{\theta_{m}}:\quad \expected{X^{m}}=\overline{X}_{n}^{(m)} 
-	\end{equation}
+		\begin{equation}
+		\hat{\theta_{m}}:\quad \expected{X^{m}}=\overline{X}_{n}^{(m)} 
+		\end{equation}
 	
 	\item[Metodo di Massima Verosimiglianza]
-	\begin{equation}
-	\hat{\theta_{m}} = \arg\max\mathcal{L}_{X_{1},...,X_{n}}
-	\end{equation}
+		\begin{equation}
+		\hat{\theta_{m}} = \arg\max\mathcal{L}_{X_{1},...,X_{n}}
+		\end{equation}
 	
 	\item[Likelihood di $Ber(p)$]
-	\begin{equation}
-	\mathcal{L}_{X_{1},...,X_{n}}(p;x_{1},...,x_{n})=
-	p^{\sum_{k=1}^{n}x_{k}}
-	\mathfrak{1}_{\{0,1\}^{n}}(x_{1},...,x_{n})
-	\end{equation}
+		\begin{equation}
+		\mathcal{L}_{X_{1},...,X_{n}}(p;x_{1},...,x_{n})=
+		p^{\sum_{k=1}^{n}x_{k}}
+		\mathfrak{1}_{\{0,1\}^{n}}(x_{1},...,x_{n})
+		\end{equation}
 	
 	\item[Likelihood di $Bin(m,p)$]
-	\begin{equation}
-	\mathcal{L}_{X_{1},...,X_{n}}(p;x_{1},...,x_{n})=
-	\prod_{k=1}^{n}\binom{m}{x_{k}} p^{\sum_{k=1}^{n}x_{k}}(1-p)^{nm-\sum_{k=1}^{n}x_{k}}
-	\mathfrak{1}_{\{0,1,...,m\}^{n}}(x_{1},...,x_{n})
-	\end{equation}
+		\begin{equation}
+		\mathcal{L}_{X_{1},...,X_{n}}(p;x_{1},...,x_{n})=
+		\prod_{k=1}^{n}\binom{m}{x_{k}} p^{\sum_{k=1}^{n}x_{k}}(1-p)^{nm-\sum_{k=1}^{n}x_{k}}
+		\mathfrak{1}_{\{0,1,...,m\}^{n}}(x_{1},...,x_{n})
+		\end{equation}
 	
 	\item[Likelihood di $Pois(\lambda)$]
-	\begin{equation}
-	\mathcal{L}_{X_{1},...,X_{n}}(\lambda;x_{1},...,x_{n})=
-	\frac{e^{-n\lambda}}{\prod_{k=1}^{n}x_{k}!}\lambda^{\sum_{k=1}^{n}x_{k}}
-	\mathfrak{1}_{\mathcal{N}_{0}^{n}}(x_{1},...,x_{n})
-	\end{equation}
+		\begin{equation}
+		\mathcal{L}_{X_{1},...,X_{n}}(\lambda;x_{1},...,x_{n})=
+		\frac{e^{-n\lambda}}{\prod_{k=1}^{n}x_{k}!}\lambda^{\sum_{k=1}^{n}x_{k}}
+		\mathfrak{1}_{\mathcal{N}_{0}^{n}}(x_{1},...,x_{n})
+		\end{equation}
 	
 	\item[Likelihood di $Unif(0,b)$]
-	\begin{equation}
-	\mathcal{L}_{X_{1},...,X_{n}}(b;x_{1},...,x_{n})=
-	\frac{1}{b}
-	\mathfrak{1}_{[0,b]^{n}}(x_{1},...,x_{n})
-	\end{equation}
+		\begin{equation}
+		\mathcal{L}_{X_{1},...,X_{n}}(b;x_{1},...,x_{n})=
+		\frac{1}{b}
+		\mathfrak{1}_{[0,b]^{n}}(x_{1},...,x_{n})
+		\end{equation}
 	
 	\item[Likelihood di $Norm(\mu,\sigma^{2})$]
-	\begin{equation}
-	\mathcal{L}_{X_{1},...,X_{n}}(\mu,\sigma;x_{1},...,x_{n})=
-	(\frac{1}{\sqrt{2\pi}\sigma})^{n}e^{-\frac{1}{2\sigma^{2}}\sum_{k=1}^{n}(x_{k}-\mu)^{2}}
-	\mathfrak{1}_{[0,b]^{n}}(x_{1},...,x_{n})
-	\end{equation}
+		\begin{equation}
+		\mathcal{L}_{X_{1},...,X_{n}}(\mu,\sigma;x_{1},...,x_{n})=
+		(\frac{1}{\sqrt{2\pi}\sigma})^{n}e^{-\frac{1}{2\sigma^{2}}\sum_{k=1}^{n}(x_{k}-\mu)^{2}}
+		\mathfrak{1}_{[0,b]^{n}}(x_{1},...,x_{n})
+		\end{equation}
 \end{description}
-
 \newpage
 
 \subsection{Intervalli di Confidenza}
@@ -676,56 +926,56 @@
 \begin{description}
 	
 	\item[Intervalli di confidenza $1-\alpha$ per $Norm(\mu,\sigma{2})$]
-	\begin{equation}
-	I_{\alpha}(\mu)= \Big(\overline{X}_{n}-z_{\frac{\alpha}{2}}\frac{\sigma}{\sqrt{n}},\overline{X}_{n}+z_{\frac{\alpha}{2}}\frac{\sigma}{\sqrt{n}}\Big)
-	\qquad
-	\sigma\;nota
-	\end{equation}
+		\begin{equation}
+		I_{\alpha}(\mu)= \Big(\overline{X}_{n}-z_{\frac{\alpha}{2}}\frac{\sigma}{\sqrt{n}},\overline{X}_{n}+z_{\frac{\alpha}{2}}\frac{\sigma}{\sqrt{n}}\Big)
+		\qquad
+		\sigma\;nota
+		\end{equation}
 	
-	\begin{equation}
-	I_{\alpha}(\mu)= \Big(\overline{X}_{n}-t_{\frac{\alpha}{2},n-1}\frac{S_{n}}{\sqrt{n}},\overline{X}_{n}+t_{\frac{\alpha}{2},n-1}\frac{S_{n}}{\sqrt{n}}\Big)
-	\qquad
-	\sigma\;incognita
-	\end{equation}
-	
-	\begin{equation}
-	I_{\alpha}(\sigma^{2})= \Big(\frac{(n-1)S_{n}^{2}}{\chi_{\frac{\alpha}{2},n-1}^{2}},
-	\frac{(n-1)S_{n}^{2}}{\chi_{1-\frac{\alpha}{2},n-1}^{2}}\Big)
-	\qquad
-	\mu\;incognita,\;
-	\sigma\;incognita
-	\end{equation}
+		\begin{equation}
+		I_{\alpha}(\mu)= \Big(\overline{X}_{n}-t_{\frac{\alpha}{2},n-1}\frac{S_{n}}{\sqrt{n}},\overline{X}_{n}+t_{\frac{\alpha}{2},n-1}\frac{S_{n}}{\sqrt{n}}\Big)
+		\qquad
+		\sigma\;incognita
+		\end{equation}
+		
+		\begin{equation}
+		I_{\alpha}(\sigma^{2})= \Big(\frac{(n-1)S_{n}^{2}}{\chi_{\frac{\alpha}{2},n-1}^{2}},
+		\frac{(n-1)S_{n}^{2}}{\chi_{1-\frac{\alpha}{2},n-1}^{2}}\Big)
+		\qquad
+		\mu\;incognita,\;
+		\sigma\;incognita
+		\end{equation}
 	
 	\item[Intervallo di confidenza $1-\alpha$ per $Ber(p)$]
-	\begin{equation}
-	I_{\alpha}(p)=
-	\Big(\overline{X}_{n}-z_{\frac{\alpha}{2}}\sqrt{\frac{\overline{X}_{n}(1-\overline{X}_{n})}{n}},\overline{X}_{n}-z_{\frac{\alpha}{2}}\sqrt{\frac{\overline{X}_{n}(1-\overline{X}_{n})}{n}}\Big)
-	\end{equation}
+		\begin{equation}
+		I_{\alpha}(p)=
+		\Big(\overline{X}_{n}-z_{\frac{\alpha}{2}}\sqrt{\frac{\overline{X}_{n}(1-\overline{X}_{n})}{n}},\overline{X}_{n}-z_{\frac{\alpha}{2}}\sqrt{\frac{\overline{X}_{n}(1-\overline{X}_{n})}{n}}\Big)
+		\end{equation}
 	
 	\item[Intervallo di confidenza $1-\alpha$ per $Exp(\lambda)$]
-	\begin{equation}
-	I_{\alpha}(\lambda)=
-	\Big(\frac{2n\overline{X}_{n}}{\chi_{\frac{\alpha}{2},2n}^{2}},\frac{2n\overline{X}_{n}}{\chi_{1-\frac{\alpha}{2},2n}^{2}}\Big)
-	\end{equation}
+		\begin{equation}
+		I_{\alpha}(\lambda)=
+		\Big(\frac{2n\overline{X}_{n}}{\chi_{\frac{\alpha}{2},2n}^{2}},\frac{2n\overline{X}_{n}}{\chi_{1-\frac{\alpha}{2},2n}^{2}}\Big)
+		\end{equation}
 	
 	\item[Statistiche Notevoli per Intervalli di Confidenza]
-	\begin{equation}
-	X\in\mathcal{L}^{2}
-	\overset{n\rightarrow\infty}{\Rightarrow}
-	\frac{\overline{X}_{n}-\mu_{X}}{\sigma_{X}/\sqrt{n}} \sim Norm(0,1)
-	\end{equation}
-	
-	\begin{equation}
-	X\in\mathcal{L}^{2}
-	\overset{n\rightarrow\infty}{\Rightarrow}
-	\frac{\overline{X}_{n}-\mu_{X}}{S_{n}/\sqrt{n}} \sim T(n-1)
-	\end{equation}
-	
-	\begin{equation}
-	X\in\mathcal{L}^{2}
-	\overset{n\rightarrow\infty}{\Rightarrow}
-	(n-1)\frac{S_{n}^{2}}{\sigma_{X}^{2}} \sim Chi(n-1)
-	\end{equation}
+		\begin{equation}
+		X\in\mathcal{L}^{2}
+		\overset{n\rightarrow\infty}{\Rightarrow}
+		\frac{\overline{X}_{n}-\mu_{X}}{\sigma_{X}/\sqrt{n}} \sim Norm(0,1)
+		\end{equation}
+		
+		\begin{equation}
+		X\in\mathcal{L}^{2}
+		\overset{n\rightarrow\infty}{\Rightarrow}
+		\frac{\overline{X}_{n}-\mu_{X}}{S_{n}/\sqrt{n}} \sim T(n-1)
+		\end{equation}
+		
+		\begin{equation}
+		X\in\mathcal{L}^{2}
+		\overset{n\rightarrow\infty}{\Rightarrow}
+		(n-1)\frac{S_{n}^{2}}{\sigma_{X}^{2}} \sim Chi(n-1)
+		\end{equation}
 	
 	\item[Note]
 	Se il campione è piccolo, $X$ deve essere Normale per poter definire intervalli di confidenza.
