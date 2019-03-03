@@ -1,0 +1,46 @@
+\section{Usage}
+\label{sec:usage}
+
+
+In this Section we show how to configure and run experiments and some sample outputs to provide a better idea of what has been created.
+
+The test of extremes for a custom random number generator produces the output shown in Figure~\ref{fig:usage-randomness-extremes} and can be executed with default configuration by running the script
+
+\begin{lstlisting}
+exp/random/randomness/extremes/main.py
+\end{lstlisting}
+
+\begin{figure}
+	\centering
+	\lstinputlisting{ext/randomness-extremes.txt}
+	\caption{A sample output of the Test of Extremes.}
+	\label{fig:usage-randomness-extremes}
+\end{figure}
+
+The test of Kolmogorov-Smirnov for a custom random number generator produces the output shown in Figure~\ref{fig:usage-randomness-kolmogorov-smirnov} and can be executed with default configuration by running the script
+
+\begin{lstlisting}
+exp/random/randomness/kolmogorov-smirnov/main.py
+\end{lstlisting}
+
+\begin{figure}
+	\centering
+	\lstinputlisting{ext/randomness-kolmogorov-smirnov.txt}
+	\caption{A sample output of the Test of Kolmogorov-Smirnov.}
+	\label{fig:usage-randomness-kolmogorov-smirnov}
+\end{figure}
+
+The simulation is configured providing a configuration YAML file as the one shown in Figure~\ref{fig:usage-simulation-configuration} and can be executed by running the script
+
+\begin{lstlisting}
+exp/simulation/performance/main.py
+\end{lstlisting}
+
+\begin{figure}
+	\centering
+	\lstinputlisting{ext/simulation-configuration.yaml}
+	\caption{A sample configuration for a simulation experiment.}
+	\label{fig:usage-simulation-configuration}
+\end{figure}
+
+

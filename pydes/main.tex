@@ -1,0 +1,117 @@
+%********************************************************************************
+% Title: PyDES, a performance modeling showcase
+%
+% Series: Courseworks in Performance Modeling of Computer Systems and Networks
+%
+% Author: Giacomo Marciani <gmarciani@acm.org>
+%
+% Institution: Department of Civil Engineering and Computer Science Engineering,
+% University of Rome Tor Vergata, Italy
+%
+% Style: ACM ART SIGCONFS (based on ACM Large v1.7)
+%*******************************************************************************
+
+\documentclass[sigconf]{acmart}
+
+\usepackage[utf8]{inputenc}
+\usepackage{booktabs}
+\usepackage{algorithm2e}
+\usepackage{listings}
+\usepackage{color, soul}
+\usepackage{graphicx}
+\usepackage{lipsum}
+\usepackage{epstopdf}
+\usepackage{subfig}
+\usepackage{bm}
+\usepackage{url}
+\usepackage{array}
+
+%*******************************************************************************
+% Packages setting
+%*******************************************************************************
+\graphicspath{{fig/}}
+
+%*******************************************************************************
+% Shared Affiliation format
+%*******************************************************************************
+\def\sharedaffiliation{%
+\end{tabular}
+\begin{tabular}{c}}
+
+%*******************************************************************************
+% Fonts
+%*******************************************************************************
+%\newfont{\eaddfntresz}{phvr8t at 11pt}
+
+%*******************************************************************************
+% Margins
+%*******************************************************************************
+%\clubpenalty=10000
+%\widowpenalty=10000
+
+%*******************************************************************************
+% hyphenation
+%*******************************************************************************
+\hyphenation{sched-uler par-a-digm adopt-ed evolv-ing th}
+
+%*******************************************************************************
+% pseudocode customisation
+%*******************************************************************************
+%\makeatletter
+%\def\BState{\State\hskip-\ALG@thistlm}
+%\makeatother
+
+%*******************************************************************************
+% Details
+%*******************************************************************************
+\acmConference[PMCSN'18]{PyDES, a performance modeling showcase}{September 2018}{Rome, Italy}
+\acmYear{2018}
+\copyrightyear{2018}
+\setcopyright{rightsretained}
+\acmISBN{123-4567-24-567/08/06}
+\acmDOI{10.475/123_4}
+\acmPrice{15.00}
+
+\begin{document}
+%*******************************************************************************
+% Title
+%*******************************************************************************
+\title{PyDES, a performance modeling showcase}
+
+%*******************************************************************************
+% Authors
+%*******************************************************************************
+\author{Giacomo Marciani}
+\orcid{0000-0002-3675-8804}
+\affiliation{%
+  \institution{University of Rome Tor Vergata}
+  \streetaddress{Via del Politecnico 1}
+  \city{Rome}
+  \state{Italy}
+  \postcode{00133}
+}
+\email{gmarciani@acm.org}
+
+\renewcommand{\shortauthors}{G. Marciani}
+
+%*******************************************************************************
+% Contents
+%*******************************************************************************
+\input{sec/abstract}
+\input{sec/ccs-keywords}
+\maketitle
+\input{sec/introduction}
+\input{sec/system}
+\input{sec/random-number-generation}
+\input{sec/performance-modeling}
+\input{sec/evaluation}
+%\input{sec/usage}
+\input{sec/conclusions}
+
+%*******************************************************************************
+% Bibliography
+%*******************************************************************************
+\bibliographystyle{biblio}
+\bibliography{./ref/biblio}
+
+\end{document}

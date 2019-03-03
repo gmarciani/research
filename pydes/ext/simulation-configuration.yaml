@@ -1,0 +1,23 @@
+general:
+  t_stop: 604800
+  t_tran: 80000
+  n_batch: 64
+  t_sample: 100
+  confidence: 0.95
+
+tasks:
+  arrival_rate_1: 3.25
+  arrival_rate_2: 6.25
+
+system:
+  cloudlet:
+    n_servers: 20
+    service_rate_1: 0.45
+    service_rate_2: 0.30
+    threshold: 20
+    server_selection: "ORDER"
+
+  cloud:
+    service_rate_1: 0.25
+    service_rate_2: 0.22
+    t_setup_mean: 0.8

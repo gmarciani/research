@@ -1,0 +1,25 @@
+\section{Conclusions}
+\label{sec:conclusions}
+
+%%
+% SUMMARY
+%%
+In this work we propose a next-event simulator for a two-layer Cloud system with off-loading policy on class-partitioned workload, whose random components leverage a multi-stream Lehmer pseudo-random number generator.
+
+%%
+% CONCLUSIONS
+%%
+We may conclude that (i) our simulator returns experimental results that are consistent with the theoretical ones, (ii) the system can achieve the steady-state (iii) the choice of the threshold $S$ is critical for system performances and (iv) the adopted preemption policy allows to balance response time for classes of tasks with different service rates. 
+
+%%
+% IMPROVEMENTS
+%%
+Although our results are pretty satisfactory, the proposed solutions could certainly be improved and be subjected to a more in-depth analysis.
+%
+From an implementation point of view, the proposed solution should be ported from Python to C and leverage multi-threading to achieve better performances, e.g. to speed-up the algorithms to find suitable multipliers for modulus in 64-bit architectures and make faster simulations.
+%
+From an analysis point of view, the proposed random number generator should be tested more extensively. For example, we may (i) take into account more tests of randomness (ii) use a pseudo-random number generator with a 64-bit modulus and less number of streams.
+%
+Finally, the simulation model should be extended in order to 
+(i) study the influence of different server selection policies, e.g. equity-selection, and 
+(ii) achieve more performance evaluation goals, such as forecasting with respect to the variation of the arrival processes.

@@ -1,0 +1,215 @@
+\section{Evaluation}
+\label{sec:evaluation}
+
+In this Section, we present our experimental results.
+First, we show the results about the randomness degree of the adopted pseudo-random number generator.
+Then, we show the results about the performance recorded by the simulation of the target system.
+
+% %
+% EXPERIMENTAL ENVIRONMENT
+% %
+The experiments have been conducted on an Amazon EC2 c3.8xlarge instance, which is really indicated for high performance science and engineering applications\footnote{https://aws.amazon.com/ec2/instance-types/}.
+The instance is equipped with 32 vCPU based on an Intel Xeon E5-2680 v2 (Ivy Bridge) processor, 30 GB of RAM and SSD with 900 IOPS.
+It runs Debian 8.3 (Jessie), Python 3.5.2, and the Python-ported version of the official Leemis library for discrete-event simulation, indicated in \cite{leemis2006discrete}.
+Our solution has been developed in Python, following the de-facto standard best-practices, stated in \cite{reitz2016,GooglePythonStyleguide}.
+
+% %
+% RANDOMNESS ANALYSIS
+% %
+\subsection{Randomness Analysis}
+\label{sec:evaluation-randomness-analysis}
+Let us now consider the results about the randomness degree of the adopted generator.
+The randomness has been assessed by the following tests:
+
+\begin{itemize}
+	\item \textbf{Spectral Test:} this test is considered one of the most powerful tests to assess the quality of linear congruential generators \cite{knuth1981art}. It relies on the fact that the output of such generators form lines or hyperplanes when plotted on 2 or more dimensions. The less the distance between these lines or planes, the better the generator is. In fact, a smaller distance between lines or planes highlights a better uniform distribution.
+	
+	In Figure~\ref{fig:experimental-analysis-randomness-spectral-16807,fig:experimental-analysis-randomness-spectral-48271,fig:experimental-analysis-randomness-spectral-58012} we show the test results for generators $(16807,2^{31}-1)$, $(48271,2^{31}-1)$ and $(50812,2^{31}-1)$, respectively.
+	
+	The results show that our generator $(50812,2^{31}-1)$ is much better than $(16807, 2^{31}-1)$, which was a past de-facto standard, and it is really similar to $(48271,2^{31}-1)$, which is the current de-facto standard, according to \cite{leemis2006discrete}.
+	
+	\item \textbf{Test of Extremes:} this test relies on the fact that if $U=U_{0},...,U_{d-1}$ is an independent identically distributed sequence of $Uniform(0,1)$ random variables, then $\max(U)^{d}$ is also a $Uniform(0,1)$. The test leverages this property to measures, for every stream, how much the generated random values differ from the theoretical uniform distribution.
+	
+	Given a number of streams $s$ and a level of confidence $c=1-\alpha$, the more the total number of fails is close to the expected value, i.e. $s \cdot c$, the better the generator is.
+	
+	In Figure~\ref{fig:experimental-analysis-randomness-extremes-50812} we show the test results for the proposed generator $(508012,2^{31}-1, 256)$ with sample size $n=10000$, $k=1000$ bins, sequence size $d=5$ and $95\%$ level of confidence.
+	%	
+	The proposed generator shows critical values $v_{min}=913$ and $v_{max}=1088$ and 14 total fails (7 lower fails and 7 upper fails), that is not far from the theoretical accepted number of fails, i.e. $256*0.05=13$.
+	The proposed generator successfully passed the test with a $94.531\%$ level of confidence.
+	
+	\item \textbf{Kolmogorov-Smirnov Analysis:} the test measures, at a given level of confidence, the biggest vertical distance between the theoretical cumulative distribution function and the empirical cumulative distribution function.
+	The more the recorded distance $d$ is less than the critical value $d*$ for the considered level of confidence, the better the generator is.
+	As the Kolmogorov-Smirnov analysis relies on pre-calculated randomness statistics, we have chosen to take into account the statistics obtained by the previous test.
+	
+	In Figure~\ref{fig:evaluation-randomness-kolmogorov-smirnov-50812} we show the test results for the proposed generator $(50812,2^{31}-1, 256)$ with a $95\%$ level of confidence.
+	%
+	The proposed generator successfully passed the test, as $d=0.041<0.081=d*$.
+	
+\end{itemize}
+
+\begin{figure}
+	\includegraphics[width=\columnwidth]{fig/evaluation-randomness-spectral-16807}
+	\caption{The Spectral Test to evaluate the randomness of the random number generator $(16807,2^{31}-1, 1)$ in the interval $(0, 10^{-3})$.}
+	\label{fig:evaluation-randomness-spectral-16807}
+\end{figure}
+
+\begin{figure}
+	\includegraphics[width=\columnwidth]{fig/evaluation-randomness-spectral-48271}
+	\caption{The Spectral Test to evaluate the randomness of the random number generator $(48271,2^{31}-1, 1)$ in the interval $(0, 10^{-3})$.}
+	\label{fig:evaluation-randomness-spectral-48271}
+\end{figure}
+
+\begin{figure}
+	\includegraphics[width=\columnwidth]{fig/evaluation-randomness-spectral-50812}
+	\caption{The Spectral Test to evaluate the randomness of the random number generator $(50812,2^{31}-1, 1)$ in the interval $(0, 10^{-3})$.}
+	\label{fig:evaluation-randomness-spectral-50812}
+\end{figure}
+
+\begin{figure}
+	\includegraphics[width=\columnwidth]{fig/evaluation-randomness-extremes-50812}
+	\caption{The Test of Extremes with $d=5$ to evaluate the randomness of the random number generator $(50812,2^{31}-1, 256)$.}
+	\label{fig:evaluation-randomness-extremes-50812}
+\end{figure}
+
+\begin{figure}
+	\includegraphics[width=\columnwidth]{fig/evaluation-randomness-kolmogorov-smirnov-50812}
+	\caption{The Kolmogorov-Smirnov Analysis (leveraging the Test of Extremes with $d=5$) to evaluate the randomness of the random number generator $(50812,2^{31}-1, 256)$ with $0.95$ confidence level.}
+	\label{fig:evaluation-randomness-kolmogorov-smirnov-50812}
+\end{figure}
+
+
+% %
+% PERFORMANCE ANALYSIS
+% %
+\subsection{Performance Analysis}
+Let us now consider the experimental results about system performance recorded by our simulator.
+In all experiments we considered values stated in Section~\ref{sec:performance-modeling} with a preemption policy based on \textit{random selection}.
+
+\subsection{Transient Analysis}
+\label{sec:evaluation-transient-analysis}
+First, we conduct a \textit{transient analysis} to evaluate the system stationary in order to (i) prove its convergence to the steady-state and (ii) estimate the duration of the transient period.
+%
+In fact, given a system that converges to stationary, the knowledge of the duration of the transient period is really important to conduct an effective performance evaluation. In particular, it allows the analyst to focus performance evaluation on a system in its stationary conditions.
+%
+In the transient analysis we focus on the global system throughput as it can be considered a good representation of the dependency of the system from the initial state.
+
+The following results have been produced by considering an ensemble of $5$ replications, where the $i+1$-th replication is initialized with the last seed of the $i$-th replication, so as to achieve the best decoupling between random sequences of different replications.
+
+In Figure \ref{fig:evaluation-transient-analysis-throughput} we show the transient analysis of the global throughput in the whole system.
+
+The results show that the system reaches the steady-state.
+This result is not surprising, because the presence of a stabilizing \textit{infinite-buffer centre}, i.e. the Cloud, largely compensates the possible instability of the \textit{thresholded finite-buffer centre}, i.e. the Cloudlet.
+
+\begin{figure}
+	\includegraphics[width=\columnwidth]{fig/evaluation-transient-analysis-throughput}
+	\caption{Transient analysis for global throughput in the whole system.}
+	\label{fig:evaluation-transient-analysis-throughput}
+\end{figure}
+
+
+\subsection{Performance Evaluation}
+Let us now focus on the \textit{performance evaluation}, taking into account the following metrics:
+
+\begin{enumerate}
+	\item \textit{response time} both global and classed, both for the system as a whole and for each subsystem;
+	
+	\item \textit{throughput} both global and classed, both for the system as a whole and for each subsystem;
+	
+	\item \textit{population} both global and classed, both for the system as a whole and for each subsystem;
+	
+	\item \textit{interrupted ratio} for tasks belonging to the $2^{nd}$ class.
+	
+	\item \textit{interrupted response time} for tasks belonging to the $2^{nd}$ class.
+\end{enumerate}
+
+In our experiment we assume $S=N=20$, $k=64$ batches, batch dimension $b=512$ and initial seed $iseed=123456789$.
+%
+Theoretical results have been computed using the formulas presented in Section~\ref{sec:performance-modeling}, assuming the experimentally computed value $E[T_{clt,2,lost}]=1.47445;s.$.
+
+In Table
+
+\begin{figure}
+	\begin{center}
+		\begin{tabular}{|c||c|c|}
+			\hline
+			Measure & Theoretical & Experimental\\
+			\hline
+			$a_{clt,1}$  & $0.978326334857105$ & $0.97911346521$ \\
+			$a_{clt_2}$  & $0.603529764734761$ & $0.60502880468$ \\
+			$r$          & $0.183573830264005$ & $0.15525744148$ \\	
+			\hline
+		\end{tabular}
+	\end{center}
+	\caption{Routing probabilities: comparison between the theoretical result, computed with the analytical model, and the experimental result, computed leveraging our simulator.}
+	\label{tbl:evaluation-routing-probabilities}
+\end{figure}
+
+\begin{figure}
+	\begin{center}
+		\begin{tabular}{|c||c|c|}
+			\hline
+			Measure & Theoretical & Experimental\\
+			\hline
+			$E[N_{clt}]$  & $123456789$ & $123456789\pm 0.00342$ \\
+			$E[N_{clt,1}]$  & $123456789$ & $123456789\pm 0.00342$ \\
+			$E[N_{clt,2}]$  & $123456789$ & $123456789\pm 0.00342$ \\
+			$E[T_{clt}]$  & $123456789$ & $123456789\pm 0.00342$ \\
+			$E[T_{clt,1}]$  & $123456789$ & $123456789\pm 0.00342$ \\
+			$E[T_{clt,2}]$  & $123456789$ & $123456789\pm 0.00342$ \\
+			$X_{clt}$  & $123456789$ & $123456789\pm 0.00342$ \\
+			$X_{clt,1}$  & $123456789$ & $123456789\pm 0.00342$ \\
+			$X_{clt,2}$  & $123456789$ & $123456789\pm 0.00342$ \\
+			\hline
+			$E[N_{cld}]$  & $123456789$ & $123456789\pm 0.00342$ \\
+			$E[N_{cld,1}]$  & $123456789$ & $123456789\pm 0.00342$ \\
+			$E[N_{cld,2}]$  & $123456789$ & $123456789\pm 0.00342$ \\
+			$E[T_{cld}]$  & $123456789$ & $123456789\pm 0.00342$ \\
+			$E[T_{cld,1}]$  & $123456789$ & $123456789\pm 0.00342$ \\
+			$E[T_{cld,2}]$  & $123456789$ & $123456789\pm 0.00342$ \\
+			$X_{cld}$  & $123456789$ & $123456789\pm 0.00342$ \\
+			$X_{cld,1}$  & $123456789$ & $123456789\pm 0.00342$ \\
+			$X_{cld,2}$  & $123456789$ & $123456789\pm 0.00342$ \\
+			\hline
+			$E[N_{sys}]$  & $123456789$ & $123456789\pm 0.00342$ \\
+			$E[N_{sys,1}]$  & $123456789$ & $123456789\pm 0.00342$ \\
+			$E[N_{sys,2}]$  & $123456789$ & $123456789\pm 0.00342$ \\
+			$E[T_{sys}]$  & $123456789$ & $123456789\pm 0.00342$ \\
+			$E[T_{sys,1}]$  & $123456789$ & $123456789\pm 0.00342$ \\
+			$E[T_{sys,2}]$  & $123456789$ & $123456789\pm 0.00342$ \\
+			$X_{sys}$  & $123456789$ & $123456789\pm 0.00342$ \\
+			$X_{sys,1}$  & $123456789$ & $123456789\pm 0.00342$ \\
+			$X_{sys,2}$  & $123456789$ & $123456789\pm 0.00342$ \\
+			\hline
+			$E[T_{restarted}]$  & $123456789$ & $123456789\pm 0.00342$ \\
+			$RestartRatio$  & $123456789$ & $123456789\pm 0.00342$ \\			
+			\hline
+		\end{tabular}
+	\end{center}
+	\caption{Performance metrics: comparison between the theoretical result, computed with the analytical model, and the experimental result with level of confidence $95\%$, computed leveraging our simulator.}
+	\label{tbl:evaluation-performance-metrics}
+\end{figure}
+
+%%
+% DISTRIBUTION ANALYSIS
+%%
+\subsection{Distribution Analysis}
+\label{sec:evaluation-distribution-analysis}
+In this Section we show the distribution analysis of the Cloudlet global throughput. 
+In particular, we focus on both (i) the Probability Density Function (PDF) estimation leveraging distribution fitting, and (ii) the comparison between theoretical and experimental Cumulative Distribution Function (CDF).
+
+In Figure~\ref{fig:evaluation-distribution-analysis-pdf-throughput-cloudlet-global} and  Figure~\ref{fig:evaluation-distribution-analysis-cdf-throughput-cloudlet-global} we show the PDF estimation and the CDF analysis, respectively, for the global Cloudlet throughput when $S=N=20$, where we adopted the \textit{Freedman-Diaconis Rule} for the binning schema.
+Results show that the best fitting is the \textit{Normal Distribution} with parameters $\mu\approx7.403$ and $\sigma\approx0.364$.
+%
+The Normal behavior shown here can be considered as a further good proof of both the system stationary and the effectiveness of the batch means as a tool to study steady-state statistics.
+
+\begin{figure}
+	\includegraphics[width=\columnwidth]{fig/evaluation-distribution-analysis-pdf-throughput-cloudlet-global}
+	\caption{Distribution analysis (Probability Distribution Function)for the Cloudlet global throughput with threshold $S=N=20$.}
+	\label{fig:evaluation-distribution-analysis-pdf-throughput-cloudlet-global}
+\end{figure}
+
+\begin{figure}
+	\includegraphics[width=\columnwidth]{fig/evaluation-distribution-analysis-cdf-throughput-cloudlet-global}
+	\caption{Distribution analysis (Cumulative Distribution Function) for the Cloudlet global throughput with threshold $S=N=20$.}
+	\label{fig:evaluation-distribution-analysis-cdf-throughput-cloudlet-global}
+\end{figure}
