@@ -29,7 +29,7 @@
 %%    feedback from Joanne (Dated 28/06/2010) to simulate print output.
 %% 3) Added newtheorem definition for 'conjecture'
 %% 4) Trimmed the 'double outputting' of the DOI/URL beneath ACM Reference Format (before 1. INTRODUCTION)
-%%    and also beneath the Permission Statement/copyright line. Also inserted the "http://dx.doi.org" stem. (Gerry Murray, March 2012)
+%%    and also beneath the Permission Statement/copyright line. Also inserted the "https://doi.org" stem. (Gerry Murray, March 2012)
 %%
 %% Steps to compile: latex, bibtex, latex latex
 %%
@@ -110,7 +110,7 @@
 \def\@articleSeq{1} %Article sequence
 \def\articleSeq#1{\gdef\@articleSeq{#1}}
 \def\acmArticle#1{\gdef\@acmArticle{#1}}
-\def\@doi{http://dx.doi.org/10.1145/0000000.0000000} % These 'default' '0' values are over-ridden, during production, with 'correct' numbers entered via source .tex file - Gerry March 2012
+\def\@doi{https://doi.org/10.1145/0000000.0000000} % These 'default' '0' values are over-ridden, during production, with 'correct' numbers entered via source .tex file - Gerry March 2012
 
 % ----------------
 % Gerry - April 2011 - To assist in the formatting of the NEW ACM Reference format - 'DOI' in tt font, and url string in default

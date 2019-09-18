@@ -1174,7 +1174,7 @@ Computing Machinery]
   Copyright held by the owner/author(s). Publication rights licensed to
   ACM\@.
   \fi}
-\def\@formatdoi#1{\url{http://dx.doi.org/#1}}
+\def\@formatdoi#1{\url{https://doi.org/#1}}
 \def\@copyrightpermission{%
   \ifcase\acm@copyrightmode\relax % none
   \or % acmcopyright
