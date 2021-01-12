@@ -1,0 +1,197 @@
+\section{Specification Model}
+\label{sec:performance-modeling-specification-model}
+The typical modeling workflow requires to specify
+(i) the statistical analysis of data collected from the real system in order to determine the input model to drive simulations,
+(ii) the analytical model and equations to determine performance metrics,
+(iii) the adopted simulation approach and
+(iv) the algorithms involved in computations.
+
+\paragraph{Statistical specifications}
+We have been provided with the statistical characterization of the target system.
+Tasks belonging to the $i$-th class arrive to the system according to an exponential arrival process with rate $ \lambda_{i}$.
+The Cloudlet serves tasks belonging to the $i$-th class according to an exponential service process with rate $\mu_{clt,i}$.
+The Cloud serves tasks belonging to the $i$-th class according to an exponential service process with rate $\mu_{cld,i}$.
+We assume that 
+(i) $\mu_{clt,i}>\mu_{cld,i}\ \forall i=1,2$ and
+(ii) the setup time $T_{setup}$ is exponentially distributed with expected value $E[T_{setup}]$.
+
+In particular, we consider values shown in Equations~\ref{eqn:statistical-specifications}.
+
+\begin{equation} 
+\begin{split}
+\lambda_{1}  &=6.00\;tasks/sec \\
+\lambda_{2}  &=6.25\;tasks/sec \\
+\mu_{clt,1}  &=0.45\;tasks/sec \\
+\mu_{clt,2}  &=0.27\;tasks/sec \\
+\mu_{cld,1}  &=0.25\;tasks/sec \\
+\mu_{cld,2}  &=0.22\;tasks/sec \\
+E[T_{setup}] &=0.8\;sec \\
+\end{split}
+\label{eqn:statistical-specifications}
+\end{equation}
+
+\paragraph{Analytical Model}
+Given the importance and complexity of the analytical model, we preferred to reserve the whole Section~\ref{sec:analytical-model} to present it.
+
+\paragraph{Simulation Approach}
+We decided to adopt the \textit{next-event simulation method}, which is the most effective discrete-event technique in terms of algorithmic modeling, time management and computational requirements.
+
+\paragraph{Algorithmic specifications}
+From the point of view of algorithms involved in the simulation, we need to specify:
+
+\begin{itemize}
+	
+	\item \textit{Off-Loading Algorithm}: defines the off-loading policy implemented by the \textit{Cloudlet Controller (CTRL)}. 
+	The first policy, defined in Algorithm~\ref{alg:off-loading-policy-1}, makes no distinction between classes of tasks, which are all served by the Cloudlet as long as it has available resources. 
+	The second policy, defined in Algorithm~\ref{alg:off-loading-policy-2}, gives higher priority to the $1^{st}$ class tasks by freeing up Cloudlet resources occupied by the $2^{nd}$ class tasks and restarting such tasks on Cloud when the Cloudlet occupancy level goes above a given threshold $S$.
+	
+	\item \textit{Simulation Algorithm}: defines the main execution flow of the simulator, as specified in Algorithm~\ref{alg:simulation-workflow}.
+\end{itemize}
+
+With reference to the simulation algorithm, it is worth focusing on the following aspects:
+
+\begin{itemize}
+	
+	\item \textit{event generation}: a new \textit{arrival event} is generated every time an arrival is processed and the closed-door condition does not hold. We adopted Algorithm~\ref{alg:arrivals} to generate classed arrivals, whose statistical correctness relies on the properties of the exponential distribution.
+	%
+	A new \textit{completion event} is generated every time an arrival is processed.
+	%
+	A new \textit{interruption event} is generated when an arrival is processed and the Cloudlet Controller determines that a task must be interrupted in the Cloudlet and restarted in the Cloud~\footnote{the generation of interruption events is possible only when Off-Loading Policy 2 is adopted.}.
+	%
+	Notice that the interruption event is never mentioned in the simulation workflow in Algorithm~\ref{alg:simulation-workflow}; this is because the interruption event is not an external arrival, but an internal task switching between subsystems.
+	
+	\item \textit{event submission}: when a new event is submitted to the system, the simulator updates (i) the system state and (ii) the simulation counters, e.g. number of arrivals, number of completions and so on.
+	
+	\item \textit{closed-door condition}: when this condition holds true, no more arrivals will be generated and system will only handle remaining completion events until it reaches the idle state. 
+	This condition is crucial because it identifies the point in time when the simulator has collected enough data to achieve our goals. 
+	To this aim, this condition holds true when the simulator has collected the configured number of batches, i.e. 64 batches with 512 samples each.
+	
+	\item \textit{stop condition}: when this condition holds true, the simulation is terminated. The logical definition of this condition depends on whether the simulator is used for transient analysis or performance analysis\footnote{with \textit{performance analysis} we mean the performance analysis in the steady state.}.
+	
+	In transient analysis, the condition holds true when the simulation clock is greater than a given stop time because we want to study whether or not performance metrics to converge to stable values within the given amount of time.
+	
+	In performance analysis, the condition holds true when the closed-door condition does and the system has reached the idle state because we assume that the steady state exists and we want to collect enough data to generated meaningful confidence intervals.
+	
+	\item \textit{sampling condition}: when this condition holds true, performance metrics should be sampled. 
+	In particular, it holds true when the processed event is a completion. 
+	We did like this because 
+	(i) sampling, as any other operation within the simulator, should happen in correspondence of an event, by design, and
+	(ii) a completion events brings a super set of insights w.r.t. an arrival.
+	
+	
+	\item \textit{metrics management}: when an event is submitted to the system, all the simulation counters are updated, e.g. number of arrivals, service time, integral areas and so on. 
+	When the sampling condition holds true, those counters are used to compute a sample of performance metrics. Such a sample is then used to update performance statistics leveraging \textit{One-Pass Wellford algorithm, batch means and confidence intervals} with formulas and algorithms described in \cite{leemis2006discrete}.
+	
+	We decoupled counters updates and metrics sampling in this way in order to improve the simulator performances both in terms of timing and memory consumption.
+	%
+	In fact
+	(i) the former is a low-effort operation that must be executed whenever a new event is processed,
+	(ii) the latter is a higher-effort operation that should be executed in correspondence of the event type carrying the most complete set of information, i.e. completion events,
+	%
+	Furthermore, we preferred to compute metrics by executing metrics updates within the simulation loop rather than at the end of the simulation because in this way we can consume subsets of data points at every sampling operation rather than collecting all of them until the end, thus saving up memory.
+\end{itemize}
+
+\begin{algorithm}
+	\SetAlgoLined
+	\If{task of class 1 or class 2}{
+		\eIf{$n_{clt,1}+n_{clt,2}=N$}{
+			send to the Cloud
+		}{
+			accept on Cloudlet
+		}
+	}
+	\caption{Off-Loading Policy 1.}
+	\label{alg:off-loading-policy-1}
+\end{algorithm}
+
+\begin{algorithm}
+	\SetAlgoLined
+	\If{task of class 1}{
+		\If{$n_{clt,1}=N$}{
+			send to the Cloud
+		} 
+		\If{$n_{clt,1}+n_{clt,2}<S$}{
+			accept on the Cloudlet
+		} 
+		\eIf{$n_{clt,2} > 0$}{
+			accept on the Cloudlet, interrupt a $2^{nd}$ class task in the Cloudlet and restart it in the Cloud
+		}{
+			accept on Cloudlet
+		}
+	}
+	\If{arrival of class 2}{
+		\eIf{$n_{clt,1}+n_{clt,2}>=S$}{
+			send to the Cloud
+		}{
+			accept on the Cloudlet
+		}
+	}
+	\caption{Off-Loading Policy 2.}
+	\label{alg:off-loading-policy-2}
+\end{algorithm}
+
+\begin{algorithm}
+	\SetAlgoLined
+	
+	calendar.schedule\_arrival();
+	
+	\While{$\neg stop\_condition()$}{
+		e = calendar.next\_event();
+		
+		\If{$e.type = completion$}{
+			submit\_event(e);
+		}
+	
+		\If{$e.type = arrival \land \neg close\_door\_condition()$}{
+			e\_next = submit\_event(e);
+			
+			calendar.schedule(e\_next);
+			
+			calendar.schedule\_arrival();
+		}
+	
+		update\_simulation\_counters();
+
+		\If{$sampling\_condition()$}{
+			sample = sampling();
+			
+			update\_metrics(sample);
+		}
+	}
+
+\caption{Simulation Workflow.}
+\label{alg:simulation-workflow}
+\end{algorithm}
+
+\begin{algorithm}
+	\SetAlgoLined
+	
+	rndgen.select\_stream(ARRIVAL)
+	
+	$p_{1}=\frac{\lambda_{1}}{\lambda_{1}+\lambda_{2}}$
+	
+	u = rndgen.uniform(0.0,1.0)
+	
+	\eIf{$u\leq p_{1}$}{
+		arrival\_type = TASK\_1
+		
+		rndgen.select\_stream(ARRIVAL\_TASK\_1)
+		
+		$t_{inter-arrival}$ = rndgen.exponential($\lambda_{1}$)
+	}{
+		arrival\_type = TASK\_2
+		
+		rndgen.select\_stream(ARRIVAL\_TASK\_2)
+		
+		$t_{inter-arrival}$ = rndgen.exponential($\lambda_{2}$)
+	}
+	
+	$t_{arrival}=t_{last\_arrival}+t_{inter-arrival}$
+
+	$t_{last\_arrival}=t_{arrival}$
+	
+	schedule(arrival\_type,$t_{arrival}$)
+	\caption{Generation of arrivals.}
+	\label{alg:arrivals}
+\end{algorithm}
+

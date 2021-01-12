@@ -1,0 +1,110 @@
+\section{Computational Model}
+\label{sec:performance-modeling-computational-model}
+The simulator has been designed following the \textit{next-event simulation} paradigm \cite{leemis2006discrete} and has been implemented as a \textit{Pythonv3.9} CLI application. 
+The open source code is available in a public Github repository \cite{gmarciani-pydes}.
+
+In this Section, we provide a short description of the simulator configurabili and the main software classes implementing the simulator, in order to help the reader go through our code.
+
+\paragraph{Configuration}
+The simulator can be fully configured with a YAML file loaded when the simulator starts up. 
+In particular, the following parameters can be configured:
+
+\begin{itemize}
+	\item \textit{arrival process}: statistical distribution law and parameters of arrivals for both task classes. In this work, we considered the Exponential distribution, even if any statistical distribution can be set\footnote{Notice that, even if the simulator supports any statistical distribution for the arrival process, the generation of arrivals shown in Algorithm~\ref{alg:arrivals} and the analytical models presented in Section~\ref{sec:analytical-model} are valid only for exponential arrivals.}.
+	
+	\item \textit{service process}: statistical distribution law and parameters of services for both task classes. In this work, we considered the Exponential distribution, even if any statistical distribution can be set.
+	
+	\item \textit{setup time}: statistical distribution law and parameters of the setup time for both task classes. In this work, we considered an Exponential setup time for the $2^{nd}$ class, even if any statistical distribution can be set.
+	
+	\item \textit{Cloudlet dimension}: number of Cloudlet resources. In this work, we considered a dimension of $20$ resources.
+	
+	\item \textit{Cloudlet Controller Algorithm}: Off-Loading Policy run by the Cloudlet Controller. In this work, we considered policies shown in Section~\ref{sec:performance-modeling-specification-model}, but the simulator has been designed to be easily extended with different custom policies.
+		
+	\item \textit{Cloudlet threshold}: threshold for the restart condition of $2^{nd}$ class tasks in the Cloudlet\footnote{this configuration is considered by the simulator only when the Cloudlet Controller runs the Off-Loading Policy 2.}. In this work, we considered values in $[1,20]$.
+	
+	\item \textit{server selection}: policy adopted to select the $2^{nd}$ class task to interrupt in the Cloudlet when the threshold has been reached\footnote{this configuration is considered by the simulator only when the Cloudlet Controller runs the Off-Loading Policy 2.}. In this work, we consider the Random selection, but the user can choose among Random, Ordered, Cyclic and Equity selection policies.
+\end{itemize}
+
+\paragraph{Simulation Workflow}
+The main class implementing the simulation workflow is:
+
+\begin{itemize}
+	
+	\item \textit{Simulation}: simulator entry-point, responsible to load configurations and drive the simulation workflow. In particular
+	(i) it creates the calendar of events, the target system and statistics objects, 
+	(ii) shows the real-time progress of the simulation, 
+	(iii) writes raw data files and output reports.
+
+\end{itemize}
+
+\paragraph{Event management}
+Events are managed by a \textit{priority-queue based calendar} with the ability both to schedule and un-schedule events\footnote{when a task is interrupted within the Cloudlet and restarted in the Cloud, the initial Cloud completion event is actually un-scheduled and a brand new Cloud completion event is scheduled as a replacement.}.
+%
+The calendar is initialized by scheduling the first arrival in the initialization phase. The submission of an arrival $a$ to the system could in fact induce
+(i) the scheduling of the corresponding completion event,
+(ii) the scheduling of a new arrival, or
+(iii) the un-scheduling of a previously scheduled completion, i.e. interruption in Cloudlet.
+
+The main classes implementing event management are:
+
+\begin{itemize}
+	
+	\item \textit{Calendar}: calendar of events, implemented as a priority-queue with the ability to both schedule and un-schedule events.
+	
+\end{itemize}
+
+\paragraph{System}
+The main classes implementing the target system are:
+
+\begin{itemize}
+	
+	\item \textit{System}: high level abstraction of the whole system, responsible to initialize the Cloudlet, initialize the Cloud, implement the Controller logic and update system-level classed/global metrics.
+	
+	\item \textit{Cloudlet}: represents the Cloudlet subsystem, responsible to handle events, select the task to interrupt according to the selection policy and update Cloudlet-level classed/global metrics.
+	
+	\item \textit{Cloud}: represents the Cloud subsystem, responsible to handle events and update Cloudlet-level classed/global metrics.
+	
+\end{itemize}
+
+\paragraph{Randomization}
+Random components are ruled by a custom \textit{multi-stream Lehmer generator} to generate pseudo-random events.
+The implementation of the generator and its experimental evaluation are respectively described later on in Section~\ref{sec:random-number-generation} and Section~\ref{sec:evaluation}.
+The \textit{degree of randomization} has been improved by associating the following processes to a dedicated stream of the pseudo-random number generator: type selection for the next arrival, arrival process of each task class, service process of each servant and server selection rule.
+This approach has been motivated by the fact that in a real case scenario we can assume the independence between (i) inter-classed workload, (ii) computational offer of distinct resources and (iii) selection strategies.
+
+The main classes implementing the random processes are:
+
+\begin{itemize}
+	
+	\item \textit{RndGen}: instance of a fully-customizable multi-stream Lehmer pseudo-random number generator.
+	
+	\item \textit{RandomComponent}: represents a fully-customizable independent random process. In particular, the calendar and each subsystem receive as input an instance of this object in order to realize their own random logic.
+	
+\end{itemize}
+
+\paragraph{Metrics}
+The main classes implementing metrics and statistics are:
+
+\begin{itemize}
+	
+	\item \textit{SimulationMetrics}: abstraction encapsulating all counters and performance metrics involved in the simulation, responsible to make it easy to update metrics during the simulation loop. In particular, each subsystem receives as input a reference to this singleton in order to decentralize and isolate the updates of metrics leveraging the well-know IoC software design pattern.
+	
+	\item \textit{BatchedMeasure}: an object that represents a measurement with both an instantaneous value and mean, standard deviation and confidence interval leveraging the batch means technique and the confidence interval estimation, as defined in \cite{leemis2006discrete}.
+	
+	\item \textit{WelfordAccumulator}: an object that is able to return in-place updated mean and standard deviation leveraging the \textit{one-pass Welford algorithm}. This object is widely adopted in our software, as it is used to update batch means.
+	
+	\item \textit{Sample}: an object that represents the instantaneous sample of simulation counters and performance metrics. It is used in our simulator to create a snapshot of metrics during the sampling process.
+	
+\end{itemize}
+
+\paragraph{Analytical Solver}
+The main classes implementing the analytical model resolution logic are:
+
+\begin{itemize}
+
+	\item \textit{AnalyticalSolver}: an object that is able to compute the analytical solution for the target system. In particular, this solver leverages our Markov Chain generator and an efficient symbolic solver for the resolution of flow-balance equations. The calculus of performance metrics is ruled by the same formulas specified in section dedicated to the analytical model.
+
+\end{itemize}
+
+\paragraph{Correctness}
+The correct behavior of mission critical classes has been covered by unit testing implemented with the built-in Python testing library.

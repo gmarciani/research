@@ -1,9 +1,9 @@
-\section{Random number generation}
+\section{Random Number Generation}
 \label{sec:random-number-generation}
 
 The generation of pseudo-random numbers is a fundamental building-block in any next-event simulation.
 %
-In fact, a sequence of pseudo-random numbers uniformly distributed in $(0,1)$ can be used to generate stochastic variates, e.g. the exponential distribution, that can be leveraged to generate streams of random events, e.g. requests to the system with random occurrence time and computational demand.
+In fact, a sequence of pseudo-random numbers uniformly distributed in $(0,1)$ can be used to generate stochastic variates, e.g. the exponential distribution, that can be used in turn to generate streams of random events, e.g. requests to the system with random occurrence time and computational demand.
 %
 There exist many techniques for random number generation, a lot of which are comprehensively presented in \cite{l1994uniform}.
 The most notable algorithmic generators are \textit{linear congruential generators}, \textit{multiple recursive generators}, \textit{composite generators}, and \textit{shift-register generators}.
@@ -30,14 +30,14 @@ We propose a generator with the following parameters:
 	Although all modern computers have a 64-bit architecture, we considered a 32-bit one because the algorithm to find the right multiplier for a 64-bit modulus can be very slow.
 	For this reason we have chosen $2^{31}-1$ as our modulus.
 	
-	\item \textbf{multiplier $\mathbf{50812}$:} the multiplier should be \textit{full-period modulus-compatible} with respect to the chosen modulus. The chosen modulus has 23093 of such multipliers. Among these there are also multipliers such $16807$, widely used in the past, and $48271$, that is currently the most widely adopted.
+	\item \textbf{multiplier $\mathbf{50812}$:} the multiplier should be \textit{full-period modulus-compatible} with respect to the chosen modulus. The chosen modulus has 23093 of such multipliers. Among these there are also multipliers such as $16807$, widely used in the past, and $48271$, that is currently the most widely adopted.
 	We have chosen $50812$ as our multiplier because we wanted to study a suitable multiplier that is different from the de-facto standard.
 	
-	\item \textbf{$\mathbf{256}$ streams:} the original periodic random sequence can be partitioned in different disjoint periodic random subsequences, one for each stream. 
-	The number of streams should be no more than the number of required disjoint subsequences, because streams come with the cost of reducing the size of the random sequence.
-	We have chosen 256 streams, that is a lot more than the strictly required for our simulations, because it is a de-facto standard hence it is useful for comparisons between our evaluation and the one proposed in literature \cite{leemis2006discrete}.
+	\item \textbf{$\mathbf{256}$ streams:} the original periodic random sequence can be partitioned in different disjoint periodic random sub-sequences, one for each stream. 
+	The number of streams should be no more than the number of required disjoint sub-sequences, because streams come with the cost of reducing the size of the random sequence.
+	We have chosen 256 streams, even if it is a lot more than the strictly required for our simulations, because it is a de-facto standard hence it is useful for comparisons between our evaluation and the one proposed in literature \cite{leemis2006discrete}. 
 	
-	\item \textbf{jump multiplier $\mathbf{29872}$:} the jump multiplier is used to partition the random sequence in disjoint subsequences, one for each stream, whose length is often called jump size. The jump multiplier should be \textit{modulus compatible} with the chosen modulus.
+	\item \textbf{jump multiplier $\mathbf{29872}$:} the jump multiplier is used to partition the random sequence in disjoint sub-sequences, one for each stream, whose length is often called jump size. The jump multiplier should be \textit{modulus compatible} with the chosen modulus.
 	We have chosen $29872$ as our jump multiplier because it is the value that maximizes the jump size.
 	
 	\item \textbf{initial seed $\mathbf{123456789}$:} the initial seed is the starting point of the finite sequence of generated values. Even if the initial seed does not impact the randomness degree of a generator in a single run (it only has to be changed in different replication of the same ensemble), we decide to indicate it here for completeness. 

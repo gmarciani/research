@@ -1,0 +1,46 @@
+\section{Verification}
+\label{sec:performance-modeling-verification}
+The main goal of verification is to assess the consistency of the computational model with the specification model.
+The verification has been carried out by evaluating the following consistency checks based on simulator logs and output reports:
+
+\begin{itemize}
+	\item \textbf{state consistency:} verifies the correctness of the system state evolution, i.e. given an event, it implies the expected system state transition;
+	
+	\item \textbf{clock consistency:} verifies the correctness of the simulation clock evolution, i.e. given an event, it implies the expected simulation clock transition;
+	
+	\item \textbf{arrival consistency:} verifies the correctness of arrivals ordering, i.e. given a set of tasks, they took service following the arrival order;
+	
+	\item \textbf{completion consistency:} verifies the correctness of completion ordering, i.e. given a set of tasks, they leave the system following the ascending ordering key $t_{arrival}+service$;
+	
+	\item \textbf{flow consistency:} verifies the correctness of the following flow trends:
+	
+	\begin{equation}
+	n_{clt,i}=a_{clt,i}-c_{clt,i}-s_{clt,i}
+	\end{equation}
+	\begin{equation}
+	n_{cld,i}=a_{cld,i}-c_{cld,i}+s_{cld,i}
+	\end{equation}
+	\begin{equation}
+	s_{clt,i}=s_{cld,i}
+	\end{equation}
+	
+	where 
+	$n_{j,i}$ is the population in the $j$-th subsystem belonging to $i$-th class of tasks, 
+	$a_{j,i}$ is the number of arrivals to the $j$-th subsystem belonging to $i$-th class of tasks,
+	$c_{j,i}$ is the number of completions in the $j$-th subsystem belonging to $i$-th class of tasks
+	$s_{j,i}$ is the number of switches from/to the $j$-th subsystem belonging to $i$-th class of tasks\footnote{notice that $s_{j,1}=0\forall j=1,2$, as tasks belonging to class $C1$ cannot be switched from Cloudlet to Cloud.}.
+	 
+	\item \textbf{workload change consistency:} verifies the correctness of performance metrics variations in response to arrival/service rates variations. For example, we verified that the following hold true:
+	
+	\begin{equation}
+		\mu_{cld,2}^{new} > \mu_{cld,2}^{old} \Rightarrow E[T_{sys,2}]^{new} > E[T_{sys,2}]^{old}
+	\end{equation}
+	\\
+	and
+	
+	\begin{equation}
+	S^{new} > S^{old} \Rightarrow E[N_{cld,2}]^{new} < E[N_{cld,2}]^{old}
+	\end{equation}
+	\\
+	where $S$ is the threshold for the off-loading algorithm 2.
+\end{itemize}

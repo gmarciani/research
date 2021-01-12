@@ -1,0 +1,56 @@
+general:
+
+  mode: "PERFORMANCE_ANALYSIS"
+
+  batches: 64
+  batchdim: 512
+  confidence: 0.95
+
+  random:
+    generator: "MarcianiMultiStream"
+    seed: 123456789
+
+arrival:
+  TASK_1:
+    distribution: "EXPONENTIAL"
+    parameters:
+      r: 6.00
+  TASK_2:
+    distribution: "EXPONENTIAL"
+    parameters:
+      r: 6.25
+
+system:
+  cloudlet:
+    controller_algorithm: "ALGORITHM_2"
+    threshold: 20
+    n_servers: 20
+    server_selection: "RANDOM"
+    service:
+      TASK_1:
+        distribution: "EXPONENTIAL"
+        parameters:
+          r: 0.45
+      TASK_2:
+        distribution: "EXPONENTIAL"
+        parameters:
+          r: 0.27
+  cloud:
+      service:
+        TASK_1:
+          distribution: "EXPONENTIAL"
+          parameters:
+            r: 0.25
+        TASK_2:
+          distribution: "EXPONENTIAL"
+          parameters:
+            r: 0.22
+      setup:
+        TASK_1:
+          distribution: "DETERMINISTIC"
+          parameters:
+            v: 0
+        TASK_2:
+          distribution: "EXPONENTIAL"
+          parameters:
+            m: 0.8
