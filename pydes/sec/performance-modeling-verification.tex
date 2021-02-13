@@ -30,17 +30,22 @@ The verification has been carried out by evaluating the following consistency ch
 	$c_{j,i}$ is the number of completions in the $j$-th subsystem belonging to $i$-th class of tasks
 	$s_{j,i}$ is the number of switches from/to the $j$-th subsystem belonging to $i$-th class of tasks\footnote{notice that $s_{j,1}=0\forall j=1,2$, as tasks belonging to class $C1$ cannot be switched from Cloudlet to Cloud.}.
 	 
-	\item \textbf{workload change consistency:} verifies the correctness of performance metrics variations in response to arrival/service rates variations. For example, we verified that some intuitive relations hold true, such as:
+	\item \textbf{workload change consistency:} verifies the correctness of performance metrics variations in response to arrival/service rates variations. For example, we verified that some intuitive relations hold true, such as Equations~\ref{eqn:verification-1},\ref{eqn:verification-2},\ref{eqn:verification-3}:
 	
 	\begin{equation}
 		\mu_{cld,2}^{new} > \mu_{cld,2}^{old} \Rightarrow E[T_{sys,2}]^{new} < E[T_{sys,2}]^{old}
+	\label{eqn:verification-1}
 	\end{equation}
-	\\
-	and
+	
+	\begin{equation}
+	S^{new} > S^{old} \Rightarrow E[N_{clt,2}]^{new} > E[N_{clt,2}]^{old}
+	\label{eqn:verification-2}
+	\end{equation}
 	
 	\begin{equation}
 	S^{new} > S^{old} \Rightarrow E[N_{cld,2}]^{new} < E[N_{cld,2}]^{old}
+	\label{eqn:verification-3}
 	\end{equation}
-	\\
+	
 	where $S$ is the threshold for the off-loading algorithm 2.
 \end{itemize}

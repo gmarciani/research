@@ -13,7 +13,7 @@ We may conclude that
 (i) our simulator returns experimental results that approximates the theoretical ones, 
 (ii) the adopted pseudo-random number generator has a satisfactory randomness degree,
 (iii) the system can achieve the steady-state,
-(iv) the choice of the off-loading policy is crucial for system performances and in particular.
+(iv) the adoption of an off-loading policy and the fine tuning of its parameters are crucial for system performances.
 
 %%
 % IMPROVEMENTS
@@ -24,8 +24,9 @@ From an analytical point of view, the proposed analytical model should be refine
 %
 From an implementation point of view, the proposed solution should be ported from Python to C and leverage multi-threading to achieve better performances, e.g. to speed-up the algorithms to find suitable multipliers for modulus in 64-bit architectures and make faster simulations.
 %
-From an analysis point of view, the proposed random number generator should be tested more extensively. For example, we may (i) take into account more tests of randomness (ii) use a pseudo-random number generator with a 64-bit modulus and less number of streams.
+From a randomness point of view, the proposed random number generator should be tested more extensively. For example, we may (i) take into account more tests of randomness (ii) use a pseudo-random number generator with a 64-bit modulus and less number of streams.
 %
 Finally, the simulation model should be extended in order to 
-(i) study the influence of different server selection policies, e.g. equity-selection, and 
+(i) study the impact of different thresholds,
+(ii) study the influence of different server selection policies, e.g. equity-selection, and 
 (ii) achieve more performance evaluation goals, such as what-if analysis with respect to the variation of the arrival and service processes.

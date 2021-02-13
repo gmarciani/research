@@ -221,7 +221,7 @@ Given the accepted workloads we can determine the following performance metrics 
 		\begin{split}
 			N_{clt,1} &= \sum_{s: (n_{clt,1},n_{clt,2}) \in S_{clt}} \pi_{s} n_{clt,1}  \\
 			X_{clt,1} &= \lambda_{clt,1} \\
-			T_{clt,1} &= \frac{1}{\mu_{clt,1}} \\
+			T_{clt,1} &= \frac{N_{clt,1}}{X_{clt,1}} \\
 		\end{split}
 	\end{equation}
 
@@ -233,7 +233,7 @@ Given the accepted workloads we can determine the following performance metrics 
 			%E[N_{clt,2}] &= \lambda_{clt,2}E[T_{clt,2}]-\lambda_{r} E[T_{clt,2,lost}] \\
 			%E[N_{clt,2}] &= \lambda_{clt,2}E[T_{clt,2}]-E[N_{cld,2}]^{[R]} \\
 			X_{clt,2} &= \lambda_{clt,2} - \lambda_{r} \\
-			T_{clt,2} &= \frac{1}{\mu_{clt,2}} \\
+			T_{clt,2} &= \frac{N_{clt,2}}{X_{clt,2}} \\
 		\end{split}
 	\end{equation}
 
