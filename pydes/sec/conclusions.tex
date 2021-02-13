@@ -4,22 +4,23 @@
 %%
 % SUMMARY
 %%
-In this work we propose a next-event simulator for a two-layer Cloud system with off-loading policy on class-partitioned workload, whose random components leverage a multi-stream Lehmer pseudo-random number generator.
+In this work we propose a next-event simulator for a two-layer Cloud system with off-loading policies on class-partitioned workload, whose random components leverage a multi-stream Lehmer pseudo-random number generator.
 
 %%
 % CONCLUSIONS
 %%
 We may conclude that 
-(i) our simulator returns experimental results that are consistent with the theoretical ones, 
+(i) our simulator returns experimental results that approximates the theoretical ones, 
 (ii) the adopted pseudo-random number generator has a satisfactory randomness degree,
 (iii) the system can achieve the steady-state,
-(iv) the choice of the off-loading policy is crucial for system performances and in particular, 
-(v) the best global system performance are achieved by the off-loading policy [INSERT HERE THE BEST ALGORITHM] with threshold [INSERT HERE THE BEST THRESHOLD]
+(iv) the choice of the off-loading policy is crucial for system performances and in particular.
 
 %%
 % IMPROVEMENTS
 %%
 Although our results are pretty satisfactory, the proposed solutions could certainly be improved and be subjected to a more in-depth analysis.
+%
+From an analytical point of view, the proposed analytical model should be refined adjusting some of the very strong assumption we made to simplify it.
 %
 From an implementation point of view, the proposed solution should be ported from Python to C and leverage multi-threading to achieve better performances, e.g. to speed-up the algorithms to find suitable multipliers for modulus in 64-bit architectures and make faster simulations.
 %

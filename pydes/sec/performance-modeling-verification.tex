@@ -30,10 +30,10 @@ The verification has been carried out by evaluating the following consistency ch
 	$c_{j,i}$ is the number of completions in the $j$-th subsystem belonging to $i$-th class of tasks
 	$s_{j,i}$ is the number of switches from/to the $j$-th subsystem belonging to $i$-th class of tasks\footnote{notice that $s_{j,1}=0\forall j=1,2$, as tasks belonging to class $C1$ cannot be switched from Cloudlet to Cloud.}.
 	 
-	\item \textbf{workload change consistency:} verifies the correctness of performance metrics variations in response to arrival/service rates variations. For example, we verified that the following hold true:
+	\item \textbf{workload change consistency:} verifies the correctness of performance metrics variations in response to arrival/service rates variations. For example, we verified that some intuitive relations hold true, such as:
 	
 	\begin{equation}
-		\mu_{cld,2}^{new} > \mu_{cld,2}^{old} \Rightarrow E[T_{sys,2}]^{new} > E[T_{sys,2}]^{old}
+		\mu_{cld,2}^{new} > \mu_{cld,2}^{old} \Rightarrow E[T_{sys,2}]^{new} < E[T_{sys,2}]^{old}
 	\end{equation}
 	\\
 	and

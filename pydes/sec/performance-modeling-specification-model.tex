@@ -41,9 +41,16 @@ From the point of view of algorithms involved in the simulation, we need to spec
 
 \begin{itemize}
 	
-	\item \textit{Off-Loading Algorithm}: defines the off-loading policy implemented by the \textit{Cloudlet Controller (CTRL)}. 
+	\item \textit{Off-Loading Algorithm}: defines the off-loading policy implemented by the \textit{Cloudlet Controller (CTRL)}.
+	%
 	The first policy, defined in Algorithm~\ref{alg:off-loading-policy-1}, makes no distinction between classes of tasks, which are all served by the Cloudlet as long as it has available resources. 
-	The second policy, defined in Algorithm~\ref{alg:off-loading-policy-2}, gives higher priority to the $1^{st}$ class tasks by freeing up Cloudlet resources occupied by the $2^{nd}$ class tasks and restarting such tasks on Cloud when the Cloudlet occupancy level goes above a given threshold $S$.
+	%
+	The second policy, defined in Algorithm~\ref{alg:off-loading-policy-2}, gives higher priority to the $1^{st}$ class tasks by 
+	(i) accepting in Cloudlet at most $S$ $2^{nd}$ class tasks and 
+	(ii) freeing up Cloudlet resources occupied by the $2^{nd}$ class tasks in favor of $1^{st}$ class tasks restarting the former on Cloud.
+	Notice that the threshold $S$ plays a key role here.
+	On one hand, a high $S$ increases the opportunity for  $2^{nd}$ class tasks to be served by the Cloudlet, that is faster than the Cloud.
+	On the other hand, a high $S$ increases also the risk for $2^{nd}$ class tasks to incur in the overhead caused by the restart in Cloud.
 	
 	\item \textit{Simulation Algorithm}: defines the main execution flow of the simulator, as specified in Algorithm~\ref{alg:simulation-workflow}.
 \end{itemize}
@@ -100,7 +107,7 @@ With reference to the simulation algorithm, it is worth focusing on the followin
 			accept on Cloudlet
 		}
 	}
-	\caption{Off-Loading Policy 1.}
+	\caption{Off-Loading Policy 1 (OP1).}
 	\label{alg:off-loading-policy-1}
 \end{algorithm}
 
@@ -126,7 +133,7 @@ With reference to the simulation algorithm, it is worth focusing on the followin
 			accept on the Cloudlet
 		}
 	}
-	\caption{Off-Loading Policy 2.}
+	\caption{Off-Loading Policy 2 (OP2).}
 	\label{alg:off-loading-policy-2}
 \end{algorithm}
 
