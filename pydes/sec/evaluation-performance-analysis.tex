@@ -11,7 +11,7 @@ In fact, given a system that converges to stationary, the knowledge of the durat
 %
 In particular, even if there exist techniques to reduce the impact of transitory measurements on the final insights, having an estimate for the duration of the transient period allows the analyst to focus performance evaluation on a system in its stationary conditions.
 
-In Figures \ref{fig:evaluation-transient-analysis-throughput-1} and \ref{fig:evaluation-transient-analysis-throughput-2} we show the transient analysis for system running the Off-Loading Policy and 2, respectively. 
+In Figures \ref{fig:evaluation-transient-analysis-throughput-1} and \ref{fig:evaluation-transient-analysis-throughput-2} we show the transient analysis for system running the Off-Loading Policy 1 and 2, respectively. 
 In this experiment we focused on the global system throughput as it can be considered a good representation of the dependency of the system to its initial state.
 The experiment has been conducted considering an ensemble of $5$ replications, where the $i+1$-th replication is initialized with the last seed of the $i$-th replication, so as to achieve the best decoupling between random sequences of different replications.
 
@@ -74,7 +74,7 @@ By comparing the three scenarios, we conclude that:
 	\item moving from $S=20$ to $S=5$ does not have a significant impact on response time for $1^{st}$ class tasks, whereas it improves it for $2^{nd}$ class tasks.
 	This may sound less intuitive because a high $S$ increases the probability for a $2^{nd}$ class task to be served by the Cloudlet, which is faster than the Cloud. Nevertheless, a high $S$ also increases the probability for the same tasks to be interrupted in the Cloudlet and lose time.
 	
-	\item the previous two points suggest us that a fine tuning of $S$ would be really valuable to leverage the power of OP2 over OP1.
+	\item the previous two points suggest us that a fine tuning of $S$ together with a smarter policy for the selection of the $2^{nd}$ class tasks to interrupt, e.g. interrupt the youngest task in order to minimize the lost time in Cloudlet, would be really valuable to leverage the power of OP2 over OP1.
 \end{enumerate}
 
 %\begin{figure}

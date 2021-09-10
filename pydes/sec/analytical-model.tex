@@ -14,7 +14,7 @@ So, \textit{we assume the routing probabilities to be static in order to unlock 
 
 In Figures~\ref{fig:analytical-model-queue-1} and \ref{fig:analytical-model-queue-2}, we show the queue models for the system with Off-Loading Policy 1 and Off-Loading Policy 2, respectively.
 
-\begin{figure}delphi
+\begin{figure}
 	\includegraphics[width=\columnwidth]{fig/analytical-model-queue-1}
 	\caption{Queue model for the system with OP1.}
 	\label{fig:analytical-model-queue-1}
@@ -54,7 +54,7 @@ The definition of the routing probabilities relies on the following subsets of C
 	\item $A_{clt,2}$: subset of states where  a task belonging to the $2^{nd}$ class is accepted in the Cloudlet.
 	
 	In OP1, a $2^{nd}$ class task is accepted in the Cloudlet as long as not all the $N$ resources are occupied.
-	In OP2, a $2^{nd}$ class task is accepted in the Cloudlet as long as not all the $N$ resources are occupied and there are at most $S$ resources occupied by $2^{nd}$ class tasks.
+	In OP2, a $2^{nd}$ class task is accepted in the Cloudlet as long as not all the $N$ resources are occupied and the number of resources occupied by $2^{nd}$ class tasks satisfies the condition $(n_{clt,1}+n_{clt,2}<S)$.
 	
 	\begin{equation}
 		A_{clt,2} :=
@@ -67,7 +67,7 @@ The definition of the routing probabilities relies on the following subsets of C
 			\\
 			\begin{aligned}
 				& \{(n_{clt,1},n_{clt,2})\in S_{clt} : \\
-				& n_{clt,1}+n_{clt,2}<N \wedge n_{clt,2}<S\}
+				& n_{clt,1}+n_{clt,2}<N \wedge n_{clt,1} + n_{clt,2}<S\}
 			\end{aligned} & \mbox{if } OP2
 		\end{array}
 		\right.
@@ -88,7 +88,7 @@ The definition of the routing probabilities relies on the following subsets of C
 			\\
 			\begin{aligned}
 				& \{(n_{clt,1},n_{clt,2})\in S_{clt} : \\
-				& n_{clt,1}+n_{clt,2}=N \wedge n_{clt,2}>0\}
+				& n_{clt,1}+n_{clt,2}\geq S \wedge n_{clt,2}>0\}
 			\end{aligned} & \mbox{if } OP2
 		\end{array}
 		\right.
@@ -172,7 +172,7 @@ In this chain, the red state represents the one where both the $1^{st}$ and $2^{
 \end{equation}
 
 In Figure~\ref{fig:analytical-model-markov-2-1} we show the Markov Chain for the system with Off-Loading Policy 2 and $N=2,S=1$. 
-In this chain, the red state represents the one where both the $1^{st}$ and $2^{nd}$ class traffic is blocked; the orange state represents the one where (i) a $1^{st}$ class arrival is accepted in Cloudlet, causing the restart in Cloud of a random running $2^{nd}$ class task and (ii) a $2^{nd}$ class arrival is blocked by the Cloudlet and forwarded to the Cloud; whereas the grey state and (ii) a $2^{nd}$ class arrival is blocked by the Cloudlet and forwarded to the Cloud.
+In this chain, the red state represents the one where both the $1^{st}$ and $2^{nd}$ class traffic is blocked; the orange state represents the one where (i) a $1^{st}$ class arrival is accepted in Cloudlet, causing the restart in Cloud of a random running $2^{nd}$ class task and (ii) a $2^{nd}$ class arrival is blocked by the Cloudlet and forwarded to the Cloud; whereas the grey state represents the one where a $1^{st}$ class arrival is accepted in Cloudlet and a $2^{nd}$ class arrival is blocked by the Cloudlet and forwarded to the Cloud.
 
 \begin{figure}
 	\includegraphics[width=\columnwidth]{fig/analytical-model-markov-2-1}

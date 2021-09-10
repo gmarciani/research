@@ -3,7 +3,7 @@
 The simulator has been designed following the \textit{next-event simulation} paradigm \cite{leemis2006discrete} and has been implemented as a \textit{Pythonv3.9} CLI application. 
 The open source code is available in a public Github repository \cite{gmarciani-pydes}.
 
-In this Section, we provide a short description of the simulator configurabili and the main software classes implementing the simulator, in order to help the reader go through our code.
+In this Section, we provide a short description of the simulator configuration and the main software classes implementing the simulator, in order to help the reader go through our code.
 
 \paragraph{Configuration}
 The simulator can be fully configured with a YAML file loaded when the simulator starts up. 
@@ -42,7 +42,7 @@ Events are managed by a \textit{priority-queue based calendar} with the ability 
 %
 The calendar is initialized by scheduling the first arrival in the initialization phase. The submission of an arrival $a$ to the system could in fact induce
 (i) the scheduling of the corresponding completion event,
-(ii) the scheduling of a new arrival, or
+(ii) the scheduling of a new arrival and
 (iii) the un-scheduling of a previously scheduled completion, i.e. interruption in Cloudlet.
 
 The main classes implementing event management are:

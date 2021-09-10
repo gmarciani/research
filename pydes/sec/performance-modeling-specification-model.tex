@@ -73,7 +73,7 @@ With reference to the simulation algorithm, it is worth focusing on the followin
 	This condition is crucial because it identifies the point in time when the simulator has collected enough data to achieve our goals. 
 	To this aim, this condition holds true when the simulator has collected the configured number of batches, i.e. 64 batches with 512 samples each.
 	
-	\item \textit{stop condition}: when this condition holds true, the simulation is terminated. The logical definition of this condition depends on whether the simulator is used for transient analysis or performance analysis\footnote{with \textit{performance analysis} we mean the performance analysis in the steady state.}.
+	\item \textit{stop condition}: when this condition holds true, the simulation is terminated. The logical definition of this condition depends on whether the simulator is used for the performance analysis in the transient state or in the steady state.
 	
 	In transient analysis, the condition holds true when the simulation clock is greater than a given stop time because we want to study whether or not performance metrics to converge to stable values within the given amount of time.
 	
@@ -93,14 +93,14 @@ With reference to the simulation algorithm, it is worth focusing on the followin
 	%
 	In fact
 	(i) the former is a low-effort operation that must be executed whenever a new event is processed,
-	(ii) the latter is a higher-effort operation that should be executed in correspondence of the event type carrying the most complete set of information, i.e. completion events,
+	(ii) the latter is a higher-effort operation that should be executed in correspondence of the event type carrying the most complete set of information, i.e. completion events.
 	%
 	Furthermore, we preferred to compute metrics by executing metrics updates within the simulation loop rather than at the end of the simulation because in this way we can consume subsets of data points at every sampling operation rather than collecting all of them until the end, thus saving up memory.
 \end{itemize}
 
 \begin{algorithm}
 	\SetAlgoLined
-	\If{task of class 1 or class 2}{
+	\If{arrival of class 1 or class 2}{
 		\eIf{$n_{clt,1}+n_{clt,2}=N$}{
 			send to the Cloud
 		}{
@@ -113,7 +113,7 @@ With reference to the simulation algorithm, it is worth focusing on the followin
 
 \begin{algorithm}
 	\SetAlgoLined
-	\If{task of class 1}{
+	\If{arrival of class 1}{
 		\If{$n_{clt,1}=N$}{
 			send to the Cloud
 		} 

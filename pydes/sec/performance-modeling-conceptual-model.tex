@@ -1,6 +1,6 @@
 \section{Conceptual Model}
 \label{sec:performance-modeling-conceptual-model}
-A conceptual model defines the target system in terms of 
+A conceptual model describes the target system in terms of 
 (i) the states it can assume over time, 
 (ii) the events that let it change in time and
 (iii) system assumptions.
@@ -47,15 +47,19 @@ We consider the following events:
 \end{itemize}
 
 \paragraph{Assumptions}
-The following assumptions hold for the modeled system and ensure that we can adopt the \textit{Next-Event Simulation Model}.
+The following assumptions hold for the modeled system and ensure that we can adopt the \textit{Next-Event Simulation Model}:
 
 \begin{itemize}
 	\item \textbf{Stochastic:} the system behavior is driven by some random components, such as task arrivals and service times.
 	
 	\item \textbf{Dynamic:} the state of the system evolves with the time during a finite observation period. Notice that even if this period may be long enough to reach a steady state, it is finite anyway.
 	
-	\item \textbf{Discrete:} the state of the system evolves as a step-wise function. Notice that this assumption holds because the state space is in $\mathcal{N}^{i}$ for some $i$ and the time of events is in $\mathcal{N}$.
-	
+	\item \textbf{Discrete:} the state of the system evolves as a step-wise function. Notice that this assumption holds because both the state space and the time space are discrete, i.e. the state space is in $\mathcal{N}^{i}$ for some $i$.
+\end{itemize}
+
+Other useful assumptions, even if not necessary for the next event simulation, are:
+
+\begin{itemize}
 	\item \textbf{Conservative:} it is not possible to have idle resources as long as there are unprocessed tasks; alternatively speaking, as soon as a resource completes the service for a task, it immediately starts with the next eligible task (if any), with no idle time in between.
 	
 	\item \textbf{Flow Balanced:} the number of completed tasks is equal to the number of  arrived tasks in the observation period; alternatively speaking, given an observation period, every task that arrives to the system, it is served by the system within the same period. This assumption may sounds unacceptable given that the Cloudlet may reject some tasks, but it holds anyway because such tasks are not dropped but sent to the Cloud that, having infinite resources, always guarantees them to be served.

@@ -20,10 +20,10 @@ We propose to evaluate the system behavior with two alternative off-loading poli
 \begin{itemize}
 	\item \textbf{Off-Loading Policy 1 (OP1):} the Cloudlet makes no distinction between tasks; it forwards incoming tasks to the Cloud when it has no available resources. Actually, OP1 represents the absence of an off-loading policy because in this case no off-loading is actually performed.
 	
-	\item \textbf{Off-Loading Policy 2 (OP2):} the Cloudlet gives higher priority to $1^{st}$ class tasks; it accepts only a thresholded occupancy of $2^{nd}$ class tasks, interrupts $2^{nd}$ class tasks to free up resources for $1^{st}$ class tasks and forwards incoming tasks to the Cloud when it has no available resources.
+	\item \textbf{Off-Loading Policy 2 (OP2):} the Cloudlet gives higher priority to $1^{st}$ class tasks; it accepts only a dynamically thresholded occupancy of $2^{nd}$ class tasks, interrupts $2^{nd}$ class tasks to free up resources for $1^{st}$ class tasks and forwards incoming tasks to the Cloud when it has no available resources.
 \end{itemize}
 
-We propose to evaluate system stationary and the following performance metrics with a $95\%$ level of confidence:
+We propose to evaluate the convergence of the system to a steady state and the following performance metrics in the steady state with a $95\%$ level of confidence:
 
 \begin{itemize}
 	\item \textit{System/Cloudlet/Cloud response time} both global and per-class;
