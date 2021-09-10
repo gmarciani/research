@@ -5,26 +5,27 @@ The containers orchestration in Cloud environment is a disruptive technology tha
 %
 First, Cloud computing allows applications to scale over a theoretically infinite pool of resources in a pay-per-use fashion.
 %
-Next, the deployment of applications as containerized micro-services provides software engineers with a fine-grained control over components scaling.
+Then, the deployment of applications as containerized micro-services provides software engineers with a fine-grained control over components placement and scaling.
+%
+Since placement and scaling decisions have both monetary and performance impact, the elastic container orchestration, that is the self-adaptive scaling and placing of containers, is a strategic asset both for Cloud-oriented and On-Premises industries.
 %
 % %
 % PROBLEM STATEMENT
 % %
-Even if the controllability over scaling allows companies to satisfy both budget and QoS requirements, the high variability of workloads makes ineffective the widely adopted techniques of manual scaling.
+Even if the controllability over placement and scaling allows companies to satisfy both budget and QoS requirements, the high variability of workloads makes manual interventions ineffective and requires to put in place efficient and effective automated solutions.
 %
-Since scaling decisions have both monetary and performance costs, the elastic container orchestration, that is the adaptive auto-scaling of containers, is a strategic asset for Cloud-centric industries.
 
 
 % %
 % APPROACH
 % %
-In this work, we propose a smart elasticity solution for containers orchestration, that is the proactive auto-scaling of containers though the use of Artificial Intelligence.
+In this work, we propose and compare some heuristics solutions for the elastic containers orchestration.
 %
-In particular, we focus on the adoption of Reinforcement Learning techniques to auto-scale containers in the Kubernetes environment, that is an industrial de-facto standard for containers orchestration.
+In particular, we focus on the adoption of Hill Climbing techniques to place and scale containers in the Kubernetes environment, that is an industrial de-facto standard for containers orchestration.
 %
-We propose a smart elasticity service that is deployable as a Kubernetes controller implemented as a highly scalable micro-service architecture.
+We propose an elasticity service that is deployable as a Kubernetes controller.
 %
-Hence, our main contribution is the design, implementation and experimental analysis of an Artificial Intelligence solution to realize proactive elasticity as an extension of the traditional reactive auto-scaling, natively provided by Kubernetes.
+Hence, our main contribution is the design, implementation and experimental analysis of solutions to drive elastic containers orchestration as an extension of the traditional reactive threshold-based auto-scaling, natively provided by Kubernetes.
 
 %
 %
