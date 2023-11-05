@@ -1,41 +1,33 @@
 % %
 % MOTIVATION
 % %
-The containers orchestration in Cloud environment is a disruptive technology that opens new research fields and industrial applications.
-%
-First, Cloud computing allows applications to scale over a theoretically infinite pool of resources in a pay-per-use fashion.
-%
-Then, the deployment of applications as containerized micro-services provides software engineers with a fine-grained control over components placement and scaling.
-%
-Since placement and scaling decisions have both monetary and performance impact, the elastic container orchestration, that is the self-adaptive scaling and placing of containers, is a strategic asset both for Cloud-oriented and On-Premises industries.
+The orchestration of containerized micro-service applications in a Cloud environment provides technicians with a fine-grained control on how software components scale and are placed over a theoretically infinite pool of distributed resources.
+Providing elasticity to such orchestration is considered a strategic asset for Cloud-based industries, because scaling an placement strategies may have a relevant impact on both application performances perceived by the end-user and the overall cost of the underlying infrastructure.
 %
 % %
 % PROBLEM STATEMENT
 % %
-Even if the controllability over placement and scaling allows companies to satisfy both budget and QoS requirements, the high variability of workloads makes manual interventions ineffective and requires to put in place efficient and effective automated solutions.
-%
-
+Given the high variability of workloads, manual tuning is clearly impractical and even automated solutions leveraging static threshold based policies may be ineffective in satisfying QoS expectations, SLAs and budget requirements.
+In this context, it's increasingly important to investigate solutions based on self-adaptive strategies, opening the way for new research fields and industrial solutions.
 
 % %
 % APPROACH
 % %
-In this work, we propose and compare some heuristics solutions for the elastic containers orchestration.
+In this work, we propose and compare some heuristics for the elastic containers orchestration, leveraging Reinforcement Learning.
 %
-In particular, we focus on the adoption of Hill Climbing techniques to place and scale containers in the Kubernetes environment, that is an industrial de-facto standard for containers orchestration.
+In particular, we focus on solutions where scale-in and scale-out decisions are driven by multi-agent multi-metric self-adaptive thresholds.
 %
-We propose an elasticity service that is deployable as a Kubernetes controller.
-%
-Hence, our main contribution is the design, implementation and experimental analysis of solutions to drive elastic containers orchestration as an extension of the traditional reactive threshold-based auto-scaling, natively provided by Kubernetes.
+We evaluate the proposed solutions using a simulator that has been designed specifically to investigate scaling and placement strategies for containerized applications in a Cloud environment.
 
 %
 %
 % %
 % RESULTS
 % %
-%The experimental results show that our solution converges to an auto-scaling policy that meets QoS requirements while reducing the cost of the infrastructure. 
+The experimental results show that solution [X] converges to an auto-scaling policy that meets QoS requirements while reducing the cost of the infrastructure, with a training period of [X] hours.
 %
 %
 % %
 % CONCLUSIONS
 % %
-%Although there is still a long way to go to speed-up the learning convergence, our work show that the application of Reinforcement Learning for elastic containers auto-scaling should be a promising research field for Cloud-driven industries.
+Although there is still a long way to go to speed-up the learning convergence, our work shows that the application of Reinforcement Learning for elastic containers auto-scaling is a promising solution for Cloud-driven industries.
