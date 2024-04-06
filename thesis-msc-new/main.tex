@@ -61,7 +61,7 @@
 	\DefineBibliographyStrings{english}{url= \textsc{url} ,  }% replaces default "[Online]. Available" by "URL"
 
 
-\addbibresource{mitthesis-sample.bib}%% <== change to YOUR bib file <= CHANGE
+\addbibresource{bib/main.bib}%% <== change to YOUR bib file <= CHANGE
 
 %% to avoid split urls and stretched white space, you can set the bibliography ragged-right:
 %\appto{\bibsetup}{\raggedright}
@@ -242,10 +242,10 @@
 % The abstract environment creates all the required headings and footers. 
 % You only need to the text of the abstract in the file abstract.tex
 \begin{abstract}
-	\input{abstract.tex}% use \input rather than \include because we're inside an environment
+	\input{sec/abstract.tex}% use \input rather than \include because we're inside an environment
 \end{abstract}
 
-\include{acknowledgments}% .tex extension is presumed by \include 
+\include{sec/acknowledgments}% .tex extension is presumed by \include 
 
 %\include{biography}% optional, see MIT Libraries https://libraries.mit.edu/distinctive-collections/thesis-specs/#format
 
@@ -261,16 +261,14 @@
 
 %% If you want to use "double spacing", you should start here...
 
- \include{chapter1}% .tex extension is presumed
-%\include{chapter2}
-%\include{chapter3}
-%\include{chapter4}
+ \include{sec/chapter1}% .tex extension is presumed
+ \include{sec/chapter2}
 
 
 %%% Appendicies of thesis  %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \appendix
-\include{appendixa}
+\include{sec/appendixa}
 
 
 %%% Bibliography  %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -286,7 +284,7 @@
 %%   use an appropriate style (.bst) and your own .bib file[s]
 
 %\bibliographystyle{plainnat}
-%\bibliography{mitthesis-sample.bib}
+%\bibliography{bib/main.bib}
 
 \end{document} 
  
