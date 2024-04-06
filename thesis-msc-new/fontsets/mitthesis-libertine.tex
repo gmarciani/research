@@ -1,0 +1,61 @@
+% From mitthesis package
+% Documentation: https://ctan.org/pkg/mitthesis
+
+\ProvidesFile{mitthesis-libertine.tex}[2023/09/12 v1.02 Load Libertine and related fonts]
+
+%% Linux Libertine (serif) text font with newtxmath[libertine] (pdftex) or Libertinus (unicode) math font
+%
+%  These fonts are available here https://ctan.org/tex-archive/fonts/libertine/opentype 
+%						 and here https://github.com/alerque/libertinus
+% install these as system fonts on your computer
+%
+\ifpdftex
+	\typeout{^^JLoading newtx-libertine text and math fonts with Insolata typewriter font^^J}
+    \RequirePackage[lining,semibold]{libertine} 
+    \RequirePackage[T1]{fontenc}
+    \RequirePackage[varqu,varl]{inconsolata}% typewriter
+%    \usepackage{amsthm}% must be loaded before newtxmath
+    \RequirePackage[libertine,vvarbb]{newtxmath}
+    \RequirePackage{bm}% load after all math to give access to bold math
+\else
+	\typeout{^^JLoading Linux Libertine (serif) text font with Libertinus math font^^J}
+	%
+    \RequirePackage[warnings-off={mathtools-colon,mathtools-overbracket}]{unicode-math}
+    % suppress tiresome warnings about lack of integration between mathtools and unicode-math
+    % unicode math loads the fontspec package
+ 	%
+    \setmainfont{LinLibertine}[% Linux Libertine O  
+    	Extension = .otf,
+    	UprightFont = *_R,
+    	ItalicFont = *_RI,
+    	BoldFont = *_RZ, % Libertine O Semibold
+    	BoldItalicFont = *_RZI, % Libertine O Semibold Italic
+    %	Ligatures=Rare,% TeX
+    %	Numbers=OldStyle,%
+    	RawFeature={+ss05},% +ss02 would change J, K, R; +ss05 changes W	
+        ]    
+    \setmonofont{LinLibertine}[% Linux Libertine Mono O
+    	Scale=0.9,
+	    Extension = .otf,
+    	UprightFont = *_M,
+    	ItalicFont = *_MO,% oblique
+    	BoldFont = *_MB,
+	    BoldItalicFont = *_MBO,% oblique
+	]    
+    \setsansfont{LinBiolinum}[% Linux Biolinum O
+    	Extension = .otf,
+    	UprightFont = *_R,
+    	ItalicFont = *_RI,
+    	BoldFont = *_RB,
+	    BoldItalicFont = *_RBO,% oblique
+    	Scale=MatchUppercase]
+	%    	
+    %% a Libertine-style math font
+    \setmathfont{libertinusmath-regular}[%
+     	Extension = .otf,   
+    	Scale=MatchUppercase,
+		BoldFont = *,% This font lacks a bold version
+    	RawFeature={+ss08},% +ss08 gives slanted integrals (no other features) 	
+    	]
+    \newcommand*{\FRAC}[1]{{\addfontfeature{Fractions=On}#1}}% use OpenType feature for fractions, \FRAC{1/2}   
+\fi

@@ -1,0 +1,23 @@
+% From mitthesis package
+% Documentation: https://ctan.org/pkg/mitthesis
+
+\ProvidesFile{mitthesis-newtx-sans-text.tex}[2023/09/12 v1.02 Load newtx sans-serif text and regular math fonts]
+
+%% newtx package with sans-serif text (Helvetica-like text with Times-like math)
+%
+\ifpdftex
+	\RequirePackage[T1]{fontenc}
+    \RequirePackage[subscriptcorrection,varvw,helvratio=0.91,defaultsups]{newtx}% upint for upright integrals
+    \renewcommand{\familydefault}{\sfdefault}% use sans for main text
+%   these two commands enable hyphenation of the typewriter font - https://tex.stackexchange.com/a/204421/119566
+%    \input{t1ntxtt.fd}
+%    \DeclareFontFamily{\encodingdefault}{\ttdefault}{\hyphenchar\font=`\-} % 
+	\RequirePackage{bm}% bold math
+\else
+	\ClassWarning{mitnewthesis}{The newtx font set requires pdflatex.  Defaulting to LMR fonts}
+    \RequirePackage[warnings-off={mathtools-colon,mathtools-overbracket}]{unicode-math}
+    % suppress tiresome warnings about lack of integration between mathtools and unicode-math.
+    % Unicode-math loads the fontspec package, but the default fonts are not selected by fontspec in this case.
+\fi
+
+	

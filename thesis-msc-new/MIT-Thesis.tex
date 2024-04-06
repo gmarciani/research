@@ -1,0 +1,292 @@
+% !TeX document-id = {f8e6f84b-6dd6-4ae8-a59e-b9f398dae83e}
+% !TEX encoding = UTF-8 Unicode
+% !BIB TS-program = biber 
+% !BIB program = biber    
+
+% This file is MIT-Thesis.tex, a LaTeX template for formatting an MIT thesis with the mitthesis class.
+%
+% Version: 1.11, 2023/11/02
+%
+% Author: John H. Lienhard, copyright 2023. Reuse under the MIT license: https://ctan.org/license/mit 
+
+% Documentation is here: https://ctan.org/pkg/mitthesis
+
+%% Don't modify the \DocumentMetadata command unless you know what it does. 
+%% If this command throws an "undefined" error, your latex system is out of date: try commenting this command out.
+\DocumentMetadata{ 
+	pdfstandard = a-2b,
+	pdfversion  = 1.7,
+	lang		= en-US,
+%	debug		= {xmp-export}, % uncomment to output a separate xmpi file showing the metadata
+}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\documentclass[twoside,mydesign]{mitthesis} %,fontset=libertine, fontset=newtx-sans-text, fontset=heros-stix2, fontset=stix2
+%
+% option [twoside]		gives facing-page behavior for printing; omitting twoside will eliminate even-numbered blank pages.
+% option [lineno]	 	provides line numbers, as for editing
+% option [mydesign] 	loads packages for color, title and list formats, margins, or captions: edit mydesign.tex to change defaults.
+% option [fontset] is a keyvalue which can be:
+%					 	pdftex or unicode engines:  defaultfonts, libertine, lucida
+%					 	pdftex only: 				fira-newtxsf, newtx, newtx-sans-text
+%						unicode engines (luatex):	heros-stix2, stix2, termes, termes-stix2
+%					 	if no key value is given, fonts default to CMR (pdftex) or LMR (unicode), i.e., "the LaTeX font".
+%					 	You can edit the fontset files or you can write your own, myfonts.tex, and do [fontset=myfonts].
+%						If you are using multiple languages, load the babel package in your fontset file, before the fonts.
+
+%%%%%%%%% Packages used in sample chapters (not otherwise required) %%%%%%%
+
+%% Package for code listing in Appendix A.
+\usepackage{listings}%   documentation is here https://ctan.org/pkg/listings
+
+%% Set chemical formulas nicely
+\usepackage[version=4]{mhchem}%   documentation is here https://ctan.org/pkg/mhchem
+
+%% Latin filler used in Chapter 1, with a test for package version date. https://ctan.org/pkg/lipsum
+\usepackage{lipsum}
+\IfPackageAtLeastTF{lipsum}{2021/09/20}{\setlipsum{auto-lang=false}}{}
+
+
+%%%%%%%%%  Graphics path (to figure files)  %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%% Can set graphicspath to point to specific directories containing figures (the current directory is searched automatically)
+%% For instance, to search a subdirectory of the current directory called "figures" and a parallel directory called "art", set:
+
+% \graphicspath{ {figures/} {../art/} }% For details see: https://latexref.xyz/dev/latex2e.html#g_t_005cgraphicspath
+
+
+%%%%%%%%%  Representative set-up for biblatex  %%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\usepackage[style=ieee,maxbibnames=10,sorting=none]{biblatex}% style=ext-numeric-comp,articlein=false,giveninits=true
+	\DefineBibliographyStrings{english}{url= \textsc{url} ,  }% replaces default "[Online]. Available" by "URL"
+
+
+\addbibresource{mitthesis-sample.bib}%% <== change to YOUR bib file <= CHANGE
+
+%% to avoid split urls and stretched white space, you can set the bibliography ragged-right:
+%\appto{\bibsetup}{\raggedright}
+
+% biblatex is very powerful, and you can customize most aspects the reference list and citations to suit your needs.
+% documentation is here: https://ctan.org/pkg/biblatex
+
+
+%%%%%%%%%%  Option to use natbib   %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%\RequirePackage[numbers,sort&compress]{natbib}
+ 
+%%% add bibliography to table of contents
+%\apptocmd{\bibliography}{\addcontentsline{toc}{chapter}{\protect\textbf{\bibname}}}{}{}
+
+%%% You can use this to rename the bibliography section
+%\renewcommand{\bibname}{References}
+
+%%% Can adjust space between bibliography items (change 4pt to something else; don't drop last two lengths, they are stretchable "glue")
+%\setlength\bibsep{4pt plus 1pt minus 1pt}
+
+
+%%%%%%%%%%  Table related packages  %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\usepackage{booktabs}% better quality tables, https://ctan.org/pkg/booktabs
+\usepackage{array}%    additional options for table columns, https://ctan.org/pkg/array
+
+%\usepackage{tabularx}%   https://ctan.org/pkg/tabularx
+
+%\usepackage{dcolumn}%    alignment on decimal place, https://ctan.org/pkg/dcolumn
+%\newcolumntype{d}[1]{D{.}{.}{#1}}
+
+
+%%%%%%%%%%  Option for "double spacing" %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%% Back in the typewriter era, double spaced lines were convenient for editing with a pencil. 
+%% In typography, the separation between lines is called "leading", and it is usually set in 
+%% proportion to the font size (i.e., when the font is loaded).  If you really feel the need 
+%% to change the line separation, the most attractive results will be obtained by changing the
+%% leading in proportion to the the current font size, rather than just doubling the space.
+
+%% The setspace package provides a tool for changing line separation. Use these two commands here:
+%
+% \usepackage{setspace}%  documentation at https://ctan.org/pkg/setspace
+% \setstretch{1.1}% you can choose some other value for the stretch of space between lines
+%
+%% Use one or more of the these commands AFTER the frontmatter
+%
+% \onehalfspacing
+% \doublespacing
+% \singlespacing  % will turn these effects off (you can use these anywhere in the document)
+
+%% The best result may be to stay with leading selected by the typographer who set up the font.
+
+
+%%%%%%%%%%%  Metadata  %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+% Most of the document metadata is created automatically. 
+% The following items should be adjusted to match your work. <================= !!!!!!!!!!
+
+\hypersetup{%
+	pdfsubject={Template for writing MIT theses with the mitthesis class},
+	% Change this to briefly state topic of your thesis 
+% 
+	pdfkeywords={Massachusetts Institute of Technology, MIT},
+	% Add keywords that will help search engines and libraries to find your work.
+	% Includes the name[s] of the author[s] 
+	% (If you have used \DocumentMetadata, at line 15, you can just put "\CopyrightAuthor," for the names.)
+%
+	pdfurl={},
+	% If you have a url for the thesis, put it here. Otherwise delete this.
+	% (MIT Libraries will put your thesis in DSPACE with a persistent url after you submit it.)
+%	
+	pdfcontactemail={},
+	% You can put a [permanent] email address into the metadata, if you like.
+	% Otherwise delete this.
+%
+	pdfauthortitle={},
+	% If you have a title, you can include it here.
+}
+
+\Institution{University of Rome Tor Vergata}
+
+%%%%%%%%%%%%%%  End preamble %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{document}
+
+%%% edit the following commands to match your thesis %%%%%%%%%%
+
+\title{High Performance Computing on AWS:\\Lifecycle and Best Practices}
+
+% \Author{Author full name}{Author department}[Author's first PREVIOUS degree][Author's second PREVIOUS degree][...
+% Note that third, fourth, fifth, and sixth arguments are optional [] and may be omitted
+
+% note on names: most of the following names are made up; Silas Holman was a physics professor at MIT in the 19th century.
+
+\Author{Giacomo Marciani}{B.S. Computer Science Engineering}
+% \Author{Luisa Hernández}{Department of Research}[B.S. Mechanical Engineering, UCLA, 2018][M.S. Stellar Interiors, Vulcan Science Academy, 2020]
+% \Author{Thurston Howell III}{Department of Economics}[MBA, Ferengi School of Management, 2022]
+
+% Use once for each degree fulfilled by thesis
+% For two degrees from one department, leave the department argument blank for the second degree {}.
+% \Degree{Bachelor of Science in Physics}{Department of Physics}
+% \Degree{Master of Science in Physics}{}
+\Degree{Master of Science in Computer Science Engineering and Data Science}{Department of Civil and Computer Science Engineering}
+
+% If there is more than one supervisor, use the \Supervisor command for each.
+\Supervisor{Salvatore Filippone}{Professor of High Performance Computing}
+% \Supervisor{Secunda Castor}{Professor of Research}
+% \Supervisor{Quintus Castor}{Professor of Log Dams}
+
+% Professor who formally accepts theses for your department (e.g., the Graduate Officer, Professor Sméagol,...)
+% If more than one department, use more than once
+% **If you need to reduce vertical space, put the acceptor title in the second argument and leave the third blank {}.**
+%\Acceptor{Primus Castor}{Professor of Wetlands Engineering}{Undergraduate Officer, Department of Physics}
+\Acceptor{Renato Baciocchi}{Director}{Department of Civil and Computer Science Engineering}
+% \Acceptor{Quarta Castor}{Professor of Lodge Building}{Graduate Officer, Department of Mechanical Engineering}
+
+% Usage: \DegreeDate{Month}{year}
+% Valid degree months are September, February, or June
+\DegreeDate{February}{2025}
+
+% Date that final thesis is submitted to department
+\ThesisDate{October 27, 2024}
+
+%%%%%%  Choose whether to have a CREATIVE COMMONS License  %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%
+% If you are using a cc license, put details of your cc license here. 
+% Omit this command if you are not using a cc license.
+%
+\CClicense{CC BY-NC-ND 4.0}{https://creativecommons.org/licenses/by-nc-nd/4.0/}
+%
+
+%%%%%%%  Solutions for overflowing titlepage  %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+% If your title page is overflowing (from too many names, degrees, etc.):
+%
+% (a) you can reduce the 12pt and 18pt skips between various blocks to 6pt with this command:
+%
+% \Tighten
+%
+% (b)  you can scale down the Signature block at the bottom with this command:
+%
+% \SignatureBlockSize{\small}  %or this one \SignatureBlockSize{\footnotesize}
+%
+% (c) you can put the acceptor name and title onto two lines, rather than three like this:
+%
+% \Acceptor{Tertius Castor}{Professor and Graduate Officer, Department of Research}{}
+% \Acceptor{Quarta Castor}{Professor and Graduate Officer, Department of Mechanical Engineering}{}
+%
+% (d) you can change the font size of the the author name[s] with
+%
+%	\AuthorNameSize{\normalsize}
+%
+% (e) and you can omit any previous degrees from the title page, instead mentioning them in the Biosketch
+
+% Also, if you prefer to keep the text toward the top of the page with most white space at the bottom, you
+% can you this command to squash all of the vertical glue (stretchy space) with this command:
+%
+% \Squash 
+%
+% This command is useful when the text has not already reach the bottom of the page, since the glue gets squashed automatically
+% when the page is too full.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%%% Make titlepage
+\maketitle*
+
+%%%%%%%%% Contents that you need to write follows %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+% \includeonly{acknowledgments,biography,chapter1,chapter2,...,appendixa,...} 
+%   for usage, see https://latexref.xyz/_005cinclude-_0026-_005cincludeonly.html
+
+%%% Frontmatter (write this material in the mentioned files)  %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+% The abstract environment creates all the required headings and footers. 
+% You only need to the text of the abstract in the file abstract.tex
+\begin{abstract}
+	\input{abstract.tex}% use \input rather than \include because we're inside an environment
+\end{abstract}
+
+\include{acknowledgments}% .tex extension is presumed by \include 
+
+%\include{biography}% optional, see MIT Libraries https://libraries.mit.edu/distinctive-collections/thesis-specs/#format
+
+
+%%% Table of contents and lists of stuff (delete lists you don't need, e.g., if no tables) %%%%%%%%
+
+\tableofcontents
+%\listoffigures
+%\listoftables
+
+
+%%% Chapters of thesis  %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%% If you want to use "double spacing", you should start here...
+
+ \include{chapter1}% .tex extension is presumed
+%\include{chapter2}
+%\include{chapter3}
+%\include{chapter4}
+
+
+%%% Appendicies of thesis  %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\appendix
+\include{appendixa}
+
+
+%%% Bibliography  %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\printbibliography[title={References},heading=bibintoc]
+
+% biblatex also supports chapter-by-chapter bibliography, https://tex.stackexchange.com/a/296502/119566
+% see the biblatex manual, section 3.14.3
+
+
+%%%% Option for natbib %%%%%%%%%%%%%
+
+%%   use an appropriate style (.bst) and your own .bib file[s]
+
+%\bibliographystyle{plainnat}
+%\bibliography{mitthesis-sample.bib}
+
+\end{document} 
+ 

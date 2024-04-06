@@ -1,0 +1,20 @@
+% From mitthesis package
+% Documentation: https://ctan.org/pkg/mitthesis
+
+\ProvidesFile{mitthesis-fira-newtxsf.tex}[2023/09/12 v1.04 Load Fira Sans text font with newtx sans serif math font and Inconsolata typewriter font]
+
+%% Fira Sans text font with newtx sans serif math font and Inconsolata typewriter font
+%
+\ifpdftex
+	\typeout{^^JLoading Fira sans text font with newtx sans serif math font and Inconsolata typewriter^^J}
+    \RequirePackage[sfdefault,scaled=0.90]{FiraSans} % sans serif text package %,scaled=.85
+	\RequirePackage[T1]{fontenc}
+    \RequirePackage[varqu,varl,scaled=1.05]{zi4} % inconsolata font for typewriter
+    \RequirePackage[scaled=1.05]{newtxsf} % sans serif math
+ 	\RequirePackage{bm}
+\else
+	\ClassWarning{mitnewthesis}{The fira-newtxsf font set requires pdflatex. Defaulting to LMR fonts}
+    \RequirePackage[warnings-off={mathtools-colon,mathtools-overbracket}]{unicode-math}
+    % suppress tiresome warnings about lack of integration between mathtools and unicode-math.
+    % Unicode-math loads the fontspec package, but the default fonts are not selected by fontspec in this case.
+\fi
