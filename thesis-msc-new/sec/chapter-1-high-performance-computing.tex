@@ -5,152 +5,121 @@
 
 \chapter{High Performance Computing}
 
-\lipsum[1-2] Postremo aliquos futuros suspicor, qui me ad alias litteras vocent, genus hoc scribendi, etsi sit elegans, personae tamen et dignitatis esse negent~\cite{DKE1969,ww1920,kirk2288a,churchill1948,gibbs1863}.
+\section{Introduction}
 
-\section[A section discussing the first issue: \(J/\psi\)]{A section discussing the first issue: \ifpdftex\(\bm{J}/\bm{\psi}\)\else{\(\symbfup{J/\psi}\)}\fi}
+% Version 1
+High Performance Computing (HPC) represents a significant advancement in computational science, enabling the resolution of complex problems through the utilization of powerful computer systems and parallel processing techniques. Historically confined to specialized supercomputing facilities, HPC has evolved to embrace a wide array of applications across scientific research, engineering, financial modeling, and more. This chapter delves into the fundamental concepts of HPC, exploring its architecture, methodologies, and applications. Additionally, we discuss the emergence of cloud computing as a transformative force in making HPC more accessible and flexible.
 
+% Version 2
+High Performance Computing (HPC) refers to the use of supercomputers and parallel processing techniques to solve complex computational problems. 
 
-We begin with some ideas from the literature \cite{Fong2015,sharpe1}. 
-\begin{equation}
-\frac{\partial}{\partial t}\left[\rho\bigl(e + \lvert\vec{u}\rvert^2\big/2\bigr)\right]  + \nabla\cdot\left[\rho\bigl(h + \lvert\vec{u}\rvert^2\big/2 \bigr)\vec{u}\right]
- ={}-\nabla \cdot \vec{q} +  \rho \vec{u}\cdot\vec{g}+ \frac{\partial}{\partial x_j}\bigl(d_{ji}u_i\bigr)
-\end{equation}
- \lipsum[3]
+HPC systems are designed to perform at the highest operational rate, measured in floating-point operations per second (FLOPS). 
 
-\lipsum[4] And more citations~\cite{sharpe1,GSL}.  Then we write some more and include our citations~\cite{Swaminathan2017IDABRO,dlmf,amsmath}. The configuration is shown in Fig.~\ref{fig:golden2}.
+The field of HPC has traditionally been dominated by on-premises clusters with specialized hardware; however, the emergence of cloud computing has revolutionized access to these resources.
 
-%%%%%%%%%%%%%%%%%  begin figure  %%%%%%%%%%%%%%%%%%%%%%%%%%%
-\begin{figure}[t]
-% sample images are from mwe package, but should be found by latex in the tex tree w/o loading that package
-\begin{subfigure}[c]{0.495\textwidth}
-\centering{\includegraphics[alt={sample image},width=0.99\textwidth]{example-image-c}}%
-\subcaption{\label{fig:golden}}
-\end{subfigure}
-%%%%%%%% don't leave a break here
-\begin{subfigure}[c]{0.495\textwidth}
-\centering{\includegraphics[alt={sample image},width=0.99\textwidth]{example-image-c}}%
-\subcaption{\label{fig:golden2}}%
-\end{subfigure}%
-\caption{A figure with two subfigures: (a) first subfigure; (b) second subfigure.\label{fig:4}}
-\end{figure}
-%%%%%%%%%%%%%%%%%%%  end figure  %%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+Cloud-based HPC offers several advantages, including scalability, flexibility, and cost-efficiency.
 
-\lipsum[4]
+It allows researchers to quickly spin up large-scale computing environments tailored to their specific needs, without the upfront capital expenditure associated with physical infrastructure. 
 
-\subsection{Subsection~eqn.~\eqref{eqn:WT1}}
-\lipsum[5-6]
+This chapter provides an overview of the evolution of HPC, the transition to cloud-based solutions, and the fundamental concepts and architectures underpinning HPC systems.
 
-\subsubsection{A subsubsection}
-\lipsum[7]
+\section{Fundamental Concepts of HPC}
 
-\begin{equation}\label{eqn:WT1}
-L(\ifpdftex\bm{A}\else\symbfup{A}\fi) = \begin{pmatrix}
-\dfrac\varphi{(\varphi_1,\varepsilon_1)}			& 0 												 & \hdotsfor{3} 							& 0 \\[4\jot]
-\dfrac{\varphi k_{2,1}}{(\varphi_2,\varepsilon_1)}	& \dfrac\varphi{(\varphi_2,\varepsilon_2)}			 & 0 										& \hdotsfor{2} & 0 \\[4\jot]
-\dfrac{\varphi k_{3,1}}{(\varphi_3,\varepsilon_1)}	& \dfrac{\varphi k_{3,2}}{(\varphi_3,\varepsilon_2)} & \dfrac\varphi{(\varphi_3,\varepsilon_3)}	& 0 & \hdotsfor{1} & 0 \\[\jot]
-\vdots 												&  													 &  & \smash{\rotatebox{15}{$\ddots$}} &  & \vdots \\[\jot]
-\dfrac{\varphi k_{n-1, 1}}{(\varphi_{n-1},\varepsilon_1)}		& \dfrac{\varphi k_{n-1, 2}}{(\varphi_{n-1},\varepsilon_2)} & \hdotsfor{1} & 
-	\dfrac{\varphi k_{n-1,n-2}}{(\varphi_{n-1},\varepsilon_{n-2})}	& \dfrac{\varphi}{(\varphi_{n-1},\varepsilon_{n-1})} 		& 0 \\[4\jot]
-\dfrac{\varphi k_{n,1}}{(\varphi_n,\varepsilon_1)}				& \dfrac{\varphi k_{n,2}}{(\varphi_n,\varepsilon_2)}		& \hdotsfor{2}	&
-	\dfrac{\varphi k_{n,n-1}}{(\varphi_n,\varepsilon_{n-1})} 		& \dfrac{\varphi}{(\varphi_n,\varepsilon_n)}
-\end{pmatrix}
-\end{equation}
+\section{Definition and Scope}
 
-\section{Description our paradigm}\label{ch1:theidea}
+HPC involves the aggregation of computing power to deliver higher performance than traditional desktop systems. It enables the execution of advanced applications and simulations that require substantial processing power and memory. The scope of HPC encompasses various domains, including climate modeling, molecular dynamics, seismic analysis, and complex financial calculations.
 
-\lipsum[8] No dissertation is complete without footnotes.\footnote{First footnote. See section~\ref{sec:stratified-flow}.}\footnote{Another interesting detail.}\footnote{And another really important idea to have in mind~\cite{reynolds1958,clauser56,lienhard2020,johnson1980,johnson1965,mpl}.} 
+\section{HPC Architectures}
 
-\begin{figure}[t]
-% sample image is from mwe package, but should be found by latex in the tex tree w/o loading that package
-\centering\includegraphics[alt={sample image},width=6.67cm]{example-image-b} 
-\caption{Caption text\label{example-image-b}~\cite{GSL}.}
-\end{figure}
+HPC systems are typically classified into three main architectures:
 
+1. **Supercomputers**: The pinnacle of HPC, supercomputers consist of thousands of processors connected through high-speed networks. They are designed for maximum computational efficiency and are used in tasks requiring extensive parallel processing capabilities.
 
-\subsection{Conversion to a metaheuristic}
+2. **Clusters**: HPC clusters are composed of interconnected, off-the-shelf computers working together as a single system. Each node in the cluster runs its own instance of the operating system and contributes to the overall computational task through a distributed computing approach.
 
-\lipsum[11-12] This concept is discussed further in section~\ref{sec:stratified-flow}, and Refs.~\cite{euler1740,fourier1822}.
+3. **Grid Computing**: This architecture connects multiple dispersed computers, often geographically distributed, to form a virtual supercomputer. Grid computing harnesses the idle processing power of networked systems to solve large-scale computational problems.
 
+\section{HPC Methodologies}
 
+\subsection{Parallel Computing}
 
-\section{Other generalizations}
+Parallel computing is a cornerstone of HPC, allowing multiple computations to be performed simultaneously. There are several models of parallel computing:
 
-\subsection{The most general case}
+1. **Shared Memory Parallelism**: In this model, multiple processors access the same memory space, enabling direct communication and data sharing. OpenMP is a common framework used for shared memory parallelism.
 
-\lipsum[7] And another citation, so that our sources will be unambiguous~\cite{montijano2014}.
-\begin{gather}
-\ce{x Na(NH4)HPO4 ->[\Delta] (NaPO3)_x + x NH3 ^ + x H2O} \\[0.5em]
-\ce{^234_90Th -> ^0_-1$\beta${} + ^234_91Pa} \\[0.5em]
-\ce{SO4^2- + Ba^2+ -> BaSO4 v} \\[0.5em]
-\ce{Zn^2+
-<=>[+ 2OH-][+ 2H+]
-$\underset{\text{amphoteric hydroxide}}{\ce{Zn(OH)2 v}}$
-<=>[+ 2OH-][+ 2H+]
-$\underset{\text{tetrahydroxozincate}}{\ce{[Zn(OH)4]^2-}}$
-}
-\end{gather}
-These examples of chemical formul\ae\ are copied directly from the documentation of the \texttt{mhchem} package, which was used to typeset them.
+2. **Distributed Memory Parallelism**: Each processor has its own private memory, and processors communicate by passing messages. This model is often implemented using the Message Passing Interface (MPI).
 
-\section{Baroclinic generation of vorticity\label{sec:stratified-flow}}
+3. **Hybrid Parallelism**: Combines shared and distributed memory models to leverage the strengths of both. Hybrid parallelism is particularly effective in heterogeneous computing environments.
 
-Substitution of the particle acceleration and application Stokes theorem leads to the \textit{Kelvin-Bjerknes circulation theorem}, for
-$\rho \neq \text{fn}(p)$:
-\begin{align}
-\frac{d\Gamma}{dt} &{}= \frac{d}{dt} \int_{\mathcal{C}} \mathbf{u} \cdot d\mathbf{r}\\
-				   &{}= \int_{\mathcal{C}} \frac{D\mathbf{u}}{Dt} \cdot d\mathbf{r} + \underbrace{\int_{\mathcal{C}} \mathbf{u}\cdot d\biggl( \frac{d\mathbf{r}}{dt}\Biggr)}_{=\, 0} \\[-2pt]
-                   &{}= \iint_{\mathcal{S}} \nabla \times \frac{D\mathbf{u}}{Dt}  \cdot d\mathbf{A}\\
-                   &{}= \iint_{\mathcal{S}}  \nabla p \times \nabla \left( \frac{1}{\rho}\right) \cdot d\mathbf{A}
-\end{align}
+Parallel computing is at the heart of HPC, allowing for the simultaneous execution of multiple computations. 
 
-Baroclinic generation of vorticity accounts for the sea breeze and various other atmospheric currents in which temperature, rather than pressure, creates density gradients. Further, this phenomenon accounts for ocean currents in straits joining more and less saline seas, with surface currents flowing from the fresher to the saltier water and with bottom current going oppositely.
+The Message Passing Interface (MPI) is a standardized and portable message-passing system designed to function on a wide variety of parallel computing architectures. 
 
-%% Nomenclature list is optional
-%
-%  This environment takes three optional arguments:
-%		[1] adjust space between symbol and definition
-%		[2] name (heading) of the nomenclature list
-%		[3] level - can be "section" or "chapter" depending on whether you
-%			have one nomenclature list for whole thesis or one for each
-%			chapter. 
-\begin{nomenclature}[2em][Nomenclature for Chapter~1][section]
-\EntryHeading{Roman letters}
-\entry{$\mathcal{C}$}{material curve}
-\entry{$\mathbf{r}$}{material position [m]}
-\entry{$\mathbf{u}$}{velocity [m s$^{-1}$]}
-\EntryHeading{Greek letters}
-\entry{$\Gamma$}{circulation [m$^2$ s$^{-1}$]}
-\entry{$\rho$}{mass density [kg m$^{-3}$]}
-\end{nomenclature}
+This section will introduce the concepts of parallel computing, including task and data parallelism, and will delve into the fundamentals of MPI, explaining how it enables efficient communication and synchronization between processes in a parallel environment.
 
-%%%%%%%%%%%%%%% begin table %%%%%%%%%%%%%%%%%% 
-\begin{table}[t]
-\caption{The error function and complementary error function}\label{tab:1}%
-\centering{%
-\begin{tabular*}{0.8\textwidth}{@{\hspace*{1.5em}}@{\extracolsep{\fill}}ccc!{\hspace*{3.em}}ccc@{\hspace*{1.5em}}}
-\\[-0.5em]
-\toprule
-\multicolumn{1}{@{\hspace*{1.5em}}c}{$x$\rule{0pt}{8pt}} &
-\multicolumn{1}{c}{$\text{erf}(x)$} &
-\multicolumn{1}{c!{\hspace*{3.em}}}{$\text{erfc}(x)$} &
-\multicolumn{1}{c}{$x$} &
-\multicolumn{1}{c}{$\text{erf}(x)$} &
-\multicolumn{1}{c@{\hspace*{1.5em}}}{$\text{erfc}(x)$} \\ \midrule
-0.00 & 0.00000 & 1.00000 & 1.10 & 0.88021 & 0.11980 \\
-0.05 & 0.05637 & 0.94363 & 1.20 & 0.91031 & 0.08969 \\
-0.10 & 0.11246 & 0.88754 & 1.30 & 0.93401 & 0.06599 \\
-0.15 & 0.16800 & 0.83200 & 1.40 & 0.95229 & 0.04771 \\
-0.20 & 0.22270 & 0.77730 & 1.50 & 0.96611 & 0.03389 \\
-0.30 & 0.32863 & 0.67137 & 1.60 & 0.97635 & 0.02365 \\
-0.40 & 0.42839 & 0.57161 & 1.70 & 0.98379 & 0.01621 \\
-0.50 & 0.52050 & 0.47950 & 1.80 & 0.98909 & 0.01091 \\
-0.60 & 0.60386 & 0.39614 & 1.82\makebox[0pt][l]{14} & 0.99000 & 0.01000 \\
-0.70 & 0.67780 & 0.32220 & 1.90 & 0.99279 & 0.00721 \\
-0.80 & 0.74210 & 0.25790 & 2.00 & 0.99532 & 0.00468 \\
-0.90 & 0.79691 & 0.20309 & 2.50 & 0.99959 & 0.00041 \\
-1.00 & 0.84270 & 0.15730 & 3.00 & 0.99998 & 0.00002 \\
-\bottomrule
-\end{tabular*}
-}%
-\end{table}
-%%%%%%%%%%%%%%%% end table %%%%%%%%%%%%%%%%%%% 
+\subsection{Performance Optimization}
 
+Performance optimization in HPC involves various strategies to maximize computational efficiency:
+
+1. **Load Balancing**: Ensuring even distribution of work among processors to prevent bottlenecks and idle times.
+   
+2. **Memory Management**: Efficient utilization of memory hierarchies, including cache optimization and minimizing memory latency.
+   
+3. **Algorithmic Optimization**: Adapting algorithms to leverage parallelism and reduce computational complexity.
+
+\section{Applications of HPC}
+
+HPC is utilized in a wide array of applications, ranging from scientific research to industrial processes. 
+
+This section will provide a comprehensive overview of the major use cases of HPC, including climate modeling, computational fluid dynamics (CFD), genomics, financial modeling, and materials science. 
+
+Each of these use cases demands immense computational power, making them ideal candidates for HPC solutions.
+
+HPC is pivotal in driving innovation and discovery across multiple fields:
+
+1. **Scientific Research**: Enables simulations and modeling of complex systems such as climate change, astrophysics, and genomics.
+
+2. **Engineering**: Facilitates the design and testing of new materials, aerodynamics, and structural analysis.
+
+3. **Finance**: Supports risk modeling, high-frequency trading, and financial forecasting.
+
+4. **Medicine**: Advances drug discovery, personalized medicine, and large-scale genomic analysis.
+
+\section{HPC in the Cloud}
+
+Cloud-based High Performance Computing (HPC) has emerged as a compelling alternative to traditional on-premises HPC infrastructure. 
+
+By leveraging cloud resources, organizations can access virtually unlimited computational power, storage, and networking capabilities on demand, without the need for substantial upfront investment in hardware. 
+
+This chapter explores the architecture, benefits, challenges, deployment strategies, and applications of cloud-based HPC, providing a comprehensive overview of how cloud technologies are transforming the landscape of high-performance computing.
+
+\subsection{The Emergence of Cloud-based HPC}
+
+The integration of HPC with cloud computing has democratized access to powerful computational resources. Cloud providers offer HPC as a service, enabling organizations to scale their computing needs dynamically without the significant upfront investment in physical infrastructure.
+
+\subsection{Advantages of Cloud-based HPC}
+
+1. **Scalability**: On-demand provisioning of resources allows for flexible scaling according to workload requirements.
+
+2. **Cost-efficiency**: Pay-as-you-go models reduce capital expenditure and operational costs associated with maintaining dedicated HPC systems.
+
+3. **Accessibility**: Cloud-based HPC makes advanced computational resources accessible to smaller organizations and research institutions.
+
+\subsection{Challenges and Considerations}
+
+1. **Performance Variability**: Network latency and variability in cloud resource performance can impact the consistency of HPC tasks.
+
+2. **Data Transfer**: Large-scale data movement to and from the cloud can be time-consuming and costly.
+
+3. **Security**: Ensuring the security of sensitive data and compliance with regulatory requirements is critical in cloud environments.
+
+\section{History of HPC}
+The history of High Performance Computing (HPC) dates back to the early days of computing, with significant milestones such as the development of vector processors in the 1960s and the advent of supercomputers like the Cray-1 in the 1970s. 
+
+HPC has since evolved through several generations, with each bringing more powerful architectures and increased computational capabilities. 
+
+This section will trace the evolution of HPC, highlighting key innovations that have shaped the field, from the development of parallel processing to the rise of massively parallel processing (MPP) systems in the 1990s.
+
+\section{Conclusion}
+
+High Performance Computing remains a critical enabler of advanced computational tasks, driving innovation across various sectors. The advent of cloud computing has further enhanced the accessibility and flexibility of HPC, providing scalable solutions to meet diverse computational needs. While challenges exist, the strategic integration of HPC with cloud platforms promises significant advancements in computational science and engineering. This chapter has provided a foundational understanding of HPC architectures, methodologies, and applications, setting the stage for further exploration into optimizing HPC performance in cloud environments.

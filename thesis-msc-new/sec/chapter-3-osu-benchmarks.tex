@@ -1,0 +1,26 @@
+% From mitthesis package
+% Version: 1.04, 2023/10/19
+% Documentation: https://ctan.org/pkg/mitthesis
+
+
+\chapter{OSU Benchmarks}
+
+\section{Introduction}
+
+The OSU Micro-Benchmarks (OMB) suite is a set of benchmarks developed by the Ohio State University to evaluate the performance of MPI (Message Passing Interface) libraries. 
+
+These benchmarks are widely used in the HPC community to measure point-to-point and collective communication performance, as well as MPI synchronization mechanisms.
+
+In this chapter, we provide an overview of the OSU Benchmarks, their relevance in the context of HPC, and how they can be used to assess the performance of different configurations within AWS ParallelCluster. 
+
+We will also discuss the methodology used for running these benchmarks and interpreting the results.
+
+\section{Alternative Benchmarks for HPC}
+While the OSU Micro-Benchmarks are widely used for evaluating MPI performance, there are several other benchmark suites that can be used to assess various aspects of HPC systems. This section will provide a list of alternative benchmarks, including:
+
+1. HPCG (High Performance Conjugate Gradients): A benchmark that complements the High Performance Linpack (HPL) benchmark by focusing on memory bandwidth and communication rather than raw computational power.
+2. SPEC MPI: A benchmark suite designed to evaluate the performance of parallel systems running MPI applications, offering a diverse set of workloads.
+3. STREAM: A simple yet powerful benchmark that measures memory bandwidth, crucial for understanding the performance of memory-intensive HPC applications.
+4. LINPACK: The classic benchmark used to rank supercomputers in the Top500 list, focusing on solving dense linear systems.
+
+This section will provide a brief overview of each benchmark, discussing their relevance and applicability to different HPC scenarios.
