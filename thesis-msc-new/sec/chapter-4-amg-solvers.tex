@@ -5,148 +5,71 @@
 
 \chapter{Algebraic Multi-Grid Solvers}
 
-% Version 1
-Algebraic Multigrid (AMG) solvers are powerful iterative methods used for solving large, sparse linear systems of equations, typically arising from the discretization of partial differential equations (PDEs). Unlike geometric multigrid methods, which rely on the geometric structure of the problem, AMG solvers operate purely on the algebraic properties of the matrix, making them highly versatile for a wide range of applications. This chapter provides an in-depth exploration of AMG solvers, including their theoretical foundation, algorithmic components, implementation strategies, and practical applications in computational science and engineering.
+Algebraic Multigrid (AMG) solvers are powerful iterative methods used for solving large, sparse linear systems of equations, typically arising from the discretization of partial differential equations (PDEs).
 
-Algebraic Multigrid solvers offer a versatile and powerful approach for solving large, sparse linear systems of equations. By leveraging the algebraic properties of the problem, AMG solvers can handle complex geometries and unstructured grids, making them applicable to a wide range of scientific and engineering problems. Understanding the theoretical foundation, algorithmic components, and implementation strategies of AMG solvers is essential for their effective use in high-performance computing environments. This chapter has provided a comprehensive overview of AMG solvers, highlighting their significance and practical applications in computational science and engineering.
+By leveraging the algebraic properties of the problem, AMG solvers can handle complex geometries and unstructured grids, making them applicable to a wide range of scientific and engineering challenges.
 
-% Version 2
-Algebraic Multi-Grid (AMG) solvers are iterative methods used to solve large sparse linear systems, which arise frequently in scientific computing and engineering applications. 
+This chapter provides a comprehensive overview of AMG solvers, exploring their theoretical foundation, algorithmic components, implementations, and practical applications in computational science and engineering. 
 
-AMG solvers are known for their efficiency and scalability, making them ideal candidates for HPC environments.
-
-This chapter focuses on the principles and applications of AMG solvers, exploring their implementation within HPC frameworks. 
-
-We will also examine the specific challenges and considerations when running AMG solvers in a cloud-based HPC environment using AWS ParallelCluster.
+We will also show how to run an AMG Solver in a HPC environment deployed with AWS ParallelCluster.
 
 \section{Basic Concepts}
 
-Multigrid methods are designed to accelerate the convergence of iterative solvers by addressing the problem across multiple scales. 
+TODO
 
-They decompose the problem into coarser and coarser grids, solving on these grids iteratively and correcting errors on finer grids. 
+\subsection{Coarsening}
 
-The basic components of a multigrid cycle include:
+TODO
 
-- **Smoothing**: Reducing high-frequency errors on a given grid.
-- **Restriction**: Transferring the residual to a coarser grid.
-- **Coarse Grid Correction**: Solving the coarser grid problem approximately.
-- **Prolongation**: Interpolating the correction back to the finer grid.
+\subsection{Interpolation}
 
-\subsection{Algebraic Multigrid Concept}
+TODO
 
-AMG extends the multigrid concept by constructing the multigrid hierarchy based on the matrix's algebraic properties rather than the underlying physical geometry.
+\subsection{Smoothing}
 
-This is particularly useful for unstructured grids or problems with complex geometries.
+TODO
 
-1. **Coarsening**: AMG creates a sequence of increasingly coarser matrices that approximate the original fine-grid matrix.
-2. **Interpolation (Prolongation)**: Defines how solutions on the coarser grids are interpolated back to the finer grids.
-3. **Smoothing**: Uses relaxation methods to damp high-frequency errors on each level.
+\section{Algorithms}
 
-\section{Components of AMG Solvers}
+TODO
 
-\subsection{Coarsening Strategies}
+\subsection{V-Cycle Algorithm}
 
-Coarsening is the process of selecting a subset of variables to represent the problem at a coarser level. Common coarsening strategies include:
+TODO
 
-- **Classical AMG Coarsening**: Nodes are divided into coarse and fine sets based on their connectivity and influence.
-- **Aggregation-Based Coarsening**: Groups of nodes (aggregates) are treated as single units in the coarser grid.
+\subsection{W-Cycle Algorithm}
 
-\subsection{Interpolation Operators}
+TODO
 
-Interpolation operators define how the coarse grid corrections are interpolated to the finer grid. Key types include:
+\subsection{F-Cycle Algorithm}
 
-- **Direct Interpolation**: Uses direct connections between fine and coarse nodes.
-- **Smoothed Aggregation**: Combines aggregation with a smoothing step to improve interpolation quality.
+TODO
 
-\subsection{Smoothing Techniques}
+\section{Implementations}
 
-Smoothing techniques reduce high-frequency errors on each grid level. Common smoothers include:
-
-- **Jacobi Smoothing**: Simple and easy to implement but may require many iterations.
-- **Gauss-Seidel Smoothing**: More efficient than Jacobi but can be harder to parallelize.
-- **Symmetric Gauss-Seidel**: A combination of forward and backward Gauss-Seidel sweeps.
-
-\section{AMG Algorithms}
-
-\subsection{The V-Cycle Algorithm}
-
-The V-cycle is the most commonly used multigrid cycle. It involves:
-
-1. **Pre-Smoothing**: Applying a few iterations of a smoother on the fine grid.
-2. **Restriction**: Transferring the residual to the coarse grid.
-3. **Coarse Grid Correction**: Solving the coarse grid problem approximately.
-4. **Prolongation**: Interpolating the coarse grid correction back to the fine grid.
-5. **Post-Smoothing**: Applying additional smoothing iterations on the fine grid.
-
-\subsection{The W-Cycle and F-Cycle Algorithms}
-
-- **W-Cycle**: Similar to the V-cycle but performs additional coarse grid corrections, leading to more robust but computationally expensive solutions.
-- **F-Cycle**: A hybrid approach combining features of both V-cycle and W-cycle, providing a balance between robustness and efficiency.
-
-\section{Implementation of AMG Solvers}
+TODO
 
 \subsection{Data Structures}
 
-Efficient implementation of AMG solvers requires appropriate data structures to store sparse matrices, such as:
-
-- **Compressed Sparse Row (CSR)**: Efficient for matrix-vector multiplication.
-- **Coordinate List (COO)**: Flexible and simple, often used for constructing matrices.
+TODO
 
 \subsection{Parallelization Strategies}
 
-AMG solvers can benefit from parallelization to handle large-scale problems. Strategies include:
+TODO
 
-- **Domain Decomposition**: Dividing the problem into subdomains and solving them in parallel.
-- **Parallel Smoothing**: Implementing parallel versions of smoothing algorithms like Jacobi or Gauss-Seidel.
-- **Load Balancing**: Ensuring even distribution of computational workload across processors.
+\section{Performance}
 
-\section{Performance Considerations}
+TODO: describe convergence rate, computational complexity, scalability.
 
-\subsection{Convergence Rate}
 
-The convergence rate of AMG solvers depends on factors such as the quality of the coarsening strategy, the effectiveness of interpolation, and the choice of smoother. Balancing these components is crucial for optimal performance.
+\section{Applications}
 
-\subsection{Computational Complexity}
+TODO: describe applications in Compitational Fluid Dynamics, Structural Analysis, Electromagnetic Simulations
 
-AMG solvers aim to achieve linear computational complexity with respect to the number of unknowns. Efficient implementation and parallelization are key to maintaining this complexity in practice.
+\subsection{Implementations}
 
-\subsection{Scalability}
-
-Scalability is a critical consideration for AMG solvers, especially for large-scale problems. Implementing parallel AMG solvers and optimizing communication overhead are essential for achieving good scalability.
-
-\section{Applications of AMG Solvers}
-
-Algebraic Multi-Grid (AMG) solvers are used in a variety of applications that require the solution of large sparse linear systems. 
-
-This section will explore the primary use cases for AMG solvers, including fluid dynamics, structural mechanics, electromagnetics, and reservoir simulation. 
-
-These use cases often involve complex simulations where AMG solvers can significantly reduce computation time, making them a critical component in many scientific and engineering workflows.
-
-\subsection{Computational Fluid Dynamics (CFD)}
-
-AMG solvers are widely used in CFD for solving discretized Navier-Stokes equations, enabling efficient simulations of fluid flow and heat transfer.
-
-\subsection{Structural Analysis}
-
-In structural analysis, AMG solvers facilitate the solution of large, sparse systems arising from finite element discretizations, aiding in the analysis of stress, strain, and deformation in structures.
-
-\subsection{Electromagnetic Simulations}
-
-AMG solvers are employed in the simulation of electromagnetic fields, particularly in solving Maxwell's equations for complex geometries and materials.
-
-\subsection{Implementations of AMG Solvers}
-Several implementations of AMG solvers exist, each tailored to different types of problems and computational environments. This section will provide a list of popular AMG solver implementations, including:
-
-1. Hypre: A library of high-performance preconditioners and solvers, widely used in parallel computing environments.
-2. ML (Multi-level Preconditioner Package): Part of the Trilinos project, designed for solving large linear systems on parallel architectures.
-3. SAMG (Algebraic Multigrid Solver by Fraunhofer SCAI): A commercial solver known for its efficiency in solving large-scale industrial problems.
-4. AMGCL: A header-only C++ library for parallel algebraic multigrid methods, optimized for modern hardware.
-
-We will also discuss the pros and cons of each implementation, as well as their suitability for different types of HPC workloads.
+TODO: describe the most famouse libraries èrpviodiong AMG solvers and for every library provide a representative example.
 
 \section{Running AMG Solvers on a Cluster}
-This section will provide a practical guide on how to run AMG solvers on an HPC cluster, focusing on the integration with AWS ParallelCluster. 
 
-We will cover the necessary steps for setting up the environment, compiling the solver, and running it across multiple nodes. 
-
-Additionally, we will discuss performance tuning strategies, such as optimizing communication patterns and load balancing, to ensure that the AMG solvers run efficiently in a distributed computing environment.
+TODO: describe how to run an AMG solver on a pcluster cluster (provide config files and code).
