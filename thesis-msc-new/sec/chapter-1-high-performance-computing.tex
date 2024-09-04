@@ -5,121 +5,76 @@
 
 \chapter{High Performance Computing}
 
-\section{Introduction}
-
-% Version 1
-High Performance Computing (HPC) represents a significant advancement in computational science, enabling the resolution of complex problems through the utilization of powerful computer systems and parallel processing techniques. Historically confined to specialized supercomputing facilities, HPC has evolved to embrace a wide array of applications across scientific research, engineering, financial modeling, and more. This chapter delves into the fundamental concepts of HPC, exploring its architecture, methodologies, and applications. Additionally, we discuss the emergence of cloud computing as a transformative force in making HPC more accessible and flexible.
-
-% Version 2
 High Performance Computing (HPC) refers to the use of supercomputers and parallel processing techniques to solve complex computational problems. 
 
-HPC systems are designed to perform at the highest operational rate, measured in floating-point operations per second (FLOPS). 
+From its beginning in the 70s, HPC has evolved to embrace a wide array of applications across scientific research, engineering, financial modeling, artificial intelligence and more. 
 
-The field of HPC has traditionally been dominated by on-premises clusters with specialized hardware; however, the emergence of cloud computing has revolutionized access to these resources.
+HPC represents a significant advancement in computational science and plays a strategic role to enable compute intensive tasks, driving innovation across various sectors. 
 
-Cloud-based HPC offers several advantages, including scalability, flexibility, and cost-efficiency.
+The field of HPC has traditionally been dominated by on-premises (on-prem) infrastructures with specialized hardware; however, Cloud computing is now a transformative force in making HPC more flexible and accessible.
 
-It allows researchers to quickly spin up large-scale computing environments tailored to their specific needs, without the upfront capital expenditure associated with physical infrastructure. 
+This chapter delves into the fundamental concepts of HPC, exploring its architecture, methodologies, applications. We will also dive deep into how Cloud infrastructures, opposed to traditional on-prem, represent a disruptive opportunity for HPC.
 
-This chapter provides an overview of the evolution of HPC, the transition to cloud-based solutions, and the fundamental concepts and architectures underpinning HPC systems.
+\section{Definition, Scope and History}
 
-\section{Fundamental Concepts of HPC}
+TODO
 
-\section{Definition and Scope}
+\section{Architectures}
 
-HPC involves the aggregation of computing power to deliver higher performance than traditional desktop systems. It enables the execution of advanced applications and simulations that require substantial processing power and memory. The scope of HPC encompasses various domains, including climate modeling, molecular dynamics, seismic analysis, and complex financial calculations.
+TODO
 
-\section{HPC Architectures}
+\section{Methodologies}
 
-HPC systems are typically classified into three main architectures:
-
-1. **Supercomputers**: The pinnacle of HPC, supercomputers consist of thousands of processors connected through high-speed networks. They are designed for maximum computational efficiency and are used in tasks requiring extensive parallel processing capabilities.
-
-2. **Clusters**: HPC clusters are composed of interconnected, off-the-shelf computers working together as a single system. Each node in the cluster runs its own instance of the operating system and contributes to the overall computational task through a distributed computing approach.
-
-3. **Grid Computing**: This architecture connects multiple dispersed computers, often geographically distributed, to form a virtual supercomputer. Grid computing harnesses the idle processing power of networked systems to solve large-scale computational problems.
-
-\section{HPC Methodologies}
+TODO
 
 \subsection{Parallel Computing}
 
-Parallel computing is a cornerstone of HPC, allowing multiple computations to be performed simultaneously. There are several models of parallel computing:
-
-1. **Shared Memory Parallelism**: In this model, multiple processors access the same memory space, enabling direct communication and data sharing. OpenMP is a common framework used for shared memory parallelism.
-
-2. **Distributed Memory Parallelism**: Each processor has its own private memory, and processors communicate by passing messages. This model is often implemented using the Message Passing Interface (MPI).
-
-3. **Hybrid Parallelism**: Combines shared and distributed memory models to leverage the strengths of both. Hybrid parallelism is particularly effective in heterogeneous computing environments.
-
-Parallel computing is at the heart of HPC, allowing for the simultaneous execution of multiple computations. 
-
-The Message Passing Interface (MPI) is a standardized and portable message-passing system designed to function on a wide variety of parallel computing architectures. 
-
-This section will introduce the concepts of parallel computing, including task and data parallelism, and will delve into the fundamentals of MPI, explaining how it enables efficient communication and synchronization between processes in a parallel environment.
+TODO
 
 \subsection{Performance Optimization}
 
-Performance optimization in HPC involves various strategies to maximize computational efficiency:
+TODO
 
-1. **Load Balancing**: Ensuring even distribution of work among processors to prevent bottlenecks and idle times.
-   
-2. **Memory Management**: Efficient utilization of memory hierarchies, including cache optimization and minimizing memory latency.
-   
-3. **Algorithmic Optimization**: Adapting algorithms to leverage parallelism and reduce computational complexity.
+\section{Applications}
 
-\section{Applications of HPC}
+TODO
 
-HPC is utilized in a wide array of applications, ranging from scientific research to industrial processes. 
+\section{New Trends}
 
-This section will provide a comprehensive overview of the major use cases of HPC, including climate modeling, computational fluid dynamics (CFD), genomics, financial modeling, and materials science. 
+TODO
 
-Each of these use cases demands immense computational power, making them ideal candidates for HPC solutions.
+\section{On-Premises Infrastructures}
 
-HPC is pivotal in driving innovation and discovery across multiple fields:
+TODO
 
-1. **Scientific Research**: Enables simulations and modeling of complex systems such as climate change, astrophysics, and genomics.
+\subsection{Basic Components}
 
-2. **Engineering**: Facilitates the design and testing of new materials, aerodynamics, and structural analysis.
+TODO
 
-3. **Finance**: Supports risk modeling, high-frequency trading, and financial forecasting.
+\subsection{Cluster Topologies}
 
-4. **Medicine**: Advances drug discovery, personalized medicine, and large-scale genomic analysis.
+TODO
 
-\section{HPC in the Cloud}
+\subsection{Deployment Strategies}
 
-Cloud-based High Performance Computing (HPC) has emerged as a compelling alternative to traditional on-premises HPC infrastructure. 
+TODO
 
-By leveraging cloud resources, organizations can access virtually unlimited computational power, storage, and networking capabilities on demand, without the need for substantial upfront investment in hardware. 
+\subsection{Advantages and Challeges}
 
-This chapter explores the architecture, benefits, challenges, deployment strategies, and applications of cloud-based HPC, providing a comprehensive overview of how cloud technologies are transforming the landscape of high-performance computing.
+TODO
 
-\subsection{The Emergence of Cloud-based HPC}
+\section{Cloud Infrastructures}
 
-The integration of HPC with cloud computing has democratized access to powerful computational resources. Cloud providers offer HPC as a service, enabling organizations to scale their computing needs dynamically without the significant upfront investment in physical infrastructure.
+TODO
 
-\subsection{Advantages of Cloud-based HPC}
+\subsection{Deployment Strategies}
 
-1. **Scalability**: On-demand provisioning of resources allows for flexible scaling according to workload requirements.
+TODO
 
-2. **Cost-efficiency**: Pay-as-you-go models reduce capital expenditure and operational costs associated with maintaining dedicated HPC systems.
+\subsection{Advantages and Challeges}
 
-3. **Accessibility**: Cloud-based HPC makes advanced computational resources accessible to smaller organizations and research institutions.
+TODO
 
-\subsection{Challenges and Considerations}
+\subsection{Services and Tools}
 
-1. **Performance Variability**: Network latency and variability in cloud resource performance can impact the consistency of HPC tasks.
-
-2. **Data Transfer**: Large-scale data movement to and from the cloud can be time-consuming and costly.
-
-3. **Security**: Ensuring the security of sensitive data and compliance with regulatory requirements is critical in cloud environments.
-
-\section{History of HPC}
-The history of High Performance Computing (HPC) dates back to the early days of computing, with significant milestones such as the development of vector processors in the 1960s and the advent of supercomputers like the Cray-1 in the 1970s. 
-
-HPC has since evolved through several generations, with each bringing more powerful architectures and increased computational capabilities. 
-
-This section will trace the evolution of HPC, highlighting key innovations that have shaped the field, from the development of parallel processing to the rise of massively parallel processing (MPP) systems in the 1990s.
-
-\section{Conclusion}
-
-High Performance Computing remains a critical enabler of advanced computational tasks, driving innovation across various sectors. The advent of cloud computing has further enhanced the accessibility and flexibility of HPC, providing scalable solutions to meet diverse computational needs. While challenges exist, the strategic integration of HPC with cloud platforms promises significant advancements in computational science and engineering. This chapter has provided a foundational understanding of HPC architectures, methodologies, and applications, setting the stage for further exploration into optimizing HPC performance in cloud environments.
+TODO

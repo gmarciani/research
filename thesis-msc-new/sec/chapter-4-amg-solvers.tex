@@ -3,12 +3,12 @@
 % Documentation: https://ctan.org/pkg/mitthesis
 
 
-\chapter{Algebraic MultiGrid: Solvers and Applications}
-
-\section{Introduction}
+\chapter{Algebraic Multi-Grid Solvers}
 
 % Version 1
 Algebraic Multigrid (AMG) solvers are powerful iterative methods used for solving large, sparse linear systems of equations, typically arising from the discretization of partial differential equations (PDEs). Unlike geometric multigrid methods, which rely on the geometric structure of the problem, AMG solvers operate purely on the algebraic properties of the matrix, making them highly versatile for a wide range of applications. This chapter provides an in-depth exploration of AMG solvers, including their theoretical foundation, algorithmic components, implementation strategies, and practical applications in computational science and engineering.
+
+Algebraic Multigrid solvers offer a versatile and powerful approach for solving large, sparse linear systems of equations. By leveraging the algebraic properties of the problem, AMG solvers can handle complex geometries and unstructured grids, making them applicable to a wide range of scientific and engineering problems. Understanding the theoretical foundation, algorithmic components, and implementation strategies of AMG solvers is essential for their effective use in high-performance computing environments. This chapter has provided a comprehensive overview of AMG solvers, highlighting their significance and practical applications in computational science and engineering.
 
 % Version 2
 Algebraic Multi-Grid (AMG) solvers are iterative methods used to solve large sparse linear systems, which arise frequently in scientific computing and engineering applications. 
@@ -19,11 +19,13 @@ This chapter focuses on the principles and applications of AMG solvers, explorin
 
 We will also examine the specific challenges and considerations when running AMG solvers in a cloud-based HPC environment using AWS ParallelCluster.
 
-\section{Theoretical Foundation of AMG Solvers}
+\section{Basic Concepts}
 
-\subsection{Multigrid Methods Overview}
+Multigrid methods are designed to accelerate the convergence of iterative solvers by addressing the problem across multiple scales. 
 
-Multigrid methods are designed to accelerate the convergence of iterative solvers by addressing the problem across multiple scales. They decompose the problem into coarser and coarser grids, solving on these grids iteratively and correcting errors on finer grids. The basic components of a multigrid cycle include:
+They decompose the problem into coarser and coarser grids, solving on these grids iteratively and correcting errors on finer grids. 
+
+The basic components of a multigrid cycle include:
 
 - **Smoothing**: Reducing high-frequency errors on a given grid.
 - **Restriction**: Transferring the residual to a coarser grid.
@@ -32,7 +34,9 @@ Multigrid methods are designed to accelerate the convergence of iterative solver
 
 \subsection{Algebraic Multigrid Concept}
 
-AMG extends the multigrid concept by constructing the multigrid hierarchy based on the matrix's algebraic properties rather than the underlying physical geometry. This is particularly useful for unstructured grids or problems with complex geometries.
+AMG extends the multigrid concept by constructing the multigrid hierarchy based on the matrix's algebraic properties rather than the underlying physical geometry.
+
+This is particularly useful for unstructured grids or problems with complex geometries.
 
 1. **Coarsening**: AMG creates a sequence of increasingly coarser matrices that approximate the original fine-grid matrix.
 2. **Interpolation (Prolongation)**: Defines how solutions on the coarser grids are interpolated back to the finer grids.
@@ -96,6 +100,20 @@ AMG solvers can benefit from parallelization to handle large-scale problems. Str
 - **Parallel Smoothing**: Implementing parallel versions of smoothing algorithms like Jacobi or Gauss-Seidel.
 - **Load Balancing**: Ensuring even distribution of computational workload across processors.
 
+\section{Performance Considerations}
+
+\subsection{Convergence Rate}
+
+The convergence rate of AMG solvers depends on factors such as the quality of the coarsening strategy, the effectiveness of interpolation, and the choice of smoother. Balancing these components is crucial for optimal performance.
+
+\subsection{Computational Complexity}
+
+AMG solvers aim to achieve linear computational complexity with respect to the number of unknowns. Efficient implementation and parallelization are key to maintaining this complexity in practice.
+
+\subsection{Scalability}
+
+Scalability is a critical consideration for AMG solvers, especially for large-scale problems. Implementing parallel AMG solvers and optimizing communication overhead are essential for achieving good scalability.
+
 \section{Applications of AMG Solvers}
 
 Algebraic Multi-Grid (AMG) solvers are used in a variety of applications that require the solution of large sparse linear systems. 
@@ -116,20 +134,6 @@ In structural analysis, AMG solvers facilitate the solution of large, sparse sys
 
 AMG solvers are employed in the simulation of electromagnetic fields, particularly in solving Maxwell's equations for complex geometries and materials.
 
-\section{Performance Considerations}
-
-\subsection{Convergence Rate}
-
-The convergence rate of AMG solvers depends on factors such as the quality of the coarsening strategy, the effectiveness of interpolation, and the choice of smoother. Balancing these components is crucial for optimal performance.
-
-\subsection{Computational Complexity}
-
-AMG solvers aim to achieve linear computational complexity with respect to the number of unknowns. Efficient implementation and parallelization are key to maintaining this complexity in practice.
-
-\subsection{Scalability}
-
-Scalability is a critical consideration for AMG solvers, especially for large-scale problems. Implementing parallel AMG solvers and optimizing communication overhead are essential for achieving good scalability.
-
 \subsection{Implementations of AMG Solvers}
 Several implementations of AMG solvers exist, each tailored to different types of problems and computational environments. This section will provide a list of popular AMG solver implementations, including:
 
@@ -146,7 +150,3 @@ This section will provide a practical guide on how to run AMG solvers on an HPC 
 We will cover the necessary steps for setting up the environment, compiling the solver, and running it across multiple nodes. 
 
 Additionally, we will discuss performance tuning strategies, such as optimizing communication patterns and load balancing, to ensure that the AMG solvers run efficiently in a distributed computing environment.
-
-\section{Conclusion}
-
-Algebraic Multigrid solvers offer a versatile and powerful approach for solving large, sparse linear systems of equations. By leveraging the algebraic properties of the problem, AMG solvers can handle complex geometries and unstructured grids, making them applicable to a wide range of scientific and engineering problems. Understanding the theoretical foundation, algorithmic components, and implementation strategies of AMG solvers is essential for their effective use in high-performance computing environments. This chapter has provided a comprehensive overview of AMG solvers, highlighting their significance and practical applications in computational science and engineering.

@@ -5,9 +5,7 @@
 
 \chapter{OSU Benchmarks}
 
-\section{Introduction}
-
-The OSU Micro-Benchmarks (OMB) suite is a set of benchmarks developed by the Ohio State University to evaluate the performance of MPI (Message Passing Interface) libraries. 
+The \textbf{OSU Micro-Benchmarks (OMB) Suite} is a set of benchmarks developed by the \textit{Ohio State University} to evaluate the performance of MPI (Message Passing Interface) libraries. 
 
 These benchmarks are widely used in the HPC community to measure point-to-point and collective communication performance, as well as MPI synchronization mechanisms.
 
@@ -15,12 +13,20 @@ In this chapter, we provide an overview of the OSU Benchmarks, their relevance i
 
 We will also discuss the methodology used for running these benchmarks and interpreting the results.
 
-\section{Alternative Benchmarks for HPC}
-While the OSU Micro-Benchmarks are widely used for evaluating MPI performance, there are several other benchmark suites that can be used to assess various aspects of HPC systems. This section will provide a list of alternative benchmarks, including:
+\section{Measurements}
 
-1. HPCG (High Performance Conjugate Gradients): A benchmark that complements the High Performance Linpack (HPL) benchmark by focusing on memory bandwidth and communication rather than raw computational power.
-2. SPEC MPI: A benchmark suite designed to evaluate the performance of parallel systems running MPI applications, offering a diverse set of workloads.
-3. STREAM: A simple yet powerful benchmark that measures memory bandwidth, crucial for understanding the performance of memory-intensive HPC applications.
-4. LINPACK: The classic benchmark used to rank supercomputers in the Top500 list, focusing on solving dense linear systems.
+TODO: Add content describing all the bechmarks in the OSU suite.
 
-This section will provide a brief overview of each benchmark, discussing their relevance and applicability to different HPC scenarios.
+\section{Running the Benchmarks}
+
+TODO: Add content showing how to install OSU, run them on a cluster suing SLURM and interpreting the results.
+
+\section{Other Benchmarks}
+While the OSU Micro-Benchmarks are widely used for evaluating MPI performance, there are several other benchmark suites that can be used to assess various aspects of HPC systems:
+
+\begin{itemize}
+    \item \textbf{LINPACK}: The classic benchmark used to rank supercomputers in the Top500 list, focusing on solving dense linear systems.
+    \item \textbf{HPCG (High Performance Conjugate Gradients)}: A benchmark that complements the High Performance Linpack (HPL) benchmark by focusing on memory bandwidth and communication rather than raw computational power.
+    \item \textbf{SPEC MPI}: A benchmark suite designed to evaluate the performance of parallel systems running MPI applications, offering a diverse set of workloads.
+    \item \textbf{STREAM}: A simple yet powerful benchmark that measures memory bandwidth, crucial for understanding the performance of memory-intensive HPC applications.
+\end{itemize}
