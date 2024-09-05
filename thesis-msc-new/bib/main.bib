@@ -1,325 +1,78 @@
-%% Sample bibliography file for mitthesis.cls
-%%
-%% Revised: 12 September 2023
-%% Copyright John H. Lienhard, MIT
-%% Offered under the MIT license: https://ctan.org/license/mit 
-
-%% REFER TO biblatex documentation for details about possible fields
-%% bibtex support depends on the bibtex style (.bst) and is usually more limited
-
-@article{DKE1969,
-  author  =	{Donald K. Edwards},
-  year	  =	{1969},
-  title	  =	{Radiative Transfer Characteristics of Materials},
-  journal = {{ASME} J. Heat Transfer},
-  volume  =	91,
-  number  = 1,
-  pages   = {1--15},
-  doi     = {10.1115/1.3580108},
-  month   = feb,
+@inproceedings{AmgPreconditioners2023,
+   abstract = {We describe preliminary results from a multi-objective graph matching algorithm, in the coarsening step of an aggregation-based Algebraic MultiGrid (AMG) preconditioner, for solving large and sparse linear systems of equations on high-end parallel computers. We have two objectives. First, we wish to improve the convergence behavior of the AMG method when applied to highly anisotropic problems. Second, we wish to extend the parallel package PSCToolkit to exploit multi-threaded parallelism at the node level on multi-core processors. Our matching proposal balances the need to simultaneously compute high weights and large cardinalities by a new formulation of the weighted matching problem combining both these objectives using a parameter. We compute the matching by a parallel 2/3-approximation algorithm for maximum weight matchings. Results with the new matching algorithm show that for a suitable choice of the parameter we compute effective preconditioners in the presence of anisotropy, i.e., smaller solve times, setup times, iterations counts, and operator complexity.},
+   author = {Pasqua D'Ambra and Fabio Durastante and S. M. Ferdous and Salvatore Filippone and Mahantesh Halappanavar and Alex Pothen},
+   doi = {10.1109/PDP59025.2023.00017},
+   isbn = {9798350337631},
+   booktitle = {Proceedings - 2023 31st Euromicro International Conference on Parallel, Distributed and Network-Based Processing, PDP 2023},
+   keywords = {AMG,MPI,Matching,OpenMP,Scalability,Sparse solvers},
+   pages = {59-67},
+   publisher = {Institute of Electrical and Electronics Engineers Inc.},
+   title = {AMG Preconditioners based on Parallel Hybrid Coarsening and Multi-objective Graph Matching},
+   year = {2023},
 }
-%% @article requires these fields: author, title, journaltitle, year/date
-%%
-%% Optional fields in biblatex: translator, annotator, commentator, subtitle,
-%%		titleaddon, editor, editora, editorb, editorc, journalsubtitle,
-%%		journaltitleaddon, issuetitle, issuesubtitle,
-%%		issuetitleaddon, language, origlanguage, series, volume,
-%%		number, eid, issue, month, pages, version, note, issn, addendum,
-%%		pubstate, doi, eprint, eprintclass, eprinttype, url, urldate
-
-@book{ww1920,
-  author	= {Edwin Taylor Whittaker and George Neville Watson},
-  year		= {1920},
-  title		= {A Course of Modern Analysis},
-  edition	= {3},
-  publisher = {Cambridge University Press},
-  address 	= {Cambridge, UK},
-  url 		= {https://archive.org/details/courseofmodernan00whit},
+@article{AmgPreconditioners2021,
+   abstract = {Linear solvers for large and sparse systems are a key element of scientific applications, and their efficient implementation is necessary to harness the computational power of current computers. Algebraic MultiGrid (AMG) preconditioners are a popular ingredient of such linear solvers; this is the motivation for the present work, where we examine some recent developments in a package of AMG preconditioners to improve efficiency, scalability, and robustness on extreme scale problems. The main novelty is the design and implementation of a parallel coarsening algorithm based on aggregation of unknowns employing weighted graph matching techniques; this is a completely automated procedure, requiring no information from the user, and applicable to general symmetric positive definite (s.p.d.) matrices. The new coarsening algorithm improves in terms of numerical scalability at low operator complexity upon decoupled aggregation algorithms available in previous releases of the package. The preconditioners package is built on the parallel software framework PSBLAS, which has also been updated to progress towards exascale. We present weak scalability results on one of the most powerful supercomputers in Europe for linear systems with sizes up to O(1010) unknowns.},
+   author = {Pasqua D’Ambra and Fabio Durastante and Salvatore Filippone},
+   doi = {10.1137/20M134914X},
+   issn = {10957197},
+   issue = {5},
+   journal = {SIAM Journal on Scientific Computing},
+   keywords = {Algebraic multigrid,Parallel scalability,Preconditioners},
+   pages = {S679-S703},
+   publisher = {Society for Industrial and Applied Mathematics Publications},
+   title = {AMG preconditioners for linear solvers towards extreme scale},
+   volume = {43},
+   year = {2021},
 }
-%% @book requires these fields: author, title, year/date
-%%
-%% Optional fields: editor, editora, editorb, editorc, translator,
-%%		annotator, commentator, introduction, foreword, afterword,
-%%		subtitle, titleaddon, maintitle, mainsubtitle, maintitleaddon,
-%%		language, origlanguage, volume, part, edition, volumes, series,
-%%		number, note, publisher, location, isbn, eid, chapter, pages,
-%%		pagetotal, addendum, pubstate, doi, eprint, eprintclass,
-%%		eprinttype, url, urldate
- 	
-@inproceedings{Swaminathan2017IDABRO,
-  author 	= {Swaminathan, Jaichander and Stover, Richard L. and Tow, Emily W. and Warsinger, David M. and Lienhard, John H.},
-  booktitle = {Proceedings of IDA World Congress on Desalination and Water Reuse},
-  title 	= {Effect of Practical Losses on Optimal Design of Batch {RO} Systems},
-  year 		= {2017},
-  month 	= oct,
-  publisher = {International Desalination Association},
-  venue 	= {S{\~a}o Paulo, Brazil},
-  eventdate = {2017-10-15/2017-10-20},
-  eprinttype= {hdl},
-  eprint 	= {1721.1/111971},
-  number 	= {IDA17WC-58334},
+@article{DiffusionBasedPreconditioning2024,
+   abstract = {We consider here a cell-centered finite difference approximation of the Richards equation in three dimensions, averaging for interface values the hydraulic conductivity (Formula presented.), a highly nonlinear function, by arithmetic, upstream and harmonic means. The nonlinearities in the equation can lead to changes in soil conductivity over several orders of magnitude and discretizations with respect to space variables often produce stiff systems of differential equations. A fully implicit time discretization is provided by backward Euler one-step formula; the resulting nonlinear algebraic system is solved by an inexact Newton Armijo–Goldstein algorithm, requiring the solution of a sequence of linear systems involving Jacobian matrices. We prove some new results concerning the distribution of the Jacobians eigenvalues and the explicit expression of their entries. Moreover, we explore some connections between the saturation of the soil and the ill conditioning of the Jacobians. The information on eigenvalues justifies the effectiveness of some preconditioner approaches which are widely used in the solution of Richards equation. We also propose a new software framework to experiment with scalable and robust preconditioners suitable for efficient parallel simulations at very large scales. Performance results on a literature test case show that our framework is very promising in the advance toward realistic simulations at extreme scale.},
+   author = {Daniele Bertaccini and Pasqua D'Ambra and Fabio Durastante and Salvatore Filippone},
+   doi = {10.1002/nla.2523},
+   issn = {10991506},
+   issue = {1},
+   journal = {Numerical Linear Algebra with Applications},
+   keywords = {Richards equation,algebraic multigrid,high performance computing,spectral analysis},
+   month = {1},
+   publisher = {John Wiley and Sons Ltd},
+   title = {Why diffusion-based preconditioning of Richards equation works: Spectral analysis and computational experiments at very large scale},
+   volume = {31},
+   year = {2024},
 }
-%% @inproceedings requires these fields: author, title, booktitle, year/date
-%%
-%% Optional fields: editor, subtitle, titleaddon, maintitle,
-%%		mainsubtitle, maintitleaddon, booksubtitle, booktitleaddon,
-%%		eventtitle, eventtitleaddon, eventdate, venue, language,
-%%		volume, part, volumes, series, number, note, organization,
-%%		publisher, location, month, isbn, eid, chapter, pages, addendum,
-%%		pubstate, doi, eprint, eprintclass, eprinttype, url, urldate
-
-@report{reynolds1958,
-  author 	= {William C. Reynolds and William M. Kays and Stephen J. Kline},
-  title 	= {Heat transfer in the Incompressible Turbulent Boundary Layer. {I}---Constant Wall Temperature},
-  type 		= {NASA Technical Memorandum No.},
-  number 	= {12-1-58W},
-  institution = {National Aeronautics and Space Administration},
-  address 	= {Washington, DC},
-  year 		= {1958},
-  eprinttype= {hdl},
-  eprint 	= {2060/19980228020},
-  month		= dec,
+@article{AmgCoarsening2023,
+   abstract = {In this paper, we discuss the convergence of an Algebraic MultiGrid (AMG) method for general symmetric positive-definite matrices. The method relies on an aggregation algorithm, named coarsening based on compatible weighted matching, which exploits the interplay between the principle of compatible relaxation and the maximum product matching in undirected weighted graphs. The results are based on a general convergence analysis theory applied to the class of AMG methods employing unsmoothed aggregation and identifying a quality measure for the coarsening; similar quality measures were originally introduced and applied to other methods as tools to obtain good quality aggregates leading to optimal convergence for M-matrices. The analysis, as well as the coarsening procedure, is purely algebraic and, in our case, allows an a posteriori evaluation of the quality of the aggregation procedure which we apply to analyze the impact of approximate algorithms for matching computation and the definition of graph edge weights. We also explore the connection between the choice of the aggregates and the compatible relaxation convergence, confirming the consistency between theories for designing coarsening procedures in purely algebraic multigrid methods and the effectiveness of the coarsening based on compatible weighted matching. We discuss various completely automatic algorithmic approaches to obtain aggregates for which good convergence properties are achieved on various test cases.},
+   author = {Pasqua D'Ambra and Fabio Durastante and Salvatore Filippone and Ludmil Zikatanov},
+   doi = {10.1016/j.camwa.2023.06.026},
+   issn = {08981221},
+   journal = {Computers and Mathematics with Applications},
+   keywords = {AMG,Aggregation,Compatible relaxation,Convergence,Graph matching},
+   month = {8},
+   pages = {290-305},
+   publisher = {Elsevier Ltd},
+   title = {Automatic coarsening in Algebraic Multigrid utilizing quality measures for matching-based aggregations},
+   volume = {144},
+   year = {2023},
 }
-%% Equivalent links for this case: 	url = {https://ntrs.nasa.gov/archive/nasa/casi.ntrs.nasa.gov/19980228020.pdf},
-%%									url = {https://hdl.handle.net/2060/19980228020},                                 
-%%
-%% @report requires these fields: author, title, type, institution, year/date
-%%
-%% Optional fields: subtitle, titleaddon, language, number, version,
-%%		note, location, month, isrn, eid, chapter, pages, pagetotal,
-%%		addendum, pubstate, doi, eprint, eprintclass, eprinttype, url,urldate
-
-@incollection{clauser56,
-  author 	= {Francis H. Clauser},
-  year 		= {1956},
-  title 	= {The Turbulent Boundary Layer},
-  booktitle = {Advances in Applied Mechanics},
-  editor 	= {H. L. Dryden and Th. von K\'arm\'an},
-  volume 	= {4},
-  publisher = {Elsevier},
-  address	= {Amsterdam, The Netherlands},
-  pages 	= {1--51},
-  doi 		= {10.1016/S0065-2156(08)70370-3},
+@article{AlyaPscToolkit2024,
+   abstract = {In this paper, we describe an upgrade of the Alya code with up-to-date parallel linear solvers capable of achieving reliability, efficiency and scalability in the computation of the pressure field at each time step of the numerical procedure for solving a Large Eddy Simulation formulation of the incompressible Navier–Stokes equations. We developed a software module in the Alya’s kernel to interface the libraries included in the current version of PSCToolkit, a framework for the iterative solution of sparse linear systems, on parallel distributed-memory computers, by Krylov methods coupled to Algebraic MultiGrid preconditioners. The Toolkit has undergone various extensions within the EoCoE-II project with the primary goal of facing the exascale challenge. Results on a realistic benchmark for airflow simulations in wind farm applications show that the PSCToolkit solvers significantly outperform the original versions of the Conjugate Gradient method available in the Alya’s kernel in terms of scalability and parallel efficiency and represent a very promising software layer to move the Alya code toward exascale.},
+   author = {Herbert Owen and Oriol Lehmkuhl and Pasqua D’Ambra and Fabio Durastante and Salvatore Filippone},
+   doi = {10.1007/s11227-024-05989-y},
+   issn = {15730484},
+   issue = {10},
+   journal = {Journal of Supercomputing},
+   keywords = {65F08,65F10,65M55,65Y05,65Z05,Algebraic MultiGrid,Iterative linear solvers,Navier–Stokes equations,Parallel scalability},
+   month = {7},
+   pages = {13533-13556},
+   publisher = {Springer},
+   title = {Alya toward exascale: algorithmic scalability using PSCToolkit},
+   volume = {80},
+   year = {2024},
 }
-%% This case is an article in series of edited books where the series title is the same for all volumes.
-%%
-%% incollection requires these fields:  author, title, editor, booktitle, year/date
-%%
-%% Optional fields: editor, editora, editorb, editorc, translator,
-%%		annotator, commentator, introduction, foreword, afterword,
-%%		subtitle, titleaddon, maintitle, mainsubtitle, maintitleaddon,
-%%		booksubtitle, booktitleaddon, language, origlanguage, volume,
-%%		part, edition, volumes, series, number, note, publisher,
-%%		location, isbn, eid, chapter, pages, addendum, pubstate, doi,
-%%		eprint, eprintclass, eprinttype, url, urldate
-
-@thesis{gibbs1863,
-  author 	= {Joisah Willard Gibbs},
-  year 		= {1863},
-  title 	= {On the Form of the Teeth of Wheels in Spur Gearing},
-  type		= {Ph.{D}. dissertation},
-  school 	= {Yale University},
-  address 	= {New Haven, CT},
+@misc{MythsLegendsHpc2023,
+   abstract = {In this thought-provoking article, we discuss certain myths and legends that are folklore among members of the high-performance computing community. We gathered these myths from conversations at conferences and meetings, product advertisements, papers, and other communications such as tweets, blogs, and news articles within and beyond our community. We believe they represent the zeitgeist of the current era of massive change, driven by the end of many scaling laws such as Dennard scaling and Moore's law. While some laws end, new directions are emerging, such as algorithmic scaling or novel architecture research. Nevertheless, these myths are rarely based on scientific facts, but rather on some evidence or argumentation. In fact, we believe that this is the very reason for the existence of many myths and why they cannot be answered clearly. While it feels like there should be clear answers for each, some may remain endless philosophical debates, such as whether Beethoven was better than Mozart. We would like to see our collection of myths as a discussion of possible new directions for research and industry investment.},
+   author = {Satoshi Matsuoka and Jens Domke and Mohamed Wahib and Aleksandr Drozd and Torsten Hoefler},
+   institution = {Arxiv},
+   keywords = {HPC myths,Quantum,clouds,deep learning,zettascale},
+   month = {10},
+   title = {Myths and Legends in High-Performance Computing},
+   year = {2023},
 }
-%% phdthesis requires these fields: author, title, type, institution, year/date
-%%
-%% Optional fields: subtitle, titleaddon, language, note, location,
-%%		month, isbn, eid, chapter, pages, pagetotal, addendum, pubstate,
-%%		doi, eprint, eprintclass, eprinttype, url, urldate
-%%
-%% Use the type field to specify the type of thesis. type = {},
-
-@proceedings{johnson1965,
-  editor	= {Howard W. Johnson},
-  title		= {The Title of the Proceedings},
-  year		= 1965,
-  volume	= 2,
-  organization = {Organization},
-  venue		= {City, State},
-  eventdate	= {1965-04-27/1965-04-28},
-  url		= {https://news.mit.edu/2009/obit-johnson},
-}
-%% @proceedings requires these fields: title, year/date
-%%
-%%	Optional fields: editor, subtitle, titleaddon, maintitle,
-%%		mainsubtitle, maintitleaddon, eventtitle, eventtitleaddon, eventdate, venue, language, volume, part, volumes, series,
-%%		number, note, organization, publisher, location, month, isbn, eid, chapter, pages, pagetotal, addendum, pubstate, doi, eprint,
-%%		eprintclass, eprinttype, url, urldate
-
-@manual{GSL,
-  title		= {{GNU} Scientific Library},
-  author 	= {Mark Galassi 
-	and Jim Davies
-	and James Theiler
-	and Brian Gough
-	and Gerard Jungman
-	and Patrick Alken
-	and Michael Booth
-	and Fabrice Rossi
-	and Rhys Ulerich},
-  version = {2.4},
-  organization = {Free Software Foundation},
-  address 	= {Boston, MA},
-  year 		= 2017,
-  url 		= {https://www.gnu.org/software/gsl/},
-  urldate 	= {2018-12-12},
-}
-%% @manual requires these fields: author/editor, title, year/date
-%%
-%% Optional fields: subtitle, titleaddon, language, edition, type,
-%%		series, number, version, note, organization, publisher,
-%%		location, isbn, eid, chapter, pages, pagetotal, addendum,
-%%		pubstate, doi, eprint, eprintclass, eprinttype, url, urldate
-
-@online{sharpe1,
-  author 	= {Michael Sharpe},
-  year 		= {2022},
-  month		= mar,
-  title 	= {New {TX} Font Package},
-  version 	= {1.71},
-  organization = {Comprehensive \TeX\ Archive Network},
-  url 		= {https://ctan.org/pkg/newtx},
-  urldate 	= {2023-05-29},
-}
-%% @online requires these fields: author/editor, title, year/date, doi/eprint/url
-%%
-%% Optional fields: subtitle, titleaddon, language, version, note,
-%%		organization, month, addendum, pubstate, eprintclass, eprinttype, urldate
-
-@misc{Fong2015,
-  title 	= {Analytical Methods for Squaring the Disc},
-  year 		= {2015},
-  author 	= {Chamberlain Fong},
-  howpublished = {{\itshape ArXiv e-prints}},
-  eprint 	= {1509.06344},
-  eprinttype= {arxiv},
-  month 	= sep,
-}
-%% @misc requires these fields: author/editor, title, year/date
-%%
-%% Optional fields: subtitle, titleaddon, language, howpublished, type, version, note, 
-%%		organization, location, month, addendum, pubstate, doi, eprint, eprintclass, 
-%%		eprinttype, url, urldate
-
-@BOOK{kirk2288a,
-  author 	= {James Tiberius Kirk},
-  year 		= {2288},
-  title 	= {Decline and Fall of the Romulan Empire},
-  edition 	= 7,
-  series 	= {Humankind's Greatest Writings},
-  number 	= {23},
-  publisher = {Vulcan Free Press},
-  address 	= {T'Paal},
-  addendum 	= {To appear.},
-}
-%% One book in a series of books
-%% Under bibtex, replace addendum by note
-
-@bookinbook{churchill1948,
-  author 	= {Winston S. Churchill},
-  year 		= {1948},
-  title 	= {{The Gathering Storm}},
-  maintitle 	= {The Second World War},
-  volume 	= {1},
-  chapter	= {5, {``The Locust Years''}},
-  pages 	= {66--89},
-  url 		= {https://www.worldcat.org/oclc/3025315},
-  publisher = {Houghton Mifflin Co.},
-  address 	= {Boston},
-}
-%% one book in a multivolume book written by a single author
-%% with bibtex, revert to "inbook"
-
-@BOOK{johnson1980,
-  editor 	= {Howard Johnson},
-  year 		= {1980},
-  title 	= {Title of Edited Book},
-  publisher = {John Wiley and Sons, Inc.},
-  address 	= {New York, NY},
-}
-%% edited book
-
-@book{fourier1822,
-  author  	= {Jean Baptiste Joseph Fourier},
-  year		= {1822},
-  title		= {Th\'{e}orie Analytique de la Chaleur},
-  publisher = {Firmin Didot, P\`{e}re et Fils},
-  address	= {Paris},
-  url	= {https://archive.org/details/analyticaltheory00fourrich},
-}
-%% old book, not much difference
-
-@online{dlmf,
-  title 	= {{NIST} {D}igital Library of Mathematical Functions},
-  version	= {1.1.19},
-  year 		= {2023},
-  month		= mar,
-  editor 	= {F. W. J. Olver and A. B. {Olde Daalhuis} and D. W. Lozier and B. I. Schneider and
-            	R. F. Boisvert and C. W. Clark and B. R. Miller and B. V. Saunders},
-  organization = {National Institute of Standards and Technology},
-  address 	= {Gaithersburg, MD},
-  url 		= {https://dlmf.nist.gov/},
-  urldate 	= {2023-05-29},
-}
-
-@article{lienhard2020,
-    author = {Lienhard, John H.},
-    title = {Heat Transfer in Flat-Plate Boundary Layers: A Correlation for Laminar, Transitional, and Turbulent Flow},
-    journal = {{ASME} J. Heat Transfer},
-    volume = {142},
-    number = {6},
-    eid = {061805},
-    year = {2020},
-    month = jun,
-    doi = {10.1115/1.4046795 },
-}
-%% note use of: eid in place of pages
-%%     url = {https://doi.org/10.1115/1.4055833},
-
-@manual{amsmath,
-  author 	= {{American Mathematical Society} and {The \LaTeX\ Project}},
-  year 		= {2020},
-  month		= feb,
-  title 	= {User's Guide for the \textsf{amsmath} Package },
-  version 	= {2.1},
-  organization = {Comprehensive \TeX\ Archive Network},
-  url 		= {https://ctan.org/tex-archive/macros/latex/required/amsmath/amsldoc.pdf},
-  urldate 	= {2023-05-29},
-}
-
-@article{euler1740,
-  author	= {Leonard Euler},
-  year		= 1740,
-  title		= {De Summis Serierum Reciprocarum}, 
-  journal	= {Commentarii Acad\-emiae Scientiarum Petropolitanae},
-  volume	= 7,
-  pages 	= {123--134},
-  eprinttype= {arxiv},
-  eprint	= {math/0506415},
-  addendum		= {First communicated to Daniel Bernoulli in 1734 and read before the St.\ Petersburg Academy in December 1735},
-}
-% with bibtex, change addendum to note.
-
-@article{montijano2014,
-  title		= {Numerical Methods With LuaLaTeX},
-  author	= {Juan I. Montijano and Mario P{\'{e}}rez and Luis R{\'{a}}ndez and Juan Luis Varona},
-  year		= 2014,
-  volume	= 35,
-  month		= jan,
-  number	= {1},
-  pages		= {51--56},
-  journal	= {TUGboat},
-  url 		= {https://tug.org/TUGboat/tb35-1/tb109montijano.pdf},
-}
-    
-@online{mpl,
-  title		= {{mpl} Colormaps},
-  author	= {St{\'e}fan {van der Walt} and Nathaniel Smith},
-  url 		= {https://bids.github.io/colormap/},
-  urldate 	= {2018-08-26},
-  year 		= 2015,
-  organization = {GitHub},
-  address 	= {San Francisco, CA},
-  month 	= sep,
-}
-   
