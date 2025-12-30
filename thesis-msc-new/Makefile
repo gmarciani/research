@@ -1,3 +1,10 @@
+requirements:
+	brew install --cask basictex
+	sudo tlmgr update --self
+	sudo tlmgr update --all
+	sudo tlmgr install latexmk tagpdf mitthesis titlesec doi mhchem lipsum biblatex biblatex-ieee biber
+build:
+	latexmk -pdf main.tex
 clean:
 	rm -rf sec/*.aux
 	rm -rf *.aux
