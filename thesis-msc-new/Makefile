@@ -6,12 +6,13 @@ help: ## show this help message
 	@echo "Available targets:"
 	@grep -E '^[a-zA-Z_-]+:.*##' $(MAKEFILE_LIST) | awk 'BEGIN {FS = ":.*## "}; {printf "  %-10s %s\n", $$1, $$2}'
 
-setup: ## install LaTeX dependencies (once)
+setup: ## install LaTeX dependencies and pre-commit hooks (once)
 	brew install --cask basictex
 	brew install fswatch
 	sudo tlmgr update --self
 	sudo tlmgr update --all
 	sudo tlmgr install latexmk tagpdf mitthesis titlesec doi mhchem lipsum biblatex biblatex-ieee biber
+	pre-commit install
 
 build: ## build main.pdf (default)
 	latexmk -pdf main.tex
