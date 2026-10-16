@@ -2,48 +2,62 @@
 % Version: 1.04, 2023/10/19
 % Documentation: https://ctan.org/pkg/mitthesis
 
-
 \chapter{Algebraic Multi-Grid Solvers}
 
-Algebraic Multigrid (AMG) solvers are powerful iterative methods used for solving large, sparse linear systems of equations, typically arising from the discretization of partial differential equations (PDEs).
+Algebraic Multigrid (AMG) solvers are powerful iterative methods used for solving large, sparse linear
+systems of equations, typically arising from the discretization of partial differential equations (PDEs).
 
-By leveraging the algebraic properties of the problem, AMG solvers can handle complex geometries and unstructured grids, making them applicable to a wide range of scientific and engineering challenges.
+By leveraging the algebraic properties of the problem, AMG solvers can handle complex geometries and
+unstructured grids, making them applicable to a wide range of scientific and engineering challenges.
 
-This chapter provides a comprehensive overview of AMG solvers, exploring their theoretical foundation, algorithmic components, implementations, and practical applications in computational science and engineering. 
+This chapter provides a comprehensive overview of AMG solvers, exploring their theoretical foundation,
+algorithmic components, implementations, and practical applications in computational science and engineering.
 We will also show how to run an AMG Solver in a HPC environment deployed with AWS ParallelCluster.
 
 \section{Basic Concepts}
+\label{sec:basic-concepts}
 
-TODO: describe AMG Solvers at high level, also explaining the difference, pros and cons w.r.t geometric multi-grid solvers.
+TODO: describe AMG Solvers at high level, also explaining the difference, pros and cons w.r.t geometric
+multi-grid solvers.
 
 \subsection{Coarsening}
+\label{ssec:coarsening}
 
 TODO: describe the coarsening techniques.
 
 \subsection{Interpolation}
+\label{ssec:interpolation}
 
 TODO: describe the interpolation techniques.
 
 \subsection{Smoothing}
+\label{ssec:smoothing}
 
 TODO: describe the smoothing techniques.
 
 \section{Algorithms}
+\label{sec:algorithms}
 
-TODO: describe most relevant algorithms with pseudo code and high level description of the approach with pros and cons. Examples: V-Cycle, W-Cycle, F-Cycle.
+TODO: describe most relevant algorithms with pseudo code and high level description of the approach with pros
+and cons. Examples: V-Cycle, W-Cycle, F-Cycle.
 
 \section{Implementations}
+\label{sec:implementations}
 
-TODO: describe the most relevant data structures, parallelization approaches and libraries providing AMG solvers. For every library provide a representative usage example with code/commands.
+TODO: describe the most relevant data structures, parallelization approaches and libraries providing AMG
+solvers. For every library provide a representative usage example with code/commands.
 
 \section{Performance}
+\label{sec:performance}
 
 TODO: describe convergence rate, computational complexity, scalability.
 
 \section{Applications}
+\label{sec:algebraic-multi-grid-solvers-applications}
 
 TODO: describe applications in Compitational Fluid Dynamics, Structural Analysis, Electromagnetic Simulations
 
 \section{Running AMG Solvers on a Cluster}
+\label{sec:running-amg-solvers-on-a-cluster}
 
 TODO: describe how to run an AMG solver on a pcluster cluster (provide config files and code).

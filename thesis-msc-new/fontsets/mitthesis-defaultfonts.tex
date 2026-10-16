@@ -6,13 +6,13 @@
 %% Default fonts
 %
 \ifpdftex
-	\typeout{^^JLoading Computer Modern text and math fonts (default for pdftex).^^J}
-	\RequirePackage[T1]{fontenc}
-	\RequirePackage{bm}
+\typeout{^^JLoading Computer Modern text and math fonts (default for pdftex).^^J}
+\RequirePackage[T1]{fontenc}
+\RequirePackage{bm}
 \else
-	\typeout{^^JLoading Latin Modern text and math fonts (default for unicode engines).^^J}
-	%
-    \RequirePackage[warnings-off={mathtools-colon,mathtools-overbracket}]{unicode-math}
-    % suppress tiresome warnings about lack of integration between mathtools and unicode-math.
-    % Unicode-math loads fontspec package, but default fonts are not selected by fontspec in this case.
+\typeout{^^JLoading Latin Modern text and math fonts (default for unicode engines).^^J}
+%
+\RequirePackage[warnings-off={mathtools-colon,mathtools-overbracket}]{unicode-math}
+% suppress tiresome warnings about lack of integration between mathtools and unicode-math.
+% Unicode-math loads fontspec package, but default fonts are not selected by fontspec in this case.
 \fi

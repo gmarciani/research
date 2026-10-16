@@ -23,6 +23,7 @@ repos:
       - id: cleveref-capitalization
       - id: csquotes
       - id: ensure-labels-for-sections
+        args: ["--ignore-label-content"]
       - id: no-space-in-cite
       - id: tilde-cite
       - id: unique-labels
